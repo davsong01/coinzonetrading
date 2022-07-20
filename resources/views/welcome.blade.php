@@ -1,132 +1,1028 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{asset('front-end/images/favicon.ico')}}">
 
-        <title>Laravel</title>
+    <title>Crypto Currency HTML Template</title>
+    
+	<!-- Vendors Style-->
+	<link rel="stylesheet" href="{{ asset('front-end/css/vendors_css.css') }}">
+	  
+	<!-- Style-->  
+	<link rel="stylesheet" href="{{ asset('front-end/css/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('front-end/css/skin_color.css') }}">
+    <style>
+        .homeScreenshot--mmo {
+            background: transparent url("{{ asset('front-end/images/front-end-img/homePreview-MMO.png') }}") no-repeat center top;
+            background-size: cover;
+        }
+        .homeScreenshot--gcs {
+            background: transparent url("{{ asset('front-end/images/front-end-img/homePreview-MMO2.png')}}") no-repeat center top;
+            background-size: cover;
+        }
+     </style>
+  </head>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<body class="theme-warning">
+	
+	<header class="top-bar">
+		<div class="topbar">
+		  <div class="container">
+			<div class="row justify-content-end">
+			  <div class="col-lg-6 col-12 d-lg-block d-none">
+				<div class="topbar-social text-center text-md-start topbar-left">
+				  <ul class="list-inline d-md-flex d-inline-block">
+					<li class="ms-10 pe-10"><a href="#"><i class="text-white fa fa-question-circle"></i> Ask a Question</a></li>
+					<li class="ms-10 pe-10"><a href="#"><i class="text-white fa fa-envelope"></i> hello@multipurposethemes.com</a></li>
+				  </ul>
+				</div>
+			  </div>
+			  <div class="col-lg-6 col-12 xs-mb-10">
+				<div class="topbar-call text-center text-lg-end topbar-right">
+				  <ul class="list-inline d-lg-flex justify-content-end">				  
+					 <li class="me-10 ps-10 lng-drop">
+					  	<select class="header-lang-bx selectpicker">
+							<option>USD</option>
+							<option>EUR</option>
+							<option>GBP</option>
+							<option>INR</option>
+						</select>
+					 </li>
+					 <li class="me-10 ps-10 lng-drop">
+					  	<select class="header-lang-bx selectpicker">
+							<option data-icon="flag-icon flag-icon-us">Eng USA</option>
+							<option data-icon="flag-icon flag-icon-gb">Eng UK</option>
+						</select>
+					 </li>
+					 <li class="me-10 ps-10"><a href="#"><i class="text-white fa fa-sign-in d-md-inline-block d-none"></i> Login</a></li>
+					 <li class="me-10 ps-10"><a href="#"><i class="text-white fa fa-dashboard d-md-inline-block d-none"></i> My Account</a></li>
+				  </ul>
+				</div>
+			  </div>
+			 </div>
+		  </div>
+		</div>
 
-        <!-- Styles -->
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.dark\:text-gray-500{--tw-text-opacity:1;color:#6b7280;color:rgba(107,114,128,var(--tw-text-opacity))}}
-        </style>
+		<nav hidden class="nav-white nav-transparent">
+			<div class="nav-header">
+				<a href="index.html" class="brand">
+					<img src="{{ asset('front-end/images/logo-light-text2.png') }}" alt=""/>
+				</a>
+				<button class="toggle-bar">
+					<span class="ti-menu"></span>
+				</button>	
+			</div>								
+			<ul class="menu">				
+				<li class="dropdown">
+					<a href="#">Home</a>
+					<ul class="dropdown-menu">
+						<li><a href="index.html">Home 1</a></li>
+						<li><a href="index2.html">Home 2</a></li>
+						<li><a href="index3.html">Home 3</a></li>
+						<li><a href="index4.html">Home 4</a></li>
+					</ul>
+				</li>				
+				<li>
+					<a href="buy_sell.html">Instant Buy & Sell</a>
+				</li>				
+				<li class="dropdown">
+					<a href="#">Trade</a>
+					<ul class="dropdown-menu">
+						<li><a href="currency_converter.html">Currency Converter</a></li>
+						<li><a href="live_coin.html">Live Coin Chart</a></li>
+					</ul>
+				</li>
+				<li class="megamenu">
+					<a href="#">Pages</a>
+					<div class="megamenu-content">
+						<div class="row">
+							<div class="col-lg-3 col-12">
+								<ul class="list-group">
+									<li><h4 class="menu-title">User Pages</h4></li>
+									<li><a href="faqs.html"><i class="ti-arrow-circle-right me-10"></i>FAQs</a></li>
+									<li><a href="inovice.html"><i class="ti-arrow-circle-right me-10"></i>Invoice</a></li>
+									<li><a href="membership.html"><i class="ti-arrow-circle-right me-10"></i>Membership</a></li>
+									<li><a href="testimonial.html"><i class="ti-arrow-circle-right me-10"></i>Testimonial</a></li>
+									<li><a href="about.html"><i class="ti-arrow-circle-right me-10"></i>About</a></li>
+									<li><a href="404.html"><i class="ti-arrow-circle-right me-10"></i>404</a></li>
+									<li><a href="500.html"><i class="ti-arrow-circle-right me-10"></i>500</a></li>
+								</ul>
+							</div>
+							<div class="col-lg-3 col-12">
+								<ul class="list-group">
+									<li><h4 class="menu-title">Widgets</h4></li>
+									<li><a href="widgets.html"><i class="ti-arrow-circle-right me-10"></i>Widgets</a></li>
+									<li><a href="register.html"><i class="ti-arrow-circle-right me-10"></i>Register</a></li>
+									<li><a href="login.html"><i class="ti-arrow-circle-right me-10"></i>Login</a></li>
+									<li><a href="register_login.html"><i class="ti-arrow-circle-right me-10"></i>Register & Login</a></li>
+									<li><a href="forgot_pass.html"><i class="ti-arrow-circle-right me-10"></i>Forgot Password</a></li>
+									<li><a href="lockscreen.html"><i class="ti-arrow-circle-right me-10"></i>Lock Screen</a></li>
+									<li><a href="maintenance.html"><i class="ti-arrow-circle-right me-10"></i>Under Constructions</a></li>
+								</ul>
+							</div>
+							<div class="col-md-3 col-12">
+								<ul class="list-group">
+									<li><h4 class="menu-title">Footer</h4></li> 
+									<li><a href="footer_style1.html"><i class="ti-arrow-circle-right me-10"></i>Footer One</a></li>
+									<li><a href="footer_style2.html"><i class="ti-arrow-circle-right me-10"></i>Footer Two</a></li>
+									<li><a href="footer_style3.html"><i class="ti-arrow-circle-right me-10"></i>Footer Three</a></li>
+									<li><a href="footer_style4.html"><i class="ti-arrow-circle-right me-10"></i>Footer Four</a></li>
+									<li><a href="footer_style5.html"><i class="ti-arrow-circle-right me-10"></i>Footer Five</a></li>
+									<li><a href="footer_style6.html"><i class="ti-arrow-circle-right me-10"></i>Footer Six</a></li>
+								</ul>
+							</div>
+							<div class="col-lg-3 col-12">
+								<ul class="list-group">
+									<li><h4 class="menu-title">Header</h4></li>
+									<li><a href="header_default.html"><i class="ti-arrow-circle-right me-10"></i>Header One</a></li>
+									<li><a href="header_style2.html"><i class="ti-arrow-circle-right me-10"></i>Header Two</a></li>
+									<li><a href="header_style3.html"><i class="ti-arrow-circle-right me-10"></i>Header Three</a></li>
+									<li><a href="header_style4.html"><i class="ti-arrow-circle-right me-10"></i>Header Four</a></li>
+									<li><a href="header_style5.html"><i class="ti-arrow-circle-right me-10"></i>Header Five</a></li> 
+								</ul>
+							</div>
+						</div>
+					</div>
+				</li>				
+				<li class="dropdown">
+					<a href="#">Blog</a>
+					<ul class="dropdown-menu">
+						<li class="dropdown">
+							<a href="#">Grid Blog</a>
+							<ul class="dropdown-menu">
+								<li><a href="blog_grid_2.html">Grid 2 colunm</a></li>
+								<li><a href="blog_grid_3.html">Grid 3 colunm</a></li>
+								<li><a href="blog_grid_left_sidebar.html">blog left sidebar</a></li>
+								<li><a href="blog_grid_right_sidebar.html">blog right sidebar</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#">List Blog</a>
+							<ul class="dropdown-menu">
+								<li><a href="blog_list.html">Blog List</a></li>
+								<li><a href="blog_list_left_sidebar.html">Blog List Left Sidebar</a></li>
+								<li><a href="blog_list_right_sidebar.html">Blog List right Sidebar</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#">Single Blog Post</a>
+							<ul class="dropdown-menu">
+								<li><a href="blog_single_grid_post.html">Single Grid Post</a></li>
+								<li><a href="blog_single_html5video_post.html">Single html5 Video-post</a></li>
+								<li><a href="blog_single_image_post.html">Single Image Post</a></li>
+								<li><a href="blog_single_slider_post.html">Single Slider Post</a></li>
+								<li><a href="blog_single_soundcloud_post.html">Single SoundCloud Post</a></li>
+								<li><a href="blog_single_vimeo_post.html">Single Vimeo Post</a></li>
+								<li><a href="blog_single_post.html">Single without image post</a></li>
+								<li><a href="blog_single_youtube_post.html">Single Youtube Post</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>	
+				<li>
+					<a href="contact_us.html">Contact</a>
+				</li>
+			</ul>
+			<ul class="attributes">
+				<li class="d-md-block d-none"><a href="#" class="px-10 pt-15 pb-10"><div class="btn btn-primary py-5">Register Now</div></a></li>
+				<li><a href="#" class="toggle-search-fullscreen"><span class="ti-search"></span></a></li>				
+			</ul>
+			<div class="wrap-search-fullscreen">
+				<div class="container">
+					<button class="close-search"><span class="ti-close"></span></button>
+					<input type="text" placeholder="Search..." />
+				</div>
+			</div>
+		</nav>
+	</header>
 
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                        <g clip-path="url(#clip0)" fill="#EF3B2D">
-                            <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"/>
-                        </g>
-                    </svg>
-                </div>
-
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                                </div>
-                            </div>
+    
+    <section class="bg-img pt-200 pb-120" data-overlay="7" style="background-image: url({{ asset('/front-end/images/front-end-img/banners/banner-1.jpg') }}); background-position: top center;">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="text-center mt-80">
+						<h1 class="box-title text-white fs-50 mb-30">Buy & Sell 100+ coins instantly</h1>	
+					</div>
+					<div class="text-center d-flex gap-3 justify-content-center">
+						<a href="#" class="btn btn-outline btn-primary text-white">Visit Exchange</a>
+						<a href="#" class="btn btn-primary">Sign Up Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>	
+	<section class="overflow-xh" data-aos="fade-up">		
+		<div class="row">
+			<div class="col-12">
+				<div class="box">
+				  <div class="box-body">
+					  <!-- TradingView Widget BEGIN -->
+						<div class="tradingview-widget-container">
+						  <div class="tradingview-widget-container__widget"></div>
+						  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+						  {
+						  "symbols": [
+							{
+							  "proName": "BITSTAMP:BTCUSD",
+							  "title": "BTC/USD"
+							},
+							{
+							  "proName": "BITSTAMP:ETHUSD",
+							  "title": "ETH/USD"
+							},
+							{
+							  "description": "BTC/USD",
+							  "proName": "BITBAY:BTCUSD"
+							},
+							{
+							  "description": "XRP/USD",
+							  "proName": "BITSTAMP:XRPUSD"
+							},
+							{
+							  "description": "LTC/USD",
+							  "proName": "BINANCE:LTCUSDT"
+							}
+						  ],
+						  "showSymbolLogo": true,
+						  "colorTheme": "light",
+						  "isTransparent": true,
+						  "displayMode": "adaptive",
+						  "locale": "in"
+						}
+						  </script>
+						</div>
+						<!-- TradingView Widget END -->
+				  </div>
+			  </div>
+			</div>
+		</div>
+	</section>
+	<section class="pt-30 pb-50" data-aos="fade-up">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<ul class="nav nav-tabs justify-content-center bb-0 mb-10" role="tablist">
+						<li class="nav-item"> <a class="nav-link px-50 py-10 fs-24 active" data-bs-toggle="tab" href="#all" role="tab">Buy Crypto</a> </li>
+						<li class="nav-item"> <a class="nav-link px-50 py-10 fs-24" data-bs-toggle="tab" href="#tab1" role="tab">Sell Crypto</a> </li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="all" role="tabpanel">
+							<div class="px-15 pt-15">
+								<div class="row">
+								  <div class="col-12 col-md-4">
+									<div class="box box-body pull-up">
+									  <!-- TradingView Widget BEGIN -->
+										<div class="tradingview-widget-container">
+										  <div class="tradingview-widget-container__widget"></div>
+										  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+										  {
+										  "symbol": "BITSTAMP:BTCUSD",
+										  "width": "100%",
+										  "height": "100%",
+										  "locale": "in",
+										  "dateRange": "12M",
+										  "colorTheme": "light",
+										  "trendLineColor": "rgba(246, 178, 107, 1)",
+										  "underLineColor": "rgba(255, 242, 204, 1)",
+										  "isTransparent": true,
+										  "autosize": true,
+										  "largeChartUrl": ""
+										}
+										  </script>
+										</div>
+										<!-- TradingView Widget END -->
+									</div>			
+								  </div>
+								  <div class="col-12 col-md-4">
+									<div class="box box-body pull-up">
+									  <!-- TradingView Widget BEGIN -->
+										<div class="tradingview-widget-container">
+										  <div class="tradingview-widget-container__widget"></div>
+										  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+										  {
+										  "symbol": "BITSTAMP:ETHUSD",
+										  "width": "100%",
+										  "height": "100%",
+										  "locale": "in",
+										  "dateRange": "12M",
+										  "colorTheme": "light",
+										  "trendLineColor": "rgba(246, 178, 107, 1)",
+										  "underLineColor": "rgba(255, 242, 204, 1)",
+										  "isTransparent": true,
+										  "autosize": true,
+										  "largeChartUrl": ""
+										}
+										  </script>
+										</div>
+										<!-- TradingView Widget END -->
+									</div>			
+								  </div>
+								  <div class="col-12 col-md-4">
+									<div class="box box-body pull-up">
+									  <!-- TradingView Widget BEGIN -->
+										<div class="tradingview-widget-container">
+										  <div class="tradingview-widget-container__widget"></div>
+										  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+										  {
+										  "symbol": "BINANCE:XRPUSDT",
+										  "width": "100%",
+										  "height": "100%",
+										  "locale": "in",
+										  "dateRange": "12M",
+										  "colorTheme": "light",
+										  "trendLineColor": "rgba(246, 178, 107, 1)",
+										  "underLineColor": "rgba(255, 242, 204, 1)",
+										  "isTransparent": true,
+										  "autosize": true,
+										  "largeChartUrl": ""
+										}
+										  </script>
+										</div>
+										<!-- TradingView Widget END -->
+									</div>			
+								  </div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="tab1" role="tabpanel">
+							<div class="px-15 pt-15">
+								<div class="row">
+								  <div class="col-12 col-md-4">
+									<div class="box box-body pull-up">
+									  <!-- TradingView Widget BEGIN -->
+										<div class="tradingview-widget-container">
+										  <div class="tradingview-widget-container__widget"></div>
+										  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+										  {
+										  "symbol": "BITSTAMP:BTCUSD",
+										  "width": "100%",
+										  "height": "100%",
+										  "locale": "in",
+										  "dateRange": "12M",
+										  "colorTheme": "light",
+										  "trendLineColor": "rgba(246, 178, 107, 1)",
+										  "underLineColor": "rgba(255, 242, 204, 1)",
+										  "isTransparent": true,
+										  "autosize": true,
+										  "largeChartUrl": ""
+										}
+										  </script>
+										</div>
+										<!-- TradingView Widget END -->
+									</div>			
+								  </div>
+								  <div class="col-12 col-md-4">
+									<div class="box box-body pull-up">
+									  <!-- TradingView Widget BEGIN -->
+										<div class="tradingview-widget-container">
+										  <div class="tradingview-widget-container__widget"></div>
+										  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+										  {
+										  "symbol": "BITSTAMP:ETHUSD",
+										  "width": "100%",
+										  "height": "100%",
+										  "locale": "in",
+										  "dateRange": "12M",
+										  "colorTheme": "light",
+										  "trendLineColor": "rgba(246, 178, 107, 1)",
+										  "underLineColor": "rgba(255, 242, 204, 1)",
+										  "isTransparent": true,
+										  "autosize": true,
+										  "largeChartUrl": ""
+										}
+										  </script>
+										</div>
+										<!-- TradingView Widget END -->
+									</div>			
+								  </div>
+								  <div class="col-12 col-md-4">
+									<div class="box box-body pull-up">
+									  <!-- TradingView Widget BEGIN -->
+										<div class="tradingview-widget-container">
+										  <div class="tradingview-widget-container__widget"></div>
+										  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+										  {
+										  "symbol": "BINANCE:XRPUSDT",
+										  "width": "100%",
+										  "height": "100%",
+										  "locale": "in",
+										  "dateRange": "12M",
+										  "colorTheme": "light",
+										  "trendLineColor": "rgba(246, 178, 107, 1)",
+										  "underLineColor": "rgba(255, 242, 204, 1)",
+										  "isTransparent": true,
+										  "autosize": true,
+										  "largeChartUrl": ""
+										}
+										  </script>
+										</div>
+										<!-- TradingView Widget END -->
+									</div>			
+								  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> 
+	
+	<section class="py-50 bg-white" data-aos="fade-up">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-7 col-12 text-center">
+					<h1 class="mb-15">Market Live</h1>					
+					<hr class="w-100 bg-primary">
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-12">
+					<div class="box box-body">
+						<div style="height:433px; background-color: #FFFFFF; overflow:hidden; box-sizing: border-box; border: 1px solid #56667F; border-radius: 4px; text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #56667F; padding: 0px; margin: 0px; width: 100%;"><div style="height:413px; padding:0px; margin:0px; width: 100%;"><iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=light&cnt=6&pref_coin_id=1505&graph=yes" width="100%" height="409px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0;"></iframe></div><div style="color: #FFFFFF; line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%; font-family: Verdana, Tahoma, Arial, sans-serif;"><a href="https://coinlib.io" target="_blank" style="font-weight: 500; color: #FFFFFF; text-decoration:none; font-size:11px">Cryptocurrency Prices</a>&nbsp;by Coinlib</div></div>
+					</div>
+				</div>
+			</div>						
+		</div>
+	</section>
+	
+	<section class="py-50" data-aos="fade-up">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-7 col-12 text-center">
+					<h1 class="mb-15">Trade. Anywhere.</h1>					
+					<hr class="w-100 bg-primary">
+				</div>
+			</div>
+			<div class="row mt-30">
+				<div class="col-lg-4 col-12">
+					<div class="box mb-md-0">
+						<div class="box-body">
+							<div class="d-flex align-items-center justify-content-between">
+								<h3 class="box-title mb-0">Mobile</h3>
+								<i class="fa fa-mobile fs-36 text-black-10"></i>
+							</div>
+							<p class="my-50">All the power of Binance's cryptocurrency exchange, in the palm of your hand. Download the Binance mobile crypto trading app today.</p>
+							<div class="row justify-content-between">
+								<div class="col-6">
+									<a href="#"><img src="{{ asset('front-end/images/front-end-img/google-play.png')}}" class="pull-up mb-20" alt="" /></a>
+								</div>
+								<div class="col-6">
+									<a href="#"><img src="{{ asset('front-end/images/front-end-img/and-apk.png')}}" class="pull-up mb-20" alt="" /></a>
+								</div>
+								<div class="col-6">
+									<a href="#"><img src="{{ asset('front-end/images/front-end-img/app-store.png')}}" class="pull-up" alt="" /></a>
+								</div>
+								<div class="col-6">
+									<a href="#"><img src="{{ asset('front-end/images/front-end-img/qr.png') }}" class="pull-up" alt="" /></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-12">
+					<div class="box mb-md-0">
+						<div class="box-body">
+							<div class="d-flex align-items-center justify-content-between">
+								<h3 class="box-title mb-0">Desktop</h3>
+								<i class="fa fa-desktop fs-36 text-black-10"></i>
+							</div>
+							<p class="my-50">Powerful crypto trading platform for those who mean business. The Binance crypto trading experience, tailor-made for your Windows or MacOS device.</p>
+							<div class="row justify-content-between">
+								<div class="col-6">
+									<a href="#"><img src="{{ asset('front-end/images/front-end-img/macos.png') }}" class="pull-up mb-20" alt="" /></a>
+								</div>
+								<div class="col-6">
+									<a href="#"><img src="{{ asset('front-end/images/front-end-img/windows.png')}}" class="pull-up mb-20" alt="" /></a>
+								</div>
+								<div class="col-6">
+									<a href="#"><img src="{{ asset('front-end/images/front-end-img/lunux.png')}}" class="pull-up" alt="" /></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-12">
+					<div class="box h-p100 mb-md-0">
+						<div class="box-body">
+							<div class="d-flex align-items-center justify-content-between">
+								<h3 class="box-title mb-0">API</h3>
+								<i class="fa fa-plug fs-36 text-black-10"></i>
+							</div>
+							<p class="my-50">The Binance API is designed to provide an easy and efficient way to integrate your trading application into our platform.</p>
+							<div class="row justify-content-between">
+								<div class="col-12">
+									<a href="#"><i class="fa fa-plug me-10"></i>Official API Documentation</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>						
+		</div>
+	</section>
+	
+	<section class="py-50 overflow-xh" data-aos="fade-up">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-7 col-12 text-start">
+					<h6 class="sub-heading">Market Outlooks</h6>
+					<h1 class="mb-15">Analyze markets across 150+ countries</h1>					
+					<hr class="w-100 bg-primary ms-0">
+					
+					<ul class="nav nav-pills" role="tablist">
+						<li class="nav-item"> <a class="nav-link active fs-18 py-15" data-bs-toggle="tab" href="#home7" role="tab">Consumer Markets</a> </li>
+						<li class="nav-item"> <a class="nav-link py-15 fs-18" data-bs-toggle="tab" href="#profile7" role="tab">Digital Markets</a> </li>
+						<li class="nav-item"> <a class="nav-link py-15 fs-18" data-bs-toggle="tab" href="#messages7" role="tab">Mobility Markets</a> </li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="home7" role="tabpanel">
+							<div class="py-15">
+								<p class="fs-18 mb-20">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>								
+								<div class="text-center d-flex gap-3 justify-content-start">
+									<a href="#" class="btn btn-warning">Explore the tool</a>
+									<a href="#" class="btn btn-outline btn-warning"> <i class="fa fa-youtube-play me-10"></i>Watch the tutorial</a>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="profile7" role="tabpanel">
+							<div class="py-15">
+								<p class="fs-18 mb-20">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
+								<div class="text-center d-flex gap-3 justify-content-start">
+									<a href="#" class="btn btn-warning">Explore the tool</a>
+									<a href="#" class="btn btn-outline btn-warning"> <i class="fa fa-youtube-play me-10"></i>Watch the tutorial</a>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="messages7" role="tabpanel">
+							<div class="py-15">
+								<p class="fs-18 mb-20">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites</p>							
+								<div class="text-center d-flex gap-3 justify-content-start">
+									<a href="#" class="btn btn-warning">Explore the tool</a>
+									<a href="#" class="btn btn-outline btn-warning"> <i class="fa fa-youtube-play me-10"></i>Watch the tutorial</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5 col-12 d-lg-block d-none">
+					<div class="browserMockup browserMockup--perspectiveRight ms-70 position-relative">
+						<div class="browserMockup__addressBar">
+							<span class="browserMockup__button"></span>
+							<span class="browserMockup__button"></span>
+							<span class="browserMockup__button"></span>
+							<span class="browserMockup__addressInput"></span>
+						</div>
+						<span class="homeScreenshot  homeScreenshot--mmo" style="background-position-y: 0px;"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="py-50 bg-white" data-aos="fade-up">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-7 col-12 text-center">
+					<h1 class="mb-15">Our complete solutions</h1>					
+					<hr class="w-100 bg-primary">
+				</div>
+			</div>
+			<div class="row mt-30">
+				<div class="col-lg-4 col-12">
+					<div class="box">
+						<div class="box-body px-30 pt-50 pb-30">
+							<div class="text-center mb-30">
+								<h3 class="box-title mb-10">Basic Account</h3>
+								<p>Get to know us</p>					
+								<hr class="w-100 bg-primary">
+							</div>
+							<ul class="list list-hand">
+								<li> Access to basic statistics</li>
+								<li> Download as PDF & PNG</li>
+							</ul>
+						</div>
+						<div class="box-footer bg-lightest min-h-80 l-h-60">
+							<p class="text-center fs-22">Free</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-12">
+					<div class="box">
+						<div class="box-body px-30 pt-50 pb-30">
+							<div class="text-center mb-30">
+								<h3 class="box-title mb-10">Single Account</h3>
+								<p>The ideal entry-level account for individual users</p>					
+								<hr class="w-100 bg-primary">
+							</div>
+							<ul class="list list-hand">
+								<li> Full access to all statistics</li>
+								<li> Stand-alone license</li>
+							</ul>
+						</div>
+						<div class="box-footer bg-lightest min-h-80 l-h-60">
+							<p class="text-center fs-36">$39 <small class="fs-16 fw-300">/ month*</small></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-12">
+					<div class="box">
+						<div class="box-body px-30 pt-50 pb-30">
+							<div class="text-center mb-30">
+								<h3 class="box-title mb-10">Corporate Account</h3>
+								<p>Our company solution</p>					
+								<hr class="w-100 bg-primary">
+							</div>
+							<ul class="list list-hand">
+								<li> All functions of the Single Account</li>
+								<li> Access to dossiers, forecasts, studies</li>
+							</ul>
+						</div>
+						<div class="box-footer bg-lightest min-h-80 l-h-60">
+							<p class="text-center fs-36"> <small class="fs-16 fw-300">starting at</small> $700 <small class="fs-16 fw-300">/ month*</small></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12">
+					<p class="fs-12 text-end">
+						*All products require an annual contract. Prices do not include sales tax.
+					</p>
+				</div>
+				<div class="col-12 text-center">
+					<a href="#" class="btn btn-warning">Go to product overview</a>
+				</div>
+			</div>						
+		</div>
+	</section>
+	
+	<section class="py-50" data-aos="fade-up">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-7 col-12 text-center">
+					<h1 class="mb-15">Reviews & Ratings</h1>				
+					<hr class="w-100 bg-primary">
+				</div>
+			</div>
+			<div class="row mt-30">				
+				<div class="col-md-3 col-12">
+					<div class="box pull-up">
+						<div class="box-body">
+							<div>
+								<div class="d-flex align-items-center mb-30">
+									<div class="me-15">
+										<img src="{{ asset('front-end/images/front-end-img/avatar/1.jpg') }}" class="avatar avatar-lg rounded10" alt="">
+									</div>
+									<div class="d-flex flex-column fw-500">
+										<a href="#" class="text-dark hover-primary mb-1 fs-16">Johen Kothari</a>
+										<span class="text-fade fs-12">Software Engineer</span>
+									</div>
+								</div>
+								<p class="mb-25 min-h-120">A great aspect of this course is the student mentors. These people are always there to help, support, and motivate the student to complete modules...</p>
+								<div class="d-flex align-items-center">
+									<a href="#">
+										<i class="me-15 fa fa-linkedin-square"></i>
+										<span>Detailed Review</span>									
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-12">
+					<div class="box pull-up">
+						<div class="box-body">
+							<div>
+								<div class="d-flex align-items-center mb-30">
+									<div class="me-15">
+										<img src="{{ asset('front-end/images/front-end-img/avatar/2.jpg') }}" class="avatar avatar-lg rounded10" alt="">
+									</div>
+									<div class="d-flex flex-column fw-500">
+										<a href="#" class="text-dark hover-primary mb-1 fs-16">Johen doe</a>
+										<span class="text-fade fs-12">Vice President</span>
+									</div>
+								</div>
+								<p class="mb-25 min-h-120">This course actually helped me move from being a general manager to vice president. The content was exciting. I actually implemented what I learnt through case...</p>
+								<div class="d-flex align-items-center">
+									<a href="#">
+										<i class="me-15 fa fa-linkedin-square"></i>
+										<span>Detailed Review</span>									
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-12">
+					<div class="box pull-up">
+						<div class="box-body">
+							<div>
+								<div class="d-flex align-items-center mb-30">
+									<div class="me-15">
+										<img src="{{ asset('front-end/images/front-end-img/avatar/3.jpg') }}" class="avatar avatar-lg rounded10" alt="">
+									</div>
+									<div class="d-flex flex-column fw-500">
+										<a href="#" class="text-dark hover-primary mb-1 fs-16">Anshu Srivastav</a>
+										<span class="text-fade fs-12">Research Assistant</span>
+									</div>
+								</div>
+								<p class="mb-25 min-h-120">Group case studies really give a sense of teamwork, as it happens in regular classroom studies. It teaches us coordination and right attitude as a team...</p>
+								<div class="d-flex align-items-center">
+									<a href="#">
+										<i class="me-15 fa fa-linkedin-square"></i>
+										<span>Detailed Review</span>									
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-12">
+					<div class="box pull-up">
+						<div class="box-body">
+							<div>
+								<div class="d-flex align-items-center mb-30">
+									<div class="me-15">
+										<img src="{{ asset('front-end/images/front-end-img/avatar/4.jpg')}}" class="avatar avatar-lg rounded10" alt="">
+									</div>
+									<div class="d-flex flex-column fw-500">
+										<a href="#" class="text-dark hover-primary mb-1 fs-16">Mical Doe</a>
+										<span class="text-fade fs-12">Analyst</span>
+									</div>
+								</div>
+								<p class="mb-25 min-h-120">It doesn’t matter what your previous working background is, as everything is taught from the basics.</p>
+								<div class="d-flex align-items-center">
+									<a href="#">
+										<i class="me-15 fa fa-linkedin-square"></i>
+										<span>Detailed Review</span>									
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-3 col-12">
+					<div class="box pull-up">
+						<div class="box-body">
+							<div>
+								<div class="d-flex align-items-center mb-30">
+									<div class="me-15">
+										<img src="{{ asset('front-end/images/front-end-img/avatar/5.jpg')}}" class="avatar avatar-lg rounded10" alt="">
+									</div>
+									<div class="d-flex flex-column fw-500">
+										<a href="#" class="text-dark hover-primary mb-1 fs-16">Paton don</a>
+										<span class="text-fade fs-12">Data Analyst</span>
+									</div>
+								</div>
+								<p class="mb-25 min-h-120">They will prepare you how to face Data Science job interviews along with this upGrad will also provide mock interviews and mock MCQ tests to check...</p>
+								<div class="d-flex align-items-center">
+									<a href="#">
+										<i class="me-15 fa fa-linkedin-square"></i>
+										<span>Detailed Review</span>									
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-12">
+					<div class="box pull-up">
+						<div class="box-body">
+							<div>
+								<div class="d-flex align-items-center mb-30">
+									<div class="me-15">
+										<img src="{{asset('front-end/images/front-end-img/avatar/6.jpg')}}" class="avatar avatar-lg rounded10" alt="">
+									</div>
+									<div class="d-flex flex-column fw-500">
+										<a href="#" class="text-dark hover-primary mb-1 fs-16">Johen Doe</a>
+										<span class="text-fade fs-12">Samsung</span>
+									</div>
+								</div>
+								<p class="mb-25 min-h-120">Many of the basic concepts are being taught to build good intuition of Machine Learning models. Most of the basic math required for developing an intuition...</p>
+								<div class="d-flex align-items-center">
+									<a href="#">
+										<i class="me-15 fa fa-linkedin-square"></i>
+										<span>Detailed Review</span>									
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-12">
+					<div class="box pull-up">
+						<div class="box-body">
+							<div>
+								<div class="d-flex align-items-center mb-30">
+									<div class="me-15">
+										<img src="{{asset('front-end/images/front-end-img/avatar/7.jpg')}}" class="avatar avatar-lg rounded10" alt="">
+									</div>
+									<div class="d-flex flex-column fw-500">
+										<a href="#" class="text-dark hover-primary mb-1 fs-16">Moriss Kothari</a>
+										<span class="text-fade fs-12">Software Engineer</span>
+									</div>
+								</div>
+								<p class="mb-25 min-h-120">You will be notified of any interview opportunities in ML and they will share your profile with the recruiters. This really helps to kick start your...</p>
+								<div class="d-flex align-items-center">
+									<a href="#">
+										<i class="me-15 fa fa-linkedin-square"></i>
+										<span>Detailed Review</span>									
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-12">
+					<div class="box pull-up">
+						<div class="box-body">
+							<div>
+								<div class="d-flex align-items-center mb-30">
+									<div class="me-15">
+										<img src="{{asset('front-end/images/front-end-img/avatar/8.jpg')}}" class="avatar avatar-lg rounded10" alt="">
+									</div>
+									<div class="d-flex flex-column fw-500">
+										<a href="#" class="text-dark hover-primary mb-1 fs-16">Johens Kothari</a>
+										<span class="text-fade fs-12">Software Engineer</span>
+									</div>
+								</div>
+								<p class="mb-25 min-h-120">The course justifies every penny charged and is an investment that reaps benefits once we enter the market after course completion.</p>
+								<div class="d-flex align-items-center">
+									<a href="#">
+										<i class="me-15 fa fa-linkedin-square"></i>
+										<span>Detailed Review</span>									
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="py-50 bg-white" data-aos="fade-up">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-7 col-12 text-center">
+					<h1 class="mb-15">Get in touch with us.<br>We are happy to help.</h1>				
+					<hr class="w-100 bg-primary">
+				</div>
+			</div>
+			<div class="row justify-content-center mt-30">
+				<div class="col-lg-6 col-12">   
+					<form>
+						<div class="contact-form form-border clearfix">
+							<div class="form-group">
+								<input id="name" type="text" placeholder="Name*" class="form-control" name="name">
+							</div>
+							<div class="form-group">
+								<input type="email" placeholder="Email*" class="form-control" name="email">
+							</div>
+							<div class="form-group">
+								<input type="text" placeholder="Phone*" class="form-control" name="phone">
+							</div>
+							<div class="form-group textarea">
+								<textarea class="form-control input-message" placeholder="Comment*" rows="7" name="message"></textarea>
+							</div>
+							<div class="form-group submit-button">
+								<button id="submit" name="submit" type="submit" value="Send" class="btn btn-primary"> Send your message </button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<footer class="footer_three">
+		<div class="footer-top bg-dark3 pt-50">
+            <div class="container">
+                <div class="row">
+					<div class="col-lg-3 col-12">
+                        <div class="widget">
+                            <h4 class="footer-title">About</h4>
+							<hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
+							<p class="text-capitalize mb-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis exercitation ullamco laboris<br><br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
                         </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                                </div>
-                            </div>
+                    </div>											
+					<div class="col-lg-3 col-12">
+						<div class="widget">
+							<h4 class="footer-title">Contact Info</h4>
+							<hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
+							<ul class="list list-unstyled mb-30">
+								<li> <i class="fa fa-map-marker"></i> 123, Lorem Ipsum, Dummy City,<br>FL-12345 USA</li>
+								<li> <i class="fa fa-phone"></i> <span>+(1) 123-878-1649 </span><br><span>+(1) 123-878-1649 </span></li>
+								<li> <i class="fa fa-envelope"></i> <span>hello@multipurposethemes.com </span><br><span>support@multipurposethemes.com </span></li>
+							</ul>
+						</div>
+					</div>					
+					<div class="col-12 col-lg-3">
+                        <div class="widget footer_widget clearfix">
+                            <h4 class="footer-title">Our Gallery</h4>
+							<hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
+                            <ul class="list-unstyled">
+								<li><a href="#">Home</a></li>
+								<li><a href="#">Instant Buy & Sell</a></li>
+								<li><a href="#">Trade</a></li>
+								<li><a href="#">Pages</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
                         </div>
                     </div>
-                </div>
-
-                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-
-                            <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                                Shop
-                            </a>
-
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
-
-                            <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Sponsor
-                            </a>
+					<div class="col-lg-3 col-12">
+                        <div class="widget">
+                            <h4 class="footer-title">Accept Card Payments</h4>
+							<hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
+							<ul class="payment-icon list-unstyled d-flex gap-items-1">
+								<li class="ps-0">
+									<a href="javascript:;"><i class="fa fa-cc-amex" aria-hidden="true"></i></a>
+								</li>
+								<li>
+									<a href="javascript:;"><i class="fa fa-cc-visa" aria-hidden="true"></i></a>
+								</li>
+								<li>
+									<a href="javascript:;"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></a>
+								</li>
+								<li>
+									<a href="javascript:;"><i class="fa fa-cc-mastercard" aria-hidden="true"></i></a>
+								</li>
+								<li>
+									<a href="javascript:;"><i class="fa fa-cc-paypal" aria-hidden="true"></i></a>
+								</li>
+							</ul>
+                            <h4 class="footer-title mt-20">Newsletter</h4>
+							<hr class="bg-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+                            <div class="mb-20">
+								<form class="" action="" method="post">
+									<div class="input-group">
+										<input name="email" required="required" class="form-control" placeholder="Your Email Address" type="email">
+										<button name="submit" value="Submit" type="submit" class="btn btn-primary"> <i class="fa fa-envelope"></i> </button>
+									</div>
+								</form>
+							</div>
                         </div>
                     </div>
-
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </div>
+                </div>				
+            </div>
+        </div>		
+		<div class="footer-bottom bg-dark3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-12 text-md-start text-center"> © 2021 <span class="text-white"> Multipurpose Themes</span>  All Rights Reserved.</div>
+					<div class="col-md-6 mt-md-0 mt-20">
+						<div class="social-icons">
+							<ul class="list-unstyled d-flex gap-items-1 justify-content-md-end justify-content-center">
+								<li><a href="#" class="waves-effect waves-circle btn btn-social-icon btn-circle btn-facebook"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#" class="waves-effect waves-circle btn btn-social-icon btn-circle btn-twitter"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#" class="waves-effect waves-circle btn btn-social-icon btn-circle btn-linkedin"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#" class="waves-effect waves-circle btn btn-social-icon btn-circle btn-youtube"><i class="fa fa-youtube"></i></a></li>
+							</ul>
+						</div>
+					</div>
                 </div>
             </div>
         </div>
-    </body>
+	</footer>
+	
+	
+	<!-- Vendor JS -->
+	<script src="{{ asset('front-end/js/vendors.min.js') }}"></script>	
+	<!-- Corenav Master JavaScript -->
+    <script src="{{ asset('front-end/corenav-master/coreNavigation-1.1.3.js') }}"></script>
+    <script src="{{ asset('front-end/js/nav.js') }}"></script>
+	<script src="{{ asset('front-end/assets/vendor_components/OwlCarousel2/dist/owl.carousel.js')}}"></script>
+	<script src="{{ asset('front-end/assets/vendor_components/bootstrap-select/dist/js/bootstrap-select.js')}}"></script>
+	<script src="{{ asset('front-end/assets/vendor_components/Web-Ticker-master/jquery.webticker.min.js')}}"></script>
+	<script>
+		//ticker
+		if ($('#webticker-1').length) {   
+			$("#webticker-1").webTicker({
+				height:'auto', 
+				duplicate:true, 
+				startEmpty:false, 
+				rssfrequency:5
+			});
+		}
+		/*--- Sparkline charts - mini charts ---*/ 
+		function sparkline_charts() {
+			$('.sparklines').sparkline('html');
+		}
+		if ($('.sparklines').length) {
+			sparkline_charts();
+		} 
+	</script>
+	
+	<!-- CryptoCurrency front end -->
+	<script src="{{ asset('/front-end/js/template.js')}}"></script>
+	
+	
+</body>
 </html>

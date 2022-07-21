@@ -9,11 +9,11 @@
     <link rel="icon" href="{{asset('front-end/images/favicon.ico')}}">
 
     <title>Crypto Currency HTML Template</title>
-    
+
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('front-end/css/vendors_css.css') }}">
-	  
-	<!-- Style-->  
+
+	<!-- Style-->
 	<link rel="stylesheet" href="{{ asset('front-end/css/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('front-end/css/skin_color.css') }}">
     <style>
@@ -29,7 +29,7 @@
   </head>
 
 <body class="theme-warning">
-	
+
 	<header class="top-bar">
 		<div class="topbar">
 		  <div class="container">
@@ -44,7 +44,7 @@
 			  </div>
 			  <div class="col-lg-6 col-12 xs-mb-10">
 				<div class="topbar-call text-center text-lg-end topbar-right">
-				  <ul class="list-inline d-lg-flex justify-content-end">				  
+				  <ul class="list-inline d-lg-flex justify-content-end">
 					 <li class="me-10 ps-10 lng-drop">
 					  	<select class="header-lang-bx selectpicker">
 							<option>USD</option>
@@ -59,8 +59,13 @@
 							<option data-icon="flag-icon flag-icon-gb">Eng UK</option>
 						</select>
 					 </li>
-					 <li class="me-10 ps-10"><a href="#"><i class="text-white fa fa-sign-in d-md-inline-block d-none"></i> Login</a></li>
-					 <li class="me-10 ps-10"><a href="#"><i class="text-white fa fa-dashboard d-md-inline-block d-none"></i> My Account</a></li>
+					  @if (Route::has('login'))
+							@auth
+								<li class="me-10 ps-10"><a href="{{ route('home') }}"><i class="text-white fa fa-dashboard d-md-inline-block d-none"></i> My Account</a></li>
+               @else
+								<li class="me-10 ps-10"><a href="{{ route('login') }}"><i class="text-white fa fa-sign-in d-md-inline-block d-none"></i> Login</a></li>
+              @endauth
+            @endif
 				  </ul>
 				</div>
 			  </div>
@@ -75,9 +80,9 @@
 				</a>
 				<button class="toggle-bar">
 					<span class="ti-menu"></span>
-				</button>	
-			</div>								
-			<ul class="menu">				
+				</button>
+			</div>
+			<ul class="menu">
 				<li class="dropdown">
 					<a href="#">Home</a>
 					<ul class="dropdown-menu">
@@ -86,10 +91,10 @@
 						<li><a href="index3.html">Home 3</a></li>
 						<li><a href="index4.html">Home 4</a></li>
 					</ul>
-				</li>				
+				</li>
 				<li>
 					<a href="buy_sell.html">Instant Buy & Sell</a>
-				</li>				
+				</li>
 				<li class="dropdown">
 					<a href="#">Trade</a>
 					<ul class="dropdown-menu">
@@ -127,7 +132,7 @@
 							</div>
 							<div class="col-md-3 col-12">
 								<ul class="list-group">
-									<li><h4 class="menu-title">Footer</h4></li> 
+									<li><h4 class="menu-title">Footer</h4></li>
 									<li><a href="footer_style1.html"><i class="ti-arrow-circle-right me-10"></i>Footer One</a></li>
 									<li><a href="footer_style2.html"><i class="ti-arrow-circle-right me-10"></i>Footer Two</a></li>
 									<li><a href="footer_style3.html"><i class="ti-arrow-circle-right me-10"></i>Footer Three</a></li>
@@ -143,12 +148,12 @@
 									<li><a href="header_style2.html"><i class="ti-arrow-circle-right me-10"></i>Header Two</a></li>
 									<li><a href="header_style3.html"><i class="ti-arrow-circle-right me-10"></i>Header Three</a></li>
 									<li><a href="header_style4.html"><i class="ti-arrow-circle-right me-10"></i>Header Four</a></li>
-									<li><a href="header_style5.html"><i class="ti-arrow-circle-right me-10"></i>Header Five</a></li> 
+									<li><a href="header_style5.html"><i class="ti-arrow-circle-right me-10"></i>Header Five</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
-				</li>				
+				</li>
 				<li class="dropdown">
 					<a href="#">Blog</a>
 					<ul class="dropdown-menu">
@@ -183,14 +188,16 @@
 							</ul>
 						</li>
 					</ul>
-				</li>	
+				</li>
 				<li>
 					<a href="contact_us.html">Contact</a>
 				</li>
 			</ul>
 			<ul class="attributes">
-				<li class="d-md-block d-none"><a href="#" class="px-10 pt-15 pb-10"><div class="btn btn-primary py-5">Register Now</div></a></li>
-				<li><a href="#" class="toggle-search-fullscreen"><span class="ti-search"></span></a></li>				
+				  @if (Route::has('register'))
+					<li class="d-md-block d-none"><a href="{{ route('register') }}" class="px-10 pt-15 pb-10"><div class="btn btn-primary py-5">Register Now</div></a></li>
+          @endif
+				<li><a href="#" class="toggle-search-fullscreen"><span class="ti-search"></span></a></li>
 			</ul>
 			<div class="wrap-search-fullscreen">
 				<div class="container">
@@ -201,13 +208,13 @@
 		</nav>
 	</header>
 
-    
+
     <section class="bg-img pt-200 pb-120" data-overlay="7" style="background-image: url({{ asset('/front-end/images/front-end-img/banners/banner-1.jpg') }}); background-position: top center;">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<div class="text-center mt-80">
-						<h1 class="box-title text-white fs-50 mb-30">Buy & Sell 100+ coins instantly</h1>	
+						<h1 class="box-title text-white fs-50 mb-30">Buy & Sell 100+ coins instantly</h1>
 					</div>
 					<div class="text-center d-flex gap-3 justify-content-center">
 						<a href="#" class="btn btn-outline btn-primary text-white">Visit Exchange</a>
@@ -216,8 +223,8 @@
 				</div>
 			</div>
 		</div>
-	</section>	
-	<section class="overflow-xh" data-aos="fade-up">		
+	</section>
+	<section class="overflow-xh" data-aos="fade-up">
 		<div class="row">
 			<div class="col-12">
 				<div class="box">
@@ -297,7 +304,7 @@
 										  </script>
 										</div>
 										<!-- TradingView Widget END -->
-									</div>			
+									</div>
 								  </div>
 								  <div class="col-12 col-md-4">
 									<div class="box box-body pull-up">
@@ -321,7 +328,7 @@
 										  </script>
 										</div>
 										<!-- TradingView Widget END -->
-									</div>			
+									</div>
 								  </div>
 								  <div class="col-12 col-md-4">
 									<div class="box box-body pull-up">
@@ -345,7 +352,7 @@
 										  </script>
 										</div>
 										<!-- TradingView Widget END -->
-									</div>			
+									</div>
 								  </div>
 								</div>
 							</div>
@@ -375,7 +382,7 @@
 										  </script>
 										</div>
 										<!-- TradingView Widget END -->
-									</div>			
+									</div>
 								  </div>
 								  <div class="col-12 col-md-4">
 									<div class="box box-body pull-up">
@@ -399,7 +406,7 @@
 										  </script>
 										</div>
 										<!-- TradingView Widget END -->
-									</div>			
+									</div>
 								  </div>
 								  <div class="col-12 col-md-4">
 									<div class="box box-body pull-up">
@@ -423,7 +430,7 @@
 										  </script>
 										</div>
 										<!-- TradingView Widget END -->
-									</div>			
+									</div>
 								  </div>
 								</div>
 							</div>
@@ -432,13 +439,13 @@
 				</div>
 			</div>
 		</div>
-	</section> 
-	
+	</section>
+
 	<section class="py-50 bg-white" data-aos="fade-up">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-7 col-12 text-center">
-					<h1 class="mb-15">Market Live</h1>					
+					<h1 class="mb-15">Market Live</h1>
 					<hr class="w-100 bg-primary">
 				</div>
 			</div>
@@ -448,15 +455,15 @@
 						<div style="height:433px; background-color: #FFFFFF; overflow:hidden; box-sizing: border-box; border: 1px solid #56667F; border-radius: 4px; text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #56667F; padding: 0px; margin: 0px; width: 100%;"><div style="height:413px; padding:0px; margin:0px; width: 100%;"><iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=light&cnt=6&pref_coin_id=1505&graph=yes" width="100%" height="409px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0;"></iframe></div><div style="color: #FFFFFF; line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%; font-family: Verdana, Tahoma, Arial, sans-serif;"><a href="https://coinlib.io" target="_blank" style="font-weight: 500; color: #FFFFFF; text-decoration:none; font-size:11px">Cryptocurrency Prices</a>&nbsp;by Coinlib</div></div>
 					</div>
 				</div>
-			</div>						
+			</div>
 		</div>
 	</section>
-	
+
 	<section class="py-50" data-aos="fade-up">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-7 col-12 text-center">
-					<h1 class="mb-15">Trade. Anywhere.</h1>					
+					<h1 class="mb-15">Trade. Anywhere.</h1>
 					<hr class="w-100 bg-primary">
 				</div>
 			</div>
@@ -524,18 +531,18 @@
 						</div>
 					</div>
 				</div>
-			</div>						
+			</div>
 		</div>
 	</section>
-	
+
 	<section class="py-50 overflow-xh" data-aos="fade-up">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-7 col-12 text-start">
 					<h6 class="sub-heading">Market Outlooks</h6>
-					<h1 class="mb-15">Analyze markets across 150+ countries</h1>					
+					<h1 class="mb-15">Analyze markets across 150+ countries</h1>
 					<hr class="w-100 bg-primary ms-0">
-					
+
 					<ul class="nav nav-pills" role="tablist">
 						<li class="nav-item"> <a class="nav-link active fs-18 py-15" data-bs-toggle="tab" href="#home7" role="tab">Consumer Markets</a> </li>
 						<li class="nav-item"> <a class="nav-link py-15 fs-18" data-bs-toggle="tab" href="#profile7" role="tab">Digital Markets</a> </li>
@@ -545,7 +552,7 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="home7" role="tabpanel">
 							<div class="py-15">
-								<p class="fs-18 mb-20">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>								
+								<p class="fs-18 mb-20">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>
 								<div class="text-center d-flex gap-3 justify-content-start">
 									<a href="#" class="btn btn-warning">Explore the tool</a>
 									<a href="#" class="btn btn-outline btn-warning"> <i class="fa fa-youtube-play me-10"></i>Watch the tutorial</a>
@@ -563,7 +570,7 @@
 						</div>
 						<div class="tab-pane" id="messages7" role="tabpanel">
 							<div class="py-15">
-								<p class="fs-18 mb-20">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites</p>							
+								<p class="fs-18 mb-20">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites</p>
 								<div class="text-center d-flex gap-3 justify-content-start">
 									<a href="#" class="btn btn-warning">Explore the tool</a>
 									<a href="#" class="btn btn-outline btn-warning"> <i class="fa fa-youtube-play me-10"></i>Watch the tutorial</a>
@@ -586,12 +593,12 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<section class="py-50 bg-white" data-aos="fade-up">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-7 col-12 text-center">
-					<h1 class="mb-15">Our complete solutions</h1>					
+					<h1 class="mb-15">Our complete solutions</h1>
 					<hr class="w-100 bg-primary">
 				</div>
 			</div>
@@ -601,7 +608,7 @@
 						<div class="box-body px-30 pt-50 pb-30">
 							<div class="text-center mb-30">
 								<h3 class="box-title mb-10">Basic Account</h3>
-								<p>Get to know us</p>					
+								<p>Get to know us</p>
 								<hr class="w-100 bg-primary">
 							</div>
 							<ul class="list list-hand">
@@ -619,7 +626,7 @@
 						<div class="box-body px-30 pt-50 pb-30">
 							<div class="text-center mb-30">
 								<h3 class="box-title mb-10">Single Account</h3>
-								<p>The ideal entry-level account for individual users</p>					
+								<p>The ideal entry-level account for individual users</p>
 								<hr class="w-100 bg-primary">
 							</div>
 							<ul class="list list-hand">
@@ -637,7 +644,7 @@
 						<div class="box-body px-30 pt-50 pb-30">
 							<div class="text-center mb-30">
 								<h3 class="box-title mb-10">Corporate Account</h3>
-								<p>Our company solution</p>					
+								<p>Our company solution</p>
 								<hr class="w-100 bg-primary">
 							</div>
 							<ul class="list list-hand">
@@ -658,19 +665,19 @@
 				<div class="col-12 text-center">
 					<a href="#" class="btn btn-warning">Go to product overview</a>
 				</div>
-			</div>						
+			</div>
 		</div>
 	</section>
-	
+
 	<section class="py-50" data-aos="fade-up">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-7 col-12 text-center">
-					<h1 class="mb-15">Reviews & Ratings</h1>				
+					<h1 class="mb-15">Reviews & Ratings</h1>
 					<hr class="w-100 bg-primary">
 				</div>
 			</div>
-			<div class="row mt-30">				
+			<div class="row mt-30">
 				<div class="col-md-3 col-12">
 					<div class="box pull-up">
 						<div class="box-body">
@@ -688,7 +695,7 @@
 								<div class="d-flex align-items-center">
 									<a href="#">
 										<i class="me-15 fa fa-linkedin-square"></i>
-										<span>Detailed Review</span>									
+										<span>Detailed Review</span>
 									</a>
 								</div>
 							</div>
@@ -712,7 +719,7 @@
 								<div class="d-flex align-items-center">
 									<a href="#">
 										<i class="me-15 fa fa-linkedin-square"></i>
-										<span>Detailed Review</span>									
+										<span>Detailed Review</span>
 									</a>
 								</div>
 							</div>
@@ -736,7 +743,7 @@
 								<div class="d-flex align-items-center">
 									<a href="#">
 										<i class="me-15 fa fa-linkedin-square"></i>
-										<span>Detailed Review</span>									
+										<span>Detailed Review</span>
 									</a>
 								</div>
 							</div>
@@ -760,13 +767,13 @@
 								<div class="d-flex align-items-center">
 									<a href="#">
 										<i class="me-15 fa fa-linkedin-square"></i>
-										<span>Detailed Review</span>									
+										<span>Detailed Review</span>
 									</a>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 				<div class="col-md-3 col-12">
 					<div class="box pull-up">
 						<div class="box-body">
@@ -784,7 +791,7 @@
 								<div class="d-flex align-items-center">
 									<a href="#">
 										<i class="me-15 fa fa-linkedin-square"></i>
-										<span>Detailed Review</span>									
+										<span>Detailed Review</span>
 									</a>
 								</div>
 							</div>
@@ -808,7 +815,7 @@
 								<div class="d-flex align-items-center">
 									<a href="#">
 										<i class="me-15 fa fa-linkedin-square"></i>
-										<span>Detailed Review</span>									
+										<span>Detailed Review</span>
 									</a>
 								</div>
 							</div>
@@ -832,7 +839,7 @@
 								<div class="d-flex align-items-center">
 									<a href="#">
 										<i class="me-15 fa fa-linkedin-square"></i>
-										<span>Detailed Review</span>									
+										<span>Detailed Review</span>
 									</a>
 								</div>
 							</div>
@@ -856,7 +863,7 @@
 								<div class="d-flex align-items-center">
 									<a href="#">
 										<i class="me-15 fa fa-linkedin-square"></i>
-										<span>Detailed Review</span>									
+										<span>Detailed Review</span>
 									</a>
 								</div>
 							</div>
@@ -866,17 +873,17 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<section class="py-50 bg-white" data-aos="fade-up">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-7 col-12 text-center">
-					<h1 class="mb-15">Get in touch with us.<br>We are happy to help.</h1>				
+					<h1 class="mb-15">Get in touch with us.<br>We are happy to help.</h1>
 					<hr class="w-100 bg-primary">
 				</div>
 			</div>
 			<div class="row justify-content-center mt-30">
-				<div class="col-lg-6 col-12">   
+				<div class="col-lg-6 col-12">
 					<form>
 						<div class="contact-form form-border clearfix">
 							<div class="form-group">
@@ -900,7 +907,7 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<footer class="footer_three">
 		<div class="footer-top bg-dark3 pt-50">
             <div class="container">
@@ -911,7 +918,7 @@
 							<hr class="bg-primary mb-10 mt-0 d-inline-block mx-auto w-60">
 							<p class="text-capitalize mb-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis exercitation ullamco laboris<br><br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
                         </div>
-                    </div>											
+                    </div>
 					<div class="col-lg-3 col-12">
 						<div class="widget">
 							<h4 class="footer-title">Contact Info</h4>
@@ -922,7 +929,7 @@
 								<li> <i class="fa fa-envelope"></i> <span>hello@multipurposethemes.com </span><br><span>support@multipurposethemes.com </span></li>
 							</ul>
 						</div>
-					</div>					
+					</div>
 					<div class="col-12 col-lg-3">
                         <div class="widget footer_widget clearfix">
                             <h4 class="footer-title">Our Gallery</h4>
@@ -970,9 +977,9 @@
 							</div>
                         </div>
                     </div>
-                </div>				
+                </div>
             </div>
-        </div>		
+        </div>
 		<div class="footer-bottom bg-dark3">
             <div class="container">
                 <div class="row align-items-center">
@@ -991,10 +998,10 @@
             </div>
         </div>
 	</footer>
-	
-	
+
+
 	<!-- Vendor JS -->
-	<script src="{{ asset('front-end/js/vendors.min.js') }}"></script>	
+	<script src="{{ asset('front-end/js/vendors.min.js') }}"></script>
 	<!-- Corenav Master JavaScript -->
     <script src="{{ asset('front-end/corenav-master/coreNavigation-1.1.3.js') }}"></script>
     <script src="{{ asset('front-end/js/nav.js') }}"></script>
@@ -1003,26 +1010,26 @@
 	<script src="{{ asset('front-end/assets/vendor_components/Web-Ticker-master/jquery.webticker.min.js')}}"></script>
 	<script>
 		//ticker
-		if ($('#webticker-1').length) {   
+		if ($('#webticker-1').length) {
 			$("#webticker-1").webTicker({
-				height:'auto', 
-				duplicate:true, 
-				startEmpty:false, 
+				height:'auto',
+				duplicate:true,
+				startEmpty:false,
 				rssfrequency:5
 			});
 		}
-		/*--- Sparkline charts - mini charts ---*/ 
+		/*--- Sparkline charts - mini charts ---*/
 		function sparkline_charts() {
 			$('.sparklines').sparkline('html');
 		}
 		if ($('.sparklines').length) {
 			sparkline_charts();
-		} 
+		}
 	</script>
-	
+
 	<!-- CryptoCurrency front end -->
 	<script src="{{ asset('/front-end/js/template.js')}}"></script>
-	
-	
+
+
 </body>
 </html>

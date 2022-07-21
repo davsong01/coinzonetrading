@@ -11,8 +11,25 @@
     <title>{{ env('APP_NAME') }}</title>
     
 	<!-- Vendors Style-->
-	<link rel="stylesheet" href="{{ asset('front-end/css/vendors_css.css') }}">
-	  
+	{{-- <link rel="stylesheet" href="{{ url('front-end/css/vendors_css.css') }}"> --}}
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/bootstrap/dist/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/Magnific-Popup-master/dist/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/lightbox-master/dist/ekko-lightbox.css') }}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/bootstrap-select/dist/css/bootstrap-select.css')}}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_plugins/timepicker/bootstrap-timepicker.min.css')}}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/fullcalendar/fullcalendar.min.css')}}">
+   
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/aos/aos.css')}}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/datatable/datatables.min.css')}}">
+
+    <link rel="stylesheet" href="{{ url('front-end/corenav-master/coreNavigation-1.1.3.css') }}">
+    <link rel="stylesheet" href="{{ url('front-end/corenav-master/coreNavigation-1.1.3.css') }}">
+    <link rel="stylesheet" href="{{ url('front-end/assets/vendor_components/fullcalendar/fullcalendar.print.min.css') }}">
 	<!-- Style-->  
 	<link rel="stylesheet" href="{{ asset('front-end/css/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('front-end/css/skin_color.css') }}">

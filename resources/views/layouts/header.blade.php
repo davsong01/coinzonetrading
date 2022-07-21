@@ -12,7 +12,7 @@
             </div>
             <div class="col-lg-6 col-12 xs-mb-10">
             <div class="topbar-call text-center text-lg-end topbar-right">
-                <ul class="list-inline d-lg-flex justify-content-end">				  
+                <ul class="list-inline d-lg-flex justify-content-end">
                     <li class="me-10 ps-10 lng-drop">
                     <select class="header-lang-bx selectpicker">
                         <option>USD</option>
@@ -27,8 +27,13 @@
                         <option data-icon="flag-icon flag-icon-gb">Eng UK</option>
                     </select>
                     </li>
-                    <li class="me-10 ps-10"><a href="#"><i class="text-white fa fa-sign-in d-md-inline-block d-none"></i> Login</a></li>
-                    <li class="me-10 ps-10"><a href="#"><i class="text-white fa fa-dashboard d-md-inline-block d-none"></i> My Account</a></li>
+                      @if (Route::has('login'))
+                        @auth
+                            <li class="me-10 ps-10"><a href="{{ route('home') }}"><i class="text-white fa fa-dashboard d-md-inline-block d-none"></i> My Account</a></li>
+                        @else
+                            <li class="me-10 ps-10"><a href="{{ route('login') }}"><i class="text-white fa fa-sign-in d-md-inline-block d-none"></i> Login</a></li>
+                        @endauth
+                    @endif
                 </ul>
             </div>
             </div>
@@ -37,14 +42,14 @@
     </div>
     <nav hidden class="nav-white nav-transparent">
         <div class="nav-header">
-            <a href="index.html" class="brand">
+            <a href="{{route('home') }}" class="brand">
                 <img src="{{ asset('front-end/images/logo-light-text2.png') }}" alt=""/>
             </a>
             <button class="toggle-bar">
                 <span class="ti-menu"></span>
-            </button>	
-        </div>								
-        <ul class="menu">				
+            </button>
+        </div>
+        <ul class="menu">
             <li class="dropdown">
                 <a href="#">Home</a>
                 <ul class="dropdown-menu">
@@ -53,10 +58,10 @@
                     <li><a href="index3.html">Home 3</a></li>
                     <li><a href="index4.html">Home 4</a></li>
                 </ul>
-            </li>				
+            </li>
             <li>
                 <a href="buy_sell.html">Instant Buy & Sell</a>
-            </li>				
+            </li>
             <li class="dropdown">
                 <a href="#">Trade</a>
                 <ul class="dropdown-menu">
@@ -94,7 +99,7 @@
                         </div>
                         <div class="col-md-3 col-12">
                             <ul class="list-group">
-                                <li><h4 class="menu-title">Footer</h4></li> 
+                                <li><h4 class="menu-title">Footer</h4></li>
                                 <li><a href="footer_style1.html"><i class="ti-arrow-circle-right me-10"></i>Footer One</a></li>
                                 <li><a href="footer_style2.html"><i class="ti-arrow-circle-right me-10"></i>Footer Two</a></li>
                                 <li><a href="footer_style3.html"><i class="ti-arrow-circle-right me-10"></i>Footer Three</a></li>
@@ -110,12 +115,12 @@
                                 <li><a href="header_style2.html"><i class="ti-arrow-circle-right me-10"></i>Header Two</a></li>
                                 <li><a href="header_style3.html"><i class="ti-arrow-circle-right me-10"></i>Header Three</a></li>
                                 <li><a href="header_style4.html"><i class="ti-arrow-circle-right me-10"></i>Header Four</a></li>
-                                <li><a href="header_style5.html"><i class="ti-arrow-circle-right me-10"></i>Header Five</a></li> 
+                                <li><a href="header_style5.html"><i class="ti-arrow-circle-right me-10"></i>Header Five</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </li>				
+            </li>
             <li class="dropdown">
                 <a href="#">Blog</a>
                 <ul class="dropdown-menu">
@@ -150,14 +155,16 @@
                         </ul>
                     </li>
                 </ul>
-            </li>	
+            </li>
             <li>
                 <a href="contact_us.html">Contact</a>
             </li>
         </ul>
         <ul class="attributes">
-            <li class="d-md-block d-none"><a href="#" class="px-10 pt-15 pb-10"><div class="btn btn-primary py-5">Register Now</div></a></li>
-            <li><a href="#" class="toggle-search-fullscreen"><span class="ti-search"></span></a></li>				
+            @if (Route::has('register'))
+                <li class="d-md-block d-none"><a href="{{ route('register') }}" class="px-10 pt-15 pb-10"><div class="btn btn-primary py-5">Register Now</div></a></li>
+            @endif
+            <li><a href="#" class="toggle-search-fullscreen"><span class="ti-search"></span></a></li>
         </ul>
         <div class="wrap-search-fullscreen">
             <div class="container">

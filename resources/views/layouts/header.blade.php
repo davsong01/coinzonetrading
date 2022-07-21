@@ -1,5 +1,5 @@
-<header class="top-bar"></header>
-    <div class="topbar">
+<header class="top-bar">
+     <div class="topbar">
         <div class="container">
         <div class="row justify-content-end">
             <div class="col-lg-6 col-12 d-lg-block d-none">
@@ -35,7 +35,6 @@
             </div>
         </div>
     </div>
-
     <nav hidden class="nav-white nav-transparent">
         <div class="nav-header">
             <a href="index.html" class="brand">

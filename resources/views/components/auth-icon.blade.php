@@ -1,0 +1,1 @@
+<a class="btn btn-social-icon btn-round btn-{{ $name }}" href="{{ $url }}"><i class="fa fa-{{ $name }}"></i></a>

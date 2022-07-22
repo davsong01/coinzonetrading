@@ -235,7 +235,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7 col-12 text-center">
-                <h1 class="mb-15">Market Live</h1>					
+                <h1 class="mb-15">Live Market</h1>					
                 <hr class="w-100 bg-primary">
             </div>
         </div>

@@ -66,14 +66,7 @@
               </div>
             </div>
 
-            <div class="text-center">
-              <p class="mt-20">{{__('- Login With -')}}</p>
-              <p class="d-flex gap-items-2 mb-0 justify-content-center">
-                <x-auth-icon name="facebook" url="#" />
-                <x-auth-icon name="twitter" url="#" />
-                <x-auth-icon name="instagram" url="#" />
-              </p>
-            </div>
+           
           </div>
         </div>
       </div>

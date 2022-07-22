@@ -50,7 +50,7 @@
                     <div class="col-12">
                       <div class="checkbox ms-5">
                         <input type="checkbox" id="basic_checkbox_1">
-                        <label for="basic_checkbox_1" class="form-label">{{ __('I agree to the ') }}<a href="#"
+                        <label for="basic_checkbox_1" class="form-label">{{ __('I agree to the ') }}<a target="_blank" href="{{ route('rules') }}"
                             class="text-warning"><b>{{ __('Terms') }}</b></a></label>
                       </div>
                     </div>

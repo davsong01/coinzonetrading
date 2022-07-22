@@ -47,7 +47,7 @@
                <a href="{{ url('/#packages') }}">Packages</a>
             </li>
             <li>
-               <a href="{{ url('/#packages') }}">Faqs</a>
+               <a href="{{ url('/#packages') }}">Faq</a>
             </li>
             <li>
                 <a href="{{ url('/#contact') }}">Contact</a>

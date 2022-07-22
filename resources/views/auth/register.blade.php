@@ -64,7 +64,7 @@
                 </form>
                 <div class="text-center">
                   <p class="mt-15 mb-0">{{ __('Already registered?') }}<a href="{{ route('login') }}"
-                      class="text-danger ms-5"> {{ __('Logn') }}</a></p>
+                      class="text-danger ms-5"> {{ __('Login') }}</a></p>
                 </div>
               </div>
             </div>

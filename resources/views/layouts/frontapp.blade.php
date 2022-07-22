@@ -51,6 +51,10 @@
         .mb-0 {
         font-size: 18px;
         }
+        nav .brand {
+            height: 56px;
+
+        }
      </style>
   </head>
 

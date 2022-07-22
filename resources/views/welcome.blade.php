@@ -8,8 +8,7 @@
                     <h1 class="box-title text-white fs-50 mb-30">Buy & Sell 100+ coins instantly</h1>	
                 </div>
                 <div class="text-center d-flex gap-3 justify-content-center">
-                    <a href="#" class="btn btn-outline btn-primary text-white">Visit Exchange</a>
-                    <a href="#" class="btn btn-primary">Sign Up Now</a>
+                    <a href="#about" class="btn btn-outline btn-primary text-white">What we are</a>
                 </div>
             </div>
         </div>
@@ -249,122 +248,30 @@
         </div>						
     </div>
 </section>
-
-<section class="py-50" data-aos="fade-up">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 col-12 text-center">
-                <h1 class="mb-15">Trade. Anywhere.</h1>					
-                <hr class="w-100 bg-primary">
-            </div>
-        </div>
-        <div class="row mt-30">
-            <div class="col-lg-4 col-12">
-                <div class="box mb-md-0">
-                    <div class="box-body">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="box-title mb-0">Mobile</h3>
-                            <i class="fa fa-mobile fs-36 text-black-10"></i>
-                        </div>
-                        <p class="my-50">All the power of Binance's cryptocurrency exchange, in the palm of your hand. Download the Binance mobile crypto trading app today.</p>
-                        <div class="row justify-content-between">
-                            <div class="col-6">
-                                <a href="#"><img src="{{ asset('front-end/images/front-end-img/google-play.png')}}" class="pull-up mb-20" alt="" /></a>
-                            </div>
-                            <div class="col-6">
-                                <a href="#"><img src="{{ asset('front-end/images/front-end-img/and-apk.png')}}" class="pull-up mb-20" alt="" /></a>
-                            </div>
-                            <div class="col-6">
-                                <a href="#"><img src="{{ asset('front-end/images/front-end-img/app-store.png')}}" class="pull-up" alt="" /></a>
-                            </div>
-                            <div class="col-6">
-                                <a href="#"><img src="{{ asset('front-end/images/front-end-img/qr.png') }}" class="pull-up" alt="" /></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <div class="box mb-md-0">
-                    <div class="box-body">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="box-title mb-0">Desktop</h3>
-                            <i class="fa fa-desktop fs-36 text-black-10"></i>
-                        </div>
-                        <p class="my-50">Powerful crypto trading platform for those who mean business. The Binance crypto trading experience, tailor-made for your Windows or MacOS device.</p>
-                        <div class="row justify-content-between">
-                            <div class="col-6">
-                                <a href="#"><img src="{{ asset('front-end/images/front-end-img/macos.png') }}" class="pull-up mb-20" alt="" /></a>
-                            </div>
-                            <div class="col-6">
-                                <a href="#"><img src="{{ asset('front-end/images/front-end-img/windows.png')}}" class="pull-up mb-20" alt="" /></a>
-                            </div>
-                            <div class="col-6">
-                                <a href="#"><img src="{{ asset('front-end/images/front-end-img/lunux.png')}}" class="pull-up" alt="" /></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <div class="box h-p100 mb-md-0">
-                    <div class="box-body">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="box-title mb-0">API</h3>
-                            <i class="fa fa-plug fs-36 text-black-10"></i>
-                        </div>
-                        <p class="my-50">The Binance API is designed to provide an easy and efficient way to integrate your trading application into our platform.</p>
-                        <div class="row justify-content-between">
-                            <div class="col-12">
-                                <a href="#"><i class="fa fa-plug me-10"></i>Official API Documentation</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>						
-    </div>
+<section id="about" style="padding-top: 15px;">
 </section>
-
+<section>
+    <div class="gaps" ></div>
+</section>
 <section class="py-50 overflow-xh" data-aos="fade-up">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-7 col-12 text-start">
-                <h6 class="sub-heading">Market Outlooks</h6>
-                <h1 class="mb-15">Analyze markets across 150+ countries</h1>					
+                <h6 class="sub-heading">Dan Morehead</h6>
+                <h1 class="mb-15 fs-18 mb-20">“We believe in the future of cryptocurrency because it entered the exchange markets on a strong note. Success in this sphere is assured to everyone, who gets the hang of managing risks in this sphere.</h1>					
                 <hr class="w-100 bg-primary ms-0">
-                
-                <ul class="nav nav-pills" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active fs-18 py-15" data-bs-toggle="tab" href="#home7" role="tab">Consumer Markets</a> </li>
-                    <li class="nav-item"> <a class="nav-link py-15 fs-18" data-bs-toggle="tab" href="#profile7" role="tab">Digital Markets</a> </li>
-                    <li class="nav-item"> <a class="nav-link py-15 fs-18" data-bs-toggle="tab" href="#messages7" role="tab">Mobility Markets</a> </li>
-                </ul>
+               
+               
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="home7" role="tabpanel">
                         <div class="py-15">
-                            <p class="fs-18 mb-20">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>								
+                            <p class="fs-18 mb-20">Coinzonetrading Limited is one of the Best Trading Platforms. We attract investors to get a steady income. The core of our activity is conducting financial transactions on international exchanges while managing risks and guaranteeing profits. <br><br>
+                            Our team consists of experienced traders engaged in trading activity for more than 14 years. We created the financial portfolio with an active profit pool from the high-yielding assets. Attracting additional capital allows us to extend boundaries and move forward. With our company, every investor becomes a player in the professional exchange market.
+                            Our customer service and support are always available to meet your needs, and our account
+                            managers know that your success is our success.</p>								
                             <div class="text-center d-flex gap-3 justify-content-start">
-                                <a href="#" class="btn btn-warning">Explore the tool</a>
-                                <a href="#" class="btn btn-outline btn-warning"> <i class="fa fa-youtube-play me-10"></i>Watch the tutorial</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="profile7" role="tabpanel">
-                        <div class="py-15">
-                            <p class="fs-18 mb-20">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
-                            <div class="text-center d-flex gap-3 justify-content-start">
-                                <a href="#" class="btn btn-warning">Explore the tool</a>
-                                <a href="#" class="btn btn-outline btn-warning"> <i class="fa fa-youtube-play me-10"></i>Watch the tutorial</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="messages7" role="tabpanel">
-                        <div class="py-15">
-                            <p class="fs-18 mb-20">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites</p>							
-                            <div class="text-center d-flex gap-3 justify-content-start">
-                                <a href="#" class="btn btn-warning">Explore the tool</a>
-                                <a href="#" class="btn btn-outline btn-warning"> <i class="fa fa-youtube-play me-10"></i>Watch the tutorial</a>
+                                <a href="{{ route('about') }}" class="btn btn-warning">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -384,36 +291,36 @@
         </div>
     </div>
 </section>
-
+<section style="margin-top:15px" id="packages">
+</section>
 <section class="py-50 bg-white" data-aos="fade-up">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7 col-12 text-center">
-                <h1 class="mb-15">Our complete solutions</h1>					
+                <h1 class="mb-15">Packages</h1>					
                 <hr class="w-100 bg-primary">
             </div>
         </div>
         <div class="row mt-30">
-            <div class="col-lg-4 col-12">
-                <div class="box">
+            <div class="col-lg-3 col-12">
+                <div class="box packages">
                     <div class="box-body px-30 pt-50 pb-30">
                         <div class="text-center mb-30">
-                            <h3 class="box-title mb-10">Basic Account</h3>
-                            <p>Get to know us</p>					
+                            <h3 class="box-title mb-10">Coinzonetrading Flexible One-Stop Investment</h3>			
                             <hr class="w-100 bg-primary">
                         </div>
                         <ul class="list list-hand">
-                            <li> Access to basic statistics</li>
-                            <li> Download as PDF & PNG</li>
+                            <li><strong>Daily ROI: </strong>$5/day</li>
+                            <li><strong>Monthly ROI: </strong>$50</li>
                         </ul>
                     </div>
                     <div class="box-footer bg-lightest min-h-80 l-h-60">
-                        <p class="text-center fs-22">Free</p>
+                        <p class="text-center fs-36">$700 <small class="fs-16 fw-300">/ month*</small></p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-12">
-                <div class="box">
+            <div class="col-lg-3 col-12">
+                <div class="box packages">
                     <div class="box-body px-30 pt-50 pb-30">
                         <div class="text-center mb-30">
                             <h3 class="box-title mb-10">Single Account</h3>
@@ -430,8 +337,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-12">
-                <div class="box">
+            <div class="col-lg-3 col-12">
+                <div class="box packages">
                     <div class="box-body px-30 pt-50 pb-30">
                         <div class="text-center mb-30">
                             <h3 class="box-title mb-10">Corporate Account</h3>
@@ -448,228 +355,36 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <p class="fs-12 text-end">
-                    *All products require an annual contract. Prices do not include sales tax.
-                </p>
+            <div class="col-lg-3 col-12">
+                <div class="box packages">
+                    <div class="box-body px-30 pt-50 pb-30">
+                        <div class="text-center mb-30">
+                            <h3 class="box-title mb-10">Corporate Account</h3>
+                            <p>Our company solution</p>					
+                            <hr class="w-100 bg-primary">
+                        </div>
+                        <ul class="list list-hand">
+                            <li> All functions of the Single Account</li>
+                            <li> Access to dossiers, forecasts, studies</li>
+                        </ul>
+                    </div>
+                    <div class="box-footer bg-lightest min-h-80 l-h-60">
+                        <p class="text-center fs-36"> <small class="fs-16 fw-300">starting at</small> $700 <small class="fs-16 fw-300">/ month*</small></p>
+                    </div>
+                </div>
             </div>
-            <div class="col-12 text-center">
-                <a href="#" class="btn btn-warning">Go to product overview</a>
-            </div>
+          
         </div>						
     </div>
 </section>
+<section style="margin-top:15px" id="contact">
 
-<section class="py-50" data-aos="fade-up">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 col-12 text-center">
-                <h1 class="mb-15">Reviews & Ratings</h1>				
-                <hr class="w-100 bg-primary">
-            </div>
-        </div>
-        <div class="row mt-30">				
-            <div class="col-md-3 col-12">
-                <div class="box pull-up">
-                    <div class="box-body">
-                        <div>
-                            <div class="d-flex align-items-center mb-30">
-                                <div class="me-15">
-                                    <img src="{{ asset('front-end/images/front-end-img/avatar/1.jpg') }}" class="avatar avatar-lg rounded10" alt="">
-                                </div>
-                                <div class="d-flex flex-column fw-500">
-                                    <a href="#" class="text-dark hover-primary mb-1 fs-16">Johen Kothari</a>
-                                    <span class="text-fade fs-12">Software Engineer</span>
-                                </div>
-                            </div>
-                            <p class="mb-25 min-h-120">A great aspect of this course is the student mentors. These people are always there to help, support, and motivate the student to complete modules...</p>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <i class="me-15 fa fa-linkedin-square"></i>
-                                    <span>Detailed Review</span>									
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-12">
-                <div class="box pull-up">
-                    <div class="box-body">
-                        <div>
-                            <div class="d-flex align-items-center mb-30">
-                                <div class="me-15">
-                                    <img src="{{ asset('front-end/images/front-end-img/avatar/2.jpg') }}" class="avatar avatar-lg rounded10" alt="">
-                                </div>
-                                <div class="d-flex flex-column fw-500">
-                                    <a href="#" class="text-dark hover-primary mb-1 fs-16">Johen doe</a>
-                                    <span class="text-fade fs-12">Vice President</span>
-                                </div>
-                            </div>
-                            <p class="mb-25 min-h-120">This course actually helped me move from being a general manager to vice president. The content was exciting. I actually implemented what I learnt through case...</p>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <i class="me-15 fa fa-linkedin-square"></i>
-                                    <span>Detailed Review</span>									
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-12">
-                <div class="box pull-up">
-                    <div class="box-body">
-                        <div>
-                            <div class="d-flex align-items-center mb-30">
-                                <div class="me-15">
-                                    <img src="{{ asset('front-end/images/front-end-img/avatar/3.jpg') }}" class="avatar avatar-lg rounded10" alt="">
-                                </div>
-                                <div class="d-flex flex-column fw-500">
-                                    <a href="#" class="text-dark hover-primary mb-1 fs-16">Anshu Srivastav</a>
-                                    <span class="text-fade fs-12">Research Assistant</span>
-                                </div>
-                            </div>
-                            <p class="mb-25 min-h-120">Group case studies really give a sense of teamwork, as it happens in regular classroom studies. It teaches us coordination and right attitude as a team...</p>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <i class="me-15 fa fa-linkedin-square"></i>
-                                    <span>Detailed Review</span>									
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-12">
-                <div class="box pull-up">
-                    <div class="box-body">
-                        <div>
-                            <div class="d-flex align-items-center mb-30">
-                                <div class="me-15">
-                                    <img src="{{ asset('front-end/images/front-end-img/avatar/4.jpg')}}" class="avatar avatar-lg rounded10" alt="">
-                                </div>
-                                <div class="d-flex flex-column fw-500">
-                                    <a href="#" class="text-dark hover-primary mb-1 fs-16">Mical Doe</a>
-                                    <span class="text-fade fs-12">Analyst</span>
-                                </div>
-                            </div>
-                            <p class="mb-25 min-h-120">It doesn’t matter what your previous working background is, as everything is taught from the basics.</p>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <i class="me-15 fa fa-linkedin-square"></i>
-                                    <span>Detailed Review</span>									
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>	
-            <div class="col-md-3 col-12">
-                <div class="box pull-up">
-                    <div class="box-body">
-                        <div>
-                            <div class="d-flex align-items-center mb-30">
-                                <div class="me-15">
-                                    <img src="{{ asset('front-end/images/front-end-img/avatar/5.jpg')}}" class="avatar avatar-lg rounded10" alt="">
-                                </div>
-                                <div class="d-flex flex-column fw-500">
-                                    <a href="#" class="text-dark hover-primary mb-1 fs-16">Paton don</a>
-                                    <span class="text-fade fs-12">Data Analyst</span>
-                                </div>
-                            </div>
-                            <p class="mb-25 min-h-120">They will prepare you how to face Data Science job interviews along with this upGrad will also provide mock interviews and mock MCQ tests to check...</p>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <i class="me-15 fa fa-linkedin-square"></i>
-                                    <span>Detailed Review</span>									
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-12">
-                <div class="box pull-up">
-                    <div class="box-body">
-                        <div>
-                            <div class="d-flex align-items-center mb-30">
-                                <div class="me-15">
-                                    <img src="{{asset('front-end/images/front-end-img/avatar/6.jpg')}}" class="avatar avatar-lg rounded10" alt="">
-                                </div>
-                                <div class="d-flex flex-column fw-500">
-                                    <a href="#" class="text-dark hover-primary mb-1 fs-16">Johen Doe</a>
-                                    <span class="text-fade fs-12">Samsung</span>
-                                </div>
-                            </div>
-                            <p class="mb-25 min-h-120">Many of the basic concepts are being taught to build good intuition of Machine Learning models. Most of the basic math required for developing an intuition...</p>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <i class="me-15 fa fa-linkedin-square"></i>
-                                    <span>Detailed Review</span>									
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-12">
-                <div class="box pull-up">
-                    <div class="box-body">
-                        <div>
-                            <div class="d-flex align-items-center mb-30">
-                                <div class="me-15">
-                                    <img src="{{asset('front-end/images/front-end-img/avatar/7.jpg')}}" class="avatar avatar-lg rounded10" alt="">
-                                </div>
-                                <div class="d-flex flex-column fw-500">
-                                    <a href="#" class="text-dark hover-primary mb-1 fs-16">Moriss Kothari</a>
-                                    <span class="text-fade fs-12">Software Engineer</span>
-                                </div>
-                            </div>
-                            <p class="mb-25 min-h-120">You will be notified of any interview opportunities in ML and they will share your profile with the recruiters. This really helps to kick start your...</p>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <i class="me-15 fa fa-linkedin-square"></i>
-                                    <span>Detailed Review</span>									
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-12">
-                <div class="box pull-up">
-                    <div class="box-body">
-                        <div>
-                            <div class="d-flex align-items-center mb-30">
-                                <div class="me-15">
-                                    <img src="{{asset('front-end/images/front-end-img/avatar/8.jpg')}}" class="avatar avatar-lg rounded10" alt="">
-                                </div>
-                                <div class="d-flex flex-column fw-500">
-                                    <a href="#" class="text-dark hover-primary mb-1 fs-16">Johens Kothari</a>
-                                    <span class="text-fade fs-12">Software Engineer</span>
-                                </div>
-                            </div>
-                            <p class="mb-25 min-h-120">The course justifies every penny charged and is an investment that reaps benefits once we enter the market after course completion.</p>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <i class="me-15 fa fa-linkedin-square"></i>
-                                    <span>Detailed Review</span>									
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
-
 <section class="py-50 bg-white" data-aos="fade-up">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7 col-12 text-center">
-                <h1 class="mb-15">Get in touch with us.<br>We are happy to help.</h1>				
+                <h1 class="mb-15">Get in touch with us.<br>We are available to help.</h1>				
                 <hr class="w-100 bg-primary">
             </div>
         </div>

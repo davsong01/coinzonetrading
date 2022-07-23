@@ -17,8 +17,8 @@ class CreateInvestorsPackagesTable extends Migration
             $table->id();
             $table->string('reference');
             $table->string('rid');
-            $table->string('investor_id');
-            $table->string('package_id');
+            $table->integer('investor_id');
+            $table->integer('package_id');
             $table->string('code');
             $table->string('url');
             $table->string('status')->default('pending');

@@ -73,7 +73,7 @@ class FunctionsController extends Controller
     }
 
     public function createCharge($data){
-        $trx = date("Ymd") .'-'. rand(1000000, 9999999);
+        $trx = date('Y') . '-' . date('m') . '-' . rand(1111111, 9999999);
         $headers = array(
             "Content-Type: application/json",
             "X-CC-Api-Key: ". $this->setting->api_key,
@@ -93,6 +93,7 @@ class FunctionsController extends Controller
                 'reference' => $trx,
                 "customer_id" => auth()->user()->id,
                 "customer_name" => auth()->user()->name,
+                "package_id" => $data['package_id'],
             ],
         ];
         // dd(json_encode($d));
@@ -114,9 +115,10 @@ class FunctionsController extends Controller
                 'fee_rate' => $response->data->fee_rate,
                 'rid' => $response->data->id,
                 'reference' => $response->data->metadata->reference,
-                'investor_id ' => $response->data->metadata->customer_id,
-                'created_at' => $response->data->created_at,
-                'expires_at' => $response->data->expires_at,
+                'package_id' => $response->data->metadata->package_id,
+                'investor_id' => $response->data->metadata->customer_id,
+                'created_at' => date('Y-m-d h:i:s', strtotime($response->data->created_at)),
+                'expires_at' => date('Y-m-d h:i:s', strtotime($response->data->expires_at)),
                 'amount' => $response->data->pricing->local->amount,
                 'currency' => $response->data->pricing->local->currency,
                 'url' => $response->data->hosted_url
@@ -126,7 +128,59 @@ class FunctionsController extends Controller
         return 'There was a problem initiating the charge';
     }
 
-    public function queryCharge($data){
-        
+    public function queryCharge($code){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.commerce.coinbase.com/charges/" . $code,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "X-CC-Api-Key: ".$this->setting->api_key."",
+                "Content-Type: application/json",
+                "Cache-Control: no-cache",
+                "X-CC-Version: 2018-03-22"
+            ),
+        ));
+        $response = curl_exec($curl);
+        $response = json_decode($response);
+        if ($response->data) {
+            return [
+                'status' => $response->data->status,
+            ];
+        }
     }
+
+    // public function getTransaction($reference)
+    // {
+    //     $year = explode("-", $reference);
+    //     $year = $year[0];
+    //     if ($year[0] === date('Y')) {
+    //         $transaction = Transaction::whereReference($reference)->first();
+    //     } else {
+    //         $transaction = \DB::table('transactions_2021')->where('reference', $reference)->first();
+    //     }
+    //     return $transaction;
+    // }
+
+    // public function updateTransaction($reference, $status)
+    // {
+    //     $years = explode("-", $reference);
+    //     $year = $years[0];
+    //     try {
+    //         if ($year === date('Y')) {
+    //             $transaction = Transaction::whereReference($reference)->first()->update(['status' => $status]);
+    //         } else {
+    //             $transaction = \DB::table('transactions_2021')->where('reference', $reference)->update(['status' => $status]);
+    //         }
+    //     } catch (\Throwable $th) {
+    //         //throw $th;
+    //     }
+
+    //     return;
+    // }
 }

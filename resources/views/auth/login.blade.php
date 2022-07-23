@@ -1,10 +1,5 @@
 <x-guest-layout>
   <x-auth-card :banner="asset('front-end/images/front-end-img/background/bg-8.jpg')" title="Login">
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
     <section class="py-50">
       <div class="container">
@@ -18,12 +13,18 @@
               <div class="p-40">
                 <form method="POST" action="{{ route('login') }}">
 									 @csrf
+                    <!-- Session Status -->
+                   <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                  <!-- Validation Errors -->
+                  <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
 									 <!-- Username -->
                   <div class="form-group">
                     <div class="input-group mb-15">
 											<span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
-                    	<x-form.input id="username" class="ps-15 bg-transparent" type="text" name="username"
-                      :value="old('username')" placeholder="Username" required autofocus />
+                    	<x-form.input id="email" class="ps-15 bg-transparent" type="email" name="email"
+                      :value="old('email')" placeholder="email" required autofocus />
                     </div>
                   </div>
 									<!-- Password-->

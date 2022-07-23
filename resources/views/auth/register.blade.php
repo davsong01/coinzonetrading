@@ -50,7 +50,7 @@
                     <div class="col-12">
                       <div class="checkbox ms-5">
                         <input type="checkbox" id="basic_checkbox_1">
-                        <label for="basic_checkbox_1" class="form-label">{{ __('I agree to the ') }}<a href="#"
+                        <label for="basic_checkbox_1" class="form-label">{{ __('I agree to the ') }}<a target="_blank" href="{{ route('rules') }}"
                             class="text-warning"><b>{{ __('Terms') }}</b></a></label>
                       </div>
                     </div>
@@ -64,7 +64,7 @@
                 </form>
                 <div class="text-center">
                   <p class="mt-15 mb-0">{{ __('Already registered?') }}<a href="{{ route('login') }}"
-                      class="text-danger ms-5"> {{ __('Logn') }}</a></p>
+                      class="text-danger ms-5"> {{ __('Login') }}</a></p>
                 </div>
               </div>
             </div>

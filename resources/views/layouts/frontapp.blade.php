@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{{asset('front-end/images/favicon.ico')}}">
+    <link rel="icon" href="{{asset('front-end/images/favicon.png')}}">
 
     <title>{{ env('APP_NAME') }}</title>
     
@@ -35,12 +35,25 @@
 	<link rel="stylesheet" href="{{ asset('front-end/css/skin_color.css') }}">
     <style>
         .homeScreenshot--mmo {
-            background: transparent url("{{ asset('front-end/images/front-end-img/homePreview-MMO.png') }}") no-repeat center top;
+            background: transparent url("{{ asset('front-end/images/banners/homePreview-MMO.png') }}") no-repeat center top;
             background-size: cover;
         }
         .homeScreenshot--gcs {
-            background: transparent url("{{ asset('front-end/images/front-end-img/homePreview-MMO2.png')}}") no-repeat center top;
+            background: transparent url("{{ asset('front-end/images/banners/homePreview-MMO2.png')}}") no-repeat center top;
             background-size: cover;
+        }
+        .packages{
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5) !important;
+        }
+        .sub-pages {
+            background-image: url({{ asset( \App\Models\Setting::value('page_banner'))}});
+        }
+        .mb-0 {
+        font-size: 18px;
+        }
+        nav .brand {
+            height: 56px;
+
         }
      </style>
   </head>

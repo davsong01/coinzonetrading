@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+
+Route::get( '/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
+Route::get('/rules',[App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

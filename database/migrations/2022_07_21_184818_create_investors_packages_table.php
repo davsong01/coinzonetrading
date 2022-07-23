@@ -16,9 +16,16 @@ class CreateInvestorsPackagesTable extends Migration
         Schema::create('investors_packages', function (Blueprint $table) {
             $table->id();
             $table->string('reference');
+            $table->string('rid');
             $table->string('investor_id');
             $table->string('package_id');
+            $table->string('code');
+            $table->string('url');
             $table->string('status')->default('pending');
+            $table->float('amount');
+            $table->string('currency');
+            $table->string('fee_rate');
+            $table->dateTime('expires_at');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->timestamps();

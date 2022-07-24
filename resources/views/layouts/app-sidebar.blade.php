@@ -15,10 +15,7 @@
           <img src="{{ asset('back-end/images/user2-160x160.jpg') }}" class="rounded-circle" alt="User Image">
         </div>
         <div class="info">
-          <p>Admin Template</p>
-			<a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i class="ion ion-gear-b"></i></a>
-            <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="ion ion-android-mail"></i></a>
-            <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ion ion-power"></i></a>
+          <p>Hi, {{ auth()->user()->name }}</p>
         </div>
       </div>
       <!-- sidebar menu -->

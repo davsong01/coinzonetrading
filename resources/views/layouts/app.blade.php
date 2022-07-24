@@ -39,7 +39,8 @@
     </head>
     <body class="hold-transition skin-yellow sidebar-mini">
     <div class="wrapper">
-        @include('layouts.app.header')
+        @include('layouts.app-header')
+        @include('layouts.app-sidebar')
             {{-- @include('layouts.navigation')
 
             <!-- Page Heading -->

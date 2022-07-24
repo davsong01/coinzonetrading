@@ -22,6 +22,10 @@ class HomeController extends Controller
     }
 
     public function test(Request $request){
+
+        
+        $packages = app('App\Http\Controllers\FunctionsController')->hasPackages(auth()->user());
+        dd($packages, 'hgj');
         // $uploadimage = app('App\Http\Controllers\FunctionsController')->uploadImage($request->file, 'front-end/images/avatar');
        
         $checkFields = app('App\Http\Controllers\FunctionsController')->checkFilledFields(auth()->user());

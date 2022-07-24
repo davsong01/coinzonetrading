@@ -22,7 +22,7 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::post('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit');
+Route::post('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit')->middleware('hasPackage');
 
 
 Route::get('/dashboard', function () {

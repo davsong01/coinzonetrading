@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Mail\NotificationMail;
+use App\Models\InvestorPackage;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
@@ -70,6 +71,17 @@ class FunctionsController extends Controller
             }
         }
         return $check;
+    }
+
+    public function hasPackages($user)
+    {
+        $packages = InvestorPackage::where('investor_id', $user->id)->get();
+
+        if(isset($packages) && $packages->count() > 0){
+            return $packages;
+        }
+        return NULL;
+       
     }
 
     public function createCharge($data){
@@ -157,6 +169,7 @@ class FunctionsController extends Controller
             ];
         }
     }
+
 
     // public function getTransaction($reference)
     // {

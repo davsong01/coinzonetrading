@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\InvestorPackage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,5 +13,10 @@ class Investor extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function packages()
+    {
+        return $this->hasMany(InvestorPackage::class, 'investor_id');
     }
 }

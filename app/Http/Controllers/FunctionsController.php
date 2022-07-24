@@ -86,7 +86,7 @@ class FunctionsController extends Controller
 
     public function createCharge($data){
         // Delete expired pending charges
-        \DB::table('investors_packages')->whereStatus('pending')->where('expires_at', '<', now())->delete();
+        \DB::table('investors_packages')->whereStatus('pending')->where('expires_at', '>', now())->delete();
 
         $trx = date('Y') . '-' . date('m') . '-' . rand(1111111, 9999999);
         $headers = array(

@@ -1,3 +1,11 @@
+@section('css')
+<style>
+    .box-title {
+        height: 110px !important;
+    }
+</style>
+    
+@endsection
 @extends('layouts.frontapp')
 @section('body')
 <section class="bg-img pt-200 pb-120" data-overlay="7" style="background-image: url({{ asset('/front-end/images/front-end-img/banners/banner-1.jpg') }}); background-position: top center;">
@@ -302,78 +310,31 @@
             </div>
         </div>
         <div class="row mt-30">
-            <div class="col-lg-3 col-12">
-                <div class="box packages">
-                    <div class="box-body px-30 pt-50 pb-30">
-                        <div class="text-center mb-30">
-                            <h3 class="box-title mb-10">Coinzonetrading Flexible One-Stop Investment</h3>			
-                            <hr class="w-100 bg-primary">
+            @if(\App\Models\Package::count() > 1)
+                @foreach(\App\Models\Package::all() as $package)
+                <div class="col-lg-3 col-12">
+                    <a href="{{ route('package.select', $package->id) }}" target="_blank">
+                    <div class="box packages">
+                        
+                        <div class="box-body px-30 pt-50 pb-30">
+                            <div class="text-center mb-30">
+                                <h3 class="box-title mb-10">{{ $package->name }}</h3>			
+                                <hr class="w-100 bg-primary">
+                            </div>
+                            <ul class="list list-hand">
+                                <li><strong>Daily ROI: </strong>${{ number_format($package->daily_roi) }}</li>
+                                <li><strong>Monthly ROI: </strong>${{ number_format($package->monthly_roi) }}</li>
+                            </ul>
                         </div>
-                        <ul class="list list-hand">
-                            <li><strong>Daily ROI: </strong>$5/day</li>
-                            <li><strong>Monthly ROI: </strong>$50</li>
-                        </ul>
-                    </div>
-                    <div class="box-footer bg-lightest min-h-80 l-h-60">
-                        <p class="text-center fs-36">$700 <small class="fs-16 fw-300">/ month*</small></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-12">
-                <div class="box packages">
-                    <div class="box-body px-30 pt-50 pb-30">
-                        <div class="text-center mb-30">
-                            <h3 class="box-title mb-10">Single Account</h3>
-                            <p>The ideal entry-level account for individual users</p>					
-                            <hr class="w-100 bg-primary">
+                        <div class="box-footer bg-lightest min-h-80 l-h-60">
+                            <p class="text-center fs-36">${{ number_format($package->amount) }} <small class="fs-16 fw-300">/ month*</small></p>
                         </div>
-                        <ul class="list list-hand">
-                            <li> Full access to all statistics</li>
-                            <li> Stand-alone license</li>
-                        </ul>
+                        
                     </div>
-                    <div class="box-footer bg-lightest min-h-80 l-h-60">
-                        <p class="text-center fs-36">$39 <small class="fs-16 fw-300">/ month*</small></p>
-                    </div>
+                    </a>
                 </div>
-            </div>
-            <div class="col-lg-3 col-12">
-                <div class="box packages">
-                    <div class="box-body px-30 pt-50 pb-30">
-                        <div class="text-center mb-30">
-                            <h3 class="box-title mb-10">Corporate Account</h3>
-                            <p>Our company solution</p>					
-                            <hr class="w-100 bg-primary">
-                        </div>
-                        <ul class="list list-hand">
-                            <li> All functions of the Single Account</li>
-                            <li> Access to dossiers, forecasts, studies</li>
-                        </ul>
-                    </div>
-                    <div class="box-footer bg-lightest min-h-80 l-h-60">
-                        <p class="text-center fs-36"> <small class="fs-16 fw-300">starting at</small> $700 <small class="fs-16 fw-300">/ month*</small></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-12">
-                <div class="box packages">
-                    <div class="box-body px-30 pt-50 pb-30">
-                        <div class="text-center mb-30">
-                            <h3 class="box-title mb-10">Corporate Account</h3>
-                            <p>Our company solution</p>					
-                            <hr class="w-100 bg-primary">
-                        </div>
-                        <ul class="list list-hand">
-                            <li> All functions of the Single Account</li>
-                            <li> Access to dossiers, forecasts, studies</li>
-                        </ul>
-                    </div>
-                    <div class="box-footer bg-lightest min-h-80 l-h-60">
-                        <p class="text-center fs-36"> <small class="fs-16 fw-300">starting at</small> $700 <small class="fs-16 fw-300">/ month*</small></p>
-                    </div>
-                </div>
-            </div>
-          
+            @endforeach
+            @endif
         </div>						
     </div>
 </section>

@@ -56,6 +56,7 @@
 
         }
      </style>
+     @yield('css')
   </head>
 
 <body class="theme-warning">

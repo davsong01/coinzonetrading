@@ -7,9 +7,9 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="icon" href="../images/favicon.ico">
+    	<link rel="icon" href="{{asset(\App\Models\Setting::value('favicon'))}}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    	<title>{{ env('APP_NAME') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -23,6 +23,17 @@
         <link rel="stylesheet" href="{{ asset('back-end/css/bootstrap-extend.css') }}">
 
         <!-- theme style -->
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/font-awesome/css/font-awesome.css')}}">
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/Ionicons/css/ionicons.css')}}">
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/themify-icons/themify-icons.css')}}">
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/linea-icons/linea.css')}}">
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/glyphicons/glyphicon.css')}}">
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/flag-icon/css/flag-icon.css')}}">
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/material-design-iconic-font/css/materialdesignicons.css')}}">
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/simple-line-icons-master/css/simple-line-icons.css')}}">
+		<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/cryptocoins-master/webfont/cryptocoins.css')}}">
+ 		<link rel="stylesheet" href="{{ asset('back-end/https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i')}}">
+
         <link rel="stylesheet" href="{{ asset('back-end/css/master_style.css') }}">
 
         <!-- Crypto_Admin skins -->

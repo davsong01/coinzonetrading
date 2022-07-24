@@ -3,6 +3,7 @@
     <a href="index.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
 	  <b class="logo-mini">
+      
 		  <span class="light-logo"><img src="{{ asset('back-end/images/logo-light.png') }}" alt="logo"></span>
 		  <span class="dark-logo"><img src="{{ asset('back-end/images/logo-dark.png') }}" alt="logo"></span>
 	  </b>

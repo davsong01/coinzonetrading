@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{{asset('front-end/images/favicon.png')}}">
+    <link rel="icon" href="{{asset(\App\Models\Setting::value('favicon'))}}">
 
     <title>{{ env('APP_NAME') }}</title>
     

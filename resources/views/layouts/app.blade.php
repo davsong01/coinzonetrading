@@ -39,20 +39,12 @@
     </head>
     <body class="hold-transition skin-yellow sidebar-mini">
     <div class="wrapper">
-        @include('layouts.app.header')
-            {{-- @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header> --}}
-
-            <!-- Page Content -->
+        @include('layouts.app-header')
+        @include('layouts.app-sidebar')
             <main>
                 {{ $slot }}
             </main>
+        @include('layouts.app-footer')
         </div>
 
         	<!-- jQuery 3 -->

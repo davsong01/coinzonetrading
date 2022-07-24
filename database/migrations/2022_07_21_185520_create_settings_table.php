@@ -20,6 +20,9 @@ class CreateSettingsTable extends Migration
             $table->string('favicon')->default('front-end/images/favicon.png');
             $table->string('official_email')->nullable();
             $table->string('wallet_address')->nullable();
+            $table->string('page_banner')->nullable();
+            $table->string('api_key')->nullable();
+            $table->string('currency')->nullable();
             $table->string('callback_url')->nullable();
             $table->string('wallet_secret_key')->nullable();
             $table->string('last_archive_date')->nullable();

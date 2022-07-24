@@ -13,7 +13,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
 		 <div class="ulogo">
-			 <a href="index.html">
+			 <a href="/dashboard">
 			  <!-- logo for regular state and mobile devices -->
 			  <span><b>Crypto </b>Admin</span>
 			</a>

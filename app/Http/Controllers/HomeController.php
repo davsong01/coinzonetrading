@@ -22,13 +22,13 @@ class HomeController extends Controller
     }
 
     public function test(Request $request){
-        $uploadimage = app('App\Http\Controllers\FunctionsController')->uploadImage($request->file, 'front-end/images/avatar');
+        // $uploadimage = app('App\Http\Controllers\FunctionsController')->uploadImage($request->file, 'front-end/images/avatar');
        
         $checkFields = app('App\Http\Controllers\FunctionsController')->checkFilledFields(auth()->user());
 
-        $queryCharge = app('App\Http\Controllers\FunctionsController')->queryCharge('DELDHC3F');
+        // $queryCharge = app('App\Http\Controllers\FunctionsController')->queryCharge('DELDHC3F');
+        
         $charge = app('App\Http\Controllers\FunctionsController')->createCharge(['name' => 'Package 1','description' => 'Package 1','amount'=>10.00, 'package_id' => 1]);
-
         
         \DB::table('investors_packages')->insert($charge);
         dd($charge);

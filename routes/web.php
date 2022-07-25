@@ -19,17 +19,17 @@ Route::get( '/', [App\Http\Controllers\HomeController::class, 'index'])->name('h
 Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
-Route::get('/test', function () {
-    return view('test');
-});
-
+Route::get('/test', [App\Http\Controllers\HomeController::class, 'testpage'])->name('test');
 Route::post('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit')->middleware('hasPackage');
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/package/select/{package}', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth'])->name('dashboard');
+});
 
 // Packages
 Route::resource('packages', PackageController::class);
+
 require __DIR__.'/auth.php';

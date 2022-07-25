@@ -35,17 +35,7 @@
  		<link rel="stylesheet" href="{{ asset('back-end/https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i')}}">
 
         <link rel="stylesheet" href="{{ asset('back-end/css/master_style.css') }}">
-
-        <!-- Crypto_Admin skins -->
         <link rel="stylesheet" href="{{ asset('back-end/css/skins/_all-skins.css')}}">
-
-
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
 
     </head>
     <body class="hold-transition skin-yellow sidebar-mini">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use auth;
+use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -19,6 +21,23 @@ class HomeController extends Controller
     public function rules()
     {
         return view('rules');
+    }
+
+    public function testpage(){
+        $i = auth()->user()->investor;
+        dd($i);
+        return view('test');
+    }
+
+    public function makePayment(Package $package){
+        $charge = app('App\Http\Controllers\FunctionsController')->createCharge([
+            'name' => $package->name, 'description' => '', 'amount' => $package->amount, 'package_id' => $package->id
+        ]);
+
+        \DB::table('investors_packages')->insert($charge);
+
+        return redirect()->away($charge['url']);
+
     }
 
     public function test(Request $request){

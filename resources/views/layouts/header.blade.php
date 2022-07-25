@@ -15,7 +15,7 @@
                    
                       @if (Route::has('login'))
                         @auth
-                            <li class="me-10 ps-10"><a href="{{ route('home') }}"><i class="text-white fa fa-dashboard d-md-inline-block d-none"></i> My Account</a></li>
+                            <li class="me-10 ps-10"><a href="{{ route('dashboard') }}" target="_blank"><i class="text-white fa fa-dashboard d-md-inline-block d-none"></i> My Account</a></li>
                         @else
                             <li class="me-10 ps-10"><a href="{{ route('login') }}"><i class="text-white fa fa-sign-in d-md-inline-block d-none"></i> Login</a></li>
                         @endauth
@@ -52,11 +52,14 @@
             <li>
                 <a href="{{ url('/#contact') }}">Contact</a>
             </li>
+        @guest
         <ul class="attributes">
-            @if (Route::has('register'))
-                <li class="d-md-block d-none"><a href="{{ route('register') }}" class="px-10 pt-15 pb-10"><div class="btn btn-primary py-5">Register Now</div></a></li>
-            @endif
+        @if (Route::has('register'))
+            <li class="d-md-block d-none"><a href="{{ route('register') }}" class="px-10 pt-15 pb-10"><div class="btn btn-primary py-5">Register Now</div></a></li>
+        @endif
         </ul>
+        @endguest
+       
         
     </nav>
 </header>

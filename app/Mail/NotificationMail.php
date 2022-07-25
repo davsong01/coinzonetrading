@@ -25,6 +25,11 @@ class NotificationMail extends Mailable
                 ->subject('Welcome to Coinzone');
         }
 
+        if ($this->data['type'] == 'contact-mail-to-admin') {
+            return $this->markdown('mails.notificationEmails')
+            ->subject('Contact form filled on '. config('app.name'));
+        }
+
         // if($this->data['type'] == 'package-payment'){
         //     return $this->markdown('mails.notificationEmails')
         //         ->subject('New contact form');

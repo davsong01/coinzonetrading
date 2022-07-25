@@ -351,19 +351,20 @@
         </div>
         <div class="row justify-content-center mt-30">
             <div class="col-lg-6 col-12">   
-                <form>
+                <form action="{{ route('contact.send') }}" method="post">
+                    @csrf
                     <div class="contact-form form-border clearfix">
                         <div class="form-group">
-                            <input id="name" type="text" placeholder="Name*" class="form-control" name="name">
+                            <input id="name" name="name" type="text" placeholder="Name*" class="form-control" value="{{ old('name') }}">
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Email*" class="form-control" name="email">
+                            <input type="email" name="email" placeholder="Email*" class="form-control" value="{{ old('email') }}">
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Phone*" class="form-control" name="phone">
+                            <input type="text" name="phone" placeholder="Phone*" class="form-control" value="{{ old('phone') }}">
                         </div>
                         <div class="form-group textarea">
-                            <textarea class="form-control input-message" placeholder="Comment*" rows="7" name="message"></textarea>
+                            <textarea class="form-control" name="message" placeholder="Message*" rows="7" value="{{ old('message') }}">{{ old('message') }}</textarea>
                         </div>
                         <div class="form-group submit-button">
                             <button id="submit" name="submit" type="submit" value="Send" class="btn btn-primary"> Send your message </button>

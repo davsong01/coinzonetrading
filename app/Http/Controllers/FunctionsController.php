@@ -50,10 +50,14 @@ class FunctionsController extends Controller
     {
         try {
             Mail::to($data['email'])->send(new NotificationMail($data));
+            $message = 1;
         } catch (\Exception $th) {
             //throw $th;
+            $message = 0;
             \Log::error($th->getMessage());
         }
+
+        return $message;
     }
 
     public function checkFilledFields($user){

@@ -20,7 +20,8 @@ Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->na
 Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'testpage'])->name('test');
-Route::post('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit')->middleware('hasPackage');
+Route::post( '/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit')->middleware('hasPackage');
+Route::post('/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/package/select/{package}', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
@@ -29,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
     })->middleware(['auth'])->name('dashboard');
 });
 
-// Packages
+// Admin
 Route::middleware(['auth'])->group(function(){
     Route::resource('packages', PackageController::class);
 });

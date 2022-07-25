@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use auth;
 use App\Models\Package;
+use App\Models\ContactForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -21,6 +22,33 @@ class HomeController extends Controller
     public function rules()
     {
         return view('rules');
+    }
+
+    public function sendContact(Request $request){
+      
+        $data = [
+            'email' => $this->setting->official_email,
+            'type' => 'contact-mail-to-admin',
+            'name' => 'Admin',
+            'messageDetails' => [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'message' => $request->message,
+            ],
+        ];
+
+        app('App\Http\Controllers\FunctionsController')->sendEmails($data);
+
+        // Log to DB
+        ContactForm::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+        ]);
+
+        return back()->with('message', 'Your message has been sent');
     }
 
     public function testpage(){

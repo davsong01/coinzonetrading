@@ -15,12 +15,14 @@ class CreatePackagesTable extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->integer('name');
+            $table->string('name');
             $table->string('short_description')->nullable();
             $table->float('amount');
             $table->float('daily_roi');
             $table->float('monthly_roi');
             $table->float('validity_period');
+            $table->foreignId('user_id')
+            ->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

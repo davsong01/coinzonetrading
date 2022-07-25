@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PackageStoreRequest;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PackageController extends Controller
 {
@@ -14,7 +16,9 @@ class PackageController extends Controller
      */
     public function index()
     {
-        //
+        return view('packages.index',[
+            'packages' => Package::all(),
+        ]);
     }
 
     /**
@@ -24,18 +28,19 @@ class PackageController extends Controller
      */
     public function create()
     {
-        //
+        return view('packages.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\PackageStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PackageStoreRequest $request)
     {
-        //
+        Auth::user()->packages()->create($request->validated());
+        return redirect()->route('packages.index')->with('success', 'Packages created successfully');
     }
 
     /**

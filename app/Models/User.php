@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function investor(){
         return $this->hasOne(Investor::class);
     }
+
+    public function packages(){
+        return $this->hasMany(Package::class, 'user_id');
+    }
 }

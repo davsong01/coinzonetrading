@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'short_description',
+        'amount',
+        'daily_roi',
+        'monthly_roi',
+        'validity_period',
+    ];
+
 }

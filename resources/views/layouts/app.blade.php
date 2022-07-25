@@ -42,6 +42,9 @@
 				font-weight: bold;
 				color:#3d3dce !important;
 			}
+			.bg-yellow {
+				background-color: #3d3b46 !important;
+			}
 		</style>
     </head>
     <body class="hold-transition skin-yellow sidebar-mini">

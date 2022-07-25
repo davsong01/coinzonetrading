@@ -35,6 +35,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::middleware(['auth'])->group(function(){
     Route::resource('packages', PackageController::class);
     Route::get('alltransactions', [App\Http\Controllers\DashboardController::class, 'adminTransactions'])->name('alltransactions');
+    Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile');
+    Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');
+    Route::POST('replaceavatar', [App\Http\Controllers\DashboardController::class, 'storeAvatar'])->name('replaceavatar');
 });
 
 require __DIR__.'/auth.php';

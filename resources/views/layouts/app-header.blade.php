@@ -36,24 +36,9 @@
               <li class="user-body">
                 <div class="row no-gutters">
                   <div class="col-12 text-left">
-                    <a href="#"><i class="ion ion-person"></i> My Profile</a>
+                    <a href="{{ route('profile') }}"><i class="ion ion-person"></i> My Profile</a>
                   </div>
-                  <div class="col-12 text-left">
-                    <a href="#"><i class="ion ion-email-unread"></i> Inbox</a>
-                  </div>
-                  <div class="col-12 text-left">
-                    <a href="#"><i class="ion ion-settings"></i> Setting</a>
-                  </div>
-				<div role="separator" class="divider col-12"></div>
-				  <div class="col-12 text-left">
-                    <a href="#"><i class="ti-settings"></i> Account Setting</a>
-                  </div>
-				<div role="separator" class="divider col-12"></div>
-				  <div class="col-12 text-left">
-                    <a href="#"><i class="fa fa-power-off"></i> Logout</a>
-                  </div>
-                </div>
-                <!-- /.row -->
+                 
               </li>
             </ul>
           </li>

@@ -44,7 +44,7 @@
         </li>
          <li class="{{ request()->routeIs('alltransactions') ? 'active' : '' }}">
           <a href="{{route('alltransactions')}}">
-            <i class="icon-home"></i> <span>Transactions</span>
+            <i class="icon-wallet"></i> <span>Transactions</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>

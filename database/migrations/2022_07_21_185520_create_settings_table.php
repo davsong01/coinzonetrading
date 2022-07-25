@@ -23,6 +23,7 @@ class CreateSettingsTable extends Migration
             $table->string('page_banner')->nullable();
             $table->string('api_key')->nullable();
             $table->string('currency')->nullable();
+            $table->string('currency_sign')->default('$');
             $table->string('callback_url')->nullable();
             $table->string('wallet_secret_key')->nullable();
             $table->string('last_archive_date')->nullable();

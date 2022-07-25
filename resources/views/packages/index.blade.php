@@ -37,7 +37,7 @@
                       <td>{{ number_format($package->amount) }}</td>
                       <td>{{ $package->daily_roi }}</td>
                       <td>{{ $package->monthly_roi }}</td>
-                      <td>{{ $package->validity_period }}</td>
+                      <td>{{ $package->validity_period }} days</td>
                       <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                         <div class="actions" role="group" aria-label="Basic example" style="display: inline-block;">
                           <button type="button" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i> View</button>

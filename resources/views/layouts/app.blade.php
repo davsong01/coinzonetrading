@@ -1,3 +1,4 @@
+@props(['scripts' => null])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -93,5 +94,6 @@
 
 	<!-- Crypto_Admin for demo purposes -->
 	<script src="{{ asset('js/demo.js') }}"></script>
+	{{$scripts}}
     </body>
 </html>

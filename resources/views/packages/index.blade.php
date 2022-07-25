@@ -44,8 +44,8 @@
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">
-                              <button type="button" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
-                                View</button>
+                              <a href="{{ route('packages.edit', ['package' => $package->id ]) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
+                                Edit</a>
                               <button type="button" class="btn btn-block btn-danger btn-xs"> <i
                                   class="fa fa-trash"></i> Delete</button>
                             </div>

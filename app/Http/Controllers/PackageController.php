@@ -40,7 +40,7 @@ class PackageController extends Controller
     public function store(PackageStoreRequest $request)
     {
         Auth::user()->packages()->create($request->validated());
-        return redirect()->route('packages.index')->with('success', 'Packages created successfully');
+        return redirect()->route('packages.index')->with('success', 'Package created successfully');
     }
 
     /**
@@ -62,19 +62,22 @@ class PackageController extends Controller
      */
     public function edit(Package $package)
     {
-        //
+        return view('packages.edit', [
+            'package' => $package
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PackageStoreRequest  $request
      * @param  \App\Models\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Package $package)
+    public function update(PackageStoreRequest $request, Package $package)
     {
-        //
+        $package->update($request->validated());
+        return redirect()->route('packages.index')->with('success', 'Package updated successfully');
     }
 
     /**

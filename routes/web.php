@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\PackageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
 // Admin
 Route::middleware(['auth'])->group(function(){
     Route::resource('packages', PackageController::class);
+    Route::get('alltransactions', [App\Http\Controllers\DashboardController::class, 'adminTransactions'])->name('alltransactions');
 });
 
 require __DIR__.'/auth.php';

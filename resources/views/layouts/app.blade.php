@@ -37,7 +37,12 @@
 
         <link rel="stylesheet" href="{{ asset('back-end/css/master_style.css') }}">
         <link rel="stylesheet" href="{{ asset('back-end/css/skins/_all-skins.css')}}">
-
+		<style>
+			.bold{
+				font-weight: bold;
+				color:#3d3dce !important;
+			}
+		</style>
     </head>
     <body class="hold-transition skin-yellow sidebar-mini">
     <div class="wrapper">

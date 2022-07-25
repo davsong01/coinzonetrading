@@ -42,6 +42,14 @@
             <li class="{{ request()->routeIs('packages.create') ? 'active' : '' }}"><a href="{{ route('packages.create') }}">Create Packages</a></li>
           </ul>
         </li>
+         <li class="{{ request()->routeIs('alltransactions') ? 'active' : '' }}">
+          <a href="{{route('alltransactions')}}">
+            <i class="icon-home"></i> <span>Transactions</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
       </ul>
     </section>
   </aside>

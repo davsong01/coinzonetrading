@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InvestorStoreRequest;
+use App\Models\Investor;
 use Illuminate\Http\Request;
 
 class InvestorController extends Controller
@@ -13,7 +15,9 @@ class InvestorController extends Controller
      */
     public function index()
     {
-        //
+        return view('investors.index', [
+            'investors' => Investor::all()->loadMissing(['user']),
+        ]);
     }
 
     /**
@@ -23,18 +27,19 @@ class InvestorController extends Controller
      */
     public function create()
     {
-        //
+        return view('investors.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\InvestorStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( InvestorStoreRequest $request)
     {
-        //
+        Auth::user()->investor()->create($request->validated());
+        return redirect()->route('investors.index')->with('success', 'Investor created successfully');
     }
 
     /**

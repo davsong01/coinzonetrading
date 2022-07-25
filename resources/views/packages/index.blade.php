@@ -37,7 +37,7 @@
                         <tr>
                           <td>{{ $package->name }}</td>
                           <td>{{ $package->short_description }}</td>
-                          <td>{{ number_format($package->amount) }}</td>
+                          <td>{{ $setting->currency_sign . number_format($package->amount) }}</td>
                           <td>{{ $package->daily_roi }}</td>
                           <td>{{ $package->monthly_roi }}</td>
                           <td>{{ $package->validity_period }}</td>

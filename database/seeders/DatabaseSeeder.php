@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Package;
+use App\Models\Setting;
 use App\Models\User;
 use Database\Factories\PackageFactory;
 use Illuminate\Database\Seeder;
@@ -23,5 +24,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'dev@coinzonetrading.test',
             'password' => Hash::make('password'),
         ])->create();
+        Setting::factory()->create();
     }
 }

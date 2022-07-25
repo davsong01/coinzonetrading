@@ -29,21 +29,21 @@
                     <input type="text" name="name" class="form-control" required
                       data-validation-required-message="This field is required" value="{{ old('name') }}">
                   </div>
-                  <div class="form-control-feedback">@error('name') {{ $error }} @enderror</div>
+                  <div class="form-control-feedback">@error('name') {{ $message }} @enderror</div>
                 </div>
                 <div class="form-group">
                   <h5>{{ __('Short Description') }}</h5>
                   <div class="controls">
-                    <textarea name="short_description" id="short_description" class="form-control" required placeholder="Short Description" value="{{ old('name') }}"></textarea>
+                    <textarea name="short_description" id="short_description" class="form-control" required placeholder="Short Description" value="">{{ old('short_description') }}</textarea>
                   </div>
                 </div>
                  <div class="form-group">
                   <h5>{{ __('Amount') }}</h5>
                   <div class="controls">
                     <input type="number" name="amount" class="form-control" required
-                      data-validation-required-message="This field is required" min="0" value="{{ old('name') }}">
+                      data-validation-required-message="This field is required" min="0" value="{{ old('amount') }}">
                   </div>
-                  <div class="form-control-feedback"></div>
+                  <div class="form-control-feedback">@error('amount') {{ $message }} @enderror</div>
                 </div>
                  <div class="form-group">
                   <h5>{{ __('Daily ROI') }}</h5>
@@ -51,7 +51,7 @@
                     <input type="number" name="daily_roi" class="form-control" required
                       data-validation-required-message="This field is required" value="{{ old('daily_roi') }}">
                   </div>
-                  <div class="form-control-feedback">@error('daily_roi') {{ $error }} @enderror</div>
+                  <div class="form-control-feedback">@error('daily_roi') {{ $message }} @enderror</div>
                 </div>
                  <div class="form-group">
                   <h5>{{ __('Monthly ROI') }}</h5>
@@ -59,7 +59,7 @@
                     <input type="number" name="monthly_roi" class="form-control" required
                       data-validation-required-message="This field is required" value="{{ old('monthly_roi') }}">
                   </div>
-                  <div class="form-control-feedback">@error('monthly_roi') {{ $error }} @enderror</div>
+                  <div class="form-control-feedback">@error('monthly_roi') {{ $message }} @enderror</div>
                 </div>
                  <div class="form-group">
                   <h5>{{ __('Validity Period') }}</h5>
@@ -67,7 +67,7 @@
                     <input type="number" name="validity_period" class="form-control" required
                       data-validation-required-message="This field is required" min="1" max="31" value="{{ old('validity_period') }}">
                   </div>
-                  <div class="form-control-feedback">@error('validity_period') {{ $error }} @enderror</div>
+                  <div class="form-control-feedback">@error('validity_period') {{ $message }} @enderror</div>
                 </div>
                 <div class="text-xs-right">
                   <button type="submit" class="btn btn-info">{{ __('Submit') }}</button>

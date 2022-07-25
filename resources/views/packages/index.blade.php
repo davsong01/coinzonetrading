@@ -41,7 +41,16 @@
                           <td>{{ $package->daily_roi }}</td>
                           <td>{{ $package->monthly_roi }}</td>
                           <td>{{ $package->validity_period }}</td>
-                          <td><span class="text-dark">Edit</span> / <span class="text-danger">Delete</span></td>
+                          <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
+                            <div class="actions" role="group" aria-label="Basic example"
+                              style="display: inline-block;">
+                              <button type="button" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
+                                View</button>
+                              <button type="button" class="btn btn-block btn-danger btn-xs"> <i
+                                  class="fa fa-trash"></i> Delete</button>
+                            </div>
+                          </td>
+                        </tr>
                         </tr>
                       @endforeach
                     </tbody>

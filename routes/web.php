@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 // Packages
-Route::resource('packages', PackageController::class);
+Route::middleware(['auth'])->group(function(){
+    Route::resource('packages', PackageController::class);
+});
 
 require __DIR__.'/auth.php';

@@ -17,42 +17,48 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>{{ __('Name') }}</th>
-                      <th>{{ __('Short Description') }}</th>
-                      <th>{{ __('Amount') }}</th>
-                      <th>{{ __('Daily ROI') }}</th>
-                      <th>{{ __('Monthly ROI') }}</th>
-                      <th>{{ __('Validity Period') }}</th>
-                      <th>{{ __('Action') }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($packages as $package)
+                <div id="example_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                  <table id="example"
+                    class="table table-bordered table-hover display nowrap margin-top-10 w-p100 dataTable"
+                    role="grid" aria-describedby="example_info">
+                    <thead>
                       <tr>
-                      <td>{{ $package->name }}</td>
-                      <td>{{ $package->short_description }}</td>
-                      <td>{{ number_format($package->amount) }}</td>
-                      <td>{{ $package->daily_roi }}</td>
-                      <td>{{ $package->monthly_roi }}</td>
-                      <td>{{ $package->validity_period }}</td>
-                      <td><span class="text-dark">Edit</span> / <span class="text-danger">Delete</span></td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>{{ __('Name') }}</th>
-                      <th>{{ __('Short Description') }}</th>
-                      <th>{{ __('Amount') }}</th>
-                      <th>{{ __('Daily ROI') }}</th>
-                      <th>{{ __('Monthly ROI') }}</th>
-                      <th>{{ __('Validity Period') }}</th>
-                    </tr>
-                  </tfoot>
-                </table>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Short Description') }}</th>
+                        <th>{{ __('Amount') }}</th>
+                        <th>{{ __('Daily ROI') }}</th>
+                        <th>{{ __('Monthly ROI') }}</th>
+                        <th>{{ __('Validity Period') }}</th>
+                        <th>{{ __('Action') }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($packages as $package)
+                        <tr>
+                          <td>{{ $package->name }}</td>
+                          <td>{{ $package->short_description }}</td>
+                          <td>{{ number_format($package->amount) }}</td>
+                          <td>{{ $package->daily_roi }}</td>
+                          <td>{{ $package->monthly_roi }}</td>
+                          <td>{{ $package->validity_period }}</td>
+                          <td><span class="text-dark">Edit</span> / <span class="text-danger">Delete</span></td>
+                        </tr>
+                      @endforeach
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Short Description') }}</th>
+                        <th>{{ __('Amount') }}</th>
+                        <th>{{ __('Daily ROI') }}</th>
+                        <th>{{ __('Monthly ROI') }}</th>
+                        <th>{{ __('Validity Period') }}</th>
+                        <th>{{ __('Action') }}</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+
+                </div>
               </div>
             </div>
             <!-- /.box-body -->
@@ -60,7 +66,36 @@
         </div>
       </div>
     </section>
-
     <!-- /.content -->
   </div>
+  <x-slot name="scripts">
+    <!-- DataTables -->
+    <script src="{{ asset('back-end/assets/vendor_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('back-end/assets/vendor_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}">
+    </script>
+    <!-- This is data table -->
+    <script src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/media/js/jquery.dataTables.min.js') }} ">
+    </script>
+
+    <!-- start - This is for export functionality only -->
+    <script
+      src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/extensions/Buttons/js/dataTables.buttons.min.js') }} ">
+    </script>
+    <script
+      src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/extensions/Buttons/js/buttons.flash.min.js') }}">
+    </script>
+    <script src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/ex-js/jszip.min.js') }}"></script>
+    <script src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/ex-js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/ex-js/vfs_fonts.js') }}"></script>
+    <script
+      src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/extensions/Buttons/js/buttons.html5.min.js') }}">
+    </script>
+    <script
+      src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/extensions/Buttons/js/buttons.print.min.js') }}">
+    </script>
+    <!-- end - This is for export functionality only -->
+
+    <!-- Crypto_Admin for Data Table -->
+    <script src="{{ asset('back-end/js/pages/data-table.js') }}"></script>
+  </x-slot>
 </x-app-layout>

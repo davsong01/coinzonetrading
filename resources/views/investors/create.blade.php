@@ -48,11 +48,15 @@
                       @enderror
                     </div>
                   </div>
+                
                   <div class="form-group">
                     <h5>{{ __('Wallet Type') }}</h5>
                     <div class="controls">
-                      <input type="text" name="name" class="form-control" required
-                        data-validation-required-message="This field is required" value="{{ old('wallet_type') }}">
+                      <select name="wallet_type" id="wallet_type" class="form-control" required data-validation-required-message="This field is required" >
+                          @foreach(app('App\Http\Controllers\Controller')->walletTypes() as $type)
+                          <option value="{{ $type }}" {{ old('wallet_type') == $type ? 'selected' : '' }}>{{ $type }}</option>
+                          @endforeach
+                      </select>
                     </div>
                     <div class="form-control-feedback">
                       @error('wallet_type')

@@ -18,4 +18,11 @@ class Controller extends BaseController
         $this->setting = Setting::first();
         View::share('setting', $this->setting);
     }
+
+    public function walletTypes(){
+        return [
+            'Etherum',
+            'Bitcoin'
+        ]; 
+    }
 }

@@ -92,10 +92,7 @@
 			  <div class="row">
 				<div class="col-12">
                     <?php 
-                        $types = [
-                            'Etherum',
-                            'Bitcoin'
-                        ];      
+                    $types = app('App\Http\Controllers\Controller')->walletTypes();     
                     ?>
                     <form action="{{ route('profile.store') }}" method="post" style="margin:auto">
                    @csrf

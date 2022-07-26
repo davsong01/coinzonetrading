@@ -39,7 +39,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ request()->routeIs('packages.index') ? 'active' : '' }}"><a href="{{ route('packages.index') }}">All Packages</a></li>
-            <li class="{{ request()->routeIs('packages.create') ? 'active' : '' }}"><a href="{{ route('packages.create') }}">Create Packages</a></li>
+            <li class="{{ request()->routeIs('packages.create') ? 'active' : '' }}"><a href="{{ route('packages.create') }}">Create Package</a></li>
           </ul>
         </li>
          <li class="{{ request()->routeIs('alltransactions') ? 'active' : '' }}">
@@ -49,6 +49,19 @@
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
+        </li>
+         <li class="treeview {{ request()->routeIs('investors.*') ? 'active' : '' }}">
+          <a href="#">
+            <i class="icon-chart"></i>
+            <span>{{ __('Investors') }}</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ request()->routeIs('investors.index') ? 'active' : '' }}"><a href="{{ route('investors.index') }}">All Investors</a></li>
+            <li class="{{ request()->routeIs('investors.create') ? 'active' : '' }}"><a href="{{ route('investors.create') }}">Create Investor</a></li>
+          </ul>
         </li>
       </ul>
     </section>

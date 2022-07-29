@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Models\InvestorPackage;
 
@@ -52,12 +53,17 @@ class DashboardController extends Controller
     }
 
     public function myPackages(){
-        $packages = InvestorPackage::where(['investor_id' => auth()->user()->id])->get();
+        $packages = Package::all();
+        $userPackages = InvestorPackage::where(['investor_id' => auth()->user()->investor->id]);
+        $mypackages = $userPackages->get();
         
+        $otherpackages = array_column($userPackages->get('package_id')->toArray(), 'package_id');
+        $otherpackages = $packages->whereNotIn('id', $otherpackages);
         
-        dd($packages);
-        return view('back.investors.mypackages.index', [
+        return view('back.investors.mypackages', [
             'packages' => $packages,
+            'mypackages' => $mypackages,
+            'otherpackages' => $otherpackages,
         ]);
     }
 }

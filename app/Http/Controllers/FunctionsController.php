@@ -216,7 +216,7 @@ class FunctionsController extends Controller
                 }
             }
         }
-
+        
         if($middleware == 'yes'){
             return;
         }else{

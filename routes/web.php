@@ -55,6 +55,8 @@ Route::middleware(['auth'])->group(function(){
 // Investor
 Route::middleware(['auth'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
+    Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions');
+
 });
 
 require __DIR__.'/auth.php';

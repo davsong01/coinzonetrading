@@ -73,9 +73,17 @@
         </li>
         @endif
         @if(auth()->user()->role == 'investor')
-        <li class="{{ request()->routeIs('alltransactions') ? 'active' : '' }}">
+        <li class="{{ request()->routeIs('investor.packages') ? 'active' : '' }}">
           <a href="{{route('investor.packages')}}">
             <i class="icon-grid"></i> <span>My Packages</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
+        <li class="{{ request()->routeIs('mytransactions') ? 'active' : '' }}">
+          <a href="{{route('mytransactions')}}">
+            <i class="icon-wallet"></i> <span>My Transactions</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>

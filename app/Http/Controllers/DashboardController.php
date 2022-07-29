@@ -13,6 +13,15 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function investorTransactions()
+    {
+        $transactions = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->get();
+       
+        return view('back.investors.transactions.index', [
+            'transactions' => $transactions,
+        ]);
+    }
+
     public function profile(){
         return view('back.general.profile');
     }

@@ -12,7 +12,7 @@
     </section>
 
     <!-- Main content -->
-   <section class="content">
+   	<section class="content">
 
       <div class="row">
         <div class="col-xl-4 col-lg-5">
@@ -136,7 +136,7 @@
       </div>
       <!-- /.row -->
 
-    </section>
+	</section>
     <!-- /.content -->
   </div>
 </x-app-layout>

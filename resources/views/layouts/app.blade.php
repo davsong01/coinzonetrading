@@ -40,7 +40,7 @@
 		<style>
 			.bold{
 				font-weight: bold;
-				color:#3d3dce !important;
+				color:#dd3765 !important;
 			}
 			.bg-yellow {
 				background-color: #3d3b46 !important;

@@ -10,9 +10,9 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{request()->routeIs('dashboard') ? 'Dashboard' : '' }}<small>Control panel</small></h1>
+      <h1>{{request()->routeIs('dashboard') ? 'Dashboard' : '' }}<small></small></h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </section>

@@ -37,6 +37,8 @@
 
         <link rel="stylesheet" href="{{ asset('back-end/css/master_style.css') }}">
         <link rel="stylesheet" href="{{ asset('back-end/css/skins/_all-skins.css')}}">
+    	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 		<style>
 			.bold{
 				font-weight: bold;
@@ -71,6 +73,8 @@
     <body class="hold-transition skin-yellow sidebar-mini">
     <div class="wrapper">
         @include('layouts.app-header')
+       
+
         @include('layouts.app-sidebar')
             <main>
                 {{ $slot }}
@@ -124,5 +128,9 @@
 	<!-- Crypto_Admin for demo purposes -->
 	<script src="{{ asset('js/demo.js') }}"></script>
 	{{$scripts}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    @include('layouts.toastr')
+	
     </body>
 </html>

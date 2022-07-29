@@ -98,7 +98,20 @@
           </a>
         </li>
         @endif
-
+        <li class="">
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+              <i class="ion ion-power"></i> <span>Logout</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+            </a>
+        </li>
+       
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>  
       </ul>
     </section>
   </aside>

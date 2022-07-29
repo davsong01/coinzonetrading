@@ -28,6 +28,7 @@
             </span>
           </a>
         </li>
+        @if(auth()->user()->role == 'admin')
         <li class="treeview {{ request()->routeIs('packages.*') ? 'active' : '' }}">
           <a href="#">
             <i class="icon-chart"></i>
@@ -70,6 +71,26 @@
             </span>
           </a>
         </li>
+        @endif
+        @if(auth()->user()->role == 'investor')
+        <li class="{{ request()->routeIs('alltransactions') ? 'active' : '' }}">
+          <a href="{{route('investor.packages')}}">
+            <i class="icon-grid"></i> <span>My Packages</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
+        <li class="{{ request()->routeIs('profile') ? 'active' : '' }}">
+          <a href="{{route('profile')}}">
+            <i class="icon-people"></i> <span>My Profile</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
+        @endif
+
       </ul>
     </section>
   </aside>

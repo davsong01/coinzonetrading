@@ -41,4 +41,14 @@ class DashboardController extends Controller
 
         return back()->with('message', 'Profile picture changed');
     }
+
+    public function myPackages(){
+        $packages = InvestorPackage::where(['investor_id' => auth()->user()->id])->get();
+        
+        
+        dd($packages);
+        return view('back.investors.mypackages.index', [
+            'packages' => $packages,
+        ]);
+    }
 }

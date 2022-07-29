@@ -10,7 +10,8 @@ class InvestorPackage extends Model
 {
     use HasFactory;
     protected $table = 'investors_packages';
-
+    protected $guarded = [];
+    
     public function investor(){
         return $this->belongsTo(Investor::class);
     }

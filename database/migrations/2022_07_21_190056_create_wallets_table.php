@@ -16,9 +16,9 @@ class CreateWalletsTable extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('type'); // debit/credit
+            $table->string('type'); // debit/credit
             $table->float('amount');
-            $table->string('status')->default('pending');
+            $table->string('reference')->nullable();
 
             $table->timestamps();
         });

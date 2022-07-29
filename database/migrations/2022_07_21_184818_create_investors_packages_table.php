@@ -28,6 +28,8 @@ class CreateInvestorsPackagesTable extends Migration
             $table->dateTime('expires_at');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->dateTime('last_cron_date');
+            
             $table->timestamps();
         });
     }

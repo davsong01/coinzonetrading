@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Wallet;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Mail\NotificationMail;
@@ -103,7 +105,7 @@ class FunctionsController extends Controller
             "name" => $data['name'],
             "description" => $data['description'],
             "pricing_type" => 'fixed_price',
-            "redirect_url" => $this->setting->callback_url,
+            "redirect_url" => $this->setting->callback_url.'/'. $trx,
             "local_price" => [
                 "amount" => $data['amount'],
                 "currency" => $this->setting->currency,
@@ -115,7 +117,7 @@ class FunctionsController extends Controller
                 "package_id" => $data['package_id'],
             ],
         ];
-        // dd(json_encode($d));
+        
         $url = "https://api.commerce.coinbase.com/charges";
 
         $curl = curl_init($url);
@@ -124,10 +126,11 @@ class FunctionsController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($d));
-       
+        
         $response = curl_exec($curl);
         curl_close($curl);
         $response = json_decode($response);
+       
         if($response->data){
             return [
                 'code' => $response->data->code,
@@ -144,7 +147,7 @@ class FunctionsController extends Controller
             ];
         }
         
-        return 'There was a problem initiating the charge';
+        return NULL;
     }
 
     public function queryCharge($code){
@@ -167,13 +170,68 @@ class FunctionsController extends Controller
         ));
         $response = curl_exec($curl);
         $response = json_decode($response);
-        if ($response->data) {
-            return [
-                'status' => $response->data->status,
-            ];
+        
+        if (isset($response)) {
+            return $response->data;
+        }else{
+            return null;
         }
     }
 
+    public function updateTransaction($reference, $middleware = 'no'){
+        //Check payment status and deliver value accordingly
+        $transaction = InvestorPackage::whereReference($reference)->whereStatus('pending')->first();
+        if(isset($transaction) && $transaction->count() > 0){
+            // $data  = $this->queryCharge($transaction->code);
+
+            $data = [
+                'payments' => [
+                    [
+                        'status' => 'CONFIRMED',
+                    ],
+                    [
+                        'amount' => 'amoun'
+                    ]
+                ],
+                'confirmed_at' => '2022-07-24 11:09:45',
+            ];
+
+            if (isset($data)) {
+                if ($data['payments'][0]['status'] == 'CONFIRMED') {
+                    $transaction->update([
+                        'status' => 'active',
+                        'start_date' => $data['confirmed_at'],
+                        'end_date' => Carbon::parse($data['confirmed_at'])->addMonth(1),
+                        'last_cron_date' => NULL
+                    ]);
+                }
+            }
+        }
+        
+        if($middleware == 'yes'){
+            return;
+        }else{
+            return redirect(route('investor.packages'));
+        }
+    }
+
+    public function getInvestorPacakgeValidity($investor_id, $package_id){
+
+        $validity = false;
+        
+        $transaction = InvestorPackage::where(['investor_id'=>$investor_id, 'package_id' => $package_id])->first();
+        if($transaction){
+            if(!is_null($transaction) && ($transaction->status == 'pending' || $transaction->end_date < now())){
+                $validity = false;
+            }
+            if (!is_null($transaction) && ($transaction->status != 'pending' && $transaction->end_date >= now())) {
+                $validity = true;
+            }
+        }
+        
+        return $validity;
+       
+    }
 
     // public function getTransaction($reference)
     // {
@@ -203,4 +261,21 @@ class FunctionsController extends Controller
 
     //     return;
     // }
+
+    public function logWallet($type, $amount, $investor_id, $reference = null){
+       
+        try {
+            $rec = Wallet::create([
+                'type' => $type,
+                'amount' => $amount,
+                'investor_id' => $investor_id,
+                'reference' => $reference,
+            ]);
+            //code...
+        } catch (\Throwable $th) {
+            $rec = null;
+        }
+      
+        return $rec;
+    }
 }

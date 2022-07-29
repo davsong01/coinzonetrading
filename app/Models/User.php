@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -51,4 +52,18 @@ class User extends Authenticatable
     public function packages(){
         return $this->hasMany(Package::class, 'user_id');
     }
+
+    public function wallets(){
+        return $this->hasMany(Wallet::class, 'user_id');
+    }
+
+    /**
+     * The user current wallet balance
+     */
+    public function walletBalance(){
+        $max = Wallet::where(['user_id' => $this->id, 'type' => 'credit'])->sum('amount');
+        $min = Wallet::where(['user_id' => $this->id, 'type' => 'debit'])->sum('amount');
+        return $max - $min;
+    }
+
 }

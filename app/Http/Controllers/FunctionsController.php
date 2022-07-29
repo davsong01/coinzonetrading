@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Mail\NotificationMail;
 use App\Models\InvestorPackage;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
@@ -85,7 +86,7 @@ class FunctionsController extends Controller
             return $packages;
         }
         return NULL;
-       
+
     }
 
     public function createCharge($data){
@@ -124,7 +125,7 @@ class FunctionsController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($d));
-       
+
         $response = curl_exec($curl);
         curl_close($curl);
         $response = json_decode($response);
@@ -143,7 +144,7 @@ class FunctionsController extends Controller
                 'url' => $response->data->hosted_url
             ];
         }
-        
+
         return 'There was a problem initiating the charge';
     }
 
@@ -174,6 +175,10 @@ class FunctionsController extends Controller
         }
     }
 
+    public function canWithdraw(float $amount, ?User $user = null){
+     $user ??= auth()->user();
+     return $user->walletBalance() >= $amount && Setting::first()->maximum_withdrawal_amount >= $amount;
+    }
 
     // public function getTransaction($reference)
     // {

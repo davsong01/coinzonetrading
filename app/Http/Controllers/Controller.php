@@ -15,14 +15,14 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->setting = Setting::first();
-        View::share('setting', $this->setting);
+        $this->settings = Setting::latest()->first();
+        View::share('settings', $this->settings);
     }
 
     public function walletTypes(){
         return [
             'Etherum',
             'Bitcoin'
-        ]; 
+        ];
     }
 }

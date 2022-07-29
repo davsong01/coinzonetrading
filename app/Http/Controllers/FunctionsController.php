@@ -182,20 +182,23 @@ class FunctionsController extends Controller
         //Check payment status and deliver value accordingly
         $transaction = InvestorPackage::whereReference($reference)->whereStatus('pending')->first();
         if(isset($transaction) && $transaction->count() > 0){
-            // $data  = $this->queryCharge($transaction->code);
-
-            $data = [
-                'payments' => [
-                    [
-                        'status' => 'CONFIRMED',
+            if(env('ENT') == 'demo'){
+                $data = [
+                    'payments' => [
+                        [
+                            'status' => 'CONFIRMED',
+                        ],
+                        [
+                            'amount' => 'amoun'
+                        ]
                     ],
-                    [
-                        'amount' => 'amoun'
-                    ]
-                ],
-                'confirmed_at' => '2022-07-24 11:09:45',
-            ];
+                    'confirmed_at' => '2022-07-24 11:09:45',
+                ];
 
+            }else{
+                $data  = $this->queryCharge($transaction->code);
+            }
+            
             if (isset($data)) {
                 if ($data['payments'][0]['status'] == 'CONFIRMED') {
                     $transaction->update([

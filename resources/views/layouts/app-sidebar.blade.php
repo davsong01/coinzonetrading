@@ -7,7 +7,6 @@
         <div class="ulogo">
           <a href="{{ route('dashboard') }}">
             <!-- logo for regular state and mobile devices -->
-
             <span><img src="{{ asset(\App\Models\Setting::value('light_logo')) }}" alt="" /></span>
           </a>
         </div>
@@ -42,7 +41,7 @@
             <li class="{{ request()->routeIs('packages.create') ? 'active' : '' }}"><a href="{{ route('packages.create') }}">Create Package</a></li>
           </ul>
         </li>
-         <li class="{{ request()->routeIs('alltransactions') ? 'active' : '' }}">
+        <li class="{{ request()->routeIs('alltransactions') ? 'active' : '' }}">
           <a href="{{route('alltransactions')}}">
             <i class="icon-wallet"></i> <span>Transactions</span>
             <span class="pull-right-container">
@@ -63,6 +62,16 @@
             <li class="{{ request()->routeIs('investors.create') ? 'active' : '' }}"><a href="{{ route('investors.create') }}">Add Investor</a></li>
           </ul>
         </li>
+        <li class="{{ request()->routeIs('settings') ? 'active' : '' }}">
+          <a href="{{route('settings')}}">
+            <i class="icon-equalizer"></i> <span>Settings</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
       </ul>
     </section>
   </aside>
+
+  

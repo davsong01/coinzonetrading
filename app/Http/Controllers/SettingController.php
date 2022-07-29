@@ -7,11 +7,66 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function settings()
+    {
+        $settings = Setting::first();
+        return view('back.settings.update')->with('settings', $settings);
+    }
+
+    public function settings1(Request $request)
+    {
+        $settings = Setting::first();
+
+        $settings->update([
+            'official_email' => $request->official_email,
+            'wallet_types' => $request->wallet_types,
+            'currency_sign' => $request->currency_sign
+        ]);
+       
+        return back()->with('message', 'Operation successful');
+    }
+
+    public function settings2(Request $request)
+    {
+        $settings = Setting::first();
+        
+        $settings->update([
+            'api_key' => $request->api_key,
+            'currency' => $request->currency,
+            'callback_url' => $request->callback_url
+        ]);
+
+        return back()->with('message', 'Operation successful');
+    }
+
+    public function settings3(Request $request)
+    {
+        $settings = Setting::first();
+        if ($request->has('favicon')) {
+            $favicon = app('App\Http\Controllers\FunctionsController')->uploadImage($request->favicon, 'front-end/images');
+            $settings->favicon = $favicon;
+        }
+
+        if($request->has('light_logo')){
+            $light_logo = app('App\Http\Controllers\FunctionsController')->uploadImage($request->light_logo, 'front-end/images');
+            $settings->light_logo = $light_logo;
+        }
+
+        if ($request->has('dark_logo')) {
+            $dark_logo = app('App\Http\Controllers\FunctionsController')->uploadImage($request->dark_logo, 'front-end/images');
+            $settings->dark_logo = $dark_logo;
+        }
+
+        if ($request->has('page_banner')) {
+            $page_banner = app('App\Http\Controllers\FunctionsController')->uploadImage($request->page_banner, 'front-end/images');
+            $settings->page_banner = $page_banner;
+        }
+
+        $settings->save();
+        
+        return back()->with('message', 'Operation successful');
+    }
+
     public function index()
     {
         //

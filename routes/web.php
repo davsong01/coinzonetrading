@@ -42,6 +42,15 @@ Route::middleware(['auth'])->group(function(){
     Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile')->middleware('pendingTransactions');
     Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');
     Route::POST('replaceavatar', [App\Http\Controllers\DashboardController::class, 'storeAvatar'])->name('replaceavatar');
+    Route::get('settings', [App\Http\Controllers\SettingController::class, 'settings'])->name('settings');
+    Route::post('settings-one', [App\Http\Controllers\SettingController::class, 'settings1'])->name('setting1.store');
+    Route::post('settings-two', [App\Http\Controllers\SettingController::class, 'settings2'])->name('setting2.store');
+    Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
+
+});
+
+// Investor
+Route::middleware(['auth'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
 });
 

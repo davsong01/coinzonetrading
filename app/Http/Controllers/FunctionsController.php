@@ -92,9 +92,11 @@ class FunctionsController extends Controller
     }
 
     public function createCharge($data){
+
         // Delete expired pending charges
         \DB::table('investors_packages')->whereStatus('pending')->where('expires_at', '>', now())->delete();
-
+        // Check if Investor has this package and its active
+       
         $trx = date('Y') . '-' . date('m') . '-' . rand(1111111, 9999999);
         $headers = array(
             "Content-Type: application/json",
@@ -131,7 +133,7 @@ class FunctionsController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $response = json_decode($response);
-
+       
         if($response->data){
             return [
                 'code' => $response->data->code,
@@ -141,7 +143,7 @@ class FunctionsController extends Controller
                 'package_id' => $response->data->metadata->package_id,
                 'investor_id' => $response->data->metadata->customer_id,
                 'created_at' => date('Y-m-d h:i:s', strtotime($response->data->created_at)),
-                'expires_at' => date('Y-m-d h:i:s', strtotime($response->data->expires_at)),
+                'expires_at' => Carbon::parse($response->data->expires_at)->addHour(),
                 'amount' => $response->data->pricing->local->amount,
                 'currency' => $response->data->pricing->local->currency,
                 'url' => $response->data->hosted_url
@@ -216,7 +218,7 @@ class FunctionsController extends Controller
                 }
             }
         }
-        
+
         if($middleware == 'yes'){
             return;
         }else{

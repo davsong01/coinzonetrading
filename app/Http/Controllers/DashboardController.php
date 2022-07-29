@@ -66,4 +66,61 @@ class DashboardController extends Controller
             'otherpackages' => $otherpackages,
         ]);
     }
+
+    public function retryTransaction($reference){
+        //Check if transaction has not expired
+       
+        $transaction = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->whereReference($reference)->first();
+        $check = InvestorPackage::where('package_id',$transaction->id)->where('investor_id', auth()->user()->investor->id)->where('status', 'active')->where('end_date', '>', now());
+        if (isset($check) && $check->count() > 0) {
+            return back()->with('error', 'You already have this package and it is active');
+        }
+        $package = Package::find($transaction->package_id);
+        
+        if(isset($transaction)){
+            if($transaction->expires_at > now()){
+                // Delete transaction and create afresh
+                $transaction->delete();
+                app('App\Http\Controllers\HomeController')->makePayment($package);
+            }else{
+                if($transaction->status == 'pending'){
+                    $transaction->delete();
+                }
+                return back()->with('error', 'Transaction window for this package has expired!');
+            }
+        }else{
+            return back()->with('error', 'Transaction not found');
+        }
+
+        return back()->with('error', 'Something went wrong');
+
+    }
+
+    public function renewPackage($reference)
+    {
+        //Check if transaction has not expired
+
+        $transaction = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->whereReference($reference)->first();
+        if(!$transaction){
+            return back()->with('error', 'Cannot find this transaction anymore');
+        }
+        $check = InvestorPackage::where('package_id', $transaction->id)->where('investor_id', auth()->user()->investor->id)->where('status', 'active')->where('end_date', '>', now());
+        if (isset($check) && $check->count() > 0) {
+            return back()->with('error', 'You already have this package and it is active');
+        }
+        $package = Package::find($transaction->package_id);
+        $transaction->delete();
+      
+        $charge = app('App\Http\Controllers\FunctionsController')->createCharge([
+            'name' => $package->name, 'description' => '', 'amount' => $package->amount, 'package_id' => $package->id
+        ]);
+
+        if (!is_null($charge)) {
+            \DB::table('investors_packages')->insert($charge);
+            return redirect()->away($charge['url']);
+        } else {
+            return back()->with('error', 'There was an error, please refresh and try again');
+        }
+
+    }
 }

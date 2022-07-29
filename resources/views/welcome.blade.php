@@ -239,7 +239,7 @@
     </div>
 </section> 
 
-<section class="py-50 bg-white" data-aos="fade-up">
+{{-- <section class="py-50 bg-white" data-aos="fade-up">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7 col-12 text-center">
@@ -255,7 +255,7 @@
             </div>
         </div>						
     </div>
-</section>
+</section> --}}
 <section id="about" style="padding-top: 15px;">
 </section>
 <section>
@@ -279,7 +279,7 @@
                             Our customer service and support are always available to meet your needs, and our account
                             managers know that your success is our success.</p>								
                             <div class="text-center d-flex gap-3 justify-content-start">
-                                <a href="{{ route('about') }}" class="btn btn-warning">Read More</a>
+                                <a href="{{ route('about') }}" class="btn btn-primary">Read More</a>
                             </div>
                         </div>
                     </div>

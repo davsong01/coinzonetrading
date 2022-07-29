@@ -5,7 +5,8 @@
     <section class="content-header">
       <h1>{{ request()->routeIs('investors.*') ? 'Investors' : '' }}</h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> {{ __('Investors') }}</a></li>
+        <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="breadcrumb-item active">{{ __('Investors') }}</li>
       </ol>
     </section>
 

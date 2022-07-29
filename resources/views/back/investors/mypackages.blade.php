@@ -12,10 +12,11 @@
    
     <!-- Main content -->
     <section class="content">
+      @if($mypackages->count() > 0)
       <!-- START Card With Image -->
       <h4 class="box-title mb-10" style="padding: 10px;color: black;"> <u>My Packages</u></h4>
       <div class="row">
-        @if($mypackages->count() > 0)
+       
           @foreach($mypackages as $package)
             <div class="col-md-12 col-lg-4">
               <div class="box box-default pull-up" style="padding: 5px;height: 350px;">
@@ -50,11 +51,11 @@
                   @endif
                   @if(!empty($package->end_date) && $package->end_date < \Carbon\Carbon::today())
                   <div class="col-md-12" style="display: flex">
-                      <a target="_blank" href="{{ route('package.select', $package->package->id) }}" class="btn btn-info bold" style="width:100%;background:#dd3765;border:none; color:white !important">Renew</a>
+                      <a target="_blank" href="{{ route('package.renew', $package->reference) }}" class="btn btn-info bold" style="width:100%;background:#dd3765;border:none; color:white !important">Renew</a>
                   </div>
 
                   @endif
-                  @if(empty($package->end_date) && $package->status == 'pending' && $package->expires_at < now())
+                  @if(empty($package->end_date) && $package->status == 'pending' && $package->expires_at > now())
                   <div class="col-md-12" style="display: flex">
                     <div class="col-md-6">
                       <a href="{{ route('payment.retry', $package->reference) }}" class="btn btn-info" style="width:100%;border:none">Try again </a>
@@ -73,9 +74,10 @@
     </section>
     
     <section class="content">
+       @if($otherpackages->count() > 0)
       <h4 class="box-title mb-10" style="color: black;paddind:10px"><u>Other Packages</u></h4>
       <div class="row">
-        @if($otherpackages->count() > 0)
+       
           @foreach($otherpackages as $package)
             <div class="col-md-12 col-lg-4">
               <div class="box box-default pull-up" style="border: #dd3765 solid 1px;padding: 5px;">

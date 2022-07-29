@@ -5,7 +5,8 @@
     <section class="content-header">
       <h1>{{ request()->routeIs('packages.*') ? 'Packages' : '' }}</h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> {{ __('Packages') }}</a></li>
+        <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="breadcrumb-item active">{{ __('Packages') }}</li>
       </ol>
     </section>
 
@@ -24,7 +25,7 @@
                     <thead>
                       <tr>
                         <th>{{ __('Name') }}</th>
-                        <th>{{ __('Short Description') }}</th>
+                        {{-- <th>{{ __('Short Description') }}</th> --}}
                         <th>{{ __('Amount') }}</th>
                         <th>{{ __('Daily ROI') }}</th>
                         <th>{{ __('Monthly ROI') }}</th>
@@ -36,11 +37,11 @@
                       @foreach ($packages as $package)
                         <tr>
                           <td>{{ $package->name }}</td>
-                          <td>{{ $package->short_description }}</td>
+                          {{-- <td>{{ $package->short_description }}</td> --}}
                           <td>{{ $setting->currency_sign . number_format($package->amount) }}</td>
                           <td>{{ $package->daily_roi }}</td>
                           <td>{{ $package->monthly_roi }}</td>
-                          <td>{{ $package->validity_period }}</td>
+                          <td>{{ $package->validity_period }} days</td>
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">
@@ -57,7 +58,7 @@
                     <tfoot>
                       <tr>
                         <th>{{ __('Name') }}</th>
-                        <th>{{ __('Short Description') }}</th>
+                        {{-- <th>{{ __('Short Description') }}</th> --}}
                         <th>{{ __('Amount') }}</th>
                         <th>{{ __('Daily ROI') }}</th>
                         <th>{{ __('Monthly ROI') }}</th>

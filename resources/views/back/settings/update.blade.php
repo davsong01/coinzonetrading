@@ -7,7 +7,8 @@
        {{ __('App Settings') }}
       </h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="breadcrumb-item active">{{ __('Update Settings') }}</li>
       </ol>
     </section>
 

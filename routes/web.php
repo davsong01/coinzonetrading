@@ -19,6 +19,7 @@ use App\Http\Controllers\InvestorController;
 
 Route::get( '/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
+Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
 Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'testpage'])->name( 'test');
@@ -56,7 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
     Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions');
     Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
-    Route::get('/payment-retry/{reference}', [App\Http\Controllers\FunctionsController::class, 'retryTransaction'])->name('payment.retry');
+    Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');
+    Route::get('/payment-renew/{reference}', [App\Http\Controllers\DashboardController::class, 'renewPackage'])->name('package.renew');
 });
 
 require __DIR__.'/auth.php';

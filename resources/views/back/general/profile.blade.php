@@ -83,6 +83,7 @@
 			<!-- /.box-body -->
 		  </div>
 		  <!-- /.box -->
+		  @if(auth()->user()->role == 'investor')
           <div class="box box-solid bg-black">
 			<div class="box-header with-border">
 			  <h3 class="box-title">Wallet details</h3>
@@ -129,7 +130,7 @@
 			</div>
 			<!-- /.box-body -->
 		  </div>
-		 
+		  @endif
         </div>
         <!-- /.col -->
       </div>

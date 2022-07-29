@@ -20,9 +20,12 @@ class Controller extends BaseController
     }
 
     public function walletTypes(){
-        return [
-            'Etherum',
-            'Bitcoin'
-        ]; 
+        if(isset($this->setting->wallet_types) && !empty($this->setting->wallet_types)){
+            $types = explode(",", $this->setting->wallet_types);
+        }else{
+            $types = [];
+        }
+        
+        return $types; 
     }
 }

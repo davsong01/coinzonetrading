@@ -21,7 +21,8 @@ Route::get( '/', [App\Http\Controllers\HomeController::class, 'index'])->name('h
 Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
-Route::get('/test', [App\Http\Controllers\HomeController::class, 'testpage'])->name('test');
+Route::get('/test', [App\Http\Controllers\HomeController::class, 'testpage'])->name( 'test');
+Route::get('/t', [App\Http\Controllers\Controller::class, 'walletTypes'])->name('trest');
 Route::post( '/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit')->middleware('hasPackage');
 Route::post( '/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
 Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');

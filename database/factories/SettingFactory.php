@@ -14,7 +14,8 @@ class SettingFactory extends Factory
     public function definition()
     {
         return [
-            'api_key' => null
+            'api_key' => null,
+            'minimum_withdrawal_amount' => 10.56
         ];
     }
 }

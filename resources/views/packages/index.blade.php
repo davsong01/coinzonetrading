@@ -25,7 +25,6 @@
                     <thead>
                       <tr>
                         <th>{{ __('Name') }}</th>
-                        {{-- <th>{{ __('Short Description') }}</th> --}}
                         <th>{{ __('Amount') }}</th>
                         <th>{{ __('Daily ROI') }}</th>
                         <th>{{ __('Monthly ROI') }}</th>
@@ -37,7 +36,6 @@
                       @foreach ($packages as $package)
                         <tr>
                           <td>{{ $package->name }}</td>
-                          {{-- <td>{{ $package->short_description }}</td> --}}
                           <td>{{ $setting->currency_sign . number_format($package->amount) }}</td>
                           <td>{{ $package->daily_roi }}</td>
                           <td>{{ $package->monthly_roi }}</td>

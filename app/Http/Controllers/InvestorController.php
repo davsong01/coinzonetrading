@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\InvestorStoreRequest;
 use App\Models\Investor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvestorController extends Controller
 {

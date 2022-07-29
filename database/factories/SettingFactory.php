@@ -15,7 +15,8 @@ class SettingFactory extends Factory
     {
         return [
             'api_key' => null,
-            'minimum_withdrawal_amount' => 10.56
+            'minimum_withdrawal_amount' => 10.56,
+            'maximum_withdrawal_amount' => 56.04,
         ];
     }
 }

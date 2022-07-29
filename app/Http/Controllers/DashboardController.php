@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Investor;
 use Illuminate\Http\Request;
 use App\Models\InvestorPackage;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -66,7 +68,7 @@ class DashboardController extends Controller
             'otherpackages' => $otherpackages,
         ]);
     }
-
+    
     public function retryTransaction($reference){
         //Check if transaction has not expired
        
@@ -99,7 +101,6 @@ class DashboardController extends Controller
     public function renewPackage($reference)
     {
         //Check if transaction has not expired
-
         $transaction = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->whereReference($reference)->first();
         if(!$transaction){
             return back()->with('error', 'Cannot find this transaction anymore');
@@ -122,5 +123,16 @@ class DashboardController extends Controller
             return back()->with('error', 'There was an error, please refresh and try again');
         }
 
+
+    public function index()
+    {
+        if(Auth::user()->role === 'investor'){
+            return view('back.investors.index', [
+                'canWithdraw' => (new FunctionsController)->canWithdraw()
+            ]);
+        }
+        return view('investors.index', [
+            'investors' => Investor::all()->loadMissing(['user']),
+        ]);
     }
 }

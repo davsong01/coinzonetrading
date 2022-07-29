@@ -58,6 +58,10 @@ class User extends Authenticatable
         return $this->hasMany(Wallet::class, 'user_id');
     }
 
+    public function withdrawals(){
+        return $this->hasMany(Withdrawal::class);
+    }
+
     /**
      * The user current wallet balance
      */

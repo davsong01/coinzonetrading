@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\Withdrawal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WithdrawalController extends Controller
 {
@@ -35,7 +37,22 @@ class WithdrawalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $settings = Setting::latest()->first();
+
+        $attributes = $request->validate([
+            'amount' => ['required',
+            `min:{$settings->minimum_withdrawal_amount}`,
+             `max:{$settings->minimum_withdrawal_amount}`,
+             ]
+        ]);
+
+        if(!(new FunctionsController)->canWithdraw(floatval($request->amount))){
+            return back()->with('error',
+            'Looks like you don\'t have enough fund or exceeded maximum withdrawable amount');
+        }
+
+        Auth::user()->withdrawals()->create($attributes);
+        return back()->with('success', 'Withdrawal successfully created.');
     }
 
     /**

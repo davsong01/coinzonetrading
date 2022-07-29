@@ -15,13 +15,13 @@ class CreateWithdrawalsTable extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->float('amount');
             $table->string('reference_id')->nullable();
-            $table->dateTime('request_date')->nullable();
+            $table->dateTime('request_date')->useCurrent();
             $table->dateTime('approved_date')->nullable();
-            $table->integer('approved_by');
-            $table->string('status')->default('pending');
+            $table->unsignedBigInteger('approved_by')->nullable();
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

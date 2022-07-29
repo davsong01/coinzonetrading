@@ -53,7 +53,8 @@ class HomeController extends Controller
 
     public function testpage(){
         $i = auth()->user()->investor;
-        dd($i);
+        $a = app('App\Http\Controllers\FunctionsController')->getInvestorPacakgeValidity(1,7);
+        dd($a);
         return view('test');
     }
 
@@ -61,10 +62,14 @@ class HomeController extends Controller
         $charge = app('App\Http\Controllers\FunctionsController')->createCharge([
             'name' => $package->name, 'description' => '', 'amount' => $package->amount, 'package_id' => $package->id
         ]);
-
-        \DB::table('investors_packages')->insert($charge);
-
-        return redirect()->away($charge['url']);
+        
+        if(!is_null($charge)){
+            \DB::table('investors_packages')->insert($charge);
+            return redirect()->away($charge['url']);
+        }else{
+            return back()->with('error', 'There was an error, please refresh and try again');
+        }
+        
 
     }
 

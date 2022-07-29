@@ -18,7 +18,7 @@ class CreateWalletsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->enum('type', ['debit', 'credit']);
             $table->float('amount');
-            $table->string('status')->default('pending');
+            $table->string('reference')->nullable();
 
             $table->timestamps();
         });

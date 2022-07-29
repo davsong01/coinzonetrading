@@ -23,7 +23,9 @@ Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->na
 
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'testpage'])->name('test');
 Route::post( '/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit')->middleware('hasPackage');
-Route::post('/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
+Route::post( '/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
+Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
+Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController::class, 'creditWalletCron']);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/package/select/{package}', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
@@ -39,9 +41,10 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('packages', PackageController::class);
     Route::resource('investors', InvestorController::class);
     Route::get('alltransactions', [App\Http\Controllers\DashboardController::class, 'adminTransactions'])->name('alltransactions');
-    Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile');
+    Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile')->middleware('pendingTransactions');
     Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');
     Route::POST('replaceavatar', [App\Http\Controllers\DashboardController::class, 'storeAvatar'])->name('replaceavatar');
+    Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
 });
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Investor;
+use App\Models\InvestorPackage;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -50,7 +51,7 @@ class User extends Authenticatable
     }
 
     public function packages(){
-        return $this->hasMany(Package::class, 'user_id');
+        return $this->hasMany(InvestorPackage::class, 'investor_id');
     }
 
     public function wallets(){

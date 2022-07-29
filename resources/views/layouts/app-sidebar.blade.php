@@ -60,7 +60,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ request()->routeIs('investors.index') ? 'active' : '' }}"><a href="{{ route('investors.index') }}">All Investors</a></li>
-            <li class="{{ request()->routeIs('investors.create') ? 'active' : '' }}"><a href="{{ route('investors.create') }}">Create Investor</a></li>
+            <li class="{{ request()->routeIs('investors.create') ? 'active' : '' }}"><a href="{{ route('investors.create') }}">Add Investor</a></li>
           </ul>
         </li>
       </ul>

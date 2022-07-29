@@ -12,7 +12,7 @@
     </section>
 
     <!-- Main content -->
-   <section class="content">
+   	<section class="content">
 
       <div class="row">
         <div class="col-xl-4 col-lg-5">
@@ -83,6 +83,7 @@
 			<!-- /.box-body -->
 		  </div>
 		  <!-- /.box -->
+		  @if(auth()->user()->role == 'investor')
           <div class="box box-solid bg-black">
 			<div class="box-header with-border">
 			  <h3 class="box-title">Wallet details</h3>
@@ -129,13 +130,13 @@
 			</div>
 			<!-- /.box-body -->
 		  </div>
-		 
+		  @endif
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
 
-    </section>
+	</section>
     <!-- /.content -->
   </div>
 </x-app-layout>

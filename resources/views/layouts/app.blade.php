@@ -40,11 +40,32 @@
 		<style>
 			.bold{
 				font-weight: bold;
-				color:#3d3dce !important;
+				color:#dd3765 !important;
 			}
 			.bg-yellow {
 				background-color: #3d3b46 !important;
 			}
+			.settings1{
+				background: #505355 !important;
+				border: none;
+			}
+
+			.settings2{
+				background: #455a64 !important
+			}
+
+			.settings1.btn:hover {
+				background: #455a64 !important;
+			}
+			.settings3{
+				background: #1367b0  !important;
+				border: none;
+			}
+			.form-container {
+				min-height: 340px;
+			}
+						
+			
 		</style>
     </head>
     <body class="hold-transition skin-yellow sidebar-mini">

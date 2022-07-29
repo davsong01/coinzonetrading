@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../messaging"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../vtpass"
+		},
+		{
+			"path": "../magodo"
+		},
+		{
+			"path": "../student"
+		}
+	],
+	"settings": {}
+}

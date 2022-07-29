@@ -57,14 +57,14 @@
                     <!-- /.col -->
                     <div class="col-12 text-center">
                       <x-form.button class="btn-info w-p100 mt-15"> {{ __('REGISTER') }} </x-form.button>
-
                     </div>
                     <!-- /.col -->
                   </div>
                 </form>
                 <div class="text-center">
                   <p class="mt-15 mb-0">{{ __('Already registered?') }}<a href="{{ route('login') }}"
-                      class="text-danger ms-5"> {{ __('Login') }}</a></p>
+                      class="text-danger ms-5"> {{ __('Login') }}</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -72,6 +72,5 @@
         </div>
       </div>
     </section>
-
   </x-auth-card>
 </x-guest-layout>

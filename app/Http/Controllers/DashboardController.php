@@ -123,6 +123,7 @@ class DashboardController extends Controller
             return back()->with('error', 'There was an error, please refresh and try again');
         }
 
+    }
 
     public function index()
     {

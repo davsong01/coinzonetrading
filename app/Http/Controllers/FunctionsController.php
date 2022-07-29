@@ -280,7 +280,7 @@ class FunctionsController extends Controller
             $rec = Wallet::create([
                 'type' => $type,
                 'amount' => $amount,
-                'investor_id' => $investor_id,
+                'user_id' => $investor_id,
                 'reference' => $reference,
             ]);
             //code...

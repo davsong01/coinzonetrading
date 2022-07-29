@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Package;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Wallet;
 use Database\Factories\PackageFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -19,11 +20,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        Package::factory(3)->create();
-        User::factory([
+        $user = User::factory([
             'email' => 'dev@coinzonetrading.test',
             'password' => Hash::make('password'),
         ])->create();
+        Package::factory(3)->create();
         Setting::factory()->create();
+        Package::factory(5)->create();
+        Wallet::factory(5)->create();
+
+        Wallet::factory(10, [
+            'user_id' => $user->id,
+        ])->create();
     }
 }

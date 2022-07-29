@@ -30,7 +30,9 @@ Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController:
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/package/select/{package}', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $view = 'dashboard';
+        if(auth()->user()->role === 'investor') $view = 'back.investors.index';
+        return view($view);
     })->middleware(['auth'])->name('dashboard');
 });
 

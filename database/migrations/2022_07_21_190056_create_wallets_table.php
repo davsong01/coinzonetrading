@@ -15,8 +15,8 @@ class CreateWalletsTable extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('type'); // debit/credit
+            $table->unsignedBigInteger('user_id');
+            $table->enum('type', ['debit', 'credit']);
             $table->float('amount');
             $table->string('reference')->nullable();
 

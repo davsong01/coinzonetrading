@@ -8,6 +8,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Mail\NotificationMail;
 use App\Models\InvestorPackage;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
@@ -87,7 +88,7 @@ class FunctionsController extends Controller
             return $packages;
         }
         return NULL;
-       
+
     }
 
     public function createCharge($data){
@@ -117,7 +118,7 @@ class FunctionsController extends Controller
                 "package_id" => $data['package_id'],
             ],
         ];
-        
+
         $url = "https://api.commerce.coinbase.com/charges";
 
         $curl = curl_init($url);
@@ -126,11 +127,11 @@ class FunctionsController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($d));
-        
+
         $response = curl_exec($curl);
         curl_close($curl);
         $response = json_decode($response);
-       
+
         if($response->data){
             return [
                 'code' => $response->data->code,
@@ -146,7 +147,7 @@ class FunctionsController extends Controller
                 'url' => $response->data->hosted_url
             ];
         }
-        
+
         return NULL;
     }
 
@@ -170,12 +171,17 @@ class FunctionsController extends Controller
         ));
         $response = curl_exec($curl);
         $response = json_decode($response);
-        
+
         if (isset($response)) {
             return $response->data;
         }else{
             return null;
         }
+    }
+
+    public function canWithdraw(float $amount, ?User $user = null){
+     $user ??= auth()->user();
+     return $user->walletBalance() >= $amount && Setting::first()->maximum_withdrawal_amount >= $amount;
     }
 
     public function updateTransaction($reference, $middleware = 'no'){
@@ -210,7 +216,7 @@ class FunctionsController extends Controller
                 }
             }
         }
-        
+
         if($middleware == 'yes'){
             return;
         }else{
@@ -221,7 +227,7 @@ class FunctionsController extends Controller
     public function getInvestorPacakgeValidity($investor_id, $package_id){
 
         $validity = false;
-        
+
         $transaction = InvestorPackage::where(['investor_id'=>$investor_id, 'package_id' => $package_id])->first();
         if($transaction){
             if(!is_null($transaction) && ($transaction->status == 'pending' || $transaction->end_date < now())){
@@ -231,9 +237,9 @@ class FunctionsController extends Controller
                 $validity = true;
             }
         }
-        
+
         return $validity;
-       
+
     }
 
     // public function getTransaction($reference)
@@ -266,7 +272,7 @@ class FunctionsController extends Controller
     // }
 
     public function logWallet($type, $amount, $investor_id, $reference = null){
-       
+
         try {
             $rec = Wallet::create([
                 'type' => $type,
@@ -278,7 +284,7 @@ class FunctionsController extends Controller
         } catch (\Throwable $th) {
             $rec = null;
         }
-      
+
         return $rec;
     }
 }

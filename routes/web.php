@@ -25,7 +25,6 @@ Route::get('/test', [App\Http\Controllers\HomeController::class, 'testpage'])->n
 Route::get('/t', [App\Http\Controllers\Controller::class, 'walletTypes'])->name('trest');
 Route::post( '/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit')->middleware('hasPackage');
 Route::post( '/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
-Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
 Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController::class, 'creditWalletCron']);
 
 Route::group(['middleware' => ['auth']], function () {
@@ -56,7 +55,8 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
     Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions');
-
+    Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
+    Route::get('/payment-retry/{reference}', [App\Http\Controllers\FunctionsController::class, 'retryTransaction'])->name('payment.retry');
 });
 
 require __DIR__.'/auth.php';

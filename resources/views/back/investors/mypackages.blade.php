@@ -50,14 +50,14 @@
                   @endif
                   @if(!empty($package->end_date) && $package->end_date < \Carbon\Carbon::today())
                   <div class="col-md-12" style="display: flex">
-                      <a href="{{ route('package.select', $package->package->id) }}" class="btn btn-info bold" style="width:100%;background:#dd3765;border:none; color:white !important">Renew</a>
+                      <a target="_blank" href="{{ route('package.select', $package->package->id) }}" class="btn btn-info bold" style="width:100%;background:#dd3765;border:none; color:white !important">Renew</a>
                   </div>
 
                   @endif
-                  @if(empty($package->end_date) && $package->status == 'pending')
+                  @if(empty($package->end_date) && $package->status == 'pending' && $package->expires_at < now())
                   <div class="col-md-12" style="display: flex">
                     <div class="col-md-6">
-                      <a href="#" class="btn btn-info" style="width:100%;border:none">Try again</a>
+                      <a href="{{ route('payment.retry', $package->reference) }}" class="btn btn-info" style="width:100%;border:none">Try again </a>
                     </div>
                       <div class="col-md-6">
                       <a href="{{ route('payment.process', $package->reference ) }}" class="btn btn-info" style="width:100%; background:#dd3765;border:none">Check status</a>

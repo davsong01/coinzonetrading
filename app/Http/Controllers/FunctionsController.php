@@ -179,9 +179,10 @@ class FunctionsController extends Controller
         }
     }
 
-    public function canWithdraw(float $amount, ?User $user = null){
-     $user ??= auth()->user();
-     return $user->walletBalance() >= $amount && Setting::first()->maximum_withdrawal_amount >= $amount;
+    public function canWithdraw(?float $amount = null, ?User $user = null){
+        $amount ??= Setting::latest()->first()->minimum_withdrawal_amount;
+        $user ??= auth()->user();
+        return $user->walletBalance() >= $amount && Setting::latest()->first()->maximum_withdrawal_amount >= $amount;
     }
 
     public function updateTransaction($reference, $middleware = 'no'){

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Investor;
 use Illuminate\Http\Request;
 use App\Models\InvestorPackage;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -44,11 +46,28 @@ class DashboardController extends Controller
 
     public function myPackages(){
         $packages = InvestorPackage::where(['investor_id' => auth()->user()->id])->get();
-        
-        
+
+
         dd($packages);
         return view('back.investors.mypackages.index', [
             'packages' => $packages,
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        if(Auth::user()->role === 'investor'){
+            return view('back.investors.index', [
+                'canWithdraw' => (new FunctionsController)->canWithdraw()
+            ]);
+        }
+        return view('investors.index', [
+            'investors' => Investor::all()->loadMissing(['user']),
         ]);
     }
 }

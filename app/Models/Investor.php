@@ -12,8 +12,8 @@ class Investor extends Model
 
     use HasFactory;
 
-    protected $fillable = ['phone', 'profile_picture', 'wallet_type', 'wallet_addrress', 'profile_picture'];
-    
+    protected $fillable = ['phone', 'profile_picture', 'wallet_type', 'wallet_addrress', 'profile_picture', 'user_id'];
+
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }

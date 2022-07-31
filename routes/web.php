@@ -32,7 +32,6 @@ Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController:
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/package/select/{package}', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
     Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
-    Route::resource('withdrawal', WithdrawalController::class);
 });
 
 // Admin
@@ -47,7 +46,9 @@ Route::middleware(['auth'])->group(function(){
     Route::post('settings-one', [App\Http\Controllers\SettingController::class, 'settings1'])->name('setting1.store');
     Route::post('settings-two', [App\Http\Controllers\SettingController::class, 'settings2'])->name('setting2.store');
     Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
-
+    Route::resource('withdrawal', WithdrawalController::class, [
+        'only' => ['update']
+    ]);
 });
 
 // Investor
@@ -57,6 +58,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
     Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');
     Route::get('/payment-renew/{reference}', [App\Http\Controllers\DashboardController::class, 'renewPackage'])->name('package.renew');
+    Route::resource('withdrawal', WithdrawalController::class, [
+        'only' => ['index']
+    ]);
 });
 
 require __DIR__.'/auth.php';

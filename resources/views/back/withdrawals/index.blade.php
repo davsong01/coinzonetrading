@@ -29,6 +29,7 @@
                         <th>{{ __('Reference ID') }}</th>
                         <th>{{ __('Requested By') }}</th>
                         <th>{{ __('Status') }}</th>
+                        <th>{{ __('Action') }}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -38,8 +39,26 @@
                         <td>{{ $settings->currency_sign. number_format($withdrawal->amount) }}</td>
                         <td>{{ $withdrawal->reference }}</td>
                         <td>{{ $withdrawal->requestedBy->email }}</td>
-                        <td style="color:{{ $withdrawal->status == 'pending' ? 'yellow' : 'green'}}">{{ $withdrawal->status }}</td>
-                        </tr>
+                        <td style="color:{{ $withdrawal->status == 'pending' ? 'blue' : 'green'}}">{{ strtoupper($withdrawal->status) }}</td>
+                        <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
+                            <div class="actions" role="group" aria-label="Basic example"
+                              style="display: inline-block;">
+                              <form action="{{ route('withdrawal.update', ['withdrawal' => $withdrawal->id ]) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="status" value="rejected">
+                                <button type="submit" class="btn btn-block btn-danger btn-xs my-2"> <i class="fa fa-trash"></i>
+                                Reject</button>
+                              </form>
+                              <form action="{{ route('withdrawal.update', ['withdrawal' => $withdrawal->id ]) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="status" value="accepted">
+                                <button type="submit" class="btn btn-block btn-success btn-xs my-2"> <i class="fa fa-checked"></i>
+                                Accept</button>
+                              </form>
+                            </div>
+                          </td>
                         </tr>
                       @endforeach
                     </tbody>

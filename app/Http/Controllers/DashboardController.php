@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function investorTransactions()
     {
         $transactions = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->get();
-       
+
         return view('back.investors.transactions.index', [
             'transactions' => $transactions,
         ]);
@@ -30,14 +30,14 @@ class DashboardController extends Controller
     }
 
     public function storeProfile(Request $request){
-        auth()->user()->update([
-            'name' => $request->name ?? auth()->user()->name,
+       $request->user()->update([
+            'name' => $request->name ??$request->user()->name,
         ]);
 
-        auth()->user()->investor->update([
-            'phone' => $request->phone ?? auth()->user()->investor->phone,
-            'wallet_type' => $request->wallet_type ?? auth()->user()->investor->wallet_type,
-            'wallet_address' => $request->wallet_address ?? auth()->user()->investor->wallet_address,
+       $request->user()->investor->update([
+            'phone' => $request->phone ??$request->user()->investor->phone,
+            'wallet_type' => $request->wallet_type ??$request->user()->investor->wallet_type,
+            'wallet_address' => $request->wallet_address ??$request->user()->investor->wallet_address,
         ]);
 
         return back()->with('message', 'Operation successful');
@@ -47,8 +47,8 @@ class DashboardController extends Controller
         if($request->has('profile_picture')){
             $profile_picture = app('App\Http\Controllers\FunctionsController')->uploadImage($request->profile_picture, 'front-end/images/avatar', 400, 400);
 
-            auth()->user()->investor->profile_picture = $profile_picture;
-            auth()->user()->investor->save();
+           $request->user()->investor->profile_picture = $profile_picture;
+           $request->user()->investor->save();
         }
 
         return back()->with('message', 'Profile picture changed');
@@ -56,29 +56,29 @@ class DashboardController extends Controller
 
     public function myPackages(){
         $packages = Package::all();
-        $userPackages = InvestorPackage::where(['investor_id' => auth()->user()->investor->id]);
+        $userPackages = InvestorPackage::where(['investor_id' =>request()->user()->investor->id]);
         $mypackages = $userPackages->get();
-        
+
         $otherpackages = array_column($userPackages->get('package_id')->toArray(), 'package_id');
         $otherpackages = $packages->whereNotIn('id', $otherpackages);
-        
+
         return view('back.investors.mypackages', [
             'packages' => $packages,
             'mypackages' => $mypackages,
             'otherpackages' => $otherpackages,
         ]);
     }
-    
+
     public function retryTransaction($reference){
         //Check if transaction has not expired
-       
+
         $transaction = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->whereReference($reference)->first();
         $check = InvestorPackage::where('package_id',$transaction->id)->where('investor_id', auth()->user()->investor->id)->where('status', 'active')->where('end_date', '>', now());
         if (isset($check) && $check->count() > 0) {
             return back()->with('error', 'You already have this package and it is active');
         }
         $package = Package::find($transaction->package_id);
-        
+
         if(isset($transaction)){
             if($transaction->expires_at > now()){
                 // Delete transaction and create afresh
@@ -111,7 +111,7 @@ class DashboardController extends Controller
         }
         $package = Package::find($transaction->package_id);
         $transaction->delete();
-      
+
         $charge = app('App\Http\Controllers\FunctionsController')->createCharge([
             'name' => $package->name, 'description' => '', 'amount' => $package->amount, 'package_id' => $package->id
         ]);
@@ -136,6 +136,6 @@ class DashboardController extends Controller
             return view('dashboard', [
                 'investors' => Investor::all()->loadMissing(['user']),
             ]);
-        }    
+        }
     }
 }

@@ -20,15 +20,16 @@
       <!-- sidebar menu -->
       <ul class="sidebar-menu" data-widget="tree">
 		    <li class="nav-devider"></li>
-        {{-- <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
+        @if(auth()->user()->role == 'admin')
+        <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
           <a href="{{route('dashboard')}}">
             <i class="icon-home"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
-        </li> --}}
-        @if(auth()->user()->role == 'admin')
+        </li>
+        
         <li class="treeview {{ request()->routeIs('packages.*') ? 'active' : '' }}">
           <a href="#">
             <i class="icon-chart"></i>

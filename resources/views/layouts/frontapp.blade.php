@@ -57,6 +57,14 @@
             height: 56px;
 
         }
+        .submit-button{
+            background-color: #dd3765 !important;
+            border-color: #dd3765 !important;
+        }	
+        .submit-button:hover{
+            background-color: #f38e3f !important;
+            border-color: #dd3765 !important;
+        }	
      </style>
      @yield('css')
   </head>

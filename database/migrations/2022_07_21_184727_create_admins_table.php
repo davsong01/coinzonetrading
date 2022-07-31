@@ -17,6 +17,7 @@ class CreateAdminsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('phone')->nullable();
+            $table->string('level')->nullable();
             $table->string('profile_picture')->nullable();
             $table->timestamps();
         });

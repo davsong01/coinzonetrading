@@ -34,10 +34,10 @@
                     <tbody>
                       @foreach ($investors as $investor)
                         <tr>
-                          <td>{{ $investor->user->name }}</td>
+                          <td>{{ $investor->user->name  ?? 'NOT-SET'}}</td>
                           <td>{{ $investor->phone }}</td>
-                          <td>{{ ucfirst($investor->type) }}</td>
-                          <td>{{ $investor->address }}</td>
+                          <td>{{ ucfirst($investor->wallet_type) }}</td>
+                          <td>{{ $investor->wallet_addrress }}</td>
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">

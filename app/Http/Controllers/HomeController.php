@@ -33,7 +33,6 @@ class HomeController extends Controller
 
     public function sendContact(Request $request)
     {
-
         $data = [
             'email' => $this->setting->official_email,
             'type' => 'contact-mail-to-admin',

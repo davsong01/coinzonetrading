@@ -49,15 +49,18 @@ class WithdrawalController extends Controller
         $settings = Setting::latest()->first();
 
         $attributes = $request->validate([
-            'amount' => ['required',
-            `min:{$settings->minimum_withdrawal_amount}`,
-             `max:{$settings->minimum_withdrawal_amount}`,
-             ]
+            'amount' => [
+                'required',
+                `min:{$settings->minimum_withdrawal_amount}`,
+                `max:{$settings->minimum_withdrawal_amount}`,
+            ]
         ]);
 
-        if(!(new FunctionsController)->canWithdraw(floatval($request->amount))){
-            return back()->with('error',
-            'Looks like you don\'t have enough fund or exceeded maximum withdrawable amount');
+        if (!(new FunctionsController)->canWithdraw(floatval($request->amount))) {
+            return back()->with(
+                'error',
+                'Looks like you don\'t have enough fund or exceeded maximum withdrawable amount'
+            );
         }
 
         # the user needs to be authenticated,
@@ -99,7 +102,25 @@ class WithdrawalController extends Controller
      */
     public function update(Request $request, Withdrawal $withdrawal)
     {
-        //
+        $request->validate([
+            'status' => ['required', 'in:rejected,accepted']
+        ]);
+
+        if ($request->status === 'accepted' && !(new FunctionsController)->canWithdraw(floatval($withdrawal->amount), $withdrawal->requestedBy)) {
+            return back()->with(
+                'error',
+                'Looks like the user don\'t have enough fund or exceeded maximum withdrawable amount'
+            );
+        }
+
+        $withdrawal->status = $request->status;
+        if ($request->status === 'accepted') {
+            $withdrawal->approved_by = $request->user()->id;
+            $withdrawal->approved_date = now()->toString();
+        }
+        $withdrawal->update();
+
+        return back()->with('success', 'Withdrawal successfully updated.');
     }
 
     /**

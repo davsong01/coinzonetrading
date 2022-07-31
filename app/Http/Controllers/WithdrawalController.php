@@ -16,7 +16,9 @@ class WithdrawalController extends Controller
      */
     public function index()
     {
-        //
+        return view('back.withdrawals.index', [
+            'withdrawals' => Withdrawal::all()->loadMissing(['requestedBy', 'approvedBy']),
+        ]);
     }
 
     /**
@@ -51,7 +53,11 @@ class WithdrawalController extends Controller
             'Looks like you don\'t have enough fund or exceeded maximum withdrawable amount');
         }
 
-        Auth::user()->withdrawals()->create($attributes);
+        # the user needs to be authenticated,
+        # since the ide does understand all laravel facades,
+        # and auth facades query the db again,
+        # we will work with the request helper method
+        request()->user()->withdrawals()->create($attributes);
         return back()->with('success', 'Withdrawal successfully created.');
     }
 

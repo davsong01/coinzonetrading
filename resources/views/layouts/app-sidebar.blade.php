@@ -50,6 +50,14 @@
             </span>
           </a>
         </li>
+        <li class="{{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
+          <a href="{{route('withdrawal.index')}}">
+            <i class="icon-wallet"></i> <span>Withdrawal</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
          <li class="treeview {{ request()->routeIs('investors.*') ? 'active' : '' }}">
           <a href="#">
             <i class="icon-chart"></i>
@@ -108,12 +116,10 @@
               </span>
             </a>
         </li>
-       
+
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
-        </form>  
+        </form>
       </ul>
     </section>
   </aside>
-
-  

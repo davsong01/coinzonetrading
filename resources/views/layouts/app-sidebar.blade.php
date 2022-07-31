@@ -19,15 +19,15 @@
       </div>
       <!-- sidebar menu -->
       <ul class="sidebar-menu" data-widget="tree">
-		<li class="nav-devider"></li>
-        <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
+		    <li class="nav-devider"></li>
+        {{-- <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
           <a href="{{route('dashboard')}}">
             <i class="icon-home"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
-        </li>
+        </li> --}}
         @if(auth()->user()->role == 'admin')
         <li class="treeview {{ request()->routeIs('packages.*') ? 'active' : '' }}">
           <a href="#">
@@ -52,7 +52,7 @@
         </li>
         <li class="{{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
           <a href="{{route('withdrawal.index')}}">
-            <i class="icon-wallet"></i> <span>Withdrawal</span>
+            <i class="icon-layers"></i> <span>Withdrawals</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -92,6 +92,14 @@
         <li class="{{ request()->routeIs('mytransactions') ? 'active' : '' }}">
           <a href="{{route('mytransactions')}}">
             <i class="icon-wallet"></i> <span>My Transactions</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
+        <li class="{{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
+          <a href="{{route('withdrawal.index')}}">
+            <i class="icon-layers"></i> <span>Withdrawal history</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>

@@ -127,13 +127,15 @@ class DashboardController extends Controller
 
     public function index()
     {
-        if(Auth::user()->role === 'investor'){
-            return view('back.investors.index', [
-                'canWithdraw' => (new FunctionsController)->canWithdraw()
+        if (Auth::user()->role === 'investor') {
+            return redirect(route('investor.packages'));
+            // return view('back.investors.index', [
+            //     'canWithdraw' => (new FunctionsController)->canWithdraw()
+            // ]);
+        }else{
+            return view('dashboard', [
+                'investors' => Investor::all()->loadMissing(['user']),
             ]);
-        }
-        return view('investors.index', [
-            'investors' => Investor::all()->loadMissing(['user']),
-        ]);
+        }    
     }
 }

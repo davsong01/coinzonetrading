@@ -16,9 +16,16 @@ class WithdrawalController extends Controller
      */
     public function index()
     {
-        return view('back.withdrawals.index', [
-            'withdrawals' => Withdrawal::all()->loadMissing(['requestedBy', 'approvedBy']),
-        ]);
+        if (Auth::user()->role === 'investor') {
+            return view('back.investors.index', [
+                'canWithdraw' => (new FunctionsController)->canWithdraw()
+            ]);
+        }else{
+            return view('back.withdrawals.index', [
+                'withdrawals' => Withdrawal::all()->loadMissing(['requestedBy', 'approvedBy']),
+            ]);
+        }
+        
     }
 
     /**

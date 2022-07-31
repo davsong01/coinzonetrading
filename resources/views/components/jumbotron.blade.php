@@ -1,5 +1,5 @@
 @props(['url' => '', 'title' => '', ])
-<section class="bg-img pt-150 pb-20" data-overlay="7" style="background-image: url({{ $url }});">
+<section class="bg-img pt-150 pb-20 sub-pages" data-overlay="7">
   <div class="container">
     <div class="row">
       <div class="col-12">

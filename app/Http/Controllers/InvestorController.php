@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InvestorStoreRequest;
 use App\Models\Investor;
+use App\Models\InvestorPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,11 +22,28 @@ class InvestorController extends Controller
         ]);
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function investorPackages($investor){
+        $packages = InvestorPackage::whereInvestorId($investor)->get();
+        $investor = Investor::find($investor);
+
+        return view('investors.show_packages', [
+            'packages' => $packages,
+            'investor' =>$investor,
+        ]);
+
+    }
+
+    public function investorPackagesUpdate(InvestorPackage $id){
+        dd($id);
+    }
+
     public function create()
     {
         return view('investors.create');

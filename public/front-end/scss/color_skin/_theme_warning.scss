@@ -503,12 +503,12 @@ Theme Warning Color
 /*---info Button---*/
 .theme-warning {
     .btn-info {
-        background-color: $theme-warning-info;
-        border-color: $theme-warning-info;
+        background-color: #dd3765;
+        border-color: #dd3765;
         color: $white;
         @include hover-full-state{
-            background-color: darken($theme-warning-info, 10%) !important;
-            border-color: darken($theme-warning-info, 10%) !important;
+            background-color:  !important;
+            border-color: #f38e3f !important;
             color: $white !important;
         } 
         &:disabled {

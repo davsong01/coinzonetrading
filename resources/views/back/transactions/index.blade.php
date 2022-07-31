@@ -29,6 +29,9 @@
                         <th>{{ __('Package') }}</th>
                         <th>{{ __('Amount') }}</th>
                         <th>{{ __('Status') }}</th>
+                        @if(auth()->user()->admin->level == 'admin')
+                        <th>Actions</th>
+                        @endif
                       </tr>
                     </thead>
                     <tbody>
@@ -52,7 +55,13 @@
                           </td>
                           <td>{{ $transaction->currency. number_format($transaction->amount) }}</td>
                           <td style="color:{{ $transaction->status == 'pending' ? 'red' : 'green'}}">{{ $transaction->status }}</td>
-                        
+                          <td> 
+                            @if(auth()->user()->admin->level == 'admin')
+                              <a href="{{ route('packages.edit', $transaction->id ) }}" class="btn btn-block btn-info btn-xs"> <i style="font-size: 14px; !important" class="fa fa-eye"></i>
+                                Edit
+                              </a>
+                            @endif
+                          </td>
                         </tr>
                         </tr>
                       @endforeach

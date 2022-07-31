@@ -47,7 +47,9 @@ Route::middleware(['auth'])->group(function(){
     Route::post('settings-one', [App\Http\Controllers\SettingController::class, 'settings1'])->name('setting1.store');
     Route::post('settings-two', [App\Http\Controllers\SettingController::class, 'settings2'])->name('setting2.store');
     Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
-
+    Route::get('investors-packages/{investor}', [App\Http\Controllers\InvestorController::class, 'investorPackages'])->name('investors.packages');
+    Route::get('edit-packages/{id}', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('packages.edit');
+    
 });
 
 // Investor

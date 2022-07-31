@@ -102,7 +102,7 @@
     </div>
 </section>
 
-<section class="py-30 bg-img countnm-bx" data-jarallax='{"speed": 0.4}'
+{{-- <section class="py-30 bg-img countnm-bx" data-jarallax='{"speed": 0.4}'
     style="background: #df3e64;" data-overlay="5">
     <div class="container">
         <div class="box box-body bg-transparent mb-0">
@@ -149,5 +149,5 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 @endsection

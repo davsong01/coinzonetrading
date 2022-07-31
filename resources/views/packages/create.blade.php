@@ -7,8 +7,8 @@
        {{ __('Create Package') }}
       </h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('packages.index') }}"><i class="fa fa-dashboard"></i> {{ __('Packages') }}</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('packages.create') }}">{{ __('Create') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('packages.index') }}"><i class="fa fa-dashboard"></i> Packages</a></li>
+        <li class="breadcrumb-item active">{{ __('Create Package') }}</li>
       </ol>
     </section>
 

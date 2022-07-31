@@ -18,6 +18,7 @@ class PackageController extends Controller
     {
         return view('packages.index',[
             'packages' => Package::all(),
+            'setting' => $this->settings,
         ]);
     }
 

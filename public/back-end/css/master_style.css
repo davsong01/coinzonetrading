@@ -20,7 +20,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
 }
 body {
     font-weight: 400;
-	font-size: 13px;
+	font-size: 16px;
 	color: #67757c;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -8715,7 +8715,7 @@ button.btn.dropdown-toggle::after, .wysihtml5-toolbar .btn.dropdown-toggle::afte
 
 .btn-group-xs > .btn,
 .btn-xs {
-  font-size: 11px;
+  font-size: 14px;
   padding: 2px 8px;
   line-height: 18px;
 }

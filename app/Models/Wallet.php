@@ -12,6 +12,6 @@ class Wallet extends Model
     protected $fillable = ['type', 'amount', 'investor_id','reference'];
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'investor_id');
     }
 }

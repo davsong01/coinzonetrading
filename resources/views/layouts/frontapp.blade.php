@@ -33,6 +33,8 @@
 	<!-- Style-->  
 	<link rel="stylesheet" href="{{ asset('front-end/css/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('front-end/css/skin_color.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <style>
         .homeScreenshot--mmo {
             background: transparent url("{{ asset('front-end/images/banners/homePreview-MMO.png') }}") no-repeat center top;
@@ -68,6 +70,8 @@
 	
 	{{-- Footer start --}}
 	@include('layouts.footer')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    @include('layouts.toastr')
 	{{-- footer end --}}
 </body>
 </html>

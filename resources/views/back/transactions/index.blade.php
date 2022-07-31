@@ -1,14 +1,15 @@
 <x-app-layout>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{ request()->routeIs('alltransactions.*') ? 'Transactions' : '' }}</h1>
+      <h1>
+       {{ __('Transactions') }}
+      </h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> {{ __('Transactions') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       </ol>
     </section>
-
+    
     <!-- Main content -->
     <section class="content">
       <div class="row">

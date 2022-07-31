@@ -57,7 +57,7 @@
                           <td style="color:{{ $transaction->status == 'pending' ? 'red' : 'green'}}">{{ $transaction->status }}</td>
                           <td> 
                             @if(auth()->user()->admin->level == 'admin')
-                              <a href="{{ route('packages.edit', $transaction->id ) }}" class="btn btn-block btn-info btn-xs"> <i style="font-size: 14px; !important" class="fa fa-eye"></i>
+                              <a href="{{ route('investorpackages.edit', ['id' => $transaction->id ]) }}" class="btn btn-block btn-info btn-xs"> <i style="font-size: 14px; !important" class="fa fa-eye"></i>
                                 Edit
                               </a>
                             @endif

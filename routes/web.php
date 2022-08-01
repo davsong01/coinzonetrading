@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');
     Route::get('/payment-renew/{reference}', [App\Http\Controllers\DashboardController::class, 'renewPackage'])->name('package.renew');
     Route::resource('withdrawal', WithdrawalController::class, [
-        'only' => ['index']
+        'only' => ['index','store']
     ]);
 });
 

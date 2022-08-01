@@ -3,20 +3,20 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-       {{ __('My packages') }}
+       {{ __('Packages') }}
       </h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
       </ol>
     </section>
    
     <!-- Main content -->
+    @if($mypackages->count() > 0)
     <section class="content">
-      @if($mypackages->count() > 0)
+     
       <!-- START Card With Image -->
-      <h4 class="box-title mb-10" style="padding: 10px;color: black;"> <u>My Packages</u></h4>
+      <h4 class="box-title mb-10" style="padding: 10px;color: black;"> <u>My packages</u></h4>
       <div class="row">
-       
           @foreach($mypackages as $package)
             <div class="col-md-12 col-lg-4">
               <div class="box box-default pull-up" style="padding: 5px;height: 350px;">
@@ -69,13 +69,13 @@
               </div>
             </div>
           @endforeach
-        @endif
       </div>
     </section>
-    
+     @endif
+    @if($otherpackages->count() > 0)
     <section class="content">
-       @if($otherpackages->count() > 0)
-      <h4 class="box-title mb-10" style="color: black;paddind:10px"><u>Other Packages</u></h4>
+       
+      <h4 class="box-title mb-10" style="color: black;paddind:10px"><u>Select a Package</u></h4>
       <div class="row">
        
           @foreach($otherpackages as $package)
@@ -108,10 +108,10 @@
               <!-- /.box -->
             </div>
           @endforeach
-        @endif
+       
       </div>
     </section>
- 
+    @endif
   </div>
   
 </x-app-layout>

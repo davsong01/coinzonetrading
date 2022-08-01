@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
     public function investorTransactions()
     {
-        $transactions = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->get();
+        $transactions = InvestorPackage::whereInvestorId(auth()->user()->id)->get();
 
         return view('back.investors.transactions.index', [
             'transactions' => $transactions,
@@ -56,9 +56,9 @@ class DashboardController extends Controller
 
     public function myPackages(){
         $packages = Package::all();
-        $userPackages = InvestorPackage::where(['investor_id' =>request()->user()->investor->id]);
+        $userPackages = InvestorPackage::where(['investor_id' =>request()->user()->id]);
         $mypackages = $userPackages->get();
-
+      
         $otherpackages = array_column($userPackages->get('package_id')->toArray(), 'package_id');
         $otherpackages = $packages->whereNotIn('id', $otherpackages);
 

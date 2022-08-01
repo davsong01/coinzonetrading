@@ -44,8 +44,8 @@
                               <strong class="bold">Expiry: </strong>{{ $transaction->expires_at }}
                           </td>
 
-                           <td> <strong class="bold">Name: </strong>{{ $transaction->investor->user->name ?? 'NOT SET' }}<br>
-                              <strong class="bold">Email: </strong>{{ $transaction->investor->user->email ?? 'NOT SET' }}
+                           <td> <strong class="bold">Name: </strong>{{ $transaction->user->name ?? 'NOT SET' }}<br>
+                              <strong class="bold">Email: </strong>{{ $transaction->user->email ?? 'NOT SET' }}
                           </td>
                           <td> <strong class="bold">Name: </strong>{{ $transaction->package->name ?? 'NOT SET' }}<br>
                             @if(isset($transaction->start_date) && isset($transaction->end_date))

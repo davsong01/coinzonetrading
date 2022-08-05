@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'hasPackage' => \App\Http\Middleware\hasPackage::class,
         'pendingTransactions' => \App\Http\Middleware\checkPendingTransaction::class,
-        
+        'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+
     ];
 }

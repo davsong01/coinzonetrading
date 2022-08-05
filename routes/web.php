@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 // Admin
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::resource('packages', PackageController::class);
     Route::resource('investors', InvestorController::class);
     Route::get('alltransactions', [App\Http\Controllers\DashboardController::class, 'adminTransactions'])->name('alltransactions');
@@ -48,9 +48,12 @@ Route::middleware(['auth'])->group(function(){
     Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
     Route::get('investors-packages/{investor}', [App\Http\Controllers\InvestorController::class, 'investorPackages'])->name('investors.packages');
     Route::get('edit-packages/{id}', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
-    Route::resource('withdrawal', WithdrawalController::class, [
-        'only' => ['update']
-    ]);
+
+    Route::middleware(['isAdmin:admin'])->group(function(){
+        Route::resource('withdrawal', WithdrawalController::class, [
+            'only' => ['update']
+        ]);
+    });
 
 });
 

@@ -58,7 +58,7 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
 });
 
 // Investor
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
     Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions');
     Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');

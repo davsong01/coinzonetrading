@@ -367,7 +367,7 @@
                             <textarea class="form-control" name="message" placeholder="Message*" rows="7" value="{{ old('message') }}">{{ old('message') }}</textarea>
                         </div>
                         <div class="form-group submit-button">
-                            <button id="submit" name="submit" type="submit" value="Send" class="btn btn-primary"> Send your message </button>
+                            <button id="submit" name="submit" type="submit" value="Send" style="width:100%" class="btn btn-primary">Send your message</button>
                         </div>
                     </div>
                 </form>

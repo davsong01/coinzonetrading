@@ -30,7 +30,7 @@
     color: #33c6dd; }
 
 .link-warning {
-  color: #ffa800; }
+  color: #f38e3f; }
   .link-warning:hover, .link-warning:focus {
     color: #ffb933; }
 
@@ -334,7 +334,7 @@
   border-color: #00b8d4 !important; }
 
 .border-warning {
-  border-color: #ffa800 !important; }
+  border-color: #f38e3f !important; }
 
 .border-danger {
   border-color: #ff3f3f !important; }
@@ -963,7 +963,7 @@
   color: #00b8d4 !important; }
 
 .text-warning {
-  color: #ffa800 !important; }
+  color: #f38e3f !important; }
 
 .text-danger {
   color: #ff3f3f !important; }
@@ -1005,7 +1005,7 @@
   background-color: #00b8d4 !important; }
 
 .bg-warning {
-  background-color: #ffa800 !important; }
+  background-color: #f38e3f !important; }
 
 .bg-danger {
   background-color: #ff3f3f !important; }

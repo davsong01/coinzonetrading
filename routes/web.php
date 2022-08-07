@@ -47,9 +47,10 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::post('settings-two', [App\Http\Controllers\SettingController::class, 'settings2'])->name('setting2.store');
     Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
     Route::get('investors-packages/{investor}', [App\Http\Controllers\InvestorController::class, 'investorPackages'])->name('investors.packages');
-
+   
     Route::middleware(['isAdmin:admin'])->group(function(){
-        Route::get('edit-packages/{id}', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
+        Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
+        Route::post('investor_packages_delete/{id}', [App\Http\Controllers\InvestorController::class, 'investorPackagesDelete'])->name('investorpackages.delete');
 
         Route::resource('withdrawal', WithdrawalController::class, [
             'only' => ['update']
@@ -62,7 +63,7 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
 Route::middleware(['auth', 'verified','pendingTransactions'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
     Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions');
-    Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
+    Route::get( '/payment/callback/{reference}/{middleware?}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
     Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');
     Route::get('/payment-renew/{reference}', [App\Http\Controllers\DashboardController::class, 'renewPackage'])->name('package.renew');
     Route::resource('withdrawal', WithdrawalController::class, [

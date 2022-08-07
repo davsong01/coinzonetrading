@@ -194,7 +194,7 @@ class FunctionsController extends Controller
         //Check payment status and deliver value accordingly
         $transaction = InvestorPackage::whereReference($reference)->whereStatus('pending')->first();
         if(isset($transaction) && $transaction->count() > 0){
-            if(env('ENT') == 'demo'){
+            if(env('ENT') == 'demow'){
                 $data = [
                     'payments' => [
                         [
@@ -210,8 +210,8 @@ class FunctionsController extends Controller
             }else{
                 $data  = $this->queryCharge($transaction->code);
             }
-            
-            if (isset($data)) {
+           
+            if (isset($data) && !empty($data->payments)) {
                 if ($data['payments'][0]['status'] == 'CONFIRMED') {
                     $transaction->update([
                         'status' => 'active',
@@ -222,7 +222,9 @@ class FunctionsController extends Controller
                 }
             }
         }
-
+        if ($middleware == 'admin') {
+            return back()->with('message', 'Status is: ' .  $transaction->status);
+        }
         if($middleware == 'yes'){
             return;
         }else{

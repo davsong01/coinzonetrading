@@ -40,8 +40,28 @@ class InvestorController extends Controller
 
     }
 
-    public function investorPackagesUpdate(InvestorPackage $id){
-        dd($id);
+    public function investorPackagesUpdate(Request $request){
+       
+        $package = InvestorPackage::find($request->id);
+        if($request->end_date < now()){
+            $status = 'expired';
+        }else{
+            $status = 'active';
+        }
+        $package->update([
+            "start_date" => $request->start_date,
+            "end_date" => $request->end_date,
+            "status" => $status,
+        ]);
+
+        return back()->with('message', 'Operation successful');
+    }
+
+    public function investorPackagesDelete($id){
+        $package = InvestorPackage::find($id);
+        $package->delete();
+
+        return back()->with('message', 'This package has been deleted for this investor!');
     }
 
     public function create()

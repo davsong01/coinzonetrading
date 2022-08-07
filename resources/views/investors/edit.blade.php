@@ -19,20 +19,19 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12">
                     <div class="box box-default">
-
                         <div class="box-body">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home"
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile"
                                         role="tab"><span class="hidden-sm-up"><i class="ion-home"></i></span> <span
                                             class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile"
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#packages"
                                         role="tab"><span class="hidden-sm-up"><i class="ion-person"></i></span> <span
                                             class="hidden-xs-down">Packages</span></a> </li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="home" role="tabpanel">
+                                <div class="tab-pane active" id="profile" role="tabpanel">
                                     <div class="pad">
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-5">
@@ -188,8 +187,96 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane pad" id="profile" role="tabpanel">2</div>
-                                <div class="tab-pane pad" id="messages" role="tabpanel">3</div>
+                                <div class="tab-pane pad" id="packages" role="tabpanel">
+                                    <div class="row">
+                                      <div class="col-lg-12 col-12">         
+                                      <div class="box">
+                                        <div class="box-header with-border">
+                                          <h4 class="box-title">{{ $investor->user->name }}'s Packages</h4> <a class="btn btn bg-blue">
+                                            <i class="fa fa-plus"></i>
+                                          </a>
+                                          <p style="color:black">You can add or edit investor's packages here</p>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                          <div class="table-responsive">
+                                            <table id="example1" class="table table-striped table-bordered no-margin">
+                                              <thead>
+                                              <tr class="bg-pale-dark">
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                                <th>Start</th>
+                                                <th>End</th>
+                                                @if(auth()->user()->admin->level == 'admin')
+                                                <th>Actions</th>
+                                                @endif
+                                              </tr>
+                                              </thead>
+                                              <tbody>
+                                                @php
+                                                    $packages = App\Models\Package::all();
+                                                    $userPackages =  App\Models\InvestorPackage::where(['investor_id' => $investor->user->id]);
+                                                    $mypackages = $userPackages->get();
+                                                  
+                                                    $otherpackages = array_column($userPackages->get('package_id')->toArray(), 'package_id');
+                                                    $otherpackages = $packages->whereNotIn('id', $otherpackages);
+                                                   
+                                                @endphp 
+                                                @foreach($mypackages as $packages)
+                                                <tr>
+                                                  <td><p class="font-size-18 no-margin">{{ $packages->package->name }}</p></td>
+                                                  <td><p class="no-margin" style="display:flex">
+                                                    @if(!empty($packages->end_date) && $packages->end_date >= \Carbon\Carbon::today())
+                                                      <button class="btn btn-info btn-sm" style="background:#dd3765;border:none" readonly>Active</button>
+                                                    @endif
+                                                    @if(!empty($packages->end_date) && $packages->end_date < \Carbon\Carbon::today())
+                                                      <button class="btn btn-warning btn-sm" style="background:red"  id="status{{ $packages->id }}" readonly>Expired</button>
+                                                    @endif
+                                                    @if(empty($packages->end_date) && $packages->status == 'pending')
+                                                        <button class="btn btn-warning btn-sm" id="status{{ $packages->id }}" readonly>Pending</button>
+                                                        <a href="{{ route('payment.process', ['reference' => $packages->reference, 'middleware' => 'admin' ]) }}" class="btn btn-info btn-sm"> <i class="fa fa-refresh"></i> </a>
+                                                    @endif
+                                                    </p>
+                                                  </td>
+                                                
+                                                  <td class="no-wrap">
+                                                    @if(!empty($packages->start_date))
+                                                      {{date("F dS, Y", strtotime($packages->start_date)). ','. date("h:ia", strtotime($packages->start_date))}}
+                                                    @endif
+                                                  </td>
+                                                  <td>
+                                                    @if(!empty($packages->end_date))
+                                                      {{date("F dS, Y", strtotime($packages->end_date)). ','. date("h:ia", strtotime($packages->end_date))}}
+                                                    @endif
+                                                  </td>
+                                                  <td>
+                                                    @if(auth()->user()->admin->level == 'admin')
+                                                    <a class="btn btn-block btn-info btn-xs" data-toggle="modal" data-target="#modal-right{{ $packages->id }}"> <i class="fa fa-eye"></i>Edit</a>
+                                                          {{-- onclick="return confirm('Are you sure you want to delete this item?');" --}}
+                                                     
+                                                       <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('investorpackages.delete', $packages->id) }}" method="POST" style="margin-top: 5px;">
+                                                        @csrf
+                                                       
+                                                        <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i>Delete</button>
+                                                      </form> 
+                                                      
+                                                     
+                                                      {{-- Edit modal --}}
+                                                      @include('investors.investor-package-edit-modal')
+                                                    @endif
+                                                  </td>
+                                                </tr>
+                                                @endforeach
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        </div>
+                                        <!-- /.box -->       
+                                      </div>
+                                    </div>	
+                                </div>
                             </div>
                         </div>
                         <!-- /.box-body -->

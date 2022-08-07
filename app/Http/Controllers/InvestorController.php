@@ -78,9 +78,13 @@ class InvestorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Investor $investor)
     {
-        //
+        // dd();
+        return view('investors.edit', [
+            'investor' => $investor->loadMissing(['user']),
+        ]);
+       
     }
 
     /**

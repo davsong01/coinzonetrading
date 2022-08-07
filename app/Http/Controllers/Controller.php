@@ -20,12 +20,12 @@ class Controller extends BaseController
     }
 
     public function walletTypes(){
-        if(isset($this->setting->wallet_types) && !empty($this->setting->wallet_types)){
-            $types = explode(",", $this->setting->wallet_types);
+        if(isset($this->settings->wallet_types) && !empty($this->settings->wallet_types)){
+            $types = explode(",", $this->settings->wallet_types);
         }else{
             $types = [];
         }
-
+        
         return $types;
     }
 }

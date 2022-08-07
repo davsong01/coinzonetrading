@@ -100,7 +100,8 @@
 			  <div class="row">
 				<div class="col-12">
                     <?php 
-                    $types = app('App\Http\Controllers\Controller')->walletTypes();     
+                    $types = app('App\Http\Controllers\Controller')->walletTypes(); 
+					  
                     ?>
                     <form action="{{ route('profile.store') }}" method="post" style="margin:auto">
                    @csrf
@@ -108,6 +109,7 @@
 					  <label class="col-sm-2 col-form-label">Wallet Type</label>
 					  <div class="col-sm-10">
                         <select name="wallet_type" id="wallet_type" class="form-control" required>
+							<option value="">Select</option>
                             @foreach($types as $type)
                             <option value="{{ $type }}" {{ auth()->user()->investor->wallet_type == $type ? 'selected' : '' }}>{{ $type }}</option>
                             @endforeach

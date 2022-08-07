@@ -30,12 +30,26 @@ class DashboardController extends Controller
     }
 
     public function storeProfile(Request $request){
+        if($request->has('investor_id')){
+            $investor = Investor::find($request->investor_id);
+            
+            $investor->update([
+                'phone' => $request->phone ?? $investor->phone,
+                'wallet_type' => $request->wallet_type ?? $investor->wallet_type,
+                'wallet_addrress' => $request->wallet_address ?? $investor->wallet_address,
+            ]);
+           
+            $investor->user()->update([
+                'name' => $request->name ?? $investor->user->name,
+            ]);
+
+            return back()->with('message', 'Operation successful');
+        }
         $request->user()->update([
             'name' => $request->name ??$request->user()->name,
         ]);
 
         if(auth()->user()->role == 'admin' || auth()->user()->role == 'staff'){
-           
             $request->user()->admin->update([
                 'phone' => $request->phone,
             ]);
@@ -43,7 +57,7 @@ class DashboardController extends Controller
             $request->user()->investor->update([
                 'phone' => $request->phone ?? $request->user()->investor->phone,
                 'wallet_type' => $request->wallet_type ?? $request->user()->investor->wallet_type,
-                'wallet_address' => $request->wallet_address ?? $request->user()->investor->wallet_address,
+                'wallet_addrress' => $request->wallet_address ?? $request->user()->investor->wallet_address,
             ]);
         }
        
@@ -51,9 +65,29 @@ class DashboardController extends Controller
     }
 
     public function storeAvatar(Request $request){
-       
+        if ($request->has('investor_id')) {
+            $investor = Investor::find($request->investor_id);
+
+            $investor->update([
+                'phone' => $request->phone ?? $investor->phone,
+                'wallet_type' => $request->wallet_type ?? $investor->wallet_type,
+                'wallet_address' => $request->wallet_address ?? $investor->wallet_address,
+            ]);
+
+            $investor->user()->update([
+                'name' => $request->name ?? $investor->user->name,
+            ]);
+
+        }
         if($request->has('profile_picture')){
             $profile_picture = app('App\Http\Controllers\FunctionsController')->uploadImage($request->profile_picture, 'front-end/images/avatar', 400, 400);
+            if ($request->has('investor_id')) {
+                $investor = Investor::find($request->investor_id);
+                $investor->profile_picture = $profile_picture;
+                $investor->save();
+
+                return back()->with('message', 'Operation successful');
+            }
             if($request->user()->role == 'admin' || $request->user()->role == 'staff'){
                 $request->user()->admin->profile_picture = $profile_picture;
                 $request->user()->admin->save();

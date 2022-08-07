@@ -43,6 +43,7 @@
                               style="display: inline-block;">
                               <a href="{{ route('investors.edit', ['investor' => $investor->id ]) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
                                 Edit</a>
+                                {{-- onclick="return confirm('Are you sure you want to delete this item?');" --}}
                               <button type="button" class="btn btn-block btn-danger btn-xs"> <i
                                   class="fa fa-trash"></i> Delete</button>
                             </div>

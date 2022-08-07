@@ -30,25 +30,38 @@ class DashboardController extends Controller
     }
 
     public function storeProfile(Request $request){
-       $request->user()->update([
+        $request->user()->update([
             'name' => $request->name ??$request->user()->name,
         ]);
 
-       $request->user()->investor->update([
-            'phone' => $request->phone ??$request->user()->investor->phone,
-            'wallet_type' => $request->wallet_type ??$request->user()->investor->wallet_type,
-            'wallet_address' => $request->wallet_address ??$request->user()->investor->wallet_address,
-        ]);
-
+        if(auth()->user()->role == 'admin' || auth()->user()->role == 'staff'){
+           
+            $request->user()->admin->update([
+                'phone' => $request->phone,
+            ]);
+        }else{
+            $request->user()->investor->update([
+                'phone' => $request->phone ?? $request->user()->investor->phone,
+                'wallet_type' => $request->wallet_type ?? $request->user()->investor->wallet_type,
+                'wallet_address' => $request->wallet_address ?? $request->user()->investor->wallet_address,
+            ]);
+        }
+       
         return back()->with('message', 'Operation successful');
     }
 
     public function storeAvatar(Request $request){
+       
         if($request->has('profile_picture')){
             $profile_picture = app('App\Http\Controllers\FunctionsController')->uploadImage($request->profile_picture, 'front-end/images/avatar', 400, 400);
-
-           $request->user()->investor->profile_picture = $profile_picture;
-           $request->user()->investor->save();
+            if($request->user()->role == 'admin' || $request->user()->role == 'staff'){
+                $request->user()->admin->profile_picture = $profile_picture;
+                $request->user()->admin->save();
+            }else{
+                $request->user()->investor->profile_picture = $profile_picture;
+                $request->user()->investor->save();
+            }
+           
         }
 
         return back()->with('message', 'Profile picture changed');
@@ -72,8 +85,8 @@ class DashboardController extends Controller
     public function retryTransaction($reference){
         //Check if transaction has not expired
 
-        $transaction = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->whereReference($reference)->first();
-        $check = InvestorPackage::where('package_id',$transaction->id)->where('investor_id', auth()->user()->investor->id)->where('status', 'active')->where('end_date', '>', now());
+        $transaction = InvestorPackage::whereInvestorId(auth()->user()->id)->whereReference($reference)->first();
+        $check = InvestorPackage::where('package_id',$transaction->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
         if (isset($check) && $check->count() > 0) {
             return back()->with('error', 'You already have this package and it is active');
         }
@@ -101,11 +114,11 @@ class DashboardController extends Controller
     public function renewPackage($reference)
     {
         //Check if transaction has not expired
-        $transaction = InvestorPackage::whereInvestorId(auth()->user()->investor->id)->whereReference($reference)->first();
+        $transaction = InvestorPackage::whereInvestorId(auth()->user()->id)->whereReference($reference)->first();
         if(!$transaction){
             return back()->with('error', 'Cannot find this transaction anymore');
         }
-        $check = InvestorPackage::where('package_id', $transaction->id)->where('investor_id', auth()->user()->investor->id)->where('status', 'active')->where('end_date', '>', now());
+        $check = InvestorPackage::where('package_id', $transaction->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
         if (isset($check) && $check->count() > 0) {
             return back()->with('error', 'You already have this package and it is active');
         }

@@ -53,13 +53,15 @@ class WithdrawalController extends Controller
                 'required',
                 `min:{$settings->minimum_withdrawal_amount}`,
                 `max:{$settings->minimum_withdrawal_amount}`,
-            ]
+            ],
         ]);
 
+        $attributes['reference_id'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference();
+       
         if (!(new FunctionsController)->canWithdraw(floatval($request->amount))) {
             return back()->with(
                 'error',
-                'Looks like you don\'t have enough fund or exceeded maximum withdrawable amount'
+                'Looks like you don\'t have enough funds or exceeded maximum withdrawable amount'
             );
         }
 
@@ -114,10 +116,11 @@ class WithdrawalController extends Controller
         }
 
         $withdrawal->status = $request->status;
-        if ($request->status === 'accepted') {
+        // Lets log admin that updated this regardless of the status
+        // if ($request->status === 'accepted') {
             $withdrawal->approved_by = $request->user()->id;
             $withdrawal->approved_date = now()->toString();
-        }
+        // }
         $withdrawal->update();
 
         return back()->with('success', 'Withdrawal successfully updated.');

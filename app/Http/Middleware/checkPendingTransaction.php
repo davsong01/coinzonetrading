@@ -17,7 +17,8 @@ class checkPendingTransaction
      */
     public function handle(Request $request, Closure $next)
     {
-       $pendingtransactions =  InvestorPackage::where('investor_id', auth()->user()->investor->id)->where('status', 'pending')->where('expires_at', '>', now())->get();
+
+       $pendingtransactions =  InvestorPackage::where('investor_id', auth()->user()->id)->where('status', 'pending')->where('expires_at', '>', now())->get();
         
        if(isset($pendingtransactions) && $pendingtransactions->count() > 0){
             // Attempt to update pending transactions
@@ -25,8 +26,7 @@ class checkPendingTransaction
                 app('App\Http\Controllers\FunctionsController')->updateTransaction($transaction->reference, 'yes');
             }
        }
-        
 
-        return $next($request);
+    return $next($request);
     }
 }

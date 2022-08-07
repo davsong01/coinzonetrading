@@ -31,6 +31,13 @@ class CreateSettingsTable extends Migration
             $table->string('archive_dates')->nullable();
             $table->unsignedFloat('minimum_withdrawal_amount')->nullable();
             $table->unsignedFloat('maximum_withdrawal_amount')->nullable();
+
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('linkedin')->nullable();
+
             $table->timestamps();
         });
     }

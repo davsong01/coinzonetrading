@@ -4,20 +4,29 @@
             <div class="row align-items-center">
                 <div class="col-md-6 col-12 text-md-start text-center"> © {{ date('Y') }} <span class="text-white"> {{ config('app.name') }}</span>. All Rights Reserved.</div>
                 <div class="col-md-6 mt-md-0 mt-20">
+                   
                     <div class="social-icons">
                         <ul class="list-unstyled d-flex gap-items-1 justify-content-md-end justify-content-center">
-                            <li><a href="#"
+                            @if(!empty($settings->facebook))
+                            <li><a href="{{ $settings->facebook }}" target="_blank"
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-facebook"><i
                                         class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"
+                            @endif
+                            @if(!empty($settings->twitter))
+                            <li><a href="{{ $settings->twitter }}" target="_blank"
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-twitter"><i
                                         class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"
+                            @endif
+                            @if(!empty($settings->linkedin))
+                            <li><a href="{{ $settings->linkedin }}"
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-linkedin"><i
                                         class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"
+                            @endif
+                            @if(!empty($settings->twitter))
+                            <li><a href="{{ $settings->youtube }}"
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-youtube"><i
                                         class="fa fa-youtube"></i></a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>

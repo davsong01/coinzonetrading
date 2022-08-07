@@ -11,7 +11,13 @@
           </a>
         </div>
         <div class="image">
-          <img src="{{ asset(!empty(auth()->user()->investor->profile_picture) ? auth()->user()->investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}" class="rounded-circle" alt="User Image">
+          <img src="
+          @if(auth()->user()->role == 'admin' || auth()->user()->role == 'staff')
+          {{ asset(!empty(auth()->user()->admin->profile_picture) ? auth()->user()->admin->profile_picture : 'back-end/images/user2-160x160.jpg') }}
+          @else
+          {{ asset(!empty(auth()->user()->investor->profile_picture) ? auth()->user()->investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}
+          @endif"
+          class="rounded-circle" alt="User Image">
         </div>
         <div class="info">
           <p>Hi, {{ auth()->user()->name }}</p>
@@ -20,10 +26,18 @@
       <!-- sidebar menu -->
       <ul class="sidebar-menu" data-widget="tree">
 		    <li class="nav-devider"></li>
+        <li>
+          <a href="/" target="_blank">
+            <i class="icon-home"></i> <span>Homepage</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
         @if(auth()->user()->role == 'admin')
         <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
           <a href="{{route('dashboard')}}">
-            <i class="icon-home"></i> <span>Dashboard</span>
+            <i class="icon-list"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>

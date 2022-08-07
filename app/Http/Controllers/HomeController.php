@@ -68,7 +68,7 @@ class HomeController extends Controller
 
     public function makePayment(Package $package)
     {
-        $check = InvestorPackage::where('package_id', $package->id)->where('investor_id', auth()->user()->investor->id)->where('status', 'active')->where('end_date', '>', now());
+        $check = InvestorPackage::where('package_id', $package->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
         if (isset($check) && $check->count() > 0) {
             return back()->with('error', 'You already have this package and it is active');
         }

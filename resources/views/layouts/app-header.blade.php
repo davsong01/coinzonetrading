@@ -27,7 +27,13 @@
           </li> --}}
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ isset(auth()->user()->investor->profile_picture ) ? auth()->user()->investor->profile_picture : asset('back-end/images/user5-128x128.jpg') }}" class="user-image rounded-circle" alt="User Image">
+              <img src="
+              @if(auth()->user()->role == 'admin' || auth()->user()->role == 'staff')
+              {{ asset(!empty(auth()->user()->admin->profile_picture) ? auth()->user()->admin->profile_picture : 'back-end/images/user2-160x160.jpg') }}
+              @else
+              {{ asset(!empty(auth()->user()->investor->profile_picture) ? auth()->user()->investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}
+              @endif"
+              class="user-image rounded-circle" alt="User Image">
             </a>
             <ul class="dropdown-menu scale-up">
               <!-- User image -->

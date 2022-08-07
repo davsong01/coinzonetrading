@@ -32,6 +32,9 @@ Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController:
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/package/select/{package}', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
     Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+    Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile');
+    Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');
+    Route::POST('replaceavatar', [App\Http\Controllers\DashboardController::class, 'storeAvatar'])->name('replaceavatar');
 });
 
 // Admin
@@ -39,9 +42,6 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::resource('packages', PackageController::class);
     Route::resource('investors', InvestorController::class);
     Route::get('alltransactions', [App\Http\Controllers\DashboardController::class, 'adminTransactions'])->name('alltransactions');
-    Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile')->middleware('pendingTransactions');
-    Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');
-    Route::POST('replaceavatar', [App\Http\Controllers\DashboardController::class, 'storeAvatar'])->name('replaceavatar');
     Route::get('settings', [App\Http\Controllers\SettingController::class, 'settings'])->name('settings');
     Route::post('settings-one', [App\Http\Controllers\SettingController::class, 'settings1'])->name('setting1.store');
     Route::post('settings-two', [App\Http\Controllers\SettingController::class, 'settings2'])->name('setting2.store');
@@ -59,7 +59,7 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
 });
 
 // Investor
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified','pendingTransactions'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
     Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions');
     Route::get( '/payment/callback/{reference}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');

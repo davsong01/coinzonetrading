@@ -111,8 +111,12 @@
                   <td>{{ $loop->index }}</td>
                   <td>{{ $settings->currency_sign . number_format($withdrawal->amount) }}</td>
                   <td>{{ $withdrawal->reference_id }}</td>
-                  <td>{{ $withdrawal->request_date->diffForHumans() }}</td>
-                  <td>{{ $withdrawal->status }}</td>
+                  <td>{{ $withdrawal->created_at->diffForHumans() }}</td>
+                  <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}
+                  @if($withdrawal->status != 'pending') <br>
+                  <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
+                  @endif
+                  </td>
                 </tr>
               @endforeach
             </tbody>

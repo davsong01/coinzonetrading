@@ -20,7 +20,13 @@
           <!-- Profile Image -->
           <div class="box bg-yellow bg-deathstar-dark">
             <div class="box-body box-profile">
-            <img class="profile-user-img rounded img-fluid mx-auto d-block"  src="{{ asset(!empty(auth()->user()->investor->profile_picture) ? auth()->user()->investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}"  alt="User Image">
+            <img class="profile-user-img rounded img-fluid mx-auto d-block"  src="
+			@if(auth()->user()->role == 'admin' || auth()->user()->role == 'staff')
+			{{ asset(!empty(auth()->user()->admin->profile_picture) ? auth()->user()->admin->profile_picture : 'back-end/images/user2-160x160.jpg') }}
+			@else
+			{{ asset(!empty(auth()->user()->investor->profile_picture) ? auth()->user()->investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}
+			@endif
+			" alt="User Image">
               <h2 class="profile-username text-center mb-0">{{ auth()->user()->name }}</h2>
               <h4 class="text-center mt-0"><i class="fa fa-envelope-o mr-10"></i>{{ auth()->user()->email }}</h4>
               <div class="form-group row"> <br><br>
@@ -64,7 +70,8 @@
                     <div class="form-group row">
 					  <label class="col-sm-2 col-form-label">Phone number</label>
 					  <div class="col-sm-10">
-						<input class="form-control" name="phone" type="text" value="{{ auth()->user()->investor->phone ?? old('phone') }}" placeholder="Phone number" required>
+						<input class="form-control" name="phone" type="text" value="{{ (auth()->user()->role == 'admin' || auth()->user()->role == 'staff') ? (auth()->user()->admin->phone ?? old('phone') ): (auth()->user()->investor->phone ?? old('phone')) }}"
+						 placeholder="Phone number" required>
 					  </div>
 					</div>
 					

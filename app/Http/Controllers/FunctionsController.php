@@ -90,6 +90,9 @@ class FunctionsController extends Controller
         return NULL;
 
     }
+    public function generateTransactionReference(){
+        return date('Y') . '-' . date('m') . '-' . rand(1111111, 9999999);
+    }
 
     public function createCharge($data){
 
@@ -97,7 +100,7 @@ class FunctionsController extends Controller
         \DB::table('investors_packages')->whereStatus('pending')->where('expires_at', '>', now())->delete();
         // Check if Investor has this package and its active
        
-        $trx = date('Y') . '-' . date('m') . '-' . rand(1111111, 9999999);
+        $trx = $this->generateTransactionReference();
         $headers = array(
             "Content-Type: application/json",
             "X-CC-Api-Key: ". $this->setting->api_key,

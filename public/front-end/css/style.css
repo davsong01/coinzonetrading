@@ -35940,12 +35940,12 @@ ul.list-edit {
       border: 1px solid #f3f6f9;
       border-radius: 5px;
       word-spacing: 1px;
-      font-weight: 600;
-      font-size: 1.286rem;
+      font-weight: 400;
+      font-size: 1.2857142857rem;
       transition: all 0.3s linear; }
       .cust-accordion .tab-wrapper.v1 .item .tab-btn a:hover {
         background-color: #ffffff;
-        color: #6993ff; }
+        color: #dd3765; }
     .cust-accordion .tab-wrapper.v1 .item .tab-content {
       border: none;
       border-top: 0;
@@ -35953,7 +35953,8 @@ ul.list-edit {
       display: none; }
   .cust-accordion .tab-wrapper.v1 .item.selected .tab-btn a {
     background-color: #ffffff;
-    color: #6993ff; }
+    color: #dd3765;
+   }
   .cust-accordion .tab-wrapper.v1 .item.selected .tab-content {
     display: block; }
   .cust-accordion .tab-wrapper.v1 .tab-btn em {

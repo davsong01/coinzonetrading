@@ -23,6 +23,6 @@ class Withdrawal extends Model
     }
 
     public function approvedBy(){
-        return $this->hasOne(User::class, 'id');
+        return $this->hasOne(User::class, 'id', 'approved_by');
     }
 }

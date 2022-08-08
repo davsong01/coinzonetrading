@@ -298,33 +298,23 @@
                                                 <thead>
                                                   <tr>
                                                     <th>{{ __('S/N') }}</th>
-                                                    <th>{{ __('Amount') }}</th>
                                                     <th>{{ __('Reference ID') }}</th>
-                                                    <th>{{ __('Status') }}</th>
-                                                    <th>{{ __('Approved by') }}</th>
+                                                    <th>{{ __('Amount') }}</th>
+                                                    <th>{{ __('Type') }}</th>
+
                                                   </tr>
                                                 </thead>
                                                 <tbody>
                                                   @php
                                                       $count = 1;
                                                   @endphp
-                                                  @foreach ($investor->user->withdrawals as $withdrawal)
+                                                  @foreach ($investor->user->wallets as $wallet)
                                                   <tr>
                                                     <td>{{ $count ++ }}</td>
-                                                    <td>{{ $settings->currency_sign. number_format($withdrawal->amount) }}</td>
-                                                    <td>{{ $withdrawal->reference_id }}</td>
-                                                  
-                                                    <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}</td>
-                                                    <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
-                                                        <div class="actions" role="group" aria-label="Basic example"
-                                                          style="display: inline-block;">
-                                                          @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
-                                                            <small><b>By: </b><span class="approved_by">{{ $withdrawal->approvedBy->name }}</></span> </small> <br>
-                                                            <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
-                                                          @endif
-                                                        </div>
-                                                      </td>
-                                                    </tr>
+                                                    <td>{{ $wallet->reference }}</td>
+                                                    <td>{{ $settings->currency_sign . number_format($wallet->amount) }}</td>
+                                                    <td style="color:{{ $wallet->type == 'credit' ? 'green' : 'red'}}">{{ ucfirst($wallet->type) }}</td>
+                                                  </tr>
                                                   @endforeach
                                                 </tbody>
                                               </table>

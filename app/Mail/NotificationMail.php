@@ -30,6 +30,11 @@ class NotificationMail extends Mailable
             ->subject('Contact form filled on '. config('app.name'));
         }
 
+        if ($this->data['type'] == 'withdrawal-notification-to-admin') {
+            return $this->markdown('mails.notificationEmails')
+            ->subject('Contact form filled on ' . config('app.name'));
+        }
+
         // if($this->data['type'] == 'package-payment'){
         //     return $this->markdown('mails.notificationEmails')
         //         ->subject('New contact form');

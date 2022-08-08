@@ -19,5 +19,10 @@ Phone: {{ $data['messageDetails']['phone'] }}
 Email: {!! $data['messageDetails']['message'] !!}
 
 @endif
+@if($data['type'] == 'withdrawal-notification-to-admin')
+Dear {{ $data['name'] }},
+
+
+@endif
 {{ config('app.name') }}
 @endcomponent

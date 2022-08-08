@@ -280,7 +280,7 @@ class FunctionsController extends Controller
     // }
 
     public function logWallet($type, $amount, $investor_id, $reference = null){
-
+        
         try {
             $rec = Wallet::create([
                 'type' => $type,

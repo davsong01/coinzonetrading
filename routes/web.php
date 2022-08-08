@@ -40,7 +40,9 @@ Route::group(['middleware' => ['auth']], function () {
 // Admin
 Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::resource('packages', PackageController::class);
-    Route::resource('investors', InvestorController::class);
+    Route::resource('investors', InvestorController::class)->except('edit');
+    Route::get('investors/{investor}/edit/{hid?}', [App\Http\Controllers\InvestorController::class, 'edit'])->name('investors.edit');
+
     Route::get('alltransactions', [App\Http\Controllers\DashboardController::class, 'adminTransactions'])->name('alltransactions');
     Route::get('settings', [App\Http\Controllers\SettingController::class, 'settings'])->name('settings');
     Route::post('settings-one', [App\Http\Controllers\SettingController::class, 'settings1'])->name('setting1.store');

@@ -24,24 +24,38 @@
                     role="grid" aria-describedby="example_info">
                     <thead>
                       <tr>
-                        <th>{{ __('Name') }}</th>
-                        <th>{{ __('Phone') }}</th>
-                        <th>{{ __('Wallet Type') }}</th>
-                        <th>{{ __('Wallet Addess') }}</th>
+                        <th>{{ __('Avatar') }}</th>
+                        <th>{{ __('Investor') }}</th>
+                        <th>{{ __('Wallet') }}</th>
+                        <th>{{ __('Packages') }}</th>
                         <th>{{ __('Action') }}</th>
                       </tr>
                     </thead>
                     <tbody>
                       @foreach ($investors as $investor)
                         <tr>
-                          <td>{{ $investor->user->name  ?? 'NOT-SET'}}</td>
-                          <td>{{ $investor->phone }}</td>
-                          <td>{{ ucfirst($investor->wallet_type) }}</td>
-                          <td>{{ $investor->wallet_addrress }}</td>
+                          <td><a class="avatar avatar-lg status-{{ is_null(app('App\Http\Controllers\FunctionsController')->hasPackages($investor->user)) ? 'danger' : 'success' }}" href="#"><img  src="{{ asset(!empty($investor->profile_picture) ? $investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}" alt="investor-image"></a></td>
+                          <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'profile' ]) }}"> {{ $investor->user->name  ?? 'NOT-SET'}} </a>
+                            <small>
+                            <br>
+                            <i class="fa fa-envelope"></i> {{ $investor->user->email  ?? 'NOT-SET'}} <br>
+                            <i class="fa fa-phone"></i> {{ $investor->phone  ?? 'NOT-SET'}} 
+                          </small>
+                           
+                          </td>
+                        
+                          <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'wallet' ]) }}">{{ $settings->currency_sign . number_format($investor->user->walletBalance()) }}</a> <br>
+                            <small>
+                              <span>Type: </span>{{ ucfirst($investor->wallet_type) }} <br>
+                              <span>Address:</span>{{ $investor->wallet_addrress }} 
+                            </small>
+                          </td>
+                          <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'packages' ]) }}">{{ app('App\Http\Controllers\FunctionsController')->hasPackages($investor->user)->count() }} Packages
+                            </a> </td>
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">
-                              <a href="{{ route('investors.edit', ['investor' => $investor->id ]) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
+                              <a target="_blank" href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'profile' ]) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
                                 Edit</a>
                                 {{-- onclick="return confirm('Are you sure you want to delete this item?');" --}}
                               <button type="button" class="btn btn-block btn-danger btn-xs"> <i
@@ -52,15 +66,7 @@
                         </tr>
                       @endforeach
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>{{ __('Name') }}</th>
-                        <th>{{ __('Phone') }}</th>
-                        <th>{{ __('Wallet Type') }}</th>
-                        <th>{{ __('Wallet Addess') }}</th>
-                        <th>{{ __('Action') }}</th>
-                      </tr>
-                    </tfoot>
+                    
                   </table>
 
                 </div>

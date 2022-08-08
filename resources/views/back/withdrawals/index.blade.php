@@ -3,7 +3,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-       {{ __('Withdraws') }}
+       {{ __('Withdrawal requests') }}
       </h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>

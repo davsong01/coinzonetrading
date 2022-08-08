@@ -31,7 +31,7 @@
                         </select>
                     </div> --}}
                     <input type="hidden" name="id" value="{{ $packages->id }}">
-                
+                    <input type="hidden" name="user_id" value={{ $investor->id }}>
             </div>
             <div class="modal-footer modal-footer-uniform">
                 <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>

@@ -53,15 +53,14 @@ class InvestorController extends Controller
             "end_date" => $request->end_date,
             "status" => $status,
         ]);
-
-        return back()->with('message', 'Operation successful');
+       
+        return redirect(route('investors.edit', ['investor' => $request->user_id, 'hid' => 'packages' ]))->with('message', 'Operation successful');
     }
 
-    public function investorPackagesDelete($id){
+    public function investorPackagesDelete($id, Request $request){
         $package = InvestorPackage::find($id);
         $package->delete();
-
-        return back()->with('message', 'This package has been deleted for this investor!');
+        return redirect(route('investors.edit', ['investor' => $request->user_id, 'hid' => 'packages']))->with('message', 'Package deleted!');
     }
 
     public function create()
@@ -98,11 +97,12 @@ class InvestorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Investor $investor)
+    public function edit(Investor $investor, $hid = null)
     {
         // dd();
         return view('investors.edit', [
             'investor' => $investor->loadMissing(['user']),
+            'hid' => $hid
         ]);
        
     }

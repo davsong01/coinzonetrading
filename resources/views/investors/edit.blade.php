@@ -22,16 +22,18 @@
                         <div class="box-body">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile"
-                                        role="tab"><span class="hidden-sm-up"><i class="ion-home"></i></span> <span
+                                <li class="nav-item"> <a class="nav-link {{ !is_null($hid) && $hid == 'profile' ? 'active' : '' }}" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ion-home"></i></span> <span
                                             class="hidden-xs-down">Profile</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#packages"
+                                <li class="nav-item"> <a class="nav-link {{ !is_null($hid) && $hid == 'packages' ? 'active' : '' }}" data-toggle="tab" href="#packages"
                                         role="tab"><span class="hidden-sm-up"><i class="ion-person"></i></span> <span
                                             class="hidden-xs-down">Packages</span></a> </li>
+                                 <li class="nav-item"> <a class="nav-link {{ !is_null($hid) && $hid == 'wallet' ? 'active' : '' }}" data-toggle="tab" href="#wallet"
+                                        role="tab"><span class="hidden-sm-up"><i class="ion-person"></i></span> <span
+                                            class="hidden-xs-down">Wallet History</span></a> </li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content tabcontent-border">
-                                <div class="tab-pane active" id="profile" role="tabpanel">
+                                <div class="tab-pane {{ !is_null($hid) && $hid == 'profile' ? 'active' : '' }}" id="profile" role="tabpanel">
                                     <div class="pad">
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-5">
@@ -104,7 +106,8 @@
                                                                                 placeholder="Phone number" required>
                                                                         </div>
                                                                     </div>
-                                                                  <input type="hidden" name="investor_id" value="{{ $investor->id }}">
+                                                                    <input type="hidden" name="investor_id" value="{{ $investor->id }}">
+                                                                  
 
                                                                     <div class="form-group row">
                                                                         <label class="col-sm-12 col-form-label"></label>
@@ -187,7 +190,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane pad" id="packages" role="tabpanel">
+                                <div class="tab-pane {{ !is_null($hid) && $hid == 'packages' ? 'active' : '' }}" id="packages" role="tabpanel">
                                     <div class="row">
                                       <div class="col-lg-12 col-12">         
                                       <div class="box">
@@ -256,7 +259,8 @@
                                                      
                                                        <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('investorpackages.delete', $packages->id) }}" method="POST" style="margin-top: 5px;">
                                                         @csrf
-                                                       
+                                                        <input type="hidden" name="user_id" value={{ $investor->id }}>
+                                                        
                                                         <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i>Delete</button>
                                                       </form> 
                                                       
@@ -277,90 +281,69 @@
                                       </div>
                                     </div>	
                                 </div>
+                                <div class="tab-pane {{ !is_null($hid) && $hid == 'wallet' ? 'active' : '' }}" id="wallet" role="tabpanel">
+                                    <div class="row">
+                                      <div class="col-lg-12 col-12">         
+                                      <div class="box">
+                                        <div class="box-header with-border">
+                                          <h4 class="box-title">{{ $investor->user->name }}'s Wallet history</h4>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                          <div class="table-responsive">
+                                            <div id="example_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                              <table id="example"
+                                                class="table table-bordered table-hover display nowrap margin-top-10 w-p100 dataTable"
+                                                role="grid" aria-describedby="example_info">
+                                                <thead>
+                                                  <tr>
+                                                    <th>{{ __('S/N') }}</th>
+                                                    <th>{{ __('Amount') }}</th>
+                                                    <th>{{ __('Reference ID') }}</th>
+                                                    <th>{{ __('Status') }}</th>
+                                                    <th>{{ __('Approved by') }}</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  @php
+                                                      $count = 1;
+                                                  @endphp
+                                                  @foreach ($investor->user->withdrawals as $withdrawal)
+                                                  <tr>
+                                                    <td>{{ $count ++ }}</td>
+                                                    <td>{{ $settings->currency_sign. number_format($withdrawal->amount) }}</td>
+                                                    <td>{{ $withdrawal->reference_id }}</td>
+                                                  
+                                                    <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}</td>
+                                                    <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
+                                                        <div class="actions" role="group" aria-label="Basic example"
+                                                          style="display: inline-block;">
+                                                          @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
+                                                            <small><b>By: </b><span class="approved_by">{{ $withdrawal->approvedBy->name }}</></span> </small> <br>
+                                                            <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
+                                                          @endif
+                                                        </div>
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                        </div>
+                                        <!-- /.box -->       
+                                      </div>
+                                    </div>	
+                                </div>
                             </div>
                         </div>
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
                 </div>
-
             </div>
-
-            {{-- <!-- Basic Forms -->
-      <div class="box">
-        <!-- /.box-header -->
-        <div class="box-body">
-          <div class="row">
-            <div class="col">
-              <form novalidate method="POST" action="{{ route('packages.update', ['package' => $package->id]) }}">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <h5>{{ __('Name') }}</h5>
-                <div class="controls">
-                    <input type="text" name="name" class="form-control" required
-                        data-validation-required-message="This field is required"
-                        value="{{ old('name') ?? $package->name }}">
-                </div>
-                <div class="form-control-feedback">@error('name') {{ $message }} @enderror</div>
-            </div>
-            <div class="form-group">
-                <h5>{{ __('Short Description') }}</h5>
-                <div class="controls">
-                    <textarea name="short_description" id="short_description" class="form-control" required
-                        placeholder="Short Description">{{ old('short_description') ?? $package->short_description }}</textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <h5>{{ __('Amount') }}</h5>
-                <div class="controls">
-                    <input type="number" name="amount" class="form-control" required
-                        data-validation-required-message="This field is required" min="0"
-                        value="{{ old('amount') ?? $package->amount }}">
-                </div>
-                <div class="form-control-feedback">@error('amount'){{$message}}@enderror</div>
-            </div>
-            <div class="form-group">
-                <h5>{{ __('Daily ROI') }}</h5>
-                <div class="controls">
-                    <input type="number" name="daily_roi" class="form-control" required
-                        data-validation-required-message="This field is required"
-                        value="{{ old('daily_roi') ?? $package->daily_roi }}">
-                </div>
-                <div class="form-control-feedback">@error('daily_roi') {{ $message }} @enderror</div>
-            </div>
-            <div class="form-group">
-                <h5>{{ __('Monthly ROI') }}</h5>
-                <div class="controls">
-                    <input type="number" name="monthly_roi" class="form-control" required
-                        data-validation-required-message="This field is required"
-                        value="{{ old('monthly_roi') ?? $package->monthly_roi }}">
-                </div>
-                <div class="form-control-feedback">@error('monthly_roi') {{ $message }} @enderror</div>
-            </div>
-            <div class="form-group">
-                <h5>{{ __('Validity Period') }}</h5>
-                <div class="controls">
-                    <input type="number" name="validity_period" class="form-control" required
-                        data-validation-required-message="This field is required" min="1" max="31"
-                        value="{{ old('validity_period') ?? $package->validity_period }}">
-                </div>
-                <div class="form-control-feedback">@error('validity_period') {{ $message }} @enderror</div>
-            </div>
-            <div class="text-xs-right">
-                <button type="submit" class="btn btn-info">{{ __('Update') }}</button>
-            </div>
-            </form>
-
-    </div>
-    <!-- /.col -->
-    </div>
-    <!-- /.row -->
-    </div>
-    <!-- /.box-body -->
-    </div>
-    <!-- /.box --> --}}
-
     </section>
     <!-- /.content -->
     </div>

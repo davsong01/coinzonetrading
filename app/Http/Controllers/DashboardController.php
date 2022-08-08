@@ -42,8 +42,7 @@ class DashboardController extends Controller
             $investor->user()->update([
                 'name' => $request->name ?? $investor->user->name,
             ]);
-
-            return back()->with('message', 'Operation successful');
+            return redirect(route('investors.edit', ['investor' => $request->investor_id, 'hid' => 'profile']))->with('message', 'Operation successful');
         }
         $request->user()->update([
             'name' => $request->name ??$request->user()->name,

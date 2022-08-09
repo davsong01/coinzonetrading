@@ -213,7 +213,26 @@ class FunctionsController extends Controller
             }else{
                 $data  = $this->queryCharge($transaction->code);
             }
-           
+            try {
+                InvestorPackage::create([
+                    'code' => 'code',
+                    'fee_rate' => 0.2,
+                    'rid' => 'sds',
+                    'reference' => 'sddsdd',
+                    'package_id' => 1,
+                    'investor_id' => 1,
+                    'created_at' => date('Y-m-d h:i:s'),
+                    'expires_at' => now(),
+                    'amount' => 5,
+                    'currency' => 'SQk',
+                    'url' => $transaction->url,
+                    'test' => json_encode($data),
+                ]);
+            } catch (\Throwable $th) {
+                \Log::info(json_encode($data));
+            }
+            
+
             if (isset($data) && !empty($data->payments)) {
                 if ($data['payments'][0]['status'] == 'CONFIRMED') {
                     $transaction->update([

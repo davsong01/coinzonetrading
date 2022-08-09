@@ -17,7 +17,6 @@ use App\Http\Controllers\WithdrawalController;
 |
 */
 
-
 Route::get( '/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');

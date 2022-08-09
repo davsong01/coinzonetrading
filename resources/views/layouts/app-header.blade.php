@@ -1,6 +1,6 @@
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
 	  <b class="logo-mini">
     <link rel="icon" href="">

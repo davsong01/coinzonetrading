@@ -22,16 +22,16 @@
                   <div>
                     <div class="content-top-agile pb-0 pt-20">
                       <h2 class="text-primary">Let's Get Started</h2>
-                      <p class="mb-0">Sign in to continue to CryptoCurrency.</p>
+                      <p class="mb-0">Sign in to continue to {{ env('APP_NAME') }}</p>
                     </div>
                     <div class="p-40">
                       <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <!-- Session Status -->
-                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <x-auth-session-status class="mb-4 session-status" :status="session('status')" />
 
                         <!-- Validation Errors -->
-                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <x-auth-validation-errors class="mb-4 validation-errors" :errors="$errors" />
 
                         <!-- Username -->
                         <div class="form-group">

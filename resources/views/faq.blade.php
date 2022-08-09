@@ -23,39 +23,40 @@
             <div class="col-12">
                 <div class="tab-wrapper v1">
                     <div class="list">
+                        <h3 class="heading">General Issues</h3>
                         <div class="item">
                             <div class="tab-btn">
-                                <a href="#">What is the meaning of Lorem ipsum?<em class="mdi mdi-plus"></em></a>
+                                <a href="#">What is Coin Zone Trading Limited?<em class="mdi mdi-plus"></em></a>
                             </div>
                             <div class="tab-content">
-                                <p>Literally it does not mean anything. It is a sequence of words without a sense of Latin derivation that make up a text also known as filler text, fictitious, blind or placeholder</p>
+                                <p>Coin Zone Trading Limited is a hedge-fund. Our main activity is safe investment by using risk management.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Why is Lorem Ipsum Dolor used? <em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">Does Coin Zone Trading Limited have an official registration?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>The Lorem Ipsum text is used to fill spaces designated to host texts that have not yet been published. They use programmers, graphic designers, typographers to get a real impression of the digital / advertising / editorial product they are working on.</p>
+                            <p>Yes, we are legally registered in the UK. You can check our certificate on the site.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#"> What is the most used version? <em class="mdi mdi-plus"></em></a></div>
+                            <div class="tab-btn"><a href="#">What services does Coin Zone Trading Limited provide?<em class="mdi mdi-plus"></em></a></div>
                             <div class="tab-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>We are engaged in trust management of capital.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#"> What are the origins of Lorem Ipsum Dolor Sit? <em class="mdi mdi-plus"></em></a></div>
+                            <div class="tab-btn"><a href="#">Does the Coin Zone Trading Limited team already have investment experience?<em class="mdi mdi-plus"></em></a></div>
                             <div class="tab-content">
-                                <p>Its origins date back to 45 BC. In fact, his words were randomly extracted from the De finibus bonorum et malorum , a classic of Latin literature written by Cicero over 2000 years ago.</p>
+                                <p>Yes, we have formed an investment portfolio that brings a stable income.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#"> What is the original text of Lorem Ipsum Dolor Sit Amet? <em class="mdi mdi-plus"></em></a></div>
+                            <div class="tab-btn"><a href="#">What are the advantages of Coin Zone Trading Limited? <em class="mdi mdi-plus"></em></a></div>
                             <div class="tab-content">
-                                <p>The original Latin text<br>Dal De finibus bonorum et malorum sections 1.10.32 and 1.10.33 - Marco Tullio Cicerone<br>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. </p>
+                                <p>We aim for a long-term relationship with each client. Our goal is to become the leader of the investment market.</p>
                             </div>
                         </div>
+                        <h3>Main issues:</h3>
                         <div class="item">
                             <div class="tab-btn">
                                 <a href="#">Can I reserve a magazine via Phone or E-mail?<em class="mdi mdi-plus"></em></a>
@@ -65,80 +66,132 @@
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Where on your website can I open a customer account?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">Who can become an investor of Coin Zone Trading Limited?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>You can create a new account at the end of the order process or on the following page: Create new account. You can view all of your orders and subscriptions in your customer account. You can also change your addresses and your password.</p>
+                            <p>Anyone regardless of his knowledge and skills can make a deposit. A team of experienced traders manages common capital, making the most profitable investments.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Do I need to create an account to make an order?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">What should I do to make a profit?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>No, you don’t have to create an account. But there are a few advantages if you create an account.</p>
-                            <ul class="list-unstyled">
-                                <li>You never have to enter your billing and shipping address again</li>
-                                <li>Find all of your orders, subscriptions and addresses in your account</li>
-                                <li>Download invoices of your orders</li>
-                            </ul>
+                            <p>Register, open an account, select a plan and make a deposit.</p>
+                        </div>
+                        </div>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">What payment methods can I use?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>We support Bitcoin, Ethereum and USDT. We will expand the list with the development of the project.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">What are your opening hours?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">How can I make a deposit?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>The products in our shop can only be ordered online at present and are sent out by Swiss Post.</p>
+                            <p>When making a deposit, you transfer the capital to us in trust management. We invest your contribution, and you will receive interest according to the market. In addition, you can take part in the affiliate program and receive 5% from the deposit of each new depositor that you have invited.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Do you also have a physical store?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">How much can I earn in Coin Zone Trading Limited?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>No, we don’t have a physical store location at the moment. We accept only orders through our online shop and we’re shipping all orders with the Swiss Post Service. Please visit our shipping section for more details.<br><br>From time to time you will find us at design fairs and popup markets in Switzerland. Subscribe to our newsletter and you’ll receive the latest news.</p>
+                            <p>Our plans provide for Very good profits. We put in proper risk management and stop loss to ensure clients funds are insured.</p>
+                            </div>
+                        </div>
+                        <h3 class="heading">Financial issues:</h3>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">How much can I invest? And what are the withdrawals limits ?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>The minimum deposit is $500, while Minimum Withdrawal allowed is $100.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Why do the prices in the shop sometimes change?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">Can I withdraw my deposit after the tenure expires?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>Many of the magazines that we sell are from far-away countries. Prices depend largely on factors such as the shipping cost, customs duties, and general price changes imposed by our suppliers and the individual publishers. We therefore have to pass any changes in costs on to our customers. For subscription orders, however, the prices are not changed until the subscription is renewed. The prices at the time of ordering always apply.</p>
+                            <p>Yes, you can withdraw the deposit in full.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Do you also sell magazines that have been financed by crowdfunding?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">How long for my withdrawal to be processed?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>Yes, we sell many different magazines from various publishers that were financed from capital raised on Kickstarter.com, Indiegogo.com, Startnext.de and other crowdfunding platforms. We’re always pleased to add new magazines that have been funded in this way, and we’ve even helped support some of them ourselves.</p>
+                            <p>Withdrawals are done by our support team in 8 hours maximum.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">General Terms & Conditions (GTC)<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">Do you take a commission to withdraw interest?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>Our current General Terms & Conditions (GTC), including all important information about prices, payment methods, returns and cancellation periods, can be found on our website at loremnotipsum.com.</p>
+                            <p>No, we do not. But you pay commission according to the rules of the chosen payment system. We do not establish any hidden fees.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Information for Press and Media<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">Can I reinvest my income?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>Please find logos, photos, press releases and more in Press and Media.</p>
+                            <p>Yes, you can deposit all the received interest again.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">I’d like to suggest a new magazine<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">In which currency is the profit accrued?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>We are always looking for new and interesting Independent Magazines. Please drop us a short line if you know a magazine, which you want to be added to our shop. Please note that we cannot add all suggested magazines to our shop.</p>
+                            <p>We will accrue your profit in the same currency that you choose for making a deposit.</p>
+                            </div>
+                        </div>
+                        <h3 class="heading">Security:</h3>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">How do you protect my personal data?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>We use SSL certificate for secure connection.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">From which countries do you sell magazines?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">What happens if your site undergoes a DDOS attack?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>Please visit this page to view all of the countries, we are selling magazines from.</p>
+                            <p>We pay organizations for protection against external attacks. All attacks on the site will be successfully neutralized by professionals.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Do you sell gift cards?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">Can I be sure that no one will know my wallet data?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>Yes, we sell gift cards that can be used to buy items in our online shop.</p>
+                            <p>Yes, if you do not pass the login and password to third parties. The third parties cannot get this information through our website.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <div class="tab-btn"><a href="#">Why do some of your prices differ from those of other retailers?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-btn"><a href="#">Is it safe to conduct all transactions in cryptocurrency?<em class="mdi mdi-plus"></em></a> </div>
                             <div class="tab-content">
-                            <p>Our retail prices are based on the trade price that we pay per magazine. We also have to take into account various other factors such as customs duties and shipping costs. These are especially high for magazines ordered from the USA or Australia, for example, and have to be considered in the final price. We also put a lot of time and effort into presenting each magazine in an optimum way in our shop and on social media. All of these factors therefore have to be taken into account when calculating the individual prices.</p>
+                            <p>Yes, absolutely. Thanks to the technology of the blockchain only you can make any changes in your account.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">What should I do if your site is not available?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>We make sure that access to the site is permanent. For this purpose, we leased a dedicated server and paid for its protection. If you have any problems, please email us at support@coinzonetrading.com</p>
+                            </div>
+                        </div>
+                        <h3 class="heading">Account:</h3>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">How many accounts can I create?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>Only one. If you try to create a second account, your profile will be blocked.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">How can I create my own account?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>Click the registration <a style="color:blue" href="/login">link</a> and enter all the data. Be sure to review the terms of cooperation and confirm this at registration by placing a marker. After that you will have access to your personal account.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">How can I create a deposit?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>Log in or register on the site and log in to your account. In the "Account" section, select the payment system and transfer the necessary amount to your account.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">Is it possible to withdraw interest using another payment system?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>No, you have to use the same purse from which the deposit was created.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="tab-btn"><a href="#">What if I forgot my password?<em class="mdi mdi-plus"></em></a> </div>
+                            <div class="tab-content">
+                            <p>You can use the forgpt password option on the login page to reset your password. Click the "Forgot Password" link and enter your email address. Then follow the instructions.</p>
                             </div>
                         </div>
                     </div>

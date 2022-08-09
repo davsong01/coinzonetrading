@@ -57,9 +57,12 @@
                               style="display: inline-block;">
                               <a target="_blank" href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'profile' ]) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
                                 Edit</a>
-                                {{-- onclick="return confirm('Are you sure you want to delete this item?');" --}}
-                              <button type="button" class="btn btn-block btn-danger btn-xs"> <i
-                                  class="fa fa-trash"></i> Delete</button>
+                              <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('investors.destroy', $investor->id) }}" method="POST" style="margin-top: 5px;">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                              </form> 
+
                             </div>
                           </td>
                         </tr>

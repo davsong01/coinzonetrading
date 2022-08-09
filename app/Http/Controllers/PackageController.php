@@ -16,8 +16,10 @@ class PackageController extends Controller
      */
     public function index()
     {
+        $packages = Package::withCount('users')->orderBy('created_at', 'DESC')->get();
+       
         return view('packages.index',[
-            'packages' => Package::all(),
+            'packages' => $packages,
             'setting' => $this->settings,
         ]);
     }
@@ -40,7 +42,8 @@ class PackageController extends Controller
      */
     public function store(PackageStoreRequest $request)
     {
-        Auth::user()->packages()->create($request->validated());
+        Package::create($request->validated());
+        
         return redirect()->route('packages.index')->with('success', 'Package created successfully');
     }
 
@@ -89,6 +92,7 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        $package->delete();
+        return back()->with('message', 'Delete Successful!');
     }
 }

@@ -43,7 +43,7 @@ class FunctionsController extends Controller
     //Files must be in public and folder name must be appended to the filename for this to work
     public function deleteImage($image)
     {
-        // dd($image);
+
         if (file_exists($image))
             unlink($image);
         return;
@@ -82,12 +82,12 @@ class FunctionsController extends Controller
 
     public function hasPackages($user)
     {
-        $packages = InvestorPackage::where('investor_id', $user->id)->get();
+        $packages = InvestorPackage::where('investor_id', $user->id)->where('status', 'active')->where('end_date', '>=', \Carbon\Carbon::today())->get();
 
         if(isset($packages) && $packages->count() > 0){
             return $packages;
         }
-        return NULL;
+        return collect([]);
 
     }
     public function generateTransactionReference(){
@@ -199,38 +199,40 @@ class FunctionsController extends Controller
 
     public function updateTransaction($reference, $middleware = 'no'){
         //Check payment status and deliver value accordingly
-        $transaction = InvestorPackage::whereReference($reference)->whereStatus('pending')->first();
-        if(isset($transaction) && $transaction->count() > 0){
-            if(env('ENT') == 'demow'){
-                $data = [
-                    'payments' => [
-                        [
-                            'status' => 'CONFIRMED',
-                        ],
-                        [
-                            'amount' => 'amoun'
-                        ]
-                    ],
-                    'confirmed_at' => '2022-07-24 11:09:45',
-                ];
+        $transaction = InvestorPackage::with('user')->whereReference($reference)->whereStatus('pending')->first();
 
-            }else{
-                $data  = $this->queryCharge($transaction->code);
-            }
+        if(isset($transaction) && $transaction->count() > 0){
+            // if(env('ENT') == 'demo'){
+            //    $data = json_decode($this->dummyCoinbaseCharge());
+            // }else{
+            $data  = $this->queryCharge($transaction->code);
+            // }
 
             if (isset($data) && !empty($data->payments)) {
-                if ($data['payments'][0]['status'] == 'CONFIRMED') {
+                if ($data->payments[0]->status == 'CONFIRMED' && $data->code == $transaction->code) {
+                    $status = $transaction->status;
+                    if(Carbon::parse($data->confirmed_at)->addMonth(1) < now()){
+                        $status = 'expired';
+                    }else{
+                        $status = 'active';
+                    }
                     $transaction->update([
-                        'status' => 'active',
-                        'start_date' => $data['confirmed_at'],
-                        'end_date' => Carbon::parse($data['confirmed_at'])->addMonth(1),
-                        'last_cron_date' => NULL
+                        'status' => $status,
+                        'start_date' => Carbon::parse($data->confirmed_at),
+                        'end_date' => Carbon::parse($data->confirmed_at)->addMonth(1),
+                        'last_cron_date' => NULL,
+                        'test' => json_encode($data),
                     ]);
                 }
             }
         }
+
+        if ($middleware == 'none') {
+            return back()->with('message', 'Status is: ' . $transaction->status);
+        }
+
         if ($middleware == 'admin') {
-            return back()->with('message', 'Status is: ' .  $transaction->status);
+            return redirect(route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'packages']))->with('message', 'Status is: '. $transaction->status);
         }
         if($middleware == 'yes'){
             return;
@@ -257,35 +259,6 @@ class FunctionsController extends Controller
 
     }
 
-    // public function getTransaction($reference)
-    // {
-    //     $year = explode("-", $reference);
-    //     $year = $year[0];
-    //     if ($year[0] === date('Y')) {
-    //         $transaction = Transaction::whereReference($reference)->first();
-    //     } else {
-    //         $transaction = \DB::table('transactions_2021')->where('reference', $reference)->first();
-    //     }
-    //     return $transaction;
-    // }
-
-    // public function updateTransaction($reference, $status)
-    // {
-    //     $years = explode("-", $reference);
-    //     $year = $years[0];
-    //     try {
-    //         if ($year === date('Y')) {
-    //             $transaction = Transaction::whereReference($reference)->first()->update(['status' => $status]);
-    //         } else {
-    //             $transaction = \DB::table('transactions_2021')->where('reference', $reference)->update(['status' => $status]);
-    //         }
-    //     } catch (\Throwable $th) {
-    //         //throw $th;
-    //     }
-
-    //     return;
-    // }
-
     public function logWallet($type, $amount, $investor_id, $reference = null){
 
         try {
@@ -301,5 +274,82 @@ class FunctionsController extends Controller
         }
 
         return $rec;
+    }
+
+    public function dummyCoinbaseCharge(){
+        return '{
+                "id": "f765421f2-1451-fafb-a513-aac6c819fba9",
+                "resource": "charge",
+                "code": "4EAGRJEJ",
+                "name": "The Sovereign Individual",
+                "description": "Mastering the Transition to the Information Age",
+                "logo_url": "https://commerce.coinbase.com/charges/ybjknds.png",
+                "hosted_url": "https://commerce.coinbase.com/charges/66BEOV2A",
+                "created_at": "2017-01-31T20:49:02Z",
+                "expires_at": "2017-01-31T21:49:02Z",
+                "confirmed_at": "2017-01-31T20:50:02Z",
+                "checkout": {
+                    "id": "a76721f2-1611-48fb-a513-aac6c819a9d6"
+                },
+                "timeline": [
+                    {
+                    "time": "2017-01-31T20:49:02Z",
+                    "status": "NEW"
+                    },
+                    {
+                    "time": "2017-01-31T20:50:02Z",
+                    "status": "PENDING"
+                    },
+                    {
+                    "time": "2017-01-31T20:50:02Z",
+                    "status": "COMPLETED"
+                    },
+                    {
+                    "time": "2017-01-31T20:50:02Z",
+                    "status": "UNRESOLVED",
+                    "context": "UNDERPAID"
+                    },
+                    {
+                    "time": "2017-01-31T20:50:02Z",
+                    "status": "RESOLVED"
+                    }
+                ],
+                "metadata": {},
+                "pricing_type": "fixed_price",
+                "pricing": {
+                    "local": { "amount": "500.00", "currency": "USD" },
+                    "bitcoin": { "amount": "1.00", "currency": "BTC" },
+                    "ethereum": { "amount": "10.00", "currency": "ETH" }
+                },
+                "payment_threshold": {
+                    "overpayment_absolute_threshold": { "amount": "5.00", "currency": "USD" },
+                    "overpayment_relative_threshold": "0.05",
+                    "underpayment_absolute_threshold": { "amount": "5.00", "currency": "USD" },
+                    "underpayment_relative_threshold": "0.05"
+                },
+                "applied_threshold": { "amount": "5.00", "currency": "USD" },
+                "applied_threshold_type": "RELATIVE",
+                "payments": [
+                    {
+                    "network": "ethereum",
+                    "transaction_id": "0xe02fead885c3e4019945428ed54d094247bada2d0ac41b08fce7ce137bf29587",
+                    "status": "CONFIRMED",
+                    "value": {
+                        "local": { "amount": "500.0", "currency": "USD" },
+                        "crypto": { "amount": "10.00", "currency": "ETH" }
+                    },
+                    "block": {
+                        "height": 100,
+                        "hash": "0xe02fead885c3e4019945428ed54d094247bada2d0ac41b08fce7ce137bf29587",
+                        "confirmations_accumulated": 8,
+                        "confirmations_required": 2
+                    }
+                    }
+                ],
+                "addresses": {
+                    "bitcoin": "mymZkiXhQNd6VWWG7VGSVdDX9bKmviti3U",
+                    "ethereum": "0x419f91df39951fd4e8acc8f1874b01c0c78ceba6"
+                }
+                }';
     }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\InvestorPackage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Package extends Model
 {
@@ -18,4 +19,7 @@ class Package extends Model
         'validity_period',
     ];
 
+    public function users(){
+        return $this->hasMany(InvestorPackage::class, 'package_id');
+    }
 }

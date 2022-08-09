@@ -22,7 +22,7 @@ class WithdrawalController extends Controller
             ]);
         }else{
             return view('back.withdrawals.index', [
-                'withdrawals' => Withdrawal::all()->loadMissing(['requestedBy', 'approvedBy']),
+                'withdrawals' => Withdrawal::with('requestedBy', 'approvedBy')->orderBy('created_at', 'DESC')->get(),
             ]);
         }
         
@@ -70,6 +70,9 @@ class WithdrawalController extends Controller
         # and auth facades query the db again,
         # we will work with the request helper method
         request()->user()->withdrawals()->create($attributes);
+         
+        // Send email to admin //official_email in the settings
+      
         return back()->with('success', 'Withdrawal successfully created.');
     }
 
@@ -121,8 +124,21 @@ class WithdrawalController extends Controller
             $withdrawal->approved_by = $request->user()->id;
             $withdrawal->approved_date = now()->toString();
         // }
+        // Modify, 
         $withdrawal->update();
+        // Send email to investor
+        $data = [
+            'type' => 'withdrawal-notification-to-investor',
+            'name' => $i,// Investor
+        ];
 
+        // Todo : Only log into wallet when status == accepted, but send email regardless of status
+        $reference = app('App\Http\Controllers\FunctionsController')->generateTransactionReference();
+        if($withdrawal->status == 'accepted'){
+            app('App\Http\Controllers\FunctionsController')->logWallet('debit', $withdrawal->amount, $withdrawal->user->id, $reference);
+        }
+        app('App\Http\Controllers\FunctionController')->sendEmails($data);
+        // End modify
         return back()->with('success', 'Withdrawal successfully updated.');
     }
 

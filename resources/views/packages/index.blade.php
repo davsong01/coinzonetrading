@@ -29,6 +29,7 @@
                         <th>{{ __('Daily ROI') }}</th>
                         <th>{{ __('Monthly ROI') }}</th>
                         <th>{{ __('Validity Period') }}</th>
+                        <th>{{ __('Investors') }}</th>
                         <th>{{ __('Action') }}</th>
                       </tr>
                     </thead>
@@ -40,30 +41,25 @@
                           <td>{{ $package->daily_roi }}</td>
                           <td>{{ $package->monthly_roi }}</td>
                           <td>{{ $package->validity_period }} days</td>
+                          <td>{{ $package->users_count }}</td>
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">
                               <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
                                 Edit</a>
-                              <button type="button" class="btn btn-block btn-danger btn-xs"> <i
-                                  class="fa fa-trash"></i> Delete</button>
+                             
+                              <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('packages.destroy', $package->id) }}" method="POST" style="margin-top: 5px;">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                              </form> 
                             </div>
                           </td>
                         </tr>
                         </tr>
                       @endforeach
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>{{ __('Name') }}</th>
-                        {{-- <th>{{ __('Short Description') }}</th> --}}
-                        <th>{{ __('Amount') }}</th>
-                        <th>{{ __('Daily ROI') }}</th>
-                        <th>{{ __('Monthly ROI') }}</th>
-                        <th>{{ __('Validity Period') }}</th>
-                        <th>{{ __('Action') }}</th>
-                      </tr>
-                    </tfoot>
+                    
                   </table>
 
                 </div>

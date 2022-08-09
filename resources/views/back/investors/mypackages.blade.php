@@ -39,11 +39,11 @@
                   @if(!empty($package->end_date) && !empty($package->start_date))
                   <p class="box-text">
                     <div class="col-md-12" style="display: flex">
-                      <div class="col-md-6">
-                        <b class="box-title bold">Start date: </b> <span>{{date("F dS, Y", strtotime($package->start_date)). ','. date("h:ia", strtotime($package->start_date))}}</span>  <br>
+                      <div class="col-md-6" style="font-size:11px">
+                        <b class="box-title bold">Start date: <br> </b> <span>{{date("M dS, Y", strtotime($package->start_date)). ','. date("h:ia", strtotime($package->start_date))}}</span>  <br>
                       </div>
-                      <div class="col-md-6">
-                        <b class="box-title bold">End date: </b> <span>{{date("F dS, Y", strtotime($package->end_date)). ','. date("h:ia", strtotime($package->start_date))}}</span>  <br>
+                      <div class="col-md-6" style="font-size:11px">
+                        <b class="box-title bold">End date: </b> <br> <span>{{date("M dS, Y", strtotime($package->end_date)). ','. date("h:ia", strtotime($package->start_date))}}</span>  <br>
                       </div>
                     </div>
                       

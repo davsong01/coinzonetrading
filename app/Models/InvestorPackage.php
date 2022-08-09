@@ -13,9 +13,9 @@ class InvestorPackage extends Model
     protected $table = 'investors_packages';
     protected $guarded = [];
     
-    public function investor(){
-        return $this->belongsTo(Investor::class);
-    }
+    // public function investor(){
+    //     return $this->belongsTo(Investor::class);
+    // }
 
     public function user()
     {

@@ -12,13 +12,13 @@ class DashboardController extends Controller
 {
     public function adminTransactions(){
         return view('back.transactions.index', [
-            'transactions' => InvestorPackage::all(),
+            'transactions' => InvestorPackage::orderBy('created_at', 'DESC')->get(),
         ]);
     }
 
     public function investorTransactions()
     {
-        $transactions = InvestorPackage::whereInvestorId(auth()->user()->id)->get();
+        $transactions = InvestorPackage::whereInvestorId(auth()->user()->id)->orderBy('created_at', 'DESC')->get();
 
         return view('back.investors.transactions.index', [
             'transactions' => $transactions,
@@ -101,8 +101,8 @@ class DashboardController extends Controller
     }
 
     public function myPackages(){
-        $packages = Package::all();
-        $userPackages = InvestorPackage::where(['investor_id' =>request()->user()->id]);
+        $packages = Package::orderBy('created_at', 'DESC')->get();
+        $userPackages = InvestorPackage::where(['investor_id' =>request()->user()->id])->orderBy('created_at', 'DESC');
         $mypackages = $userPackages->get();
       
         $otherpackages = array_column($userPackages->get('package_id')->toArray(), 'package_id');

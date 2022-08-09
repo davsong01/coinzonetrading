@@ -18,61 +18,18 @@ class hasPackage extends FunctionsController
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
+            // if user == admin
+            if(Auth::user()->role == 'admin'){
+                return $next($request);
+            }
+           
             //check if user has no plan
             $packages = app('App\Http\Controllers\FunctionsController')->hasPackages(auth()->user());
-           
+            
             if (isset($packages) && $packages->count() < 1) {
                 return redirect(url('/my-packages'));
             }
             
-            // if (auth()->user()->plan_id != NULL && auth()->user()->level == 1 && (auth()->user()->plan_expiry < now())) {
-            //     $title = 'Purchase plan';
-
-            //     return redirect(route('plan.upgrade', auth()->user()->plan_id));
-            // }
-            // if (is_null(auth()->user()->plans) && auth()->user()->user_types == 1) {
-            //     $userTransaction = auth()->user()->transactions->where('type', 1)->where('status', 'PENDING')->first();
-            //     //user has no plan and has not made any attempt to pay
-            //     if (is_null($userTransaction)) {
-            //         return redirect(url('/selectplans'));
-            //     } else {
-            //         //Check transaction status
-            //         $transactionDetails = collect($this->getTransactionDetails($userTransaction->reference));
-
-            //         //No payment
-            //         if (empty($transactionDetails['payments'])) {
-            //             return redirect(url('/selectpackage'));
-            //         }
-            //         //There is payment but it is not confirmed
-            //         if (!empty($transactionDetails['payments'])) {
-            //             $id = $transactionDetails['id'];
-            //             return redirect(route('confirm.payment', $id));
-            //         }
-            //     }
-            // }
-
-            // if (Carbon::parse(auth()->user()->plan_expiry) < Carbon::now() && auth()->user()->user_types == 1) {
-
-            //     auth()->user()->medals()->detach();
-            //     $userTransaction = auth()->user()->transactions->where('type', 1)->where('status', 'PENDING')->first();
-            //     //user has no plan and has not made any attempt to pay
-            //     if (is_null($userTransaction)) {
-            //         return redirect(url('/renewplan'));
-            //     } else {
-            //         //Check transaction status
-            //         $transactionDetails = collect($this->getTransactionDetails($userTransaction->reference));
-
-            //         //No payment
-            //         if (empty($transactionDetails['payments'])) {
-            //             return redirect(url('/renewplan'));
-            //         }
-            //         //There is payment but it is not confirmed
-            //         if (!empty($transactionDetails['payments'])) {
-            //             $id = $transactionDetails['id'];
-            //             return redirect(route('confirm.payment', $id));
-            //         }
-            //     }
-            // }
         }
 
         return $next($request);

@@ -24,6 +24,8 @@
                     role="grid" aria-describedby="example_info">
                     <thead>
                       <tr>
+                        <th>{{ __('Order No') }}</th>
+
                         <th>{{ __('Details') }}</th>
                         <th>{{ __('Package') }}</th>
                         <th>{{ __('Amount') }}</th>
@@ -33,6 +35,7 @@
                     <tbody>
                       @foreach ($transactions as $transaction)
                         <tr>
+                          <td> <strong>{{ $transaction->code }} </strong> </td>
                           <td> <strong class="bold">RID: </strong>{{ $transaction->rid }}<br>
                               <strong class="bold">Reference: </strong>{{ $transaction->reference }} <br>
                               <strong class="bold">Fee rate: </strong>{{ $transaction->fee_rate }} <br>
@@ -46,7 +49,8 @@
                             @endif
                           </td>
                           <td>{{ $transaction->currency. number_format($transaction->amount) }}</td>
-                          <td style="color:{{ $transaction->status == 'pending' ? 'red' : 'green'}}">{{ $transaction->status }}</td>
+                         
+                          <td style="color:{{ $transaction->status == 'active' ? 'green' : 'red'}}">{{ $transaction->status }}</td>
                         
                         </tr>
                         </tr>

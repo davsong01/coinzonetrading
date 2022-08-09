@@ -24,6 +24,7 @@
                     role="grid" aria-describedby="example_info">
                     <thead>
                       <tr>
+                        <th>{{ __('Order No') }}</th>
                         <th>{{ __('Details') }}</th>
                         <th>{{ __('Investor details') }}</th>
                         <th>{{ __('Package') }}</th>
@@ -37,7 +38,8 @@
                     <tbody>
                       @foreach ($transactions as $transaction)
                         <tr>
-                          <td> <strong class="bold">RID: </strong>{{ $transaction->rid }}<br>
+                          <td>{{ $transaction->code }}</td>
+                          <td>
                               <strong class="bold">Reference: </strong>{{ $transaction->reference }} <br>
                               <strong class="bold">Fee rate: </strong>{{ $transaction->fee_rate }} <br>
                               <strong class="bold">Payment URL: </strong>{{ $transaction->url }} <br>
@@ -54,7 +56,11 @@
                             @endif
                           </td>
                           <td>{{ $transaction->currency. number_format($transaction->amount) }}</td>
-                          <td style="color:{{ $transaction->status == 'pending' ? 'red' : 'green'}}">{{ $transaction->status }}</td>
+                          <td style="color:{{ $transaction->status == 'active' ? 'green' : 'red'}}">{{ $transaction->status }}
+                            @if($transaction->status == 'pending')
+                              <a href="{{ route('payment.process', ['reference' => $transaction->reference, 'middleware' => 'none']) }}" class="btn btn-info btn-sm"> <i class="fa fa-refresh"></i> </a>
+                            @endif
+                          </td>
                           <td> 
                             @if(auth()->user()->admin->level == 'admin')
                               <a href="{{ route('investorpackages.edit', ['id' => $transaction->id ]) }}" class="btn btn-block btn-info btn-xs"> <i style="font-size: 14px; !important" class="fa fa-eye"></i>

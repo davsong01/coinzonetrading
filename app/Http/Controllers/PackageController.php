@@ -16,8 +16,10 @@ class PackageController extends Controller
      */
     public function index()
     {
+        $packages = Package::withCount('users')->orderBy('created_at', 'DESC')->get();
+       
         return view('packages.index',[
-            'packages' => Package::all(),
+            'packages' => $packages,
             'setting' => $this->settings,
         ]);
     }

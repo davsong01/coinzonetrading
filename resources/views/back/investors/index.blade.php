@@ -106,9 +106,12 @@
               </tr>
             </thead>
             <tbody>
-              @foreach (auth()->user()->withdrawals as $withdrawal)
+              @php
+                  $count = 1;
+              @endphp
+              @foreach (auth()->user()->withdrawals->sortByDesc('id') as $withdrawal)
                 <tr>
-                  <td>{{ $loop->index }}</td>
+                  <td>{{ $count ++ }}</td>
                   <td>{{ $settings->currency_sign . number_format($withdrawal->amount) }}</td>
                   <td>{{ $withdrawal->reference_id }}</td>
                   <td>{{ $withdrawal->created_at->diffForHumans() }}</td>
@@ -120,15 +123,7 @@
                 </tr>
               @endforeach
             </tbody>
-            <tfoot>
-              <tr>
-                <th>{{ __('S/N') }}</th>
-                <th>{{ __('Amount') }}</th>
-                <th>{{ __('Reference ID') }}</th>
-                <th>{{ __('Request Date') }}</th>
-                <th>{{ __('Status') }}</th>
-              </tr>
-            </tfoot>
+            
           </table>
 
         </div>

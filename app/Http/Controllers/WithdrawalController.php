@@ -22,7 +22,7 @@ class WithdrawalController extends Controller
             ]);
         }else{
             return view('back.withdrawals.index', [
-                'withdrawals' => Withdrawal::all()->loadMissing(['requestedBy', 'approvedBy']),
+                'withdrawals' => Withdrawal::with('requestedBy', 'approvedBy')->orderBy('created_at', 'DESC')->get(),
             ]);
         }
         

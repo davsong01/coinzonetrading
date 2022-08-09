@@ -230,7 +230,7 @@
                                                   <td><p class="font-size-18 no-margin">{{ $packages->package->name }}</p></td>
                                                   <td><p class="no-margin" style="display:flex">
                                                     @if(!empty($packages->end_date) && $packages->end_date >= \Carbon\Carbon::today())
-                                                      <button class="btn btn-info btn-sm" style="background:#dd3765;border:none" readonly>Active</button>
+                                                      <button class="btn btn-info btn-sm" style="background:green;border:none" readonly>Active</button>
                                                     @endif
                                                     @if(!empty($packages->end_date) && $packages->end_date < \Carbon\Carbon::today())
                                                       <button class="btn btn-warning btn-sm" style="background:red"  id="status{{ $packages->id }}" readonly>Expired</button>
@@ -244,12 +244,12 @@
                                                 
                                                   <td class="no-wrap">
                                                     @if(!empty($packages->start_date))
-                                                      {{date("F dS, Y", strtotime($packages->start_date)). ','. date("h:ia", strtotime($packages->start_date))}}
+                                                      {{date("M dS, Y", strtotime($packages->start_date)). ','. date("h:ia", strtotime($packages->start_date))}}
                                                     @endif
                                                   </td>
                                                   <td>
                                                     @if(!empty($packages->end_date))
-                                                      {{date("F dS, Y", strtotime($packages->end_date)). ','. date("h:ia", strtotime($packages->end_date))}}
+                                                      {{date("M dS, Y", strtotime($packages->end_date)). ','. date("h:ia", strtotime($packages->end_date))}}
                                                     @endif
                                                   </td>
                                                   <td>

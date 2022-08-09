@@ -11,11 +11,11 @@ use App\Models\InvestorPackage;
 class CronController extends Controller
 {
     public function creditWalletCron($count = 1500){
-        $activeInvestors = InvestorPackage::where('end_date',  '>=' ,  Carbon::now())->where(function($query){
+        $activeInvestors = InvestorPackage::where('end_date',  '>=' ,  Carbon::now())->where('start_date',  '<',  Carbon::today())->where(function($query){
             $query->whereBetween('last_cron_date', [Carbon::yesterday(), Carbon::today()])
                ->orWhereNULL('last_cron_date');
         })->take($count)->get();
-
+       
         $credited = 0;
         foreach($activeInvestors as $investor){
             $amount = Package::whereId($investor->package_id)->value('daily_roi');

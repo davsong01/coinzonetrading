@@ -260,7 +260,7 @@ class FunctionsController extends Controller
     }
 
     public function logWallet($type, $amount, $investor_id, $reference = null){
-
+        
         try {
             $rec = Wallet::create([
                 'type' => $type,
@@ -270,9 +270,9 @@ class FunctionsController extends Controller
             ]);
             //code...
         } catch (\Throwable $th) {
-            $rec = null;
+            $rec = $th->getMessage();
         }
-
+       
         return $rec;
     }
 

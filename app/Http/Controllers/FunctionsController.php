@@ -176,7 +176,7 @@ class FunctionsController extends Controller
         ));
         $response = curl_exec($curl);
         $response = json_decode($response);
-
+        
         if (isset($response)) {
             return $response->data;
         }else{
@@ -195,42 +195,33 @@ class FunctionsController extends Controller
 
     public function updateTransaction($reference, $middleware = 'no'){
         //Check payment status and deliver value accordingly
-        $transaction = InvestorPackage::whereReference($reference)->whereStatus('pending')->first();
+        $transaction = InvestorPackage::with('user')->whereReference($reference)->whereStatus('pending')->first();
+       
         if(isset($transaction) && $transaction->count() > 0){
-            if(env('ENT') == 'demow'){
-                $data = [
-                    'payments' => [
-                        [
-                            'status' => 'CONFIRMED',
-                        ],
-                        [
-                            'amount' => 'amoun'
-                        ]
-                    ],
-                    'confirmed_at' => '2022-07-24 11:09:45',
-                ];
-
+            if(env('ENT') == 'demeo'){
+               echo 'hello';
             }else{
                 $data  = $this->queryCharge($transaction->code);
+               
             }
-            try {
-                InvestorPackage::create([
-                    'code' => 'code',
-                    'fee_rate' => 0.2,
-                    'rid' => 'sds',
-                    'reference' => 'sddsdd',
-                    'package_id' => 1,
-                    'investor_id' => 1,
-                    'created_at' => date('Y-m-d h:i:s'),
-                    'expires_at' => now(),
-                    'amount' => 5,
-                    'currency' => 'SQk',
-                    'url' => $transaction->url,
-                    'test' => json_encode($data),
-                ]);
-            } catch (\Throwable $th) {
-                \Log::info(json_encode($data));
-            }
+            // try {
+            //     InvestorPackage::create([
+            //         'code' => 'code',
+            //         'fee_rate' => 0.2,
+            //         'rid' => 'sds',
+            //         'reference' => 'sddsdd',
+            //         'package_id' => 1,
+            //         'investor_id' => 1,
+            //         'created_at' => date('Y-m-d h:i:s'),
+            //         'expires_at' => now(),
+            //         'amount' => 5,
+            //         'currency' => 'SQk',
+            //         'url' => $transaction->url,
+            //         'test' => json_encode($data),
+            //     ]);
+            // } catch (\Throwable $th) {
+            //     \Log::info(json_encode($data));
+            // }
             
 
             if (isset($data) && !empty($data->payments)) {
@@ -239,13 +230,15 @@ class FunctionsController extends Controller
                         'status' => 'active',
                         'start_date' => $data['confirmed_at'],
                         'end_date' => Carbon::parse($data['confirmed_at'])->addMonth(1),
-                        'last_cron_date' => NULL
+                        'last_cron_date' => NULL,
+                        'test' => json_encode($data),
                     ]);
                 }
             }
         }
+       
         if ($middleware == 'admin') {
-            return back()->with('message', 'Status is: ' .  $transaction->status);
+            return redirect(route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'packages']))->with('message', 'Status is: '. $transaction->status);
         }
         if($middleware == 'yes'){
             return;

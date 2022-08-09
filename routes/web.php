@@ -23,9 +23,6 @@ Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->na
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
 Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
-Route::get('/test', [App\Http\Controllers\HomeController::class, 'testpage'])->name( 'test');
-Route::get('/t', [App\Http\Controllers\Controller::class, 'walletTypes'])->name('trest');
-Route::post( '/test', [App\Http\Controllers\HomeController::class, 'test'])->name('testsubmit')->middleware('hasPackage');
 Route::post( '/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
 Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController::class, 'creditWalletCron']);
 
@@ -64,13 +61,13 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
 // Investor
 Route::middleware(['auth', 'verified','pendingTransactions'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
-    Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions');
+    Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions')->middleware('hasPackage');
     Route::get( '/payment/callback/{reference}/{middleware?}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
     Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');
     Route::get('/payment-renew/{reference}', [App\Http\Controllers\DashboardController::class, 'renewPackage'])->name('package.renew');
     Route::resource('withdrawal', WithdrawalController::class, [
         'only' => ['index','store']
-    ]);
+    ])->middleware('hasPackage');
 });
 
 require __DIR__.'/auth.php';

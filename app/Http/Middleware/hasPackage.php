@@ -20,9 +20,9 @@ class hasPackage extends FunctionsController
         if (Auth::check()) {
             //check if user has no plan
             $packages = app('App\Http\Controllers\FunctionsController')->hasPackages(auth()->user());
-            
-            if (!$packages) {
-                return redirect(url('/selectplans'));
+           
+            if (isset($packages) && $packages->count() < 1) {
+                return redirect(url('/my-packages'));
             }
             
             // if (auth()->user()->plan_id != NULL && auth()->user()->level == 1 && (auth()->user()->plan_expiry < now())) {

@@ -28,10 +28,10 @@
                       <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <!-- Session Status -->
-                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <x-auth-session-status class="mb-4 session-status" :status="session('status')" />
 
                         <!-- Validation Errors -->
-                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <x-auth-validation-errors class="mb-4 validation-errors" :errors="$errors" />
 
                         <!-- Username -->
                         <div class="form-group">

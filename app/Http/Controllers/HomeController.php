@@ -97,10 +97,10 @@ class HomeController extends Controller
 
         // $queryCharge = app('App\Http\Controllers\FunctionsController')->queryCharge('DELDHC3F');
 
-        $charge = app('App\Http\Controllers\FunctionsController')->createCharge(['name' => 'Package 1', 'description' => 'Package 1', 'amount' => 10.00, 'package_id' => 1]);
+        // $charge = app('App\Http\Controllers\FunctionsController')->createCharge(['name' => 'Package 1', 'description' => 'Package 1', 'amount' => 10.00, 'package_id' => 1]);
 
-        \DB::table('investors_packages')->insert($charge);
-        dd($charge);
+        // \DB::table('investors_packages')->insert($charge);
+        // dd($charge);
         $data = [
             'name' => 'David',
             'email' => 'davsong16@gmail.com',

@@ -82,7 +82,7 @@ class FunctionsController extends Controller
 
     public function hasPackages($user)
     {
-        $packages = InvestorPackage::where('investor_id', $user->id)->get();
+        $packages = InvestorPackage::where('investor_id', $user->id)->where('status', 'active')->where('end_date', '>=', \Carbon\Carbon::today())->get();
 
         if(isset($packages) && $packages->count() > 0){
             return $packages;

@@ -66,13 +66,7 @@
 			.form-container {
 				min-height: 340px;
 			}
-			.text-green-600 {
-				background: green;
-				color: white;
-				padding: 10px;
-				margin: 5px 0;
-				margin-bottom: 5px;
-			}	
+			
 			
 		</style>
     </head>

@@ -80,6 +80,32 @@ Waves
 @import url(/front-end/assets/icons/iconsmind/style.css);
 @import url(/front-end/assets/icons/icomoon/style.css);
 @import url(/front-end/assets/icons/cryptocoins-master/cryptocoins.css);
+
+.text-green-600{
+  background: green !important;
+  color: white !important;
+  padding: 10px !important;
+  border-radius: 5px !important;
+  margin-top: 10px;
+}
+.session-status {
+  margin-top: 10px;
+  background: #dd3765;
+  padding: 10px;
+  border-radius: 5px;
+}
+.validation-errors {
+  background: #f38e3f !important;
+  color: white !important;
+  padding: 10px !important;
+  border-radius: 5px !important;
+  list-style: none !important;
+}
+
+.mb-4.validation-errors ul {
+  list-style: none;
+}
+			
 html {
   height: 100%;
   font-size: 16px; }

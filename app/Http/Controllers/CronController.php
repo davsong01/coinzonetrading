@@ -15,7 +15,7 @@ class CronController extends Controller
             $query->whereBetween('last_cron_date', [Carbon::yesterday(), Carbon::today()])
                ->orWhereNULL('last_cron_date');
         })->take($count)->get();
-       
+        
         $credited = 0;
         foreach($activeInvestors as $investor){
             $amount = Package::whereId($investor->package_id)->value('daily_roi');
@@ -25,9 +25,8 @@ class CronController extends Controller
                 $investor->update(['last_cron_date' => now()]);
                 $credited += 1;
             }
-
         }
-
+        
         return response()->json([
             'Picked' => $activeInvestors->count(),
             'Credited' => $credited,

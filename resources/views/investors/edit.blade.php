@@ -255,14 +255,13 @@
                                                   <td>
                                                     @if(auth()->user()->admin->level == 'admin')
                                                     <a class="btn btn-block btn-info btn-xs" data-toggle="modal" data-target="#modal-right{{ $packages->id }}"> <i class="fa fa-eye"></i>Edit</a>
-                                                          {{-- onclick="return confirm('Are you sure you want to delete this item?');" --}}
                                                      
-                                                       <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('investorpackages.delete', $packages->id) }}" method="POST" style="margin-top: 5px;">
-                                                        @csrf
-                                                        <input type="hidden" name="user_id" value={{ $investor->id }}>
-                                                        
-                                                        <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i>Delete</button>
-                                                      </form> 
+                                                    <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('investorpackages.delete', $packages->id) }}" method="POST" style="margin-top: 5px;">
+                                                    @csrf
+                                                    <input type="hidden" name="user_id" value={{ $investor->id }}>
+                                                    
+                                                    <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i>Delete</button>
+                                                    </form> 
                                                       
                                                      
                                                       {{-- Edit modal --}}

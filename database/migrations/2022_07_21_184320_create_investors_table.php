@@ -19,7 +19,7 @@ class CreateInvestorsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('wallet_type')->nullable(); // bitcoin/blockchain
             $table->string('wallet_addrress')->nullable();
-            $table->string('profile_picture')->nullable();
+            $table->string('profile_picture')->default();
             $table->timestamps();
         });
     }

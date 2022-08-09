@@ -40,7 +40,8 @@ class PackageController extends Controller
      */
     public function store(PackageStoreRequest $request)
     {
-        Auth::user()->packages()->create($request->validated());
+        Package::create($request->validated());
+        
         return redirect()->route('packages.index')->with('success', 'Package created successfully');
     }
 
@@ -89,6 +90,7 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        $package->delete();
+        return back()->with('message', 'Delete Successful!');
     }
 }

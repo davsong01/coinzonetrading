@@ -43,7 +43,7 @@ class FunctionsController extends Controller
     //Files must be in public and folder name must be appended to the filename for this to work
     public function deleteImage($image)
     {
-        // dd($image);
+     
         if (file_exists($image))
             unlink($image);
         return;
@@ -87,7 +87,7 @@ class FunctionsController extends Controller
         if(isset($packages) && $packages->count() > 0){
             return $packages;
         }
-        return NULL;
+        return collect([]);
 
     }
     public function generateTransactionReference(){

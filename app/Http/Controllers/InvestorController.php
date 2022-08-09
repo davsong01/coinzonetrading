@@ -125,8 +125,19 @@ class InvestorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Investor $investor)
     {
-        //
+        // Delete investor image
+        if(!empty($investor->profile_picture)){
+            app('App\Http\Controllers\FunctionsController')->deleteImage($investor->profile_picture);
+        }
+        
+        // Delete investor user
+        $investor->user->delete();
+        // Delete investor
+        $investor->delete();
+
+        return back()->with('message', 'Delete successful');
+      
     }
 }

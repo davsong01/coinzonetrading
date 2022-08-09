@@ -99,7 +99,7 @@ class FunctionsController extends Controller
         // Delete expired pending charges
         \DB::table('investors_packages')->whereStatus('pending')->where('expires_at', '>', now())->delete();
         // Check if Investor has this package and its active
-       
+
         $trx = $this->generateTransactionReference();
         $headers = array(
             "Content-Type: application/json",
@@ -136,7 +136,7 @@ class FunctionsController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $response = json_decode($response);
-       
+
         if($response->data){
             return [
                 'code' => $response->data->code,
@@ -185,12 +185,16 @@ class FunctionsController extends Controller
     }
 
     public function canWithdraw(?float $amount = null, ?User $user = null){
-        $amount ??= Setting::latest()->first()->minimum_withdrawal_amount;
+        $settings = Setting::latest()->first();
+        $amount ??= $settings->minimum_withdrawal_amount;
         $user ??= auth()->user();
-        return $user->investor()->whereNotNull([
-            'phone', 'wallet_type', 'wallet_addrress',
-            'profile_picture'
-        ])->first() && $user->withdrawals()->where('status', 'pending')->get()->count() === 0 && $user->walletBalance() >= $amount && Setting::latest()->first()->maximum_withdrawal_amount >= $amount;
+        return
+        $user->investor()
+        ->whereNotNull([ 'phone', 'wallet_type', 'wallet_addrress', 'profile_picture' ])->first() &&
+        $user->withdrawals()->where('status', 'pending')->get()->count() === 0 &&
+        $user->walletBalance() >= $amount &&
+        $settings->maximum_withdrawal_amount >= $amount &&
+        now()->diffInDays(optional($user->withdrawals->first())->created_at) >= $settings->withdrawal_frequency;
     }
 
     public function updateTransaction($reference, $middleware = 'no'){
@@ -213,7 +217,7 @@ class FunctionsController extends Controller
             }else{
                 $data  = $this->queryCharge($transaction->code);
             }
-           
+
             if (isset($data) && !empty($data->payments)) {
                 if ($data['payments'][0]['status'] == 'CONFIRMED') {
                     $transaction->update([

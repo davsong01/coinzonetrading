@@ -29,6 +29,7 @@
                         <th>{{ __('Daily ROI') }}</th>
                         <th>{{ __('Monthly ROI') }}</th>
                         <th>{{ __('Validity Period') }}</th>
+                        <th>{{ __('Investors') }}</th>
                         <th>{{ __('Action') }}</th>
                       </tr>
                     </thead>
@@ -40,6 +41,7 @@
                           <td>{{ $package->daily_roi }}</td>
                           <td>{{ $package->monthly_roi }}</td>
                           <td>{{ $package->validity_period }} days</td>
+                          <td>{{ $package->users->count() }}</td>
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">

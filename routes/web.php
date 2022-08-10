@@ -38,6 +38,8 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::resource('packages', PackageController::class);
     Route::resource('investors', InvestorController::class)->except('edit');
     Route::get('investors/{investor}/edit/{hid?}', [App\Http\Controllers\InvestorController::class, 'edit'])->name('investors.edit');
+    Route::post('investor_packages_add', [App\Http\Controllers\InvestorController::class, 'investorPackagesAdd'])->name('investorpackages.add');
+
 
     Route::get('alltransactions', [App\Http\Controllers\DashboardController::class, 'adminTransactions'])->name('alltransactions');
     Route::get('settings', [App\Http\Controllers\SettingController::class, 'settings'])->name('settings');

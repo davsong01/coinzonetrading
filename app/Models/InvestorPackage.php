@@ -26,4 +26,9 @@ class InvestorPackage extends Model
     {
         return $this->belongsTo(Package::class);
     }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

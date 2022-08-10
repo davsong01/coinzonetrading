@@ -40,8 +40,12 @@
                         <tr>
                           <td>{{ $transaction->code }}</td>
                           <td>
-                              <strong class="bold">Name: </strong>{{ $transaction->user->name ?? 'NOT SET' }}<br>
-                              <strong class="bold">Email: </strong>{{ $transaction->user->email ?? 'NOT SET' }} <a target="_blank" style="color:blue" href="{{ route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'packages' ] ) }}"><i class="fa fa-external-link"></i></a>  <br>
+                            
+                              <strong class="bold">Name: </strong>{{ isset($transaction->user) ? $transaction->user->name : 'NOT SET' }}<br>
+                              <strong class="bold">Email: </strong>{{ isset($transaction->user) ? $transaction->user->email : 'NOT SET' }} 
+                              @if(isset($transaction->user))
+                              <a target="_blank" style="color:blue" href="{{ route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'packages' ] ) }}"><i class="fa fa-external-link"></i></a>  <br>
+                              @endif
                               <strong class="bold">Reference: </strong>{{ $transaction->reference }} <br>
                               <strong class="bold">Fee rate: </strong>{{ $transaction->fee_rate }} <br>
                               <strong class="bold">Payment URL: </strong>{{ $transaction->url }} <br>

@@ -9,6 +9,7 @@ use App\Models\InvestorPackage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\InvestorStoreRequest;
+use App\Models\Package;
 
 class InvestorController extends Controller
 {
@@ -40,6 +41,48 @@ class InvestorController extends Controller
             'investor' =>$investor,
         ]);
 
+    }
+
+    public function investorPackagesAdd(Request $request){
+        
+        $data = $this->validate($request, [
+            'investor_id' => 'required|numeric',
+            'package_id' => 'required|numeric',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'order_number' => 'required',
+            'amount' => 'required',
+        ]);
+
+        // Check if package price correspondds
+        $package = Package::find($data['package_id']);
+        if($request->amount != $package->amount){
+            return back()->with('error', 'Amount does not match Package price, please try again');
+        }
+
+        //Set status according to start and end date
+        if($request->end_date < $request->start_date){
+            return back()->with('error', 'End date cannot be lower than start date');
+        }else{
+            if ($request->end_date < now()) {
+                $status = 'expired';
+            } else {
+                $status = 'active';
+            }
+        }
+        $data['reference'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference() . '-' . auth()->user()->id;
+        $data['created_by'] = auth()->user()->id;
+        $data['expires_at'] = now(); 
+        $data['code'] = $request->order_number;
+        $data['status'] = $status;
+        $data['url'] = 'none';
+        $data['currency'] = $this->settings->currency;
+        $data['rid'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference() . '-' . auth()->user()->id;;
+        unset($data['order_number']);
+        
+        InvestorPackage::create($data);
+
+        return back()->with('message', 'Package Added successfully');
     }
 
     public function investorPackagesUpdate(Request $request){

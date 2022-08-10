@@ -1,3 +1,10 @@
+@php
+    $userPackages =  App\Models\InvestorPackage::where(['investor_id' => $investor->user->id]);
+    $mypackages = $userPackages->get();
+    $packages = App\Models\Package::all();
+    $otherpackages = array_column($userPackages->get('package_id')->toArray(), 'package_id');
+    $otherpackages = $packages->whereNotIn('id', $otherpackages);
+@endphp
 <x-app-layout>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -204,9 +211,9 @@
                                       <div class="col-lg-12 col-12">         
                                       <div class="box">
                                         <div class="box-header with-border">
-                                          <h4 class="box-title">{{ $investor->user->name }}'s Packages</h4> <a class="btn btn bg-blue">
-                                            <i class="fa fa-plus"></i>
-                                          </a>
+                                          <h4 class="box-title">{{ $investor->user->name }}'s Packages</h4> <a class="btn btn bg-blue" data-toggle="modal" data-target="#modal-top">
+                                           <i class="fa fa-plus"></i></a>
+                                           
                                           <p style="color:black">You can add or edit investor's packages here</p>
                                         </div>
                                         <!-- /.box-header -->
@@ -225,18 +232,16 @@
                                               </tr>
                                               </thead>
                                               <tbody>
-                                                @php
-                                                    $packages = App\Models\Package::all();
-                                                    $userPackages =  App\Models\InvestorPackage::where(['investor_id' => $investor->user->id]);
-                                                    $mypackages = $userPackages->get();
-                                                  
-                                                    $otherpackages = array_column($userPackages->get('package_id')->toArray(), 'package_id');
-                                                    $otherpackages = $packages->whereNotIn('id', $otherpackages);
-                                                   
-                                                @endphp 
+                                               
                                                 @foreach($mypackages as $packages)
                                                 <tr>
-                                                  <td><p class="font-size-18 no-margin">{{ $packages->package->name }} <br> <span> <small><b>Initiated: </b>{{ $packages->created_at }} </p></small></span></td>
+                                                  <td><p class="font-size-18 no-margin">{{ $packages->package->name }} <br> <span> <small><b>Initiated: </b>{{ $packages->created_at }} 
+                                                    @if(auth()->user()->admin->level == 'admin' && $packages->created_by != 1)
+                                                        @if(isset($packages->created_by))
+                                                            <br> <small style="color:blue"><b>Created by: </b>{{ $packages->createdBy->name }} </small>
+                                                        @endif
+                                                    @endif
+                                                    </p></small></span></td>
                                                   <td><p class="no-margin" style="display:flex">
                                                     @if(!empty($packages->end_date) && $packages->end_date >= \Carbon\Carbon::today())
                                                       <button class="btn btn-info btn-sm" style="background:green;border:none" readonly>Active</button>
@@ -272,7 +277,6 @@
                                                     <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i>Delete</button>
                                                     </form> 
                                                       
-                                                     
                                                       {{-- Edit modal --}}
                                                       @include('investors.investor-package-edit-modal')
                                                     @endif

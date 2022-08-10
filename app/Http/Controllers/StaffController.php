@@ -42,6 +42,9 @@ class StaffController extends Controller
         ]);
 
         if ($request->has('password')) {
+            $data['password'] = Hash::make($request->password);
+
+        }else{
             $data['password'] = Hash::make('9876543');
         }
 
@@ -63,10 +66,11 @@ class StaffController extends Controller
             'profile_picture' => 'sometimes',
         ]);
 
-        
+
         if ($request->has('password')) {
-            $data['password'] = Hash::make('9876543');
-        }
+            $data['password'] = Hash::make($request->password);
+        } 
+
         if ($request->has('profile_picture')) {
             $data['profile_picture'] = app('App\Http\Controllers\FunctionsController')->uploadImage($request->profile_picture, 'front-end/images/avatar', 400, 400);
         }

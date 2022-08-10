@@ -25,57 +25,40 @@
                 <form novalidate method="POST" action="{{ route('investors.store') }}">
                   @csrf
                   <div class="form-group">
+                    <h5>{{ __('Email') }}</h5>
+                    <div class="controls">
+                      <input type="email" name="email" class="form-control" required value="{{ old('email') }}">
+                    </div>
+                    
+                  </div>
+                  <div class="form-group">
                     <h5>{{ __('Name') }}</h5>
                     <div class="controls">
-                      <input type="text" name="name" class="form-control" required
-                        data-validation-required-message="This field is required" value="{{ old('name') }}">
+                      <input type="text" name="name" class="form-control" required value="{{ old('name') }}">
                     </div>
-                    <div class="form-control-feedback">
-                      @error('name')
-                        {{ $message }}
-                      @enderror
+                    
+                  </div>
+                  <div class="form-group">
+                    <h5>{{ __('Phone') }} (Optional)</h5>
+                    <div class="controls">
+                      <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
+                    </div>
+                    
+                  </div>
+                  <div class="form-group">
+                    <h5>{{ __('Profile Picture') }}</h5>
+                    <div class="controls">
+                      <input type="file" name="profile_picture" class="form-control" value="{{ old('profile_picture') }}">
                     </div>
                   </div>
                   <div class="form-group">
-                    <h5>{{ __('Phone') }}</h5>
+                    <h5>{{ __('Password') }} (Leave blank to use 12345678 as default password)</h5>
                     <div class="controls">
-                      <input type="text" name="phone" class="form-control" required
-                        data-validation-required-message="This field is required" value="{{ old('phone') }}">
+                      <input class="form-control" name="password" type="text" value="{{ old('password') }}" placeholder="Enter password">
                     </div>
-                    <div class="form-control-feedback">
-                      @error('phone')
-                        {{ $message }}
-                      @enderror
-                    </div>
+                    
                   </div>
-                
-                  <div class="form-group">
-                    <h5>{{ __('Wallet Type') }}</h5>
-                    <div class="controls">
-                      <select name="wallet_type" id="wallet_type" class="form-control" required data-validation-required-message="This field is required" >
-                          @foreach(app('App\Http\Controllers\Controller')->walletTypes() as $type)
-                          <option value="{{ $type }}" {{ old('wallet_type') == $type ? 'selected' : '' }}>{{ $type }}</option>
-                          @endforeach
-                      </select>
-                    </div>
-                    <div class="form-control-feedback">
-                      @error('wallet_type')
-                        {{ $message }}
-                      @enderror
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <h5>{{ __('Wallet Address') }}</h5>
-                    <div class="controls">
-                      <input type="text" name="wallet_address" class="form-control" required
-                        data-validation-required-message="This field is required" value="{{ old('wallet_address') }}">
-                    </div>
-                    <div class="form-control-feedback">
-                      @error('wallet_address')
-                        {{ $message }}
-                      @enderror
-                    </div>
-                  </div>
+                  
                   <div class="text-xs-right">
                     <button type="submit" class="btn btn-info">{{ __('Submit') }}</button>
                   </div>

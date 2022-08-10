@@ -90,7 +90,7 @@
         @if(auth()->user()->admin->level == 'admin')
         <li class="treeview {{ request()->routeIs('staff.*') ? 'active' : '' }}">
           <a href="#">
-            <i class="icon-chart"></i>
+            <i class="cc MCO-alt"></i>
             <span>{{ __('Staff') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>

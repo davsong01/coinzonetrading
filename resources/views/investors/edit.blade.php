@@ -106,6 +106,15 @@
                                                                                 placeholder="Phone number" required>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Email</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input class="form-control" name="email"
+                                                                                type="text"
+                                                                                value="{{ ($investor->user->email ?? old('email')) }}"
+                                                                                placeholder="Enter email" required>
+                                                                        </div>
+                                                                    </div>
                                                                     <input type="hidden" name="investor_id" value="{{ $investor->id }}">
                                                                   
 

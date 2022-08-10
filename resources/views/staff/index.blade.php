@@ -51,7 +51,7 @@
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">
-                              <a target="_blank" href="{{ route('staff.destroy', $staff->id) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
+                              <a target="_blank" href="{{ route('staff.edit', $staff->id) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
                                 Edit</a>
                               <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('staff.destroy', $staff->id) }}" method="POST" style="margin-top: 5px;">
                               @csrf

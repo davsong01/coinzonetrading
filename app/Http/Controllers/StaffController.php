@@ -48,15 +48,20 @@ class StaffController extends Controller
             $data['password'] = Hash::make('9876543');
         }
 
+        $data['email_verified_at'] = now();
+        $data['role'] = 'admin';
         $user = User::create($data);
         $data['user_id'] = $user->id;
-        $data['email_verified_at'] = now();
+       
         Admin::create($data);
        
         return redirect(route('staff.index'))->with('message', 'Update successfull');
 
     }
+    public function show(){
 
+    }
+    
     public function update(Admin $staff, Request $request){
         $data = $this->validate($request, [
             'password' => 'nullable',

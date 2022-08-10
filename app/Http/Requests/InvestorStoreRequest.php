@@ -25,9 +25,9 @@ class InvestorStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone' => 'required',
-            'wallet_type' => 'required|in: bitcoin,blockchain',
-            'wallet_address' => 'required',
+            'phone' => 'sometimes',
+            'profile_picture' => 'sometimes',
+            'email' => 'required|unique:users,email'
         ];
     }
 }

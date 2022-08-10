@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\InvestorStoreRequest;
+use App\Models\User;
 use App\Models\Investor;
-use App\Models\InvestorPackage;
 use Illuminate\Http\Request;
+use App\Models\InvestorPackage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\InvestorStoreRequest;
 
 class InvestorController extends Controller
 {
@@ -76,7 +78,20 @@ class InvestorController extends Controller
      */
     public function store( InvestorStoreRequest $request)
     {
-        Auth::user()->investor()->create($request->validated());
+        $data = $request->validated();
+        if ($request->has('password')) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            $data['password'] = Hash::make('12345678');
+        }
+
+        $data['email_verified_at'] = now();
+        
+        $user = User::create($data);
+        $data['user_id'] = $user->id;
+
+        Investor::create($data);
+
         return redirect()->route('investors.index')->with('success', 'Investor created successfully');
     }
 

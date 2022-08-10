@@ -18,13 +18,18 @@ class CronController extends Controller
         
         $credited = 0;
         foreach($activeInvestors as $investor){
-            $amount = Package::whereId($investor->package_id)->value('daily_roi');
-            $updateWallet = app('App\Http\Controllers\FunctionsController')->logWallet('credit', $amount, $investor->investor_id, $investor->reference);
+            try {
+                $amount = Package::whereId($investor->package_id)->value('daily_roi');
+                $updateWallet = app('App\Http\Controllers\FunctionsController')->logWallet('credit', $amount, $investor->investor_id, $investor->reference);
 
-            if(!is_null($updateWallet)){
-                $investor->update(['last_cron_date' => now()]);
-                $credited += 1;
+                if (!is_null($updateWallet)) {
+                    $investor->update(['last_cron_date' => now()]);
+                    $credited += 1;
+                }
+            } catch (\Throwable $th) {
+                echo $th->getMessage();
             }
+            
         }
         
         return response()->json([

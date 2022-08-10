@@ -33,6 +33,7 @@
 						<tr>
 						  <td><span class="text-success">{{ $settings->currency_sign }}{{ number_format(auth()->user()->walletBalance()) }}</span></td>
 						  <td>
+               
                 @if ($canWithdraw)
                 <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#modal-default">Request for Withdraw</button>
                 @endif

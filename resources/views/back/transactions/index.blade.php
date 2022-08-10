@@ -63,9 +63,11 @@
                           </td>
                           <td> 
                             @if(auth()->user()->admin->level == 'admin')
-                              <a href="{{ route('investorpackages.edit', ['id' => $transaction->id ]) }}" class="btn btn-block btn-info btn-xs"> <i style="font-size: 14px; !important" class="fa fa-eye"></i>
-                                Edit
-                              </a>
+                              <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('alltransactions.delete', $transaction->id) }}" method="POST" style="margin-top: 5px;">
+                              @csrf
+                             
+                              <button class="btn btn-block btn-info btn-xs" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                              </form> 
                             @endif
                           </td>
                         </tr>

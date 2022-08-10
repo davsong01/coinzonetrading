@@ -45,13 +45,13 @@
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">
-                              <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
+                              <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-block btn-primary btn-xs"> <i class="fa fa-eye"></i>
                                 Edit</a>
                              
                               <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('packages.destroy', $package->id) }}" method="POST" style="margin-top: 5px;">
                               @csrf
                               @method('DELETE')
-                              <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                              <button class="btn btn-block btn-info btn-xs" type="submit"><i class="fa fa-trash"></i> Delete</button>
                               </form> 
                             </div>
                           </td>

@@ -175,13 +175,21 @@ class DashboardController extends Controller
     {
         if (Auth::user()->role === 'investor') {
             return redirect(route('investor.packages'));
-            // return view('back.investors.index', [
-            //     'canWithdraw' => (new FunctionsController)->canWithdraw()
-            // ]);
+           
         }else{
             return view('dashboard', [
                 'investors' => Investor::all()->loadMissing(['user']),
             ]);
         }
+    }
+
+
+    public function deleteAdminTransactions(InvestorPackage $transaction){
+        if($transaction->status == 'active'){
+            return back()->with('error', 'You cannot delete this transaction because it is still active!');
+        }
+        $transaction->delete();
+
+        return back()->with('message', 'Delete succesful');
     }
 }

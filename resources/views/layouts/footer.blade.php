@@ -12,10 +12,10 @@
                                     class="waves-effect waves-circle btn btn-social-icon btn-circle btn-facebook"><i
                                         class="fa fa-facebook"></i></a></li>
                             @endif
-                            @if(!empty($settings->twitter))
-                            <li><a href="{{ $settings->twitter }}" target="_blank"
-                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-twitter"><i
-                                        class="fa fa-twitter"></i></a></li>
+                            @if(!empty($settings->youtube))
+                            <li><a href="{{ $settings->youtube }}" target="_blank"
+                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-youtube"><i
+                                        class="fa fa-youtube"></i></a></li>
                             @endif
                             @if(!empty($settings->linkedin))
                             <li><a href="{{ $settings->linkedin }}"
@@ -23,9 +23,14 @@
                                         class="fa fa-linkedin"></i></a></li>
                             @endif
                             @if(!empty($settings->twitter))
-                            <li><a href="{{ $settings->youtube }}"
-                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-youtube"><i
-                                        class="fa fa-youtube"></i></a></li>
+                            <li><a href="{{ $settings->twitter }}"
+                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-twitter"><i
+                                        class="fa fa-twitter"></i></a></li>
+                            @endif
+                            @if(!empty($settings->instagram))
+                            <li><a href="{{ $settings->instagram }}"
+                                    class="waves-effect waves-circle btn btn-social-icon btn-circle btn-instagram"><i
+                                        class="fa fa-instagram"></i></a></li>
                             @endif
                         </ul>
                     </div>

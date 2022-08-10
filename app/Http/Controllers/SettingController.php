@@ -67,6 +67,12 @@ class SettingController extends Controller
         return back()->with('message', 'Operation successful');
     }
 
+    public function settings4(Request $request)
+    {
+        $this->settings->update($request->all());
+        return back()->with('message', 'Operation successful');
+    }
+    
     public function index()
     {
         //

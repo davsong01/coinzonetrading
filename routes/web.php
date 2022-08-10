@@ -44,11 +44,14 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::post('settings-one', [App\Http\Controllers\SettingController::class, 'settings1'])->name('setting1.store');
     Route::post('settings-two', [App\Http\Controllers\SettingController::class, 'settings2'])->name('setting2.store');
     Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
+    Route::post('settings-four', [App\Http\Controllers\SettingController::class, 'settings4'])->name('setting4.store');
+    
     Route::get('investors-packages/{investor}', [App\Http\Controllers\InvestorController::class, 'investorPackages'])->name('investors.packages');
    
     Route::middleware(['isAdmin:admin'])->group(function(){
         Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
         Route::post('investor_packages_delete/{id}', [App\Http\Controllers\InvestorController::class, 'investorPackagesDelete'])->name('investorpackages.delete');
+        Route::post('alltransactionsdelete/{transaction}', [App\Http\Controllers\DashboardController::class, 'deleteAdminTransactions'])->name('alltransactions.delete');
 
         Route::resource('withdrawal', WithdrawalController::class, [
             'only' => ['update']

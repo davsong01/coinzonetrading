@@ -17,6 +17,7 @@ class WithdrawalController extends Controller
     public function index()
     {
         if (Auth::user()->role === 'investor') {
+            // dd((new FunctionsController)->canWithdraw());
             return view('back.investors.index', [
                 'canWithdraw' => (new FunctionsController)->canWithdraw()
             ]);
@@ -27,7 +28,7 @@ class WithdrawalController extends Controller
         }
         
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

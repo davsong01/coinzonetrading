@@ -26,7 +26,6 @@ class CreateSettingsTable extends Migration
             $table->string('currency')->nullable();
             $table->string('currency_sign')->default('$');
             $table->string('callback_url')->nullable();
-            $table->string('wallet_secret_key')->nullable();
             $table->string('last_archive_date')->nullable();
             $table->string('archive_dates')->nullable();
             $table->unsignedFloat('minimum_withdrawal_amount')->nullable();

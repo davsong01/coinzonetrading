@@ -144,6 +144,65 @@
 		  </div>
 		  <!-- /.box -->
         </div>
+		<div class="col-xl-6 col-lg-6">
+          <div class="box box-solid bg-black">
+			<div class="box-header with-border settings4">
+			  <h3 class="box-title">Other Settings</h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+			  <div class="row">
+				<div class="col-12">
+                <form action="{{ route('setting4.store') }}" method="post" style="margin:auto" enctype="multipart/form-data">
+                    @csrf
+					<div class="form-container">
+						<div class="form-group row">
+							<label class="form-label" data-toggle="tooltip" data-placement="top" title="Investor must have up to this amount in wallet before they can create request to withdraw">Minimum Withdrawal Amount</label>
+							<input class="form-control" name="minimum_withdrawal_amount" type="number" value="{{ $settings->minimum_withdrawal_amount ?? old('minimum_withdrawal_amount') }}" required>
+						</div>
+						<div class="form-group row">
+							<label class="form-label" data-toggle="tooltip" data-placement="top" title="Investor cannot request more than this amount for withdrawal. If left blank, investor will be able to withdraw evrything in their wallet">Maximum Withdrawal Amount</label>
+							<input class="form-control" name="maximum_withdrawal_amount" type="number" value="{{ $settings->maximum_withdrawal_amount ?? old('maximum_withdrawal_amount') }}" required>
+						</div>
+						<div class="form-group row">
+							<label class="form-label" data-toggle="tooltip" data-placement="top" title="This controls the cycle of withdrawal for investors. e.g 30 means investor can only request for withdrawal once in 30 days">Withdrawal frequency</label>
+							<input class="form-control" name="withdrawal_frequency" type="number" value="{{ $settings->withdrawal_frequency ?? old('withdrawal_frequency') }}" required>
+						</div>
+						<div class="form-group row">
+							<label class="form-label">Facebook link</label>
+							<input class="form-control" name="facebook" type="url" value="{{ $settings->facebook ?? old('facebook') }}" required>
+						</div>
+						<div class="form-group row">
+							<label class="form-label">Twitter link</label>
+							<input class="form-control" name="twitter" type="url" value="{{ $settings->twitter ?? old('twitter') }}" required>
+						</div>
+						<div class="form-group row">
+							<label class="form-label">Instagram link</label>
+							<input class="form-control" name="instagram" type="url" value="{{ $settings->instagram ?? old('instagram') }}" required>
+						</div>
+						<div class="form-group row">
+							<label class="form-label">Youtube link</label>
+							<input class="form-control" name="youtube" type="url" value="{{ $settings->youtube ?? old('youtube') }}" required>
+						</div>
+						<div class="form-group row">
+							<label class="form-label">Linkedin link</label>
+							<input class="form-control" name="linkedin" type="url" value="{{ $settings->linkedin ?? old('linkedin') }}" required>
+						</div>
+					</div>
+					<div class="form-group row">
+					  <label class="form-label"></label>
+						<button type="submit" class="btn btn-yellow settings4" style="border: none;margin: auto;">Update Appearance settings</button>
+					</div>
+                </form>
+				</div>
+				<!-- /.col -->
+			  </div>
+			  <!-- /.row -->
+			</div>
+			<!-- /.box-body -->
+		  </div>
+		  <!-- /.box -->
+        </div>
       </div>
       <!-- /.row -->
 

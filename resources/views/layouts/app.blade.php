@@ -63,6 +63,10 @@
 				background: #1367b0  !important;
 				border: none;
 			}
+			.settings4{
+				background: deeppink  !important;
+				border: none;
+			}
 			.form-container {
 				min-height: 340px;
 			}
@@ -131,6 +135,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     @include('layouts.toastr')
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
 	
     </body>
 </html>

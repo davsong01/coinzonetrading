@@ -49,6 +49,8 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::get('investors-packages/{investor}', [App\Http\Controllers\InvestorController::class, 'investorPackages'])->name('investors.packages');
    
     Route::middleware(['isAdmin:admin'])->group(function(){
+        Route::resource('staff', App\Http\Controllers\StaffController::class);
+
         Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
         Route::post('investor_packages_delete/{id}', [App\Http\Controllers\InvestorController::class, 'investorPackagesDelete'])->name('investorpackages.delete');
         Route::post('alltransactionsdelete/{transaction}', [App\Http\Controllers\DashboardController::class, 'deleteAdminTransactions'])->name('alltransactions.delete');

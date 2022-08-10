@@ -43,7 +43,7 @@
                         <td>{{ $withdrawal->reference_id }}</td>
                         
                         <td>{{ $withdrawal->requestedBy->name }} <br>
-                          <small style="color:blue">{{ $withdrawal->requestedBy->email }}</small> <br>
+                          <small>{{ $withdrawal->requestedBy->email }} <a target="_blank" style="color:blue" href="{{ route('investors.edit', ['investor' => $withdrawal->requestedBy->investor->id, 'hid' => 'wallet' ] ) }}"><i class="fa fa-external-link"></i></a> </small> <br>
                           <small>{{ $withdrawal->created_at }}</small>
                         </td>
                         <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}</td>

@@ -227,7 +227,7 @@
                                                 @endphp 
                                                 @foreach($mypackages as $packages)
                                                 <tr>
-                                                  <td><p class="font-size-18 no-margin">{{ $packages->package->name }}</p></td>
+                                                  <td><p class="font-size-18 no-margin">{{ $packages->package->name }} <br> <span> <small><b>Initiated: </b>{{ $packages->created_at }} </p></small></span></td>
                                                   <td><p class="no-margin" style="display:flex">
                                                     @if(!empty($packages->end_date) && $packages->end_date >= \Carbon\Carbon::today())
                                                       <button class="btn btn-info btn-sm" style="background:green;border:none" readonly>Active</button>

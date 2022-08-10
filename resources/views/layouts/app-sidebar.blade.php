@@ -73,7 +73,7 @@
             </span>
           </a>
         </li>
-         <li class="treeview {{ request()->routeIs('investors.*') ? 'active' : '' }}">
+        <li class="treeview {{ request()->routeIs('investors.*') ? 'active' : '' }}">
           <a href="#">
             <i class="icon-chart"></i>
             <span>{{ __('Investors') }}</span>
@@ -86,6 +86,23 @@
             <li class="{{ request()->routeIs('investors.create') ? 'active' : '' }}"><a href="{{ route('investors.create') }}">Add Investor</a></li>
           </ul>
         </li>
+
+        @if(auth()->user()->admin->level == 'admin')
+        <li class="treeview {{ request()->routeIs('staff.*') ? 'active' : '' }}">
+          <a href="#">
+            <i class="icon-chart"></i>
+            <span>{{ __('Staff') }}</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ request()->routeIs('staff.index') ? 'active' : '' }}"><a href="{{ route('staff.index') }}">All Staff</a></li>
+            <li class="{{ request()->routeIs('staff.create') ? 'active' : '' }}"><a href="{{ route('staff.create') }}">Add Staff</a></li>
+          </ul>
+        </li>
+        @endif
+
         <li class="{{ request()->routeIs('settings') ? 'active' : '' }}">
           <a href="{{route('settings')}}">
             <i class="icon-equalizer"></i> <span>Settings</span>

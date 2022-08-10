@@ -26,7 +26,7 @@
                       <tr>
                         <th>{{ __('Order No') }}</th>
                         <th>{{ __('Details') }}</th>
-                        <th>{{ __('Investor details') }}</th>
+                       
                         <th>{{ __('Package') }}</th>
                         <th>{{ __('Amount') }}</th>
                         <th>{{ __('Status') }}</th>
@@ -35,19 +35,18 @@
                         @endif
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="font-size:12px">
                       @foreach ($transactions as $transaction)
                         <tr>
                           <td>{{ $transaction->code }}</td>
                           <td>
+                              <strong class="bold">Name: </strong>{{ $transaction->user->name ?? 'NOT SET' }}<br>
+                              <strong class="bold">Email: </strong>{{ $transaction->user->email ?? 'NOT SET' }} <a target="_blank" style="color:blue" href="{{ route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'packages' ] ) }}"><i class="fa fa-external-link"></i></a>  <br>
                               <strong class="bold">Reference: </strong>{{ $transaction->reference }} <br>
                               <strong class="bold">Fee rate: </strong>{{ $transaction->fee_rate }} <br>
                               <strong class="bold">Payment URL: </strong>{{ $transaction->url }} <br>
-                              <strong class="bold">Expiry: </strong>{{ $transaction->expires_at }}
-                          </td>
-
-                           <td> <strong class="bold">Name: </strong>{{ $transaction->user->name ?? 'NOT SET' }}<br>
-                              <strong class="bold">Email: </strong>{{ $transaction->user->email ?? 'NOT SET' }}
+                              <strong class="bold">Initiated: </strong>{{ $transaction->created_at }} <br>
+                              <strong class="bold">Payment Expiry: </strong>{{ $transaction->expires_at }}
                           </td>
                           <td> <strong class="bold">Name: </strong>{{ $transaction->package->name ?? 'NOT SET' }}<br>
                             @if(isset($transaction->start_date) && isset($transaction->end_date))
@@ -71,7 +70,7 @@
                             @endif
                           </td>
                         </tr>
-                        </tr>
+                        
                       @endforeach
                     </tbody>
                     

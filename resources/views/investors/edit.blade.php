@@ -323,7 +323,12 @@
                                                   @foreach ($investor->user->wallets as $wallet)
                                                   <tr>
                                                     <td>{{ $count ++ }}</td>
-                                                    <td>{{ $wallet->reference }}</td>
+                                                    <td>{{ $wallet->reference }}
+                                                    <small> <br>
+                                                        <strong style="color: #dd3765;">Created on: </strong>{{ $wallet->created_at }} <br>
+                                                        <strong style="color: #dd3765;">Last Cron</strong> {{ $wallet->transaction->last_cron_date }} 
+                                                    </small>
+                                                    </td>
                                                     <td>{{ $settings->currency_sign . number_format($wallet->amount) }}</td>
                                                     <td style="color:{{ $wallet->type == 'credit' ? 'green' : 'red'}}">{{ ucfirst($wallet->type) }}</td>
                                                   </tr>

@@ -58,7 +58,7 @@
                               <strong class="bold">End date: </strong>{{ $transaction->end_date }}
                             @endif
                           </td>
-                          <td>{{ $transaction->currency. number_format($transaction->amount) }}</td>
+                          <td>{{ $settings->currency_sign . number_format($transaction->amount) }}</td>
                           <td style="color:{{ $transaction->status == 'active' ? 'green' : 'red'}}">{{ $transaction->status }}
                             @if($transaction->status == 'pending')
                               <a href="{{ route('payment.process', ['reference' => $transaction->reference, 'middleware' => 'none']) }}" class="btn btn-info btn-sm"> <i class="fa fa-refresh"></i> </a>

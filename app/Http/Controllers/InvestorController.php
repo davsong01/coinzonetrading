@@ -89,6 +89,7 @@ class InvestorController extends Controller
         
         $user = User::create($data);
         $data['user_id'] = $user->id;
+        $data['created_by'] = auth()->user()->id;
 
         Investor::create($data);
 
@@ -142,6 +143,9 @@ class InvestorController extends Controller
      */
     public function destroy(Investor $investor)
     {
+        if(app('App\Http\Controllers\FunctionsController')->hasPackages($investor->user)->count() > 0){
+            return back()->with('error', 'You cannot delete this user because they have an active package!');
+        }
         // Delete investor image
         if(!empty($investor->profile_picture)){
             app('App\Http\Controllers\FunctionsController')->deleteImage($investor->profile_picture);

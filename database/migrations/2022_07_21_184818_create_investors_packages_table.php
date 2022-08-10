@@ -22,12 +22,13 @@ class CreateInvestorsPackagesTable extends Migration
             $table->string('code');
             $table->string('url');
             $table->string('status')->default('pending');
-            $table->float('amount');
-            $table->string('currency');
-            $table->string('fee_rate');
-            $table->dateTime('expires_at');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->float('amount')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('fee_rate')->nullable();
+            $table->dateTime('expires_at')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->integer('created_by')->nullable();
             $table->dateTime('last_cron_date');
             
             $table->timestamps();

@@ -20,6 +20,7 @@ class CreateInvestorsTable extends Migration
             $table->string('wallet_type')->nullable(); // bitcoin/blockchain
             $table->string('wallet_addrress')->nullable();
             $table->string('profile_picture')->default();
+            $table->interger('created_by')->nullable();
             $table->timestamps();
         });
     }

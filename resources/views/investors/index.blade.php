@@ -40,6 +40,13 @@
                             <br>
                             <i class="fa fa-envelope"></i> {{ $investor->user->email  ?? 'NOT-SET'}} <br>
                             <i class="fa fa-phone"></i> {{ $investor->phone  ?? 'NOT-SET'}} 
+                             @if(auth()->user()->admin->level == 'admin')
+                             @if(isset( $investor->created_by) && $investor->created_by != 1)
+                             <br>
+                             <span style="color:blue"><strong>Created By: </strong> {{ $investor->createdBy->name  ?? 'NOT SET'}} <a target="_blank" style="color:blue" href="{{ route('staff.edit', $investor->created_by ) }}"><i class="fa fa-external-link"></i></a></span>
+                             @endif
+          
+                             @endif
                           </small>
                            
                           </td>
@@ -57,12 +64,13 @@
                               style="display: inline-block;">
                               <a target="_blank" href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'profile' ]) }}" class="btn btn-block btn-info btn-xs"> <i class="fa fa-eye"></i>
                                 Edit</a>
+                              @if(auth()->user()->admin->level == 'admin')
                               <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('investors.destroy', $investor->id) }}" method="POST" style="margin-top: 5px;">
                               @csrf
                               @method('DELETE')
                               <button class="btn btn-block btn-danger btn-xs" type="submit"><i class="fa fa-trash"></i> Delete</button>
                               </form> 
-
+                              @endif
                             </div>
                           </td>
                         </tr>

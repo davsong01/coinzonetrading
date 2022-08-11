@@ -27,7 +27,7 @@
           </li> --}}
           @if(auth()->user()->role == 'investor')
           <li class="search-box">
-            <a class="nav-link hidden-sm-down" href="javascript:void(0)"><i class="icon-wallet"></i> {{ $settings->currency_sign }}{{ number_format(auth()->user()->walletBalance()) }}</a>
+            <a class="nav-link hidden-sm-down" href="{{ route('mywallet.history') }}"><i class="icon-wallet"></i> {{ $settings->currency_sign }}{{ number_format(auth()->user()->walletBalance()) }}</a>
             
           </li>
           @endif

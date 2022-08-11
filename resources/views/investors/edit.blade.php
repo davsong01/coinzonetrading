@@ -304,8 +304,7 @@
                                         <div class="box-body">
                                           <div class="table-responsive">
                                             <div id="example_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                                              <table id="example"
-                                                class="table table-bordered table-hover display nowrap margin-top-10 w-p100 dataTable"
+                                              <table id="example" class="table table-bordered responsive table-hover display nowrap margin-top-10 w-p100 dataTable"
                                                 role="grid" aria-describedby="example_info">
                                                 <thead>
                                                   <tr>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wallet;
 use App\Models\Package;
 use App\Models\Investor;
 use Illuminate\Http\Request;
 use App\Models\InvestorPackage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -48,7 +50,6 @@ class DashboardController extends Controller
                 'email' => $request->email ?? $investor->user->email
             ]);
 
-    
             return redirect(route('investors.edit', ['investor' => $request->investor_id, 'hid' => 'profile']))->with('message', 'Operation successful');
         }
 
@@ -198,7 +199,6 @@ class DashboardController extends Controller
         }
     }
 
-
     public function deleteAdminTransactions(InvestorPackage $transaction){
         if($transaction->status == 'active'){
             return back()->with('error', 'You cannot delete this transaction because it is still active!');
@@ -206,5 +206,13 @@ class DashboardController extends Controller
         $transaction->delete();
 
         return back()->with('message', 'Delete succesful');
+    }
+
+    public function mywalletHistory(){
+        $wallets = Wallet::whereUserId(auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+
+        return view('back.investors.mywallethistory', [
+            'wallets' => $wallets,
+        ]);
     }
 }

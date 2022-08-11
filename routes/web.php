@@ -67,6 +67,8 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
 // Investor
 Route::middleware(['auth', 'verified','pendingTransactions'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
+    Route::get('my-wallethistory', [App\Http\Controllers\DashboardController::class, 'myWalletHistory'])->name('mywallet.history');
+    
     Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions')->middleware('hasPackage');
     Route::get( '/payment/callback/{reference}/{middleware?}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
     Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');

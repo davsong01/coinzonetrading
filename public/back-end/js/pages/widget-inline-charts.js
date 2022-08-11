@@ -1,6 +1,6 @@
 //[widget inline charts Javascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 //Primary use:   Used only for the  widget inline charts
 
 

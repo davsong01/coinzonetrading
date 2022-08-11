@@ -75,7 +75,7 @@
         </li>
         <li class="treeview {{ request()->routeIs('investors.*') ? 'active' : '' }}">
           <a href="#">
-            <i class="icon-chart"></i>
+            <i class="ion ion-person-stalker"></i>
             <span>{{ __('Investors') }}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>

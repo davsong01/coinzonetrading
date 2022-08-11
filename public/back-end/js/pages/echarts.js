@@ -1,6 +1,6 @@
 //[charts Javascript]e_chart_1
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 
 var dom = document.getElementById("e_chart_1");
 var myChart = echarts.init(dom);

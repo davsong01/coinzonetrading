@@ -1,6 +1,6 @@
 //[custom Javascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 //Primary use:	Crypto Admin - Responsive Admin Template
 
 //should be included in all pages. It controls some layout

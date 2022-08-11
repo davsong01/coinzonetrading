@@ -1,6 +1,6 @@
 //[chartjs Javascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 
 
 $(function () {

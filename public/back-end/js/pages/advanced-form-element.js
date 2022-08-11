@@ -1,7 +1,3 @@
-//[advanced form element Javascript]
-
-//Project:	Crypto Admin - Responsive Admin Template
-//Primary use:   Used only for the advanced-form-element
 
 $(function () {
     "use strict";

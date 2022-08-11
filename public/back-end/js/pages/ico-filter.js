@@ -1,6 +1,6 @@
 //[ico-filter Javascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 
 $(function () {
   'use strict';

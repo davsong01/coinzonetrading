@@ -1,6 +1,6 @@
 //[widget flot charts Javascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 //Primary use:   Used only for the  widget flot charts
 
 

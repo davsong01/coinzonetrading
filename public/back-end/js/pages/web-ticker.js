@@ -1,6 +1,6 @@
 //[web ticker element Javascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 
 $(function () {
     "use strict";

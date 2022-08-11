@@ -1,6 +1,6 @@
 //[editor Javascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 //Primary use:   Used only for the wysihtml5 Editor 
 
 

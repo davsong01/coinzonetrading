@@ -1,6 +1,6 @@
 //[avascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 
 $(function () {
   'use strict';

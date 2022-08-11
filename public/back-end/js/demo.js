@@ -1,7 +1,3 @@
-//[Preview Menu Javascript]
-
-//Project:	Crypto Admin - Responsive Admin Template
-//Primary use:   This file is for demo purposes only.
 
 $(function () {
   'use strict'

@@ -1,6 +1,6 @@
 //[widget morris charts Javascript]
 
-//Project:	Crypto Admin - Responsive Admin Template
+ 
 //Primary use:   Used only for the morris charts
 
 

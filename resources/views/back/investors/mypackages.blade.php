@@ -86,7 +86,7 @@
                     <hr class="w-100 bg-primary" style="margin: 1rem auto">
                     <span class="bold"><strong>{{ \App\Models\Setting::value('currency_sign') }}{{ number_format($package->amount) }}/{{ $package->validity_period }}Days</strong></span>
                 </div>
-                <div class="box-body">            	
+                <div class="box-body" style="font-size: 14px;">            	
                   <p class="box-text">
                     <div class="col-md-12" style="display: flex">
                       <div class="col-md-6">

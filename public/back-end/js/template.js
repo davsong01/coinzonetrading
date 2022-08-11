@@ -1,8 +1,3 @@
-//[Master Javascript]
-
-//Project:	Crypto Admin - Responsive Admin Template
-//should be included in all pages. It controls some layout
-
 
 // Make sure jQuery has been loaded
 if (typeof jQuery === 'undefined') {

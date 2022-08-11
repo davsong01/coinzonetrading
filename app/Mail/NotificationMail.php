@@ -32,8 +32,14 @@ class NotificationMail extends Mailable
 
         if ($this->data['type'] == 'withdrawal-notification-to-admin') {
             return $this->markdown('mails.notificationEmails')
-            ->subject('Contact form filled on ' . config('app.name'));
+            ->subject('A new withdrawal request on ' . config('app.name'));
         }
+
+        if ($this->data['type'] == 'withdrawal-status-change-to-investor') {
+            return $this->markdown('mails.notificationEmails')
+            ->subject('withdrawal request status changed on ' . config('app.name'));
+        }
+
 
         // if($this->data['type'] == 'package-payment'){
         //     return $this->markdown('mails.notificationEmails')
@@ -49,4 +55,4 @@ class NotificationMail extends Mailable
         // }
     }
 
-}      
+}

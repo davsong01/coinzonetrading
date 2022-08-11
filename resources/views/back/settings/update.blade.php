@@ -16,6 +16,8 @@
    <section class="content">
 
       <div class="row">
+		@if(auth()->user()->admin->level == 'admin')
+
 		<div class="col-xl-6 col-lg-6">
           <div class="box box-solid bg-black">
 			<div class="box-header with-border settings1">
@@ -55,7 +57,7 @@
 		  <!-- /.box -->
         </div>
         <!-- /.col -->
-
+	
         <div class="col-xl-6 col-lg-6">
           <div class="box box-solid bg-black">
 			<div class="box-header with-border">
@@ -97,7 +99,7 @@
 		  <!-- /.box -->
         </div>
         <!-- /.col -->
-
+		@endif
 		<div class="col-xl-6 col-lg-6">
           <div class="box box-solid bg-black">
 			<div class="box-header with-border settings3">
@@ -144,6 +146,8 @@
 		  </div>
 		  <!-- /.box -->
         </div>
+		@if(auth()->user()->admin->level == 'admin')
+
 		<div class="col-xl-6 col-lg-6">
           <div class="box box-solid bg-black">
 			<div class="box-header with-border settings4">
@@ -203,6 +207,7 @@
 		  </div>
 		  <!-- /.box -->
         </div>
+		@endif
       </div>
       <!-- /.row -->
 

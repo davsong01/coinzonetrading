@@ -38,16 +38,24 @@ class DashboardController extends Controller
                 'wallet_type' => $request->wallet_type ?? $investor->wallet_type,
                 'wallet_addrress' => $request->wallet_address ?? $investor->wallet_address,
             ]);
-
+            // dd($investor->user);
             $this->validate($request, [
-                'email' => 'required|unique:users,email,' . $request->user()->id,
+                'email' => 'sometimes|unique:users,email,' . $investor->user->id,
             ]);
             
             $investor->user()->update([
                 'name' => $request->name ?? $investor->user->name,
-                'email' => $request->email
+                'email' => $request->email ?? $investor->user->email
             ]);
+
+    
             return redirect(route('investors.edit', ['investor' => $request->investor_id, 'hid' => 'profile']))->with('message', 'Operation successful');
+        }
+
+        if ($request->has('password') && !is_null($request->password)) {
+            $request->user()->update([
+                'password' => Hash::make($request->password),
+            ]);
         }
 
         $request->user()->update([

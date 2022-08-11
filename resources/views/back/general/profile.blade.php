@@ -74,7 +74,12 @@
 						 placeholder="Phone number" required>
 					  </div>
 					</div>
-					
+					 <div class="form-group row">
+					  <label class="col-sm-2 col-form-label">Change Password (Optional)</label>
+					  <div class="col-sm-10">
+						<input class="form-control" name="password" type="text" placeholder="Password">
+					  </div>
+					</div>
 					<div class="form-group row">
 					  <label class="col-sm-2 col-form-label"></label>
 					  <div class="col-sm-10">

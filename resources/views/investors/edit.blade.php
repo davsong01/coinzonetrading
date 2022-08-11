@@ -213,7 +213,7 @@
                                         <div class="box-header with-border">
                                           <h4 class="box-title">{{ $investor->user->name }}'s Packages</h4> <a class="btn btn bg-blue" data-toggle="modal" data-target="#modal-top">
                                            <i class="fa fa-plus"></i></a>
-                                           
+                                           @include('investors.investor-package-add-modal')
                                           <p style="color:black">You can add or edit investor's packages here</p>
                                         </div>
                                         <!-- /.box-header -->

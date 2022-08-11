@@ -64,15 +64,17 @@
                               <a href="{{ route('payment.process', ['reference' => $transaction->reference, 'middleware' => 'none']) }}" class="btn btn-info btn-sm"> <i class="fa fa-refresh"></i> </a>
                             @endif
                           </td>
+                          @if(auth()->user()->admin->level == 'admin')
                           <td> 
-                            @if(auth()->user()->admin->level == 'admin')
+                            
                               <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('alltransactions.delete', $transaction->id) }}" method="POST" style="margin-top: 5px;">
                               @csrf
                              
                               <button class="btn btn-block btn-info btn-xs" type="submit"><i class="fa fa-trash"></i> Delete</button>
                               </form> 
-                            @endif
                           </td>
+                          @endif
+
                         </tr>
                         
                       @endforeach

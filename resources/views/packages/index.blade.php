@@ -47,12 +47,13 @@
                               style="display: inline-block;">
                               <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-block btn-primary btn-xs"> <i class="fa fa-eye"></i>
                                 Edit</a>
-                             
+                              @if(auth()->user()->admin->level == 'admin')
                               <form onsubmit="return confirm('Are you sure you want to delete forever?');" action="{{ route('packages.destroy', $package->id) }}" method="POST" style="margin-top: 5px;">
                               @csrf
                               @method('DELETE')
                               <button class="btn btn-block btn-info btn-xs" type="submit"><i class="fa fa-trash"></i> Delete</button>
                               </form> 
+                              @endif
                             </div>
                           </td>
                         </tr>

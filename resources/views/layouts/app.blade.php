@@ -70,6 +70,10 @@
 			.form-container {
 				min-height: 340px;
 			}
+			.backend-logo-top {
+				width: 55% !important;
+				margin-top: -5px !important;
+			}
 			
 			
 		</style>

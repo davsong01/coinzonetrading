@@ -4,13 +4,13 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
 	  <b class="logo-mini">
     <link rel="icon" href="">
-		  <span class="light-logo"><img src="{{asset(\App\Models\Setting::value('light_logo'))}}" alt="logo"></span>
-		  <span class="dark-logo"><img src="{{asset(\App\Models\Setting::value('dark_logo'))}}" alt="logo"></span>
+		  <span class="light-logo"><img class="backend-logo-top" src="{{asset(\App\Models\Setting::value('light_logo'))}}" alt="logo"></span>
+		  <span class="dark-logo"><img class="backend-logo-top"  src="{{asset(\App\Models\Setting::value('dark_logo'))}}" alt="logo"></span>
 	  </b>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">
-		  <img src="{{asset(\App\Models\Setting::value('light_logo'))}}" alt="logo" class="light-logo">
-	  	  <img src="{{asset(\App\Models\Setting::value('dark_logo'))}}" alt="logo" class="dark-logo">
+		  <img class="backend-logo-top" src="{{asset(\App\Models\Setting::value('light_logo'))}}" alt="logo" class="light-logo">
+      <img class="backend-logo-top" src="{{asset(\App\Models\Setting::value('dark_logo'))}}" alt="logo" class="dark-logo">
 	  </span>
     </a>
     <!-- Header Navbar -->

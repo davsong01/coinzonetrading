@@ -174,23 +174,23 @@
 						</div>
 						<div class="form-group row">
 							<label class="form-label">Facebook link</label>
-							<input class="form-control" name="facebook" type="url" value="{{ $settings->facebook ?? old('facebook') }}" required>
+							<input class="form-control" name="facebook" type="url" value="{{ $settings->facebook ?? old('facebook') }}">
 						</div>
 						<div class="form-group row">
 							<label class="form-label">Twitter link</label>
-							<input class="form-control" name="twitter" type="url" value="{{ $settings->twitter ?? old('twitter') }}" required>
+							<input class="form-control" name="twitter" type="url" value="{{ $settings->twitter ?? old('twitter') }}">
 						</div>
 						<div class="form-group row">
 							<label class="form-label">Instagram link</label>
-							<input class="form-control" name="instagram" type="url" value="{{ $settings->instagram ?? old('instagram') }}" required>
+							<input class="form-control" name="instagram" type="url" value="{{ $settings->instagram ?? old('instagram') }}">
 						</div>
 						<div class="form-group row">
 							<label class="form-label">Youtube link</label>
-							<input class="form-control" name="youtube" type="url" value="{{ $settings->youtube ?? old('youtube') }}" required>
+							<input class="form-control" name="youtube" type="url" value="{{ $settings->youtube ?? old('youtube') }}">
 						</div>
 						<div class="form-group row">
 							<label class="form-label">Linkedin link</label>
-							<input class="form-control" name="linkedin" type="url" value="{{ $settings->linkedin ?? old('linkedin') }}" required>
+							<input class="form-control" name="linkedin" type="url" value="{{ $settings->linkedin ?? old('linkedin') }}">
 						</div>
 					</div>
 					<div class="form-group row">

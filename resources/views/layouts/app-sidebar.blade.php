@@ -7,7 +7,7 @@
         <div class="ulogo">
           <a href="{{ route('dashboard') }}">
             <!-- logo for regular state and mobile devices -->
-            <span><img src="{{ asset(\App\Models\Setting::value('light_logo')) }}" alt="" /></span>
+            <span><img class="" src="{{ asset(\App\Models\Setting::value('light_logo')) }}" alt="" /></span>
           </a>
         </div>
         <div class="image">

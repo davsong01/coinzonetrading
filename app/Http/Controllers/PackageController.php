@@ -92,6 +92,10 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
+        if($package->users->count() > 0){
+            return back()->with('error', 'You cannot delete this package because it is being used by one or more investors');
+        }
+
         $package->delete();
         return back()->with('message', 'Delete Successful!');
     }

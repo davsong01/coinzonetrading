@@ -38,30 +38,31 @@
                     <textarea name="short_description" id="short_description" class="form-control" required placeholder="Short Description">{{ old('short_description') ?? $package->short_description }}</textarea>
                   </div>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                   <h5>{{ __('Amount') }}</h5>
                   <div class="controls">
                     <input type="number" name="amount" class="form-control" required
-                      data-validation-required-message="This field is required" min="0" value="{{ old('amount') ?? $package->amount }}">
+                      data-validation-required-message="This field is required" min="0" value="{{ old('amount') ?? $package->amount }}" step=".01">
+                  </div>
+                  <div class="form-control-feedback">@error('amount'){{$message}}@enderror</div>
+                </div>
+                <div class="form-group">
+                  <h5>{{ __('Max Amount') }}</h5>
+                  <div class="controls">
+                    <input type="number" name="max_amount" class="form-control" required
+                      data-validation-required-message="This field is required" min="0" value="{{ old('max_amount') ?? $package->max_amount }}" step=".01">
                   </div>
                   <div class="form-control-feedback">@error('amount'){{$message}}@enderror</div>
                 </div>
                  <div class="form-group">
-                  <h5>{{ __('Daily ROI') }}</h5>
+                  <h5>{{ __('Daily ROI %') }}</h5>
                   <div class="controls">
                     <input type="number" name="daily_roi" class="form-control" required
-                      data-validation-required-message="This field is required" value="{{ old('daily_roi') ?? $package->daily_roi }}">
+                      data-validation-required-message="This field is required" step=".01" value="{{ old('daily_roi') ?? $package->daily_roi }}" min="1" max="100">
                   </div>
                   <div class="form-control-feedback">@error('daily_roi') {{ $message }} @enderror</div>
                 </div>
-                 <div class="form-group">
-                  <h5>{{ __('Monthly ROI') }}</h5>
-                  <div class="controls">
-                    <input type="number" name="monthly_roi" class="form-control" required
-                      data-validation-required-message="This field is required" value="{{ old('monthly_roi') ?? $package->monthly_roi }}">
-                  </div>
-                  <div class="form-control-feedback">@error('monthly_roi') {{ $message }} @enderror</div>
-                </div>
+                
                  <div class="form-group">
                   <h5>{{ __('Validity Period') }}</h5>
                   <div class="controls">

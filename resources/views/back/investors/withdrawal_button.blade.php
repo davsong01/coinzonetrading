@@ -89,3 +89,5 @@ $canWithdraw = app('App\Http\Controllers\FunctionsController')->canWithdraw();
         <!-- /.modal-dialog -->
     </div>
 </div>
+
+

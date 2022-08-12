@@ -66,17 +66,24 @@ class HomeController extends Controller
         return view('test');
     }
 
-    public function makePayment(Package $package)
+    public function makePayment(Request $request)
     {
+        $package = Package::find($request->package);
+
+        if($request->amount < $package->amount || $request->amount > $package->max_amount){
+            return back()->with('error', 'Amount entered not within range');
+        }
         $check = InvestorPackage::where('package_id', $package->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
         if (isset($check) && $check->count() > 0) {
             return back()->with('error', 'You already have this package and it is active');
         }
 
         $charge = app('App\Http\Controllers\FunctionsController')->createCharge([
-            'name' => $package->name, 'description' => '', 'amount' => $package->amount, 'package_id' => $package->id
+            'name' => $package->name, 'description' => '', 'amount' => $request->amount, 'package_id' => $package->id
         ]);
 
+        $charge['daily_roi'] = $this->getRoi($package, $charge['amount']);
+       
         if (!is_null($charge)) {
             \DB::table('investors_packages')->insert($charge);
             return redirect()->away($charge['url']);
@@ -85,27 +92,9 @@ class HomeController extends Controller
         }
     }
 
-    public function test(Request $request)
-    {
-
-
-        // $packages = app('App\Http\Controllers\FunctionsController')->hasPackages(auth()->user());
-        // dd($packages, 'hgj');
-        // $uploadimage = app('App\Http\Controllers\FunctionsController')->uploadImage($request->file, 'front-end/images/avatar');
-
-        $checkFields = app('App\Http\Controllers\FunctionsController')->checkFilledFields(auth()->user());
-
-        // $queryCharge = app('App\Http\Controllers\FunctionsController')->queryCharge('DELDHC3F');
-
-        // $charge = app('App\Http\Controllers\FunctionsController')->createCharge(['name' => 'Package 1', 'description' => 'Package 1', 'amount' => 10.00, 'package_id' => 1]);
-
-        // \DB::table('investors_packages')->insert($charge);
-        // dd($charge);
-        $data = [
-            'name' => 'David',
-            'email' => 'davsong16@gmail.com',
-            'type' => 'registration'
-        ];
-        $sendEmail = app('App\Http\Controllers\FunctionsController')->sendEmails($data);
+    public function getRoi($package, $amount){
+        // roi is package roi of amount
+        return ($package->daily_roi / 100) * $amount;
+        
     }
 }

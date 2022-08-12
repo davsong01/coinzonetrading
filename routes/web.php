@@ -26,7 +26,7 @@ Route::post( '/sendcontact', [App\Http\Controllers\HomeController::class, 'sendC
 Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController::class, 'creditWalletCron']);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/package/select/{package}', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
+    Route::post('/package/select', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
     Route::get('/dashboard',[App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
     Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile');
     Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');

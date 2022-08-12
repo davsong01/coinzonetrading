@@ -21,6 +21,7 @@ class CreateInvestorsPackagesTable extends Migration
             $table->integer('package_id');
             $table->string('code');
             $table->string('url');
+            $table->string('daily_roi');
             $table->string('status')->default('pending');
             $table->float('amount')->nullable();
             $table->string('currency')->nullable();

@@ -15,7 +15,7 @@ class Package extends Model
         'short_description',
         'amount',
         'daily_roi',
-        'monthly_roi',
+        'max_amount',
         'validity_period',
     ];
 

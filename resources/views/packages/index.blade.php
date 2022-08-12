@@ -26,8 +26,8 @@
                       <tr>
                         <th>{{ __('Name') }}</th>
                         <th>{{ __('Amount') }}</th>
+                        <th>{{ __('Max Amount') }}</th>
                         <th>{{ __('Daily ROI') }}</th>
-                        <th>{{ __('Monthly ROI') }}</th>
                         <th>{{ __('Validity Period') }}</th>
                         <th>{{ __('Investors') }}</th>
                         <th>{{ __('Action') }}</th>
@@ -38,8 +38,8 @@
                         <tr>
                           <td>{{ $package->name }}</td>
                           <td>{{ $setting->currency_sign . number_format($package->amount) }}</td>
+                          <td>{{ $setting->currency_sign . number_format($package->max_amount) }}</td>
                           <td>{{ $package->daily_roi }}</td>
-                          <td>{{ $package->monthly_roi }}</td>
                           <td>{{ $package->validity_period }} days</td>
                           <td>{{ $package->users_count }}</td>
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">

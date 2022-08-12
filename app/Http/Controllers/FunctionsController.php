@@ -125,7 +125,7 @@ class FunctionsController extends Controller
                 "package_id" => $data['package_id'],
             ],
         ];
-
+      
         $url = "https://api.commerce.coinbase.com/charges";
 
         $curl = curl_init($url);

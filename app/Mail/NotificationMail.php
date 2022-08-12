@@ -20,9 +20,10 @@ class NotificationMail extends Mailable
 
     public function build()
     {
+       
         if($this->data['type'] == 'registration'){
             return $this->markdown('mails.notificationEmails')
-                ->subject('Welcome to Coinzone');
+                ->subject('Welcome to '. config('app.name'));
         }
 
         if ($this->data['type'] == 'contact-mail-to-admin') {
@@ -37,22 +38,8 @@ class NotificationMail extends Mailable
 
         if ($this->data['type'] == 'withdrawal-status-change-to-investor') {
             return $this->markdown('mails.notificationEmails')
-            ->subject('withdrawal request status changed on ' . config('app.name'));
+            ->subject('Request for Withdrawal status notification');
         }
-
-
-        // if($this->data['type'] == 'package-payment'){
-        //     return $this->markdown('mails.notificationEmails')
-        //         ->subject('New contact form');
-        // }
-        // if($this->data['type'] == 'new_product_user'){
-        //     return $this->markdown('mails.notificationEmails')
-        //         ->subject('Payment received');
-        // }
-        // if($this->data['type'] == 'new_product_admin'){
-        //     return $this->markdown('mails.notificationEmails')
-        //         ->subject('Payment received from '.$this->data['name']);
-        // }
     }
 
 }

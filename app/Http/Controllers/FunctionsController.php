@@ -51,15 +51,17 @@ class FunctionsController extends Controller
 
     public function sendEmails($data)
     {
+       
         try {
             Mail::to($data['email'])->send(new NotificationMail($data));
             $message = 1;
         } catch (\Exception $th) {
             //throw $th;
             $message = 0;
+            // dd($th->getMessage());
             \Log::error($th->getMessage());
         }
-
+       
         return $message;
     }
 
@@ -185,17 +187,68 @@ class FunctionsController extends Controller
     }
 
     public function canWithdraw(?float $amount = null, ?User $user = null){
-        $settings = Setting::latest()->first();
-        $amount ??= $settings->minimum_withdrawal_amount;
+        // $settings = Setting::latest()->first();
+        // $amount ??= $settings->minimum_withdrawal_amount;
         $user ??= auth()->user();
-        return
-        $user->investor()
-        ->whereNotNull([ 'phone', 'wallet_type', 'wallet_addrress', 'profile_picture' ])->first() &&
-        $user->withdrawals()->where('status', 'pending')->get()->count() === 0 &&
-        $user->walletBalance() >= $amount &&
-        $settings->maximum_withdrawal_amount >= $amount &&
-        now()->diffInDays(optional($user->withdrawals->first())->created_at) >= $settings->withdrawal_frequency;
+
+        $data['eligibility'] = true;
+        $data['min'] = $this->getMinimumWithdrawalAmount();
+        $data['max'] = $this->getMaximumWithdrawalAmount($user);
+        $data['reasons'] = [];
+
+        // Minimum withdrawal amount
+        if($user->walletBalance() < $this->getMinimumWithdrawalAmount()){
+            $data['eligibility'] = false;
+            $data['reasons'][] = 'Wallet balance is less than minimum withdrawal amount of: '. $this->setting->currency_sign.$data['min'];
+        }
+
+        // Must fill details
+        if(is_null($user->investor()->whereNotNull($this->investorMustFillBeForeWithdrawal())->first())){
+            $data['eligibility'] = false;
+            $data['reasons'][] = 'You have not filled one of the following details: '. ucfirst(str_replace('_', ' ', implode(',', $this->investorMustFillBeForeWithdrawal())));
+        }
+
+        if($user->withdrawals()->where('status', 'pending')->get()->count() > 0){
+            $data['eligibility'] = false;
+            $data['reasons'][] = 'You have a pending withdrawal request';
+        }
+        $frequency = $this->setting->withdrawal_frequency ?? 0;
+        if($user->withdrawals->where('status', '!=', 'rejected')->whereBetween('created_at', [now()->subDays($frequency), now()])->count() > 0){
+            $data['eligibility'] = false;
+            $data['reasons'][] = 'You can only make 1 withdrawal request in ' . $frequency. ' days';
+        };
+        
+        
+        return $data;
     }
+
+    public function getMinimumWithdrawalAmount(){
+        return $this->setting->minimum_withdrawal_amount ?? 0;
+    }
+
+    public function getMaximumWithdrawalAmount($user)
+    {
+       return $user->walletBalance() < $this->setting->maximum_withdrawal_amount  ? $user->walletBalance() : $this->setting->maximum_withdrawal_amount;
+    }
+
+    public function investorMustFillBeForeWithdrawal()
+    {
+        return ['phone', 'wallet_type', 'wallet_addrress', 'profile_picture'];
+    }
+
+
+// Check 5:
+// Withdrawal Frequency - this is the frequency an investor can make withdrawal requests. It is in days and default is 30 days. If set to 30 days for example, investor can only make a request for withdrawal(pending, approved or declined) once in 30 days.
+// This value is set by an admin
+
+   
+    // Conditions
+    // <ol>
+    // <li>You must have filled these on your profile page
+    //     <li></li>
+    // </li>
+    // </ol>
+    // <li>You m</li>
 
     public function updateTransaction($reference, $middleware = 'no'){
         //Check payment status and deliver value accordingly

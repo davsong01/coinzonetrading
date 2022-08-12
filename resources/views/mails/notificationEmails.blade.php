@@ -23,15 +23,28 @@ Email: {!! $data['messageDetails']['message'] !!}
 @if($data['type'] == 'withdrawal-notification-to-admin')
 Dear {{ $data['name'] }},
 
-There is a new withdrawal request from {{ optional($data['requestedBy'])->name }},
-log into your account to view the request.
+There is a new withdrawal request, find details below:
+
+Name:  {{ optional($data['requestedBy'])->name }} <br>
+Phone:  {{ $data['name'] }} <br>
+Email:  {{ $data['email'] }} <br>
+Amount:  {{ $settings->currency_sign. number_format($data['amount']) }} <br>
+Reference:  {{ $data['reference'] }} <br>
+
+Kindly login to your account on: <a href="{{ url('/').'/withdrawal' }}">{{ env('APP_NAME') }}</a> to approve or reject this request.
+
+Thank you.
 @endif
 
 @if($data['type'] == 'withdrawal-status-change-to-investor')
 Dear {{ $data['name'] }},
 
-The status of your withdrawal request was recently changed,
-log into your account to see the update.
+Your request to withdraw has been updated!
+
+Status: <span style="color:{{ $data['status'] == 'accepted' ? 'green' : 'red'}}"> {{ $data['status'] }}</span>
+
+Kindly login to your account on: <a href="{{ url('/').'/withdrawal' }}">{{ env('APP_NAME') }}</a> to view your withdrawal history.
+
 @endif
 
 {{ config('app.name') }}

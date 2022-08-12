@@ -14,10 +14,12 @@
    
     <section class="content">
       <!-- START Card With Image -->
+      
       <div class="row">
           <div class="col-lg-12 col-12">         
           <div class="box">
             <div class="box-header with-border">
+              
             </div>
             <!-- /.box-header -->
             <div class="box-body"> 

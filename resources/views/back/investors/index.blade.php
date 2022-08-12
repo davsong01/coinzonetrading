@@ -20,77 +20,8 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <div class="col-lg-12 col-12">
-		  <div class="box">
-			<div class="box-header with-border">
-			  <h5 class="box-title" style="color:black">Wallet Balance</h5>
-			</div>
-			<div class="box-body">
-				<div class="table-responsive">
-					<table class="table table-striped table-hover no-margin">
-					  <tbody>
-						<tr>
-						  <td><span class="text-success">{{ $settings->currency_sign }}{{ number_format(auth()->user()->walletBalance()) }}</span></td>
-						  <td>
-               
-                @if ($canWithdraw)
-                <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#modal-default">Request for Withdraw</button>
-                @endif
-              </td>
-						 
-						</tr>
-					
-						
-					  </tbody>
-					</table>
-				</div>
-			</div>
-			<!-- /.box-body -->
-		  </div>
-		</div>
-      </div>
-      @if ($canWithdraw)
-        <div class="text-xs-right">
-          <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title"></h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                  <form method="POST" action="{{ route('withdrawal.store') }}">
-                    @csrf
-                    <div class="form-group">
-                      <h5>Amount <span class="text-danger">*</span></h5>
-                      <div class="controls">
-                        <input type="number" name="amount" class="form-control" required=""
-                          data-validation-required-message="This field is required"
-                          max="{{ $settings->maximum_withdrawal_amount }}">
-                        <div class="help-block"></div>
-                      </div>
-                    </div>
-                    <div class="text-xs-right">
-                      <button type="submit" class="btn btn-info">Send request</button>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-        </div>
-      @endif
+      @include('back.investors.withdrawal_button')
       <div class="box my-2">
-        <div class="box-header with-border">
-          <h3 class="box-title">{{ __('Withdrawals') }}</h3>
-        </div>
         <!-- /.box-header -->
         <div class="box-body">
           <div class="table-responsive">
@@ -113,9 +44,9 @@
               @foreach (auth()->user()->withdrawals->sortByDesc('id') as $withdrawal)
                 <tr>
                   <td>{{ $count ++ }}</td>
-                  <td>{{ $settings->currency_sign . number_format($withdrawal->amount) }}</td>
+                  <td>{{ $settings->currency_sign . number_format($withdrawal->amount,2) }}</td>
                   <td>{{ $withdrawal->reference_id }}</td>
-                  <td>{{ $withdrawal->created_at->diffForHumans() }}</td>
+                  <td>{{ $withdrawal->created_at}}</td>
                   <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}
                   @if($withdrawal->status != 'pending') <br>
                   <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>

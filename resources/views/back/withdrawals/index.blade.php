@@ -12,6 +12,7 @@
 
     <!-- Main content -->
     <section class="content">
+      
       <div class="row">
         <div class="col-12">
           <div class="box">
@@ -39,7 +40,7 @@
                       @foreach ($withdrawals as $withdrawal)
                       <tr>
                         <td>{{ $count++ }}</td>
-                        <td>{{ $settings->currency_sign. number_format($withdrawal->amount) }}</td>
+                        <td>{{ $settings->currency_sign. number_format($withdrawal->amount, 2) }}</td>
                         <td>{{ $withdrawal->reference_id }}</td>
                         
                         <td>{{ $withdrawal->requestedBy->name }} <br>
@@ -51,28 +52,12 @@
 
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">
-                              @if(auth()->user()->admin->level == 'admin')
+                              @if(auth()->user()->admin->level == 'admin' && $withdrawal->approvedBy->id != 1)
                                 @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
                                 <small><b>By: </b><span class="approved_by">{{ $withdrawal->approvedBy->name }}</></span> </small> <br>
                                 <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
                                 @endif
-
-                                <form action="{{ route('withdrawal.update', ['withdrawal' => $withdrawal->id ]) }}" method="post">
-                                  @csrf
-                                  @method('PATCH')
-                                  <input type="hidden" name="status" value="rejected">
-                                  <button type="submit" class="btn btn-block btn-danger btn-xs my-2"> <i class="fa fa-trash"></i>
-                                  Reject</button>
-                                </form>
-
-                                <form action="{{ route('withdrawal.update', ['withdrawal' => $withdrawal->id ]) }}" method="post">
-                                  @csrf
-                                  @method('PATCH')
-                                  <input type="hidden" name="status" value="accepted">
-                                  <button type="submit" class="btn btn-block btn-success btn-xs my-2"> <i class="fa fa-checked"></i>
-                                  Accept</button>
-                                </form>
-                              @else
+                              @endif
                               @if($withdrawal->status == 'pending')
                               <form action="{{ route('withdrawal.update', ['withdrawal' => $withdrawal->id ]) }}" method="post">
                                 @csrf
@@ -95,7 +80,7 @@
                               <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
                               @endif
                               @endif
-                              @endif
+                      
                             </div>
                           </td>
                         </tr>

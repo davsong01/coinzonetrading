@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 // Admin
 Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
+    Route::get('/clear-cache', [App\Http\Controllers\SettingController::class, 'clearCache'])->name('cache.clear');
+
     Route::resource('packages', PackageController::class);
     Route::resource('investors', InvestorController::class)->except('edit');
     Route::get('investors/{investor}/edit/{hid?}', [App\Http\Controllers\InvestorController::class, 'edit'])->name('investors.edit');

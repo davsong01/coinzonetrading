@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class SettingController extends Controller
 {
@@ -11,6 +12,14 @@ class SettingController extends Controller
     {
         $settings = Setting::first();
         return view('back.settings.update')->with('settings', $settings);
+    }
+
+    public function clearCache(){
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
+        Artisan::call('config:clear');
+
+        return back()->with('message', 'Cache cleared!');
     }
 
     public function settings1(Request $request)

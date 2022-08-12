@@ -14,7 +14,13 @@
 
     <!-- Main content -->
    <section class="content">
-
+		<div class="row">
+			<div class="box-body">
+			<a class="btn btn-app bg-yellow" href="{{ route('cache.clear') }}">
+				<i class="fa fa-refresh"></i> Clear App Cache
+			</a>
+			</div>
+		</div>
       <div class="row">
 		@if(auth()->user()->admin->level == 'admin')
 

@@ -324,8 +324,10 @@
                                                     <td>{{ $count ++ }}</td>
                                                     <td>{{ $wallet->reference }}
                                                     <small> <br>
-                                                        <strong style="color: #dd3765;">Created on: </strong>{{ $wallet->created_at }} <br>
-                                                        <strong style="color: #dd3765;">Last Cron</strong> {{ $wallet->transaction->last_cron_date }} 
+                                                        <strong style="color: #dd3765;">Created on: </strong>{{ $wallet->created_at }}
+                                                        @if(isset($wallet->transaction->last_cron_date)) <br>
+                                                        <strong style="color: #dd3765;">Last Cron</strong> {{ $wallet->transaction->last_cron_date ?? null }} 
+                                                        @endif
                                                     </small>
                                                     </td>
                                                     <td>{{ $settings->currency_sign . number_format($wallet->amount) }}</td>

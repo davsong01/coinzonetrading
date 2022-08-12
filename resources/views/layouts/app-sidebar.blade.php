@@ -28,7 +28,7 @@
 		    <li class="nav-devider"></li>
         <li>
           <a href="/" target="_blank">
-            <i class="icon-home"></i> <span>Homepage</span>
+            <i class="icon-home"></i> <span>Visit Frontend</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>

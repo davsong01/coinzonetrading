@@ -131,37 +131,40 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function retryTransaction($reference){
-        //Check if transaction has not expired
+    // public function retryTransaction($reference){
+    //     //Check if transaction has not expired
 
-        $transaction = InvestorPackage::whereInvestorId(auth()->user()->id)->whereReference($reference)->first();
-        // dd($transaction, $reference, auth()->user()->id);
-        $check = InvestorPackage::where('package_id',$transaction->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
-        if (isset($check) && $check->count() > 0) {
-            return back()->with('error', 'You already have this package and it is active');
-        }
-        $package = Package::find($transaction->package_id);
+    //     $transaction = InvestorPackage::whereInvestorId(auth()->user()->id)->whereReference($reference)->first();
+        
+    //     $check = InvestorPackage::where('package_id',$transaction->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
+        
+    //     if (isset($check) && $check->count() > 0) {
+    //         return back()->with('error', 'You already have this package and it is active');
+    //     }
+    //     $package = Package::find($transaction->package_id);
 
-        if(isset($transaction)){
-            if($transaction->expires_at > now()){
-                // Delete transaction and create afresh
-                $transaction->delete();
-                $request()->package = $package;
-                dd(\Request::all);
-                app('App\Http\Controllers\HomeController')->makePayment($request);
-            }else{
-                if($transaction->status == 'pending'){
-                    $transaction->delete();
-                }
-                return back()->with('error', 'Transaction window for this package has expired!');
-            }
-        }else{
-            return back()->with('error', 'Transaction not found');
-        }
+    //     if(isset($transaction)){
+    //         if($transaction->expires_at > now()){
+    //             // Transaction has expired
+    //             // Delete transaction and create afresh
+    //             $transaction->delete();
+    //             $request()->package = $package;
+              
+    //             app('App\Http\Controllers\HomeController')->makePayment($request);
+    //         }else{
+    //             // transaction can still be done
+    //             if($transaction->status == 'pending'){
+    //                 $transaction->delete();
+    //             }
+    //             return back()->with('error', 'Transaction window for this package has expired!');
+    //         }
+    //     }else{
+    //         return back()->with('error', 'Transaction not found');
+    //     }
 
-        return back()->with('error', 'Something went wrong');
+    //     return back()->with('error', 'Something went wrong');
 
-    }
+    // }
 
     // public function renewPackage($reference)
     // {

@@ -57,11 +57,11 @@
                   @endif
                   @if(empty($package->end_date) && $package->status == 'pending' && $package->expires_at > now())
                   <div class="col-md-12" style="display: flex">
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                       <a href="{{ route('payment.retry', $package->reference) }}" class="btn btn-info" style="width:100%;border:none">Try again </a>
-                    </div>
-                      <div class="col-md-6">
-                      <a href="{{ route('payment.process', $package->reference ) }}" class="btn btn-info" style="width:100%; background:#dd3765;border:none">Check status</a>
+                    </div> --}}
+                      <div class="col-md-12">
+                      <a href="{{ route('payment.process', ['reference' => $package->reference, 'middleware' => 'none' ]) }}" class="btn btn-info" style="width:100%; background:#dd3765;border:none">Check status</a>
                     </div>
                   </div>
                   @endif
@@ -114,7 +114,7 @@
                                   <span aria-hidden="true">×</span></button>
                           </div>
                           <div class="modal-body">
-                              <form method="POST" action="{{ route('package.select') }}">
+                              <form method="POST" target="_blank" action="{{ route('package.select') }}">
                                   @csrf
                                   <div class="form-group">
                                       <h5>Enter Amount <span class="text-danger">*</span></h5>

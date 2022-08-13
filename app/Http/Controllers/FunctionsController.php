@@ -281,7 +281,11 @@ class FunctionsController extends Controller
         }
 
         if ($middleware == 'none') {
-            return back()->with('message', 'Status is: ' . $transaction->status);
+            if($transaction->status == 'pending'){
+                return back()->with('error', 'Status is: ' . $transaction->status);
+            }else{
+                return back()->with('message', 'Status is: ' . $transaction->status);
+            }
         }
 
         if ($middleware == 'admin') {

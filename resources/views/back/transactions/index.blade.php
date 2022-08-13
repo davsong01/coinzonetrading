@@ -55,7 +55,8 @@
                           <td> <strong class="bold">Name: </strong>{{ $transaction->package->name ?? 'NOT SET' }}<br>
                             @if(isset($transaction->start_date) && isset($transaction->end_date))
                               <strong class="bold">Start date: </strong>{{ $transaction->start_date }} <br>
-                              <strong class="bold">End date: </strong>{{ $transaction->end_date }}
+                              <strong class="bold">End date: </strong>{{ $transaction->end_date }} <br>
+                              <strong class="bold">Daily ROI: </strong>{{ $settings->currency_sign . number_format($transaction->daily_roi) }}
                             @endif
                           </td>
                           <td>{{ $settings->currency_sign . number_format($transaction->amount) }}</td>

@@ -226,6 +226,7 @@
                                                 <th>Status</th>
                                                 <th>Start</th>
                                                 <th>End</th>
+                                                <th>Daily ROI</th>
                                                 @if(auth()->user()->admin->level == 'admin')
                                                 <th>Actions</th>
                                                 @endif
@@ -266,6 +267,7 @@
                                                       {{date("M dS, Y", strtotime($packages->end_date)). ','. date("h:ia", strtotime($packages->end_date))}}
                                                     @endif
                                                   </td>
+                                                  <td>{{ $settings->currency_sign . number_format($packages->daily_roi) }}</td>
                                                   <td>
                                                     @if(auth()->user()->admin->level == 'admin')
                                                     <a class="btn btn-block btn-info btn-xs" data-toggle="modal" data-target="#modal-right{{ $packages->id }}"> <i class="fa fa-eye"></i>Edit</a>

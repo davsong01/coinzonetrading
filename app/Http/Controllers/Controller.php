@@ -28,4 +28,10 @@ class Controller extends BaseController
         
         return $types;
     }
+
+    public function getRoi($package, $amount)
+    {
+        // roi is package roi of amount
+        return ($package->daily_roi / 100) * $amount;
+    }
 }

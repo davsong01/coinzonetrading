@@ -56,8 +56,9 @@ class InvestorController extends Controller
 
         // Check if package price correspondds
         $package = Package::find($data['package_id']);
-        if($request->amount != $package->amount){
-            return back()->with('error', 'Amount does not match Package price, please try again');
+
+        if($request->amount < $package->amount || $request->amount > $package->max_amount ){
+            return back()->with('error', $this->settings->currency_sign . number_format($request->amount, 2) . ' is not in range of Package: '. $package->name);
         }
 
         //Set status according to start and end date
@@ -78,6 +79,7 @@ class InvestorController extends Controller
         $data['url'] = 'none';
         $data['currency'] = $this->settings->currency;
         $data['rid'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference() . '-' . auth()->user()->id;;
+        $data['daily_roi'] = $this->getRoi($package, $request->amount);
         unset($data['order_number']);
         
         InvestorPackage::create($data);
@@ -136,7 +138,7 @@ class InvestorController extends Controller
 
         Investor::create($data);
 
-        return redirect()->route('investors.index')->with('success', 'Investor created successfully');
+        return redirect()->route('investors.index')->with('message', 'Investor created successfully');
     }
 
     /**

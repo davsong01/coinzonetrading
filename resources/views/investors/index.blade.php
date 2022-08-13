@@ -45,12 +45,9 @@
                              <br>
                              <span style="color:blue"><strong>Created By: </strong> {{ $investor->createdBy->name  ?? 'NOT SET'}} <a target="_blank" style="color:blue" href="{{ route('staff.edit', $investor->created_by ) }}"><i class="fa fa-external-link"></i></a></span>
                              @endif
-          
                              @endif
-                          </small>
-                           
+                            </small>
                           </td>
-                        
                           <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'wallet' ]) }}">{{ $settings->currency_sign . number_format($investor->user->walletBalance()) }}</a> <br>
                             <small>
                               <span>Type: </span>{{ ucfirst($investor->wallet_type) }} <br>

@@ -44,7 +44,7 @@ class PackageController extends Controller
     {
         Package::create($request->validated());
         
-        return redirect()->route('packages.index')->with('success', 'Package created successfully');
+        return redirect()->route('packages.index')->with('message', 'Package created successfully');
     }
 
     /**
@@ -81,7 +81,7 @@ class PackageController extends Controller
     public function update(PackageStoreRequest $request, Package $package)
     {
         $package->update($request->validated());
-        return redirect()->route('packages.index')->with('success', 'Package updated successfully');
+        return redirect()->route('packages.index')->with('message', 'Package updated successfully');
     }
 
     /**

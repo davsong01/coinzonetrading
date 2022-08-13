@@ -110,7 +110,7 @@ class WithdrawalController extends Controller
 
         $withdrawal->status = $request->status;
       
-        $withdrawal->approved_by = $request->user()->id;
+        $withdrawal->approved_by = auth()->user()->id;
         $withdrawal->approved_date = now()->toString();
         $withdrawal->save();
         

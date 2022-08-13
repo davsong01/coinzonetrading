@@ -48,12 +48,14 @@
                           <small>{{ $withdrawal->created_at }}</small>
                         </td>
                         <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}
+                          @if(!is_null($withdrawal->approvedBy))
                            @if(auth()->user()->admin->level == 'admin' && $withdrawal->approvedBy->id != 1)
                            <br>
                               @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
                                 <small  style="color:blue"><b>By: </b><span class="approved_by">{{ $withdrawal->approvedBy->name }}</></span> </small> <br>
                                 <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
                                 @endif
+                              @endif
                               @endif
                         </td>
                         <td style="padding: 10px 15px;width: min-content !important; margin: auto;">

@@ -47,17 +47,19 @@
                           <small>{{ $withdrawal->requestedBy->email }} <a target="_blank" style="color:blue" href="{{ route('investors.edit', ['investor' => $withdrawal->requestedBy->investor->id, 'hid' => 'wallet' ] ) }}"><i class="fa fa-external-link"></i></a> </small> <br>
                           <small>{{ $withdrawal->created_at }}</small>
                         </td>
-                        <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}</td>
+                        <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}
+                           @if(auth()->user()->admin->level == 'admin' && $withdrawal->approvedBy->id != 1)
+                           <br>
+                              @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
+                                <small  style="color:blue"><b>By: </b><span class="approved_by">{{ $withdrawal->approvedBy->name }}</></span> </small> <br>
+                                <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
+                                @endif
+                              @endif
+                        </td>
                         <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
 
                             <div class="actions" role="group" aria-label="Basic example"
                               style="display: inline-block;">
-                              @if(auth()->user()->admin->level == 'admin' && $withdrawal->approvedBy->id != 1)
-                                @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
-                                <small><b>By: </b><span class="approved_by">{{ $withdrawal->approvedBy->name }}</></span> </small> <br>
-                                <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
-                                @endif
-                              @endif
                               @if($withdrawal->status == 'pending')
                               <form action="{{ route('withdrawal.update', ['withdrawal' => $withdrawal->id ]) }}" method="post">
                                 @csrf
@@ -75,10 +77,10 @@
                                 Accept</button>
                               </form>
                               @else
-                              @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
+                              {{-- @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
                               <small> <b>By: </b><span class="approved_by">{{ $withdrawal->approvedBy->name }}</></span> </small><br>
                               <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
-                              @endif
+                              @endif --}}
                               @endif
                       
                             </div>

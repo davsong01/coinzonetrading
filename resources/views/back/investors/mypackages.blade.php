@@ -18,7 +18,7 @@
               <div class="col-lg-12 col-12">
                   <div class="box">
                       <div class="box-header with-border">
-                          <h4 class="box-title">Latest Package(s)</h4>
+                          <h4 class="box-title">Latest Package(s)</h4> <a href="{{ route('mytransactions') }}" class="btn btn-info"><i class="icon-grid"></i> All Packages</a>
                           <ul class="box-controls pull-right">
                               <li><a class="box-btn-slide" href="#"></a></li>
                               <li><a class="box-btn-fullscreen" href="#"></a></li>

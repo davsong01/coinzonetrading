@@ -3,25 +3,33 @@
     .box-title {
         height: 110px !important;
     }
+
+    @media only screen and (max-width: 800px) {
+        .get {
+            margin-top: 186px;
+        }
+    }
+    
 </style>
     
 @endsection
 @extends('layouts.frontapp')
 @section('body')
-<section class="bg-img pt-200 pb-120" data-overlay="7" style="background-image: url({{ asset('/front-end/images/front-end-img/banners/banner-1.jpg') }}); background-position: top center;">
+<section class="bg-img pt-150 pb-120" data-overlay="7" style="background-image: url({{ asset('/front-end/images/front-end-img/banners/banner-1.jpg') }}); background-position: top center;">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="text-center mt-80">
-                    <h1 class="box-title text-white fs-50 mb-30">Buy & Sell 100+ coins instantly</h1>	
+                <div class="text-center mt-20">
+                    <h1 class="box-title text-white fs-50 mb-30">We attract investors to get a steady income.</h1>	
                 </div>
-                <div class="text-center d-flex gap-3 justify-content-center">
-                    <a href="#about" class="btn btn-outline btn-primary text-white">What we are</a>
+                <div class="text-center d-flex gap-3 justify-content-center get">
+                    <a href="{{ route('login') }}" class="btn btn-outline btn-primary text-white">Get Started</a>
                 </div>
             </div>
         </div>
     </div>
-</section>	
+</section>
+	
 <section class="overflow-xh" data-aos="fade-up">		
     <div class="row">
         <div class="col-12">
@@ -68,194 +76,7 @@
         </div>
     </div>
 </section>
-<section class="pt-30 pb-50" data-aos="fade-up">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="nav nav-tabs justify-content-center bb-0 mb-10" role="tablist">
-                    <li class="nav-item"> <a class="nav-link px-50 py-10 fs-24 active" data-bs-toggle="tab" href="#all" role="tab">Buy Crypto</a> </li>
-                    <li class="nav-item"> <a class="nav-link px-50 py-10 fs-24" data-bs-toggle="tab" href="#tab1" role="tab">Sell Crypto</a> </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="all" role="tabpanel">
-                        <div class="px-15 pt-15">
-                            <div class="row">
-                                <div class="col-12 col-md-4">
-                                <div class="box box-body pull-up">
-                                    <!-- TradingView Widget BEGIN -->
-                                    <div class="tradingview-widget-container">
-                                        <div class="tradingview-widget-container__widget"></div>
-                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                                        {
-                                        "symbol": "BITSTAMP:BTCUSD",
-                                        "width": "100%",
-                                        "height": "100%",
-                                        "locale": "in",
-                                        "dateRange": "12M",
-                                        "colorTheme": "light",
-                                        "trendLineColor": "rgba(246, 178, 107, 1)",
-                                        "underLineColor": "rgba(255, 242, 204, 1)",
-                                        "isTransparent": true,
-                                        "autosize": true,
-                                        "largeChartUrl": ""
-                                    }
-                                        </script>
-                                    </div>
-                                    <!-- TradingView Widget END -->
-                                </div>			
-                                </div>
-                                <div class="col-12 col-md-4">
-                                <div class="box box-body pull-up">
-                                    <!-- TradingView Widget BEGIN -->
-                                    <div class="tradingview-widget-container">
-                                        <div class="tradingview-widget-container__widget"></div>
-                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                                        {
-                                        "symbol": "BITSTAMP:ETHUSD",
-                                        "width": "100%",
-                                        "height": "100%",
-                                        "locale": "in",
-                                        "dateRange": "12M",
-                                        "colorTheme": "light",
-                                        "trendLineColor": "rgba(246, 178, 107, 1)",
-                                        "underLineColor": "rgba(255, 242, 204, 1)",
-                                        "isTransparent": true,
-                                        "autosize": true,
-                                        "largeChartUrl": ""
-                                    }
-                                        </script>
-                                    </div>
-                                    <!-- TradingView Widget END -->
-                                </div>			
-                                </div>
-                                <div class="col-12 col-md-4">
-                                <div class="box box-body pull-up">
-                                    <!-- TradingView Widget BEGIN -->
-                                    <div class="tradingview-widget-container">
-                                        <div class="tradingview-widget-container__widget"></div>
-                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                                        {
-                                        "symbol": "BINANCE:XRPUSDT",
-                                        "width": "100%",
-                                        "height": "100%",
-                                        "locale": "in",
-                                        "dateRange": "12M",
-                                        "colorTheme": "light",
-                                        "trendLineColor": "rgba(246, 178, 107, 1)",
-                                        "underLineColor": "rgba(255, 242, 204, 1)",
-                                        "isTransparent": true,
-                                        "autosize": true,
-                                        "largeChartUrl": ""
-                                    }
-                                        </script>
-                                    </div>
-                                    <!-- TradingView Widget END -->
-                                </div>			
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="tab1" role="tabpanel">
-                        <div class="px-15 pt-15">
-                            <div class="row">
-                                <div class="col-12 col-md-4">
-                                <div class="box box-body pull-up">
-                                    <!-- TradingView Widget BEGIN -->
-                                    <div class="tradingview-widget-container">
-                                        <div class="tradingview-widget-container__widget"></div>
-                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                                        {
-                                        "symbol": "BITSTAMP:BTCUSD",
-                                        "width": "100%",
-                                        "height": "100%",
-                                        "locale": "in",
-                                        "dateRange": "12M",
-                                        "colorTheme": "light",
-                                        "trendLineColor": "rgba(246, 178, 107, 1)",
-                                        "underLineColor": "rgba(255, 242, 204, 1)",
-                                        "isTransparent": true,
-                                        "autosize": true,
-                                        "largeChartUrl": ""
-                                    }
-                                        </script>
-                                    </div>
-                                    <!-- TradingView Widget END -->
-                                </div>			
-                                </div>
-                                <div class="col-12 col-md-4">
-                                <div class="box box-body pull-up">
-                                    <!-- TradingView Widget BEGIN -->
-                                    <div class="tradingview-widget-container">
-                                        <div class="tradingview-widget-container__widget"></div>
-                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                                        {
-                                        "symbol": "BITSTAMP:ETHUSD",
-                                        "width": "100%",
-                                        "height": "100%",
-                                        "locale": "in",
-                                        "dateRange": "12M",
-                                        "colorTheme": "light",
-                                        "trendLineColor": "rgba(246, 178, 107, 1)",
-                                        "underLineColor": "rgba(255, 242, 204, 1)",
-                                        "isTransparent": true,
-                                        "autosize": true,
-                                        "largeChartUrl": ""
-                                    }
-                                        </script>
-                                    </div>
-                                    <!-- TradingView Widget END -->
-                                </div>			
-                                </div>
-                                <div class="col-12 col-md-4">
-                                <div class="box box-body pull-up">
-                                    <!-- TradingView Widget BEGIN -->
-                                    <div class="tradingview-widget-container">
-                                        <div class="tradingview-widget-container__widget"></div>
-                                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-                                        {
-                                        "symbol": "BINANCE:XRPUSDT",
-                                        "width": "100%",
-                                        "height": "100%",
-                                        "locale": "in",
-                                        "dateRange": "12M",
-                                        "colorTheme": "light",
-                                        "trendLineColor": "rgba(246, 178, 107, 1)",
-                                        "underLineColor": "rgba(255, 242, 204, 1)",
-                                        "isTransparent": true,
-                                        "autosize": true,
-                                        "largeChartUrl": ""
-                                    }
-                                        </script>
-                                    </div>
-                                    <!-- TradingView Widget END -->
-                                </div>			
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> 
 
-{{-- <section class="py-50 bg-white" data-aos="fade-up">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 col-12 text-center">
-                <h1 class="mb-15">Live Market</h1>					
-                <hr class="w-100 bg-primary">
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="box box-body">
-                    <div style="height:433px; background-color: #FFFFFF; overflow:hidden; box-sizing: border-box; border: 1px solid #56667F; border-radius: 4px; text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #56667F; padding: 0px; margin: 0px; width: 100%;"><div style="height:413px; padding:0px; margin:0px; width: 100%;"><iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=light&cnt=6&pref_coin_id=1505&graph=yes" width="100%" height="409px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0;"></iframe></div><div style="color: #FFFFFF; line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%; font-family: Verdana, Tahoma, Arial, sans-serif;"><a href="https://coinlib.io" target="_blank" style="font-weight: 500; color: #FFFFFF; text-decoration:none; font-size:11px">Cryptocurrency Prices</a>&nbsp;by Coinlib</div></div>
-                </div>
-            </div>
-        </div>						
-    </div>
-</section> --}}
 <section id="about" style="padding-top: 15px;">
 </section>
 <section>
@@ -310,8 +131,9 @@
             </div>
         </div>
         <div class="row mt-30">
-            @if(\App\Models\Package::count() > 1)
-                @foreach(\App\Models\Package::all() as $package)
+            {{-- {{ dd(\App\Models\Package::where('status', 'published')->count()) }} --}}
+            @if($packages->count() > 1)
+                @foreach($packages as $package)
                 <div class="col-lg-3 col-12">
                     <a href="{{ route('login', $package->id) }}" target="_blank">
                     <div class="box packages">

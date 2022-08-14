@@ -13,7 +13,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $packages = Package::where('status', 'published')->get();
+       
+        return view('welcome')->with('packages', $packages);
     }
 
     public function about()
@@ -73,18 +75,17 @@ class HomeController extends Controller
         if($request->amount < $package->amount || $request->amount > $package->max_amount){
             return back()->with('error', 'Amount entered not within range');
         }
-        $check = InvestorPackage::where('package_id', $package->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
-        if (isset($check) && $check->count() > 0) {
-            return back()->with('error', 'You already have this package and it is active');
-        }
+        // $check = InvestorPackage::where('package_id', $package->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
+        // if (isset($check) && $check->count() > 0) {
+        //     return back()->with('error', 'You already have this package and it is active');
+        // }
 
         $charge = app('App\Http\Controllers\FunctionsController')->createCharge([
             'name' => $package->name, 'description' => '', 'amount' => $request->amount, 'package_id' => $package->id
         ]);
-
-        $charge['daily_roi'] = $this->getRoi($package, $charge['amount']);
-       
+        
         if (!is_null($charge)) {
+            $charge['daily_roi'] = $this->getRoi($package, $charge['amount']);
             \DB::table('investors_packages')->insert($charge);
             return redirect()->away($charge['url']);
         } else {

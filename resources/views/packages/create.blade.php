@@ -62,13 +62,21 @@
                   <div class="form-control-feedback">@error('daily_roi') {{ $message }} @enderror</div>
                 </div>
                 
-                 <div class="form-group">
+                <div class="form-group">
                   <h5>{{ __('Validity Period') }}</h5>
                   <div class="controls">
                     <input type="number" name="validity_period" class="form-control" required
                       data-validation-required-message="This field is required" min="1" max="31" value="{{ old('validity_period') }}">
                   </div>
                   <div class="form-control-feedback">@error('validity_period') {{ $message }} @enderror</div>
+                </div>
+                <div class="form-group">
+                  <h5>{{ __('Status') }}</h5>
+                  <select name="status" id="status"
+                    class="form-control" required>
+                    <option value="published" selected>Published</option>
+                    <option value="draft">Draft</option>
+                  </select>
                 </div>
                 <div class="text-xs-right">
                   <button type="submit" class="btn btn-info">{{ __('Submit') }}</button>

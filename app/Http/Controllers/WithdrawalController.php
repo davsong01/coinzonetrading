@@ -116,13 +116,14 @@ class WithdrawalController extends Controller
         
         // Send email to investor
         $data = [
-            'reference' => $withdrawal->reference,
-            'email' => request()->user()->email,
+            'reference' => $withdrawal->reference_id,
+            'email' => $withdrawal->requestedBy->email,
             'type' => 'withdrawal-status-change-to-investor',
-            'name' => request()->user()->name,
+            'name' => $withdrawal->requestedBy->name,
             'status' =>  $withdrawal->status,
+            'date_requested' =>  $withdrawal->created_at,
         ];
-      
+       
         app('App\Http\Controllers\FunctionsController')->sendEmails($data);
 
         // Todo : Only log into wallet when status == accepted, but send email regardless of status

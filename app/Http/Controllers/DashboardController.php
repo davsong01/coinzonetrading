@@ -117,7 +117,8 @@ class DashboardController extends Controller
     }
 
     public function myPackages(){
-        $packages = Package::orderBy('created_at', 'DESC')->get();
+        $packages = Package::orderBy('created_at', 'DESC')->where('status', 'published')->get();
+        
         $userPackages = InvestorPackage::where(['investor_id' =>request()->user()->id])->orderBy('created_at', 'DESC');
         $mypackages = $userPackages->get();
       

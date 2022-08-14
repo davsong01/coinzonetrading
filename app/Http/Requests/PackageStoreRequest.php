@@ -28,6 +28,7 @@ class PackageStoreRequest extends FormRequest
             'short_description' => 'required|max:255',
             'amount' => 'required|numeric',
             'daily_roi' => 'required|numeric',
+            'status' => 'required',
             'max_amount' => 'required|numeric',
             'validity_period' => 'required|max:31',
         ];

@@ -130,7 +130,15 @@
             </span>
           </a>
         </li>
-        <li class="{{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
+        <li class="{{ request()->routeIs('mywallet.history') ? 'active' : '' }}">
+          <a href="{{route('mywallet.history')}}">
+            <i class="cc BCN-alt"></i> <span>Wallet history</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+        </li>
+         <li class="{{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
           <a href="{{route('withdrawal.index')}}">
             <i class="icon-layers"></i> <span>Withdrawal history</span>
             <span class="pull-right-container">
@@ -138,6 +146,7 @@
             </span>
           </a>
         </li>
+        
         <li class="{{ request()->routeIs('profile') ? 'active' : '' }}">
           <a href="{{route('profile')}}">
             <i class="icon-people"></i> <span>My Profile</span>

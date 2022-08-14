@@ -71,6 +71,14 @@
                   </div>
                   <div class="form-control-feedback">@error('validity_period') {{ $message }} @enderror</div>
                 </div>
+                <div class="form-group">
+                  <h5>{{ __('Status') }}</h5>
+                  <select name="status" id="status"
+                    class="form-control" required>
+                    <option value="published" {{ $package->status == 'published' ?? 'selected' }}>Published</option>
+                    <option value="draft" {{ $package->status == 'draft' ?? 'selected' }}>Draft</option>
+                  </select>
+                </div>
                 <div class="text-xs-right">
                   <button type="submit" class="btn btn-info">{{ __('Update') }}</button>
                 </div>

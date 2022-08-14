@@ -39,7 +39,11 @@ Thank you.
 @if($data['type'] == 'withdrawal-status-change-to-investor')
 Dear {{ $data['name'] }},
 
-Your request to withdraw has been updated!
+Your request to withdraw has been {{ strtoUpper($data['status']) }}!
+
+Reference: {{ $data['reference'] }} 
+
+Date requested : {{ $data['date_requested'] }}
 
 Status: <span style="color:{{ $data['status'] == 'accepted' ? 'green' : 'red'}}"> {{ $data['status'] }}</span>
 

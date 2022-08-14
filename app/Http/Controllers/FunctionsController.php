@@ -139,7 +139,7 @@ class FunctionsController extends Controller
         curl_close($curl);
         $response = json_decode($response);
 
-        if($response->data){
+        if(isset($response) && isset($response->data)){
             return [
                 'code' => $response->data->code,
                 'fee_rate' => $response->data->fee_rate,
@@ -153,9 +153,10 @@ class FunctionsController extends Controller
                 'currency' => $response->data->pricing->local->currency,
                 'url' => $response->data->hosted_url
             ];
+        }else{
+            return NULL;
         }
 
-        return NULL;
     }
 
     public function queryCharge($code){

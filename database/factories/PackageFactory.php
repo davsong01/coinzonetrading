@@ -18,8 +18,9 @@ class PackageFactory extends Factory
             'name' => $this->faker->words(3, true),
             'short_description' => $this->faker->words(5, true),
             'amount' => intval($this->faker->numerify('######')),
+            'max_amount' => abs( intval($this->faker->numerify('######'))),
             'daily_roi' => intval($this->faker->numerify('##')),
-            'monthly_roi' => intval($this->faker->numerify('###')),
+            // 'monthly_roi' => intval($this->faker->numerify('###')),
             'validity_period' => intval($this->faker->numerify('##')),
             'user_id' => User::factory()->create()
         ];

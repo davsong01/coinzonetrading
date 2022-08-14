@@ -25,6 +25,7 @@ class CreatePackagesTable extends Migration
             $table->foreignId('user_id')
             ->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

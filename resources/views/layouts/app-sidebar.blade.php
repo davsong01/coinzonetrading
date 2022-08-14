@@ -43,7 +43,7 @@
             </span>
           </a>
         </li>
-        
+
         <li class="treeview {{ request()->routeIs('packages.*') ? 'active' : '' }}">
           <a href="#">
             <i class="icon-chart"></i>
@@ -55,6 +55,7 @@
           <ul class="treeview-menu">
             <li class="{{ request()->routeIs('packages.index') ? 'active' : '' }}"><a href="{{ route('packages.index') }}">All Packages</a></li>
             <li class="{{ request()->routeIs('packages.create') ? 'active' : '' }}"><a href="{{ route('packages.create') }}">Create Package</a></li>
+            <li class="{{ request()->routeIs('packages.trashed') ? 'active' : '' }}"><a href="{{ route('packages.trashed') }}">Trashed Packages</a></li>
           </ul>
         </li>
         <li class="{{ request()->routeIs('alltransactions') ? 'active' : '' }}">

@@ -17,7 +17,7 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::withCount('users')->orderBy('created_at', 'DESC')->get();
-       
+
         return view('packages.index',[
             'packages' => $packages,
             'setting' => $this->settings,
@@ -43,7 +43,7 @@ class PackageController extends Controller
     public function store(PackageStoreRequest $request)
     {
         Package::create($request->validated());
-        
+
         return redirect()->route('packages.index')->with('message', 'Package created successfully');
     }
 
@@ -85,7 +85,7 @@ class PackageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft delete the specified resource from storage.
      *
      * @param  \App\Models\Package  $package
      * @return \Illuminate\Http\Response
@@ -97,6 +97,42 @@ class PackageController extends Controller
         }
 
         $package->delete();
-        return back()->with('message', 'Delete Successful!');
+        return back()->with('message', 'Trash Successful!');
+    }
+
+    /**
+     * Display a listing of trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        return view('packages.trashed', [
+            'trashes' => Package::onlyTrashed()->orderBy('deleted_at', 'DESC')->get(),
+        ]);
+    }
+
+    /**
+     * Restore deleted specified resource from storage.
+     *
+     * @param  $package
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($package)
+    {
+        Package::withTrashed()->findOrFail($package)->restore();
+        return back()->with('message', 'Restore Successful!');
+    }
+
+    /**
+     * Force delete the specified resource from storage.
+     *
+     * @param  $package
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($package)
+    {
+        Package::withTrashed()->findOrFail($package)->forceDelete();
+        return back()->with('message', 'Permanent Delete Successful!');
     }
 }

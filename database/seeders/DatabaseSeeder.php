@@ -23,11 +23,14 @@ class DatabaseSeeder extends Seeder
         $user = User::factory([
             'email' => 'dev@coinzonetrading.test',
             'password' => Hash::make('password'),
+            'role' => 'admin'
         ])->create();
         Package::factory(3)->create();
         Setting::factory()->create();
         Package::factory(5)->create();
         Wallet::factory(5)->create();
+
+        $user->admin()->create();
 
         Wallet::factory(10, [
             'user_id' => $user->id,

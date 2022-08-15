@@ -38,7 +38,7 @@ class DashboardController extends Controller
             $investor->update([
                 'phone' => $request->phone ?? $investor->phone,
                 'wallet_type' => $request->wallet_type ?? $investor->wallet_type,
-                'country' => $request->wallet_address ?? $investor->country,
+                'country' => $request->country ?? $investor->country,
                 'zip_code' => $request->zip_code ?? $investor->zip_code,
                 'address' => $request->address ?? $investor->address,
                 'state' => $request->state ?? $investor->state,

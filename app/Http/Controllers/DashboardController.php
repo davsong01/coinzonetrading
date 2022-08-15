@@ -38,7 +38,10 @@ class DashboardController extends Controller
             $investor->update([
                 'phone' => $request->phone ?? $investor->phone,
                 'wallet_type' => $request->wallet_type ?? $investor->wallet_type,
-                'wallet_addrress' => $request->wallet_address ?? $investor->wallet_address,
+                'country' => $request->wallet_address ?? $investor->country,
+                'zip_code' => $request->zip_code ?? $investor->zip_code,
+                'address' => $request->address ?? $investor->address,
+                'state' => $request->state ?? $investor->state,
             ]);
             // dd($investor->user);
             $this->validate($request, [
@@ -73,6 +76,10 @@ class DashboardController extends Controller
                 'phone' => $request->phone ?? $request->user()->investor->phone,
                 'wallet_type' => $request->wallet_type ?? $request->user()->investor->wallet_type,
                 'wallet_addrress' => $request->wallet_address ?? $request->user()->investor->wallet_address,
+                'country' => $request->country ?? $request->user()->investor->country,
+                'zip_code' => $request->zip_code ?? $request->user()->investor->zip_code,
+                'address' => $request->address ?? $request->user()->investor->address,
+                'state' => $request->state ?? $request->user()->investor->state,
             ]);
         }
        
@@ -120,7 +127,7 @@ class DashboardController extends Controller
         $packages = Package::orderBy('created_at', 'DESC')->where('status', 'published')->get();
         
         $userPackages = InvestorPackage::where(['investor_id' =>request()->user()->id])->orderBy('created_at', 'DESC');
-        $mypackages = $userPackages->get();
+        $mypackages = $userPackages->take(5)->get();
       
         $otherpackages = array_column($userPackages->get('package_id')->toArray(), 'package_id');
         $otherpackages = $packages->whereNotIn('id', $otherpackages);

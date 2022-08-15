@@ -47,7 +47,7 @@
                                                 <!-- Profile Image -->
                                                 <div class="box bg-yellow bg-deathstar-dark">
                                                     <div class="box-body box-profile">
-                                                        <img class="profile-user-img rounded img-fluid mx-auto d-block"
+                                                        <img style="border-radius:50% !important" class="profile-user-img img-fluid mx-auto d-block"
                                                             src="{{ asset(!empty($investor->profile_picture) ? $investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}" alt="User Image">
                                                         <h2 class="profile-username text-center mb-0">
                                                             {{ $investor->user->name }}</h2>
@@ -122,6 +122,34 @@
                                                                                 placeholder="Enter email" required>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Country</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input class="form-control" name="country" type="text" value="{{  $investor->country ?? old('country') }}"
+                                                                            placeholder="Country">
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Address</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input class="form-control" name="address" type="text" value="{{  $investor->address ?? old('address') }}"
+                                                                            placeholder="Address">
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">State/Region</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input class="form-control" name="state" type="text" value="{{  $investor->state ?? old('state') }}"
+                                                                            placeholder="State/Region">
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Zip Code</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input class="form-control" name="zip_code" type="text" value="{{  $investor->zip_code ?? old('zip_code') }}"
+                                                                            placeholder="Zip code">
+                                                                        </div>
+                                                                        </div>
                                                                     <input type="hidden" name="investor_id" value="{{ $investor->id }}">
                                                                   
 

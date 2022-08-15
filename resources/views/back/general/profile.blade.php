@@ -20,7 +20,7 @@
           <!-- Profile Image -->
           <div class="box bg-yellow bg-deathstar-dark">
             <div class="box-body box-profile">
-            <img class="profile-user-img rounded img-fluid mx-auto d-block"  src="
+            <img style="border-radius: 50%; !important" class="profile-user-img img-fluid mx-auto d-block"  src="
 			@if(auth()->user()->role == 'admin' || auth()->user()->role == 'staff')
 			{{ asset(!empty(auth()->user()->admin->profile_picture) ? auth()->user()->admin->profile_picture : 'back-end/images/user2-160x160.jpg') }}
 			@else
@@ -74,6 +74,37 @@
 						 placeholder="Phone number" required>
 					  </div>
 					</div>
+					
+					@if(auth()->user()->role == 'investor')
+					<div class="form-group row">
+					  <label class="col-sm-2 col-form-label">Country</label>
+					  <div class="col-sm-10">
+						<input class="form-control" name="country" type="text" value="{{ auth()->user()->investor->country ?? old('country') }}"
+						 placeholder="Country">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <label class="col-sm-2 col-form-label">Address</label>
+					  <div class="col-sm-10">
+						<input class="form-control" name="address" type="text" value="{{ auth()->user()->investor->address ?? old('address') }}"
+						 placeholder="Address">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <label class="col-sm-2 col-form-label">State/Region</label>
+					  <div class="col-sm-10">
+						<input class="form-control" name="state" type="text" value="{{ auth()->user()->investor->state ?? old('state') }}"
+						 placeholder="State/Region">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <label class="col-sm-2 col-form-label">Zip Code</label>
+					  <div class="col-sm-10">
+						<input class="form-control" name="zip_code" type="text" value="{{ auth()->user()->investor->zip_code ?? old('zip_code') }}"
+						 placeholder="Zip code">
+					  </div>
+					</div>
+					@endif
 					 <div class="form-group row">
 					  <label class="col-sm-2 col-form-label">Change Password (Optional)</label>
 					  <div class="col-sm-10">

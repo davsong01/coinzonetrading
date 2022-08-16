@@ -51,17 +51,17 @@
                         </div>
 
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <div class="checkbox ms-5">
                               <input type="checkbox" id="basic_checkbox_1">
-                              <label for="basic_checkbox_1" class="form-label">{{ __('Remember Me') }}</label>
+                              <label for="basic_checkbox_1" class="form-label remember">{{ __('Remember Me') }}</label>
                             </div>
                           </div>
                           <!-- /.col -->
                           @if (Route::has('password.request'))
-                            <div class="col-6">
-                              <div class="fog-pwd text-end">
-                                <a href="{{ route('password.request') }}" class="hover-warning"><i
+                            <div class="col-md-6">
+                              <div class="fog-pwd">
+                                <a href="{{ route('password.request') }}" class="hover-warning remember"><i
                                     class="ion ion-locked"></i>{{ __(' Forgot your password?') }}</a><br>
                               </div>
                             </div>
@@ -119,7 +119,7 @@
                           <div class="col-12">
                             <div class="checkbox ms-5">
                               <input type="checkbox" id="basic_checkbox_22">
-                              <label for="basic_checkbox_22" class="form-label">{{ __('I agree to the ') }}<a
+                              <label for="basic_checkbox_22" class="form-label remember">{{ __('I agree to the ') }}<a
                                   target="_blank" href="{{ route('rules') }}"
                                   class="text-warning"><b>{{ __('Terms') }}</b></a>
                               </label>

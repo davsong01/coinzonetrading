@@ -32,10 +32,10 @@
                                 <li class="nav-item"> <a class="nav-link {{ !is_null($hid) && $hid == 'profile' ? 'active' : '' }}" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ion-home"></i></span> <span
                                             class="hidden-xs-down">Profile</span></a> </li>
                                 <li class="nav-item"> <a class="nav-link {{ !is_null($hid) && $hid == 'packages' ? 'active' : '' }}" data-toggle="tab" href="#packages"
-                                        role="tab"><span class="hidden-sm-up"><i class="ion-person"></i></span> <span
+                                        role="tab"><span class="hidden-sm-up"><i class="icon-grid"></i></span> <span
                                             class="hidden-xs-down">Packages</span></a> </li>
                                  <li class="nav-item"> <a class="nav-link {{ !is_null($hid) && $hid == 'wallet' ? 'active' : '' }}" data-toggle="tab" href="#wallet"
-                                        role="tab"><span class="hidden-sm-up"><i class="ion-person"></i></span> <span
+                                        role="tab"><span class="hidden-sm-up"><i class="icon-wallet"></i></span> <span
                                             class="hidden-xs-down">Wallet History</span></a> </li>
                             </ul>
                             <!-- Tab panes -->
@@ -349,12 +349,13 @@
                                                   @php
                                                       $count = 1;
                                                   @endphp
-                                                  @foreach ($investor->user->wallets as $wallet)
+                                                  @if(isset($investor->user->wallets) && $investor->user->wallets->count() > 1)
+                                                  @foreach ($investor->user->wallets->sortByDesc('created_at') as $wallet)
                                                   <tr>
                                                     <td>{{ $count ++ }}</td>
                                                     <td>{{ $wallet->reference }}
                                                     <small> <br>
-                                                        <strong style="color: #dd3765;">Created on: </strong>{{ $wallet->created_at }}
+                                                        <strong style="color: #dd3765;">Created on: </strong>{{ $wallet->created_at }} <br>
                                                         @if(isset($wallet->transaction->last_cron_date)) <br>
                                                         <strong style="color: #dd3765;">Last Cron</strong> {{ $wallet->transaction->last_cron_date ?? null }} 
                                                         @endif
@@ -364,6 +365,7 @@
                                                     <td style="color:{{ $wallet->type == 'credit' ? 'green' : 'red'}}">{{ ucfirst($wallet->type) }}</td>
                                                   </tr>
                                                   @endforeach
+                                                  @endif
                                                 </tbody>
                                               </table>
                                             </div>

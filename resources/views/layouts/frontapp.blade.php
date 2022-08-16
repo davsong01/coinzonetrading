@@ -65,6 +65,10 @@
             background-color: #f38e3f !important;
             border-color: #dd3765 !important;
         }	
+        .remember{
+            font-size: 13px !important;
+            color: #888ca1 !important;
+        }
      </style>
      @yield('css')
   </head>

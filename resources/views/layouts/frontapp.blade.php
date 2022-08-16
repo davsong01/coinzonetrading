@@ -69,6 +69,9 @@
             font-size: 13px !important;
             color: #888ca1 !important;
         }
+        .tv-ticker-item-tape--compact {
+            font-size: 12px;
+        }
      </style>
      @yield('css')
   </head>

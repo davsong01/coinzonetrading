@@ -85,6 +85,7 @@
                                                 <div class="box box-solid bg-black">
                                                     <div class="box-header with-border">
                                                         <h3 class="box-title">Personal details</h3>
+                                                       
                                                     </div>
                                                     <!-- /.box-header -->
                                                     <div class="box-body">
@@ -295,7 +296,7 @@
                                                       {{date("M dS, Y", strtotime($packages->end_date)). ','. date("h:ia", strtotime($packages->end_date))}}
                                                     @endif
                                                   </td>
-                                                  <td>{{ $settings->currency_sign . number_format($packages->daily_roi) }}</td>
+                                                  <td>{{ $settings->currency_sign . $packages->daily_roi }}</td>
                                                   <td>
                                                     @if(auth()->user()->admin->level == 'admin')
                                                     <a class="btn btn-block btn-info btn-xs" data-toggle="modal" data-target="#modal-right{{ $packages->id }}"> <i class="fa fa-eye"></i>Edit</a>
@@ -349,7 +350,8 @@
                                                   @php
                                                       $count = 1;
                                                   @endphp
-                                                  @if(isset($investor->user->wallets) && $investor->user->wallets->count() > 1)
+                                                  
+                                                  @if(isset($investor->user->wallets) && $investor->user->wallets->count() > 0)
                                                   @foreach ($investor->user->wallets->sortByDesc('created_at') as $wallet)
                                                   <tr>
                                                     <td>{{ $count ++ }}</td>
@@ -361,7 +363,7 @@
                                                         @endif
                                                     </small>
                                                     </td>
-                                                    <td>{{ $settings->currency_sign . number_format($wallet->amount) }}</td>
+                                                    <td>{{ $settings->currency_sign . number_format($wallet->amount, 2) }}</td>
                                                     <td style="color:{{ $wallet->type == 'credit' ? 'green' : 'red'}}">{{ ucfirst($wallet->type) }}</td>
                                                   </tr>
                                                   @endforeach

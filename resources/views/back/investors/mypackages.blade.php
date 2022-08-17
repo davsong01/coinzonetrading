@@ -75,7 +75,7 @@
                                               {{ $settings->currency_sign . number_format($package->amount) }}
                                             </td>
                                             <td>
-                                              {{ $settings->currency_sign . number_format($package->daily_roi) }}
+                                              {{ $settings->currency_sign . number_format($package->daily_roi, 2) }}
 
                                             </td>
                                       </tr>
@@ -114,7 +114,7 @@
                                 <div class="col-md-12" style="display: flex">
                                     <div class="col-md-6">
                                         <b class="box-title bold">Daily ROI:
-                                        </b><span>{{ number_format($package->daily_roi) }}%</span>
+                                        </b><span>{{ $package->daily_roi }}%</span>
                                     </div>
 
                                 </div>

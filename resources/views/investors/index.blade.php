@@ -48,13 +48,13 @@
                              @endif
                             </small>
                           </td>
-                          <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'wallet' ]) }}">{{ $settings->currency_sign . number_format($investor->user->walletBalance()) }}</a> <br>
+                          <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'wallet' ]) }}">{{ $settings->currency_sign . number_format($investor->user->walletBalance(), 2) }}</a> <br>
                             <small>
                               <span>Type: </span>{{ ucfirst($investor->wallet_type) }} <br>
                               <span>Address:</span>{{ $investor->wallet_addrress }} 
                             </small>
                           </td>
-                          <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'packages' ]) }}">{{ app('App\Http\Controllers\FunctionsController')->hasPackages($investor->user)->count() }} Packages
+                          <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'packages' ]) }}">{{ app('App\Http\Controllers\FunctionsController')->hasPackages($investor->user)->count() }} Package(s)
                             </a> </td>
                           <td style="padding: 10px 15px;width: min-content !important; margin: auto;">
                             <div class="actions" role="group" aria-label="Basic example"

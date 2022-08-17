@@ -128,7 +128,7 @@ class WithdrawalController extends Controller
 
         // Todo : Only log into wallet when status == accepted, but send email regardless of status
         if($withdrawal->status == 'accepted'){
-            app('App\Http\Controllers\FunctionsController')->logWallet('debit', $withdrawal->amount, $withdrawal->user_id, $withdrawal->reference);
+            app('App\Http\Controllers\FunctionsController')->logWallet('debit', $withdrawal->amount, $withdrawal->user_id, $withdrawal->reference_id);
         }
         // End modify
         return back()->with('message', 'Withdrawal successfully updated.');

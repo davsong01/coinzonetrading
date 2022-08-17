@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
 						<label class="form-label">Start date</label>
-                        <input style="margin: 0;" class="form-control" name="start_date" type="date" value="{{ old('start_date') }}" required>
+                        <input style="margin: 0;" class="form-control" name="start_date" type="date" value="{{ old('start_date') }}" min="{{ date('Y-m-d') }}" required>
                     </div>
                     <div class="form-group">
 						<label class="form-label">End date</label>

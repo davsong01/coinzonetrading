@@ -3,7 +3,7 @@ $canWithdraw = app('App\Http\Controllers\FunctionsController')->canWithdraw();
 ?>
 <div class="row">
     <div class="col-md-4">
-        <div class="small-box bg-warning pull-up bg-hexagons-white">
+        <div class="small-box bg-{{  $canWithdraw['eligibility'] == true ? 'success' : 'warning' }} pull-up bg-hexagons-white">
             <div class="inner">
             <h3>{{ $settings->currency_sign . auth()->user()->walletBalance()  }}</h3>
 

@@ -19,7 +19,8 @@ class CronController extends Controller
         $credited = 0;
         foreach($activeInvestors as $investor){
             try {
-                $amount = Package::whereId($investor->package_id)->value('daily_roi');
+                $amount = $investor->daily_roi;
+
                 $updateWallet = app('App\Http\Controllers\FunctionsController')->logWallet('credit', $amount, $investor->investor_id, $investor->reference);
 
                 if (!is_null($updateWallet)) {

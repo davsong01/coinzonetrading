@@ -265,7 +265,8 @@
                                                
                                                 @foreach($mypackages as $packages)
                                                 <tr>
-                                                  <td><p class="font-size-18 no-margin">{{ $packages->package->name }} <br> <span> <small><b>Initiated: </b>{{ $packages->created_at }} 
+                                                  <td><p class="font-size-18 no-margin">{{ $packages->package->name }} <br> <span> <small><b>Initiated: </b>{{ $packages->created_at }} <br>
+                                                  <span> <small><b>Reference ID: </b>{{ $packages->reference }} 
                                                     @if(auth()->user()->admin->level == 'admin' && $packages->created_by != 1)
                                                         @if(isset($packages->created_by))
                                                             <br> <small style="color:blue"><b>Created by: </b>{{ $packages->createdBy->name }} </small>
@@ -332,10 +333,12 @@
                                           <h4 class="box-title">{{ $investor->user->name }}'s Wallet history</h4>
                                         </div>
                                         <!-- /.box-header -->
+                
                                         <div class="box-body">
                                           <div class="table-responsive">
                                             <div id="example1" class="table table-striped table-bordered no-margin">
-                                              <table id="example" class="table table-bordered responsive table-hover display nowrap margin-top-10 w-p100 dataTable"
+                                               <table id="example"
+                                                class="table table-bordered table-hover display nowrap margin-top-10 w-p100 dataTable"
                                                 role="grid" aria-describedby="example_info">
                                                 <thead>
                                                   <tr>
@@ -357,7 +360,7 @@
                                                     <td>{{ $count ++ }}</td>
                                                     <td>{{ $wallet->reference }}
                                                     <small> <br>
-                                                        <strong style="color: #dd3765;">Created on: </strong>{{ $wallet->created_at }} <br>
+                                                        <strong style="color: #dd3765;">Created on: </strong>{{ $wallet->created_at }}
                                                         @if(isset($wallet->transaction->last_cron_date)) <br>
                                                         <strong style="color: #dd3765;">Last Cron</strong> {{ $wallet->transaction->last_cron_date ?? null }} 
                                                         @endif

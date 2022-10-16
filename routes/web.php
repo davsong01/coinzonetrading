@@ -53,8 +53,10 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::post('settings-two', [App\Http\Controllers\SettingController::class, 'settings2'])->name('setting2.store');
     Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
     Route::post('settings-four', [App\Http\Controllers\SettingController::class, 'settings4'])->name('setting4.store');
+    Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
 
-    Route::get('investors-packages/{investor}', [App\Http\Controllers\InvestorController::class, 'investorPackages'])->name('investors.packages');
+   
+    Route::get('resolve-wallet-backlog', [App\Http\Controllers\CronController::class, 'runCronBacklog'])->name('wallet.resolve');
 
     Route::middleware(['isAdmin:admin'])->group(function(){
         Route::resource('staff', App\Http\Controllers\StaffController::class);

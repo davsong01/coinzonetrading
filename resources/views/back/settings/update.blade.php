@@ -15,12 +15,22 @@
     <!-- Main content -->
    <section class="content">
 		<div class="row">
-			<div class="box-body">
-			<a class="btn btn-app bg-yellow" href="{{ route('cache.clear') }}">
-				<i class="fa fa-refresh"></i> Clear App Cache
-			</a>
+			<div class="col-md-3">
+				<div class="box-body">
+				<a data-toggle="tooltip" data-placement="top" title="This feature clears the site's cache" class="btn btn-info" href="{{ route('cache.clear') }}">
+					<i class="fa fa-refresh"></i> Clear App Cache
+				</a>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="box-body">
+				<a data-toggle="tooltip" data-placement="top" title="This feature resolves investors whose wallets have not been credited, it handles 500 requests at a time" class="btn btn-success" href="{{ route('wallet.resolve') }}">
+					<i class="fa fa-refresh"></i> <i class="icon-wallet"></i> Run wallet cron
+				</a>
+				</div>
 			</div>
 		</div>
+		
       <div class="row">
 		@if(auth()->user()->admin->level == 'admin')
 

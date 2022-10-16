@@ -238,11 +238,11 @@ class FunctionsController extends Controller
     }
 
 
-// Check 5:
-// Withdrawal Frequency - this is the frequency an investor can make withdrawal requests. It is in days and default is 30 days. If set to 30 days for example, investor can only make a request for withdrawal(pending, approved or declined) once in 30 days.
-// This value is set by an admin
+    // Check 5:
+    // Withdrawal Frequency - this is the frequency an investor can make withdrawal requests. It is in days and default is 30 days. If set to 30 days for example, investor can only make a request for withdrawal(pending, approved or declined) once in 30 days.
+    // This value is set by an admin
 
-   
+
     // Conditions
     // <ol>
     // <li>You must have filled these on your profile page
@@ -251,11 +251,12 @@ class FunctionsController extends Controller
     // </ol>
     // <li>You m</li>
 
-    public function updateTransaction($reference, $middleware = 'no'){
+    public function updateTransaction($reference, $middleware = 'no')
+    {
         //Check payment status and deliver value accordingly
         $transaction = InvestorPackage::with('user')->whereReference($reference)->whereStatus('pending')->first();
 
-        if(isset($transaction) && $transaction->count() > 0){
+        if (isset($transaction) && $transaction->count() > 0) {
             // if(env('ENT') == 'demo'){
             //    $data = json_decode($this->dummyCoinbaseCharge());
             // }else{
@@ -265,15 +266,16 @@ class FunctionsController extends Controller
             if (isset($data) && !empty($data->payments)) {
                 if ($data->payments[0]->status == 'CONFIRMED' && $data->code == $transaction->code) {
                     $status = $transaction->status;
-                    if(Carbon::parse($data->confirmed_at)->addMonth(1) < now()){
+                    if (Carbon::parse($data->payments[0]->detected_at)->addMonth(1) < now()) {
                         $status = 'expired';
-                    }else{
+                    } else {
                         $status = 'active';
                     }
+
                     $transaction->update([
                         'status' => $status,
-                        'start_date' => Carbon::parse($data->confirmed_at),
-                        'end_date' => Carbon::parse($data->confirmed_at)->addMonth(1),
+                        'start_date' => Carbon::parse($data->payments[0]->detected_at),
+                        'end_date' => Carbon::parse($data->payments[0]->detected_at)->addMonth(1),
                         'last_cron_date' => NULL,
                         'test' => json_encode($data),
                     ]);
@@ -282,22 +284,23 @@ class FunctionsController extends Controller
         }
 
         if ($middleware == 'none') {
-            if($transaction->status == 'pending'){
+            if ($transaction->status == 'pending') {
                 return back()->with('error', 'Status is: ' . $transaction->status);
-            }else{
+            } else {
                 return back()->with('message', 'Status is: ' . $transaction->status);
             }
         }
 
         if ($middleware == 'admin') {
-            return redirect(route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'packages']))->with('message', 'Status is: '. $transaction->status);
+            return redirect(route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'packages']))->with('message', 'Status is: ' . $transaction->status);
         }
-        if($middleware == 'yes'){
+        if ($middleware == 'yes') {
             return;
-        }else{
+        } else {
             return redirect(route('investor.packages'));
         }
     }
+
 
     public function getInvestorPacakgeValidity($investor_id, $package_id){
 
@@ -335,79 +338,6 @@ class FunctionsController extends Controller
     }
 
     public function dummyCoinbaseCharge(){
-        return '{
-                "id": "f765421f2-1451-fafb-a513-aac6c819fba9",
-                "resource": "charge",
-                "code": "4EAGRJEJ",
-                "name": "The Sovereign Individual",
-                "description": "Mastering the Transition to the Information Age",
-                "logo_url": "https://commerce.coinbase.com/charges/ybjknds.png",
-                "hosted_url": "https://commerce.coinbase.com/charges/66BEOV2A",
-                "created_at": "2017-01-31T20:49:02Z",
-                "expires_at": "2017-01-31T21:49:02Z",
-                "confirmed_at": "2017-01-31T20:50:02Z",
-                "checkout": {
-                    "id": "a76721f2-1611-48fb-a513-aac6c819a9d6"
-                },
-                "timeline": [
-                    {
-                    "time": "2017-01-31T20:49:02Z",
-                    "status": "NEW"
-                    },
-                    {
-                    "time": "2017-01-31T20:50:02Z",
-                    "status": "PENDING"
-                    },
-                    {
-                    "time": "2017-01-31T20:50:02Z",
-                    "status": "COMPLETED"
-                    },
-                    {
-                    "time": "2017-01-31T20:50:02Z",
-                    "status": "UNRESOLVED",
-                    "context": "UNDERPAID"
-                    },
-                    {
-                    "time": "2017-01-31T20:50:02Z",
-                    "status": "RESOLVED"
-                    }
-                ],
-                "metadata": {},
-                "pricing_type": "fixed_price",
-                "pricing": {
-                    "local": { "amount": "500.00", "currency": "USD" },
-                    "bitcoin": { "amount": "1.00", "currency": "BTC" },
-                    "ethereum": { "amount": "10.00", "currency": "ETH" }
-                },
-                "payment_threshold": {
-                    "overpayment_absolute_threshold": { "amount": "5.00", "currency": "USD" },
-                    "overpayment_relative_threshold": "0.05",
-                    "underpayment_absolute_threshold": { "amount": "5.00", "currency": "USD" },
-                    "underpayment_relative_threshold": "0.05"
-                },
-                "applied_threshold": { "amount": "5.00", "currency": "USD" },
-                "applied_threshold_type": "RELATIVE",
-                "payments": [
-                    {
-                    "network": "ethereum",
-                    "transaction_id": "0xe02fead885c3e4019945428ed54d094247bada2d0ac41b08fce7ce137bf29587",
-                    "status": "CONFIRMED",
-                    "value": {
-                        "local": { "amount": "500.0", "currency": "USD" },
-                        "crypto": { "amount": "10.00", "currency": "ETH" }
-                    },
-                    "block": {
-                        "height": 100,
-                        "hash": "0xe02fead885c3e4019945428ed54d094247bada2d0ac41b08fce7ce137bf29587",
-                        "confirmations_accumulated": 8,
-                        "confirmations_required": 2
-                    }
-                    }
-                ],
-                "addresses": {
-                    "bitcoin": "mymZkiXhQNd6VWWG7VGSVdDX9bKmviti3U",
-                    "ethereum": "0x419f91df39951fd4e8acc8f1874b01c0c78ceba6"
-                }
-                }';
+        return '{"addresses":{"ethereum":"0x8d9b02ba407b0cf79c7df30f1890e4b145e13070","usdc":"0x8d9b02ba407b0cf79c7df30f1890e4b145e13070","dai":"0x8d9b02ba407b0cf79c7df30f1890e4b145e13070","apecoin":"0x8d9b02ba407b0cf79c7df30f1890e4b145e13070","shibainu":"0x8d9b02ba407b0cf79c7df30f1890e4b145e13070","tether":"0x8d9b02ba407b0cf79c7df30f1890e4b145e13070","bitcoincash":"qz35vxgg3k2dz9an9kw28e3d73mupmtcvyee8nm736","dogecoin":"DSK6ces54BQ73xq1AFHX9EJNfcsKZcnHzH","litecoin":"MAmqbWHXL3iN8VHxkDkh6Pyf8mZsgpCMFt","bitcoin":"36J8Ga4KGUiH4gKpAegwNNyXQ2RWp9kAZN"},"applied_threshold":{"amount":"2.50","currency":"USD"},"applied_threshold_type":"RELATIVE","brand_color":"#122332","brand_logo_url":"","code":"YHEELT3Q","created_at":"2022-10-16T11:27:49Z","description":"","exchange_rates":{"APE-USD":"4.4955","BCH-USD":"110.005","BTC-USD":"19139.465","DAI-USD":"1.00025","ETH-USD":"1282.445","LTC-USD":"50.905","DOGE-USD":"0.058955","SHIB-USD":"0.000010235","USDC-USD":"1.0","USDT-USD":"1.000045"},"expires_at":"2022-10-16T12:27:49Z","fee_rate":0.01,"fees_settled":true,"hosted_url":"https:\/\/commerce.coinbase.com\/charges\/YHEELT3Q","id":"0a8b7f3a-e7c0-4f09-a651-6bfedb8f4de3","local_exchange_rates":{"APE-USD":"4.4955","BCH-USD":"110.005","BTC-USD":"19139.465","DAI-USD":"1.00025","ETH-USD":"1282.445","LTC-USD":"50.905","DOGE-USD":"0.058955","SHIB-USD":"0.000010235","USDC-USD":"1.0","USDT-USD":"1.000045"},"logo_url":"","metadata":{"reference":"2022-10-1279876","package_id":"1","customer_id":"22","customer_name":"Arwa"},"name":"Coinzonetrading Flexible One-Stop Investment","offchain_eligible":false,"organization_name":"","payment_threshold":{"overpayment_absolute_threshold":{"amount":"5.00","currency":"USD"},"overpayment_relative_threshold":"0.005","underpayment_absolute_threshold":{"amount":"5.00","currency":"USD"},"underpayment_relative_threshold":"0.005"},"payments":[{"payment_id":"e840e585-6ff5-46cb-a340-9f228abd605a","network":"bitcoin","transaction_id":"7cf1bdc3fc1b4fe73eecc7d661957bd1de89d7b72f6042162d8aa69b8c0b55d6","status":"CONFIRMED","detected_at":"2022-10-16T11:47:35Z","value":{"local":{"amount":"503.01","currency":"USD"},"crypto":{"amount":"0.02628155","currency":"BTC"}},"block":{"height":758932,"hash":"0000000000000000000601650c37cd170736f581efeff78699d4c74703e1cd39","confirmations":50,"confirmations_required":1},"deposited":{"autoconversion_enabled":false,"autoconversion_status":"PENDING","status":"COMPLETED","destination":"coinzonetrading@gmail.com","exchange_rate":null,"amount":{"gross":{"local":null,"crypto":{"amount":"0.02628155","currency":"BTC"}},"net":{"local":null,"crypto":{"amount":"0.02601873","currency":"BTC"}},"coinbase_fee":{"local":null,"crypto":{"amount":"0.00026282","currency":"BTC"}}}},"coinbase_processing_fee":{"local":{"amount":"5.03","currency":"USD"},"crypto":{"amount":"0.00026282","currency":"BTC"}},"net":{"local":{"amount":"497.98","currency":"USD"},"crypto":{"amount":"0.02601873","currency":"BTC"}}}],"pricing":{"local":{"amount":"500.00","currency":"USD"},"ethereum":{"amount":"0.389880000","currency":"ETH"},"usdc":{"amount":"500.000000","currency":"USDC"},"dai":{"amount":"499.875031242189452637","currency":"DAI"},"apecoin":{"amount":"111.222333444555666778","currency":"APE"},"shibainu":{"amount":"48851978.505129500000000000","currency":"SHIB"},"tether":{"amount":"499.977501","currency":"USDT"},"bitcoincash":{"amount":"4.54524794","currency":"BCH"},"dogecoin":{"amount":"8481.04486450","currency":"DOGE"},"litecoin":{"amount":"9.82221786","currency":"LTC"},"bitcoin":{"amount":"0.02612403","currency":"BTC"}},"pricing_type":"fixed_price","pwcb_only":false,"redirect_url":"https:\/\/coinzonetrading.com\/payment\/callback\/2022-10-1279876","resource":"charge","support_email":"coinzonetrading@gmail.com","timeline":[{"status":"NEW","time":"2022-10-16T11:27:49Z"},{"status":"PENDING","time":"2022-10-16T11:47:35Z","payment":{"network":"bitcoin","transaction_id":"7cf1bdc3fc1b4fe73eecc7d661957bd1de89d7b72f6042162d8aa69b8c0b55d6","value":{"amount":"0.02628155","currency":"BTC"}}},{"status":"UNRESOLVED","context":"OVERPAID","time":"2022-10-16T11:51:54Z","payment":{"network":"bitcoin","transaction_id":"7cf1bdc3fc1b4fe73eecc7d661957bd1de89d7b72f6042162d8aa69b8c0b55d6","value":{"amount":"0.02628155","currency":"BTC"}}},{"status":"RESOLVED","time":"2022-10-16T16:32:34Z"}],"utxo":true}';
     }
 }

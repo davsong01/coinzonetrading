@@ -268,7 +268,7 @@
                                                   <td><p class="font-size-18 no-margin">{{ $packages->package->name }} <br> <span> <small><b>Initiated: </b>{{ $packages->created_at }} <br>
                                                   <span> <small><b>Reference ID: </b>{{ $packages->reference }} 
                                                     @if(auth()->user()->admin->level == 'admin' && $packages->created_by != 1)
-                                                        @if(isset($packages->created_by))
+                                                        @if(isset($packages->created_by) && isset($packages->createdBy->name))
                                                             <br> <small style="color:blue"><b>Created by: </b>{{ $packages->createdBy->name }} </small>
                                                         @endif
                                                     @endif

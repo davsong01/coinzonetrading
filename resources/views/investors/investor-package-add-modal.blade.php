@@ -15,7 +15,7 @@
                         <label class="form-label">Select Package</label>
                         <select style="margin: 0;" name="package_id" id="package_id" class="form-control" required>
                             <option value="">Select...</option>
-                            @foreach($otherpackages as $package)
+                            @foreach($packages as $package)
                             <option  value="{{ $package->id }}" {{ old('package_id') == $package->id ? 'selected' : '' }}>{{ $package->name }} ({{ $settings->currency_sign . number_format($package->amount) .' - ' . number_format($package->max_amount)}})</option>
                             @endforeach
                         </select>

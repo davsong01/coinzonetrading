@@ -27,7 +27,7 @@
                         <th>{{ __('Order No') }}</th>
                         <th>{{ __('Details') }}</th>
                        
-                        <th>{{ __('Package') }}</th>
+                        <th class="package" style="min-width: 150px;">{{ __('Package') }}</th>
                         <th>{{ __('Amount') }}</th>
                         <th>{{ __('Status') }}</th>
                         @if(auth()->user()->admin->level == 'admin')
@@ -39,8 +39,7 @@
                       @foreach ($transactions as $transaction)
                         <tr>
                           <td>{{ $transaction->code }}</td>
-                          <td>
-                            
+                          <td class="package" style="min-width: 150px;">
                               <strong class="bold">Name: </strong>{{ isset($transaction->user) ? $transaction->user->name : 'NOT SET' }}<br>
                               <strong class="bold">Email: </strong>{{ isset($transaction->user) ? $transaction->user->email : 'NOT SET' }} 
                               @if(isset($transaction->user->investor))
@@ -62,8 +61,20 @@
                           <td>{{ $settings->currency_sign . number_format($transaction->amount) }}</td>
                           <td style="color:{{ $transaction->status == 'active' ? 'green' : 'red'}}">{{ $transaction->status }}
                             @if($transaction->status == 'pending')
-                              <a href="{{ route('payment.process', ['reference' => $transaction->reference, 'middleware' => 'none']) }}" class="btn btn-info btn-sm"> <i class="fa fa-refresh"></i> </a>
+                              <a href="{{ route('payment.process', ['reference' => $transaction->reference, 'middleware' => 'none']) }}" class="btn btn-info btn-sm"> <i class="fa fa-refresh"></i> </a> 
                             @endif
+                            @if(isset($transaction->test) && !empty($transaction->test))
+                              <br>
+                              <p style="color:black;border: 1px black solid;height: 120px;width: 320px;border-radius: 5px;padding:5px;margin-top:5px">
+                                    RAW RESPONSE: <br>
+                                    <b>Payment_id: </b>{{ $transaction->payment_id }} <br>
+                                    <b>Network: </b>{{ $transaction->network }} <br>
+                                    <b>Status: </b>{{ $transaction->raw_status }} <br>
+                                    <b>Detected at: </b>{{ $transaction->detected_at }}
+                               
+                              </p>
+                            @endif
+                            
                           </td>
                           @if(auth()->user()->admin->level == 'admin')
                           <td> 

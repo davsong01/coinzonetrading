@@ -179,7 +179,7 @@ class FunctionsController extends Controller
         ));
         $response = curl_exec($curl);
         $response = json_decode($response);
-
+       
         if (isset($response)) {
             return $response->data;
         }else{
@@ -237,20 +237,6 @@ class FunctionsController extends Controller
         return ['phone', 'wallet_type', 'wallet_addrress', 'profile_picture'];
     }
 
-
-    // Check 5:
-    // Withdrawal Frequency - this is the frequency an investor can make withdrawal requests. It is in days and default is 30 days. If set to 30 days for example, investor can only make a request for withdrawal(pending, approved or declined) once in 30 days.
-    // This value is set by an admin
-
-
-    // Conditions
-    // <ol>
-    // <li>You must have filled these on your profile page
-    //     <li></li>
-    // </li>
-    // </ol>
-    // <li>You m</li>
-
     public function updateTransaction($reference, $middleware = 'no')
     {
         //Check payment status and deliver value accordingly
@@ -262,16 +248,17 @@ class FunctionsController extends Controller
             // }else{
             $data  = $this->queryCharge($transaction->code);
             // }
-
+          
             if (isset($data) && !empty($data->payments)) {
                 if ($data->payments[0]->status == 'CONFIRMED' && $data->code == $transaction->code) {
                     $status = $transaction->status;
+                    
                     if (Carbon::parse($data->payments[0]->detected_at)->addMonth(1) < now()) {
                         $status = 'expired';
                     } else {
                         $status = 'active';
                     }
-
+                    // dd($status,$data);
                     $transaction->update([
                         'status' => $status,
                         'start_date' => Carbon::parse($data->payments[0]->detected_at),

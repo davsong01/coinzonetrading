@@ -13,8 +13,24 @@ use Illuminate\Support\Facades\Hash;
 class DashboardController extends Controller
 {
     public function adminTransactions(){
+        $transactions = InvestorPackage::orderBy('created_at', 'DESC')->get();
+        $transactions->map(function($transaction){
+            if(isset($transaction->test) && !empty($transaction->test)){
+                $test = json_decode($transaction->test);
+                
+                $payments = $test->payments[0] ?? null;
+                $transaction->payment_id = $payments->payment_id ?? null;
+                $transaction->network = $payments->network ?? null;
+                $transaction->raw_status = $payments->status ?? null;
+                $transaction->detected_at =
+                date("M jS, Y", strtotime($payments->detected_at))?? null;
+            }
+            
+            return $transaction;
+        });
+
         return view('back.transactions.index', [
-            'transactions' => InvestorPackage::orderBy('created_at', 'DESC')->get(),
+            'transactions' => $transactions,
         ]);
     }
 
@@ -43,7 +59,7 @@ class DashboardController extends Controller
                 'address' => $request->address ?? $investor->address,
                 'state' => $request->state ?? $investor->state,
             ]);
-            // dd($investor->user);
+           
             $this->validate($request, [
                 'email' => 'sometimes|unique:users,email,' . $investor->user->id,
             ]);

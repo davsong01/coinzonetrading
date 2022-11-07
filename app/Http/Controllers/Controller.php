@@ -16,6 +16,7 @@ class Controller extends BaseController
     public function __construct()
     {
         $this->settings = Setting::latest()->first();
+        
         View::share('settings', $this->settings);
     }
 

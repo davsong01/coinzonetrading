@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use auth;
 use App\Models\Package;
+use App\Models\Setting;
 use App\Models\ContactForm;
 use Illuminate\Http\Request;
 use App\Models\InvestorPackage;
@@ -35,8 +36,10 @@ class HomeController extends Controller
 
     public function sendContact(Request $request)
     {
+        $settings = Setting::latest()->first();
+
         $data = [
-            'email' => $this->setting->official_email,
+            'email' => $settings->official_email,
             'type' => 'contact-mail-to-admin',
             'name' => 'Admin',
             'messageDetails' => [

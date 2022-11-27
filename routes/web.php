@@ -81,9 +81,10 @@ Route::middleware(['auth', 'verified','pendingTransactions'])->group(function ()
     Route::get( '/payment/callback/{reference}/{middleware?}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
     Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');
     Route::get('/payment-renew/{reference}', [App\Http\Controllers\DashboardController::class, 'renewPackage'])->name('package.renew');
+    
     Route::resource('withdrawal', WithdrawalController::class, [
         'only' => ['index','store']
-    ])->middleware('hasPackage');
+    ]);
 });
 
 require __DIR__.'/auth.php';

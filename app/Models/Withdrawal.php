@@ -10,7 +10,7 @@ class Withdrawal extends Model
     use HasFactory;
 
     protected $fillable = [
-        'amount', 'status', 'approved_date', 'reference_id'
+        'amount', 'status', 'approved_date', 'reference_id', 'withdrawal_method', 'withdrawal_address'
     ];
 
     protected $casts = [

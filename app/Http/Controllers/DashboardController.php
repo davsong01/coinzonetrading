@@ -139,6 +139,30 @@ class DashboardController extends Controller
         return back()->with('message', 'Profile picture changed');
     }
 
+    public function storeId(Request $request)
+    {
+        $settings = Setting::latest()->first();
+        if ($request->has('means_of_identification')) {
+            $means_of_identification = app('App\Http\Controllers\FunctionsController')->uploadImage($request->means_of_identification, 'front-end/images/ids', 700, 700);
+            
+            auth()->user()->investor->update([
+                'means_of_identification' => $means_of_identification,
+            ]);
+
+            $data = [
+                'email' => $settings->official_email,
+                'type' => 'upload-means-of-identification',
+                'investor_name' => auth()->user()->name,
+                'investor_email' => auth()->user()->email,
+                'name' => 'Administrator',
+            ];
+
+            $email = (new FunctionsController)->sendEmails($data);
+        }
+
+        return back()->with('message', 'Means of Identification successfully uploaded');
+    }
+
     public function myPackages(){
         $packages = Package::orderBy('created_at', 'DESC')->where('status', 'published')->get();
         
@@ -244,5 +268,13 @@ class DashboardController extends Controller
         return view('back.investors.mywallethistory', [
             'wallets' => $wallets,
         ]);
+    }
+
+    public function trade(){
+        return back();
+    }
+
+    public function marketData(){
+        return view('back.investors.market_data');
     }
 }

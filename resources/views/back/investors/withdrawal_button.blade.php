@@ -36,6 +36,22 @@ $canWithdraw = app('App\Http\Controllers\FunctionsController')->canWithdraw();
                     <form method="POST" action="{{ route('withdrawal.store') }}">
                         @csrf
                         <div class="form-group">
+                            <h5>Wihdrawal method</h5>
+                            <div class="controls">
+                                <input type="text" name="withdrawal_method" class="form-control" required=""
+                                    value="{{auth()->user()->investor->wallet_type}}" readonly>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <h5>Wallet address <small>(Withdrawal amount will be sent to this address)</small></h5>
+                            <div class="controls">
+                                <input type="text" name="withdrawal_address" class="form-control" required=""
+                                    value="{{auth()->user()->investor->wallet_addrress}}" readonly>
+                                <div class="help-block"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <h5>Amount (<span style="color:red">min: {{ $settings->currency_sign.'5'}}</span>, <span style="color:green">max: {{ $settings->currency_sign.$canWithdraw['max'] }}</span>)<span class="text-danger">*</span></h5>
                             <div class="controls">
                                 <input type="number" name="amount" class="form-control" required=""

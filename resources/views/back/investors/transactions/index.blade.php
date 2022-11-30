@@ -8,6 +8,8 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       </ol>
+      @include('back.investors.verification_streak')
+
     </section>
    
     <!-- Main content -->
@@ -19,9 +21,7 @@
             <div class="box-body">
               <div class="table-responsive">
                 <div id="example_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                  <table id="example"
-                    class="table table-bordered table-hover display nowrap margin-top-10 w-p100 dataTable"
-                    role="grid" aria-describedby="example_info">
+                  <table id="example" class="table table-bordered table-hover display nowrap margin-top-10 w-p100 dataTable" role="grid" aria-describedby="example_info">
                     <thead>
                       <tr>
                         <th>{{ __('Order No') }}</th>

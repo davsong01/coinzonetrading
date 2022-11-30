@@ -34,7 +34,14 @@
                     <tbody>
                       @foreach ($investors as $investor)
                         <tr>
-                          <td><a class="avatar avatar-lg status-{{ is_null(app('App\Http\Controllers\FunctionsController')->hasPackages($investor->user)) ? 'danger' : 'success' }}" href="#"><img  src="{{ asset(!empty($investor->profile_picture) ? $investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}" alt="investor-image"></a></td>
+                          <td>
+                            <a class="avatar avatar-lg status-{{ is_null(app('App\Http\Controllers\FunctionsController')->hasPackages($investor->user)) ? 'danger' : 'success' }}" href="#"><img  src="{{ asset(!empty($investor->profile_picture) ? $investor->profile_picture : 'back-end/images/user2-160x160.jpg') }}" alt="investor-image">  </a> <br>
+                            @if(!empty($investor->approved_identification))
+                            <small style="color:green"><span><i class="fa fa-check" aria-hidden="true"></i>ID Verified</span></small>
+                            @else
+                            <small style="color:red"><span><i class="fa fa-check" aria-hidden="true"></i>ID UnVerified</span></small>
+                            @endif
+                          </td>
                           <td><a href="{{ route('investors.edit', ['investor' => $investor->id, 'hid' => 'profile' ]) }}"> {{ $investor->user->name  ?? 'NOT-SET'}} </a>
                             <small>
                             <br>

@@ -40,6 +40,16 @@ class NotificationMail extends Mailable
             return $this->markdown('mails.notificationEmails')
             ->subject('Request for Withdrawal status notification');
         }
+
+        if ($this->data['type'] == 'id-approval-by-admin') {
+            return $this->markdown('mails.notificationEmails')
+            ->subject('Identification Verification successful');
+        }
+
+        if ($this->data['type'] == 'upload-means-of-identification') {
+            return $this->markdown('mails.notificationEmails')
+            ->subject('Investor uploaded means of identification');
+        }        
     }
 
 }

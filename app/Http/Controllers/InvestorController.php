@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Package;
+use App\Models\Setting;
 use App\Models\Investor;
 use Illuminate\Http\Request;
 use App\Models\InvestorPackage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\InvestorStoreRequest;
-use App\Models\Package;
 
 class InvestorController extends Controller
 {
@@ -102,6 +103,28 @@ class InvestorController extends Controller
         ]);
        
         return redirect(route('investors.edit', ['investor' => $request->user_id, 'hid' => 'packages' ]))->with('message', 'Operation successful');
+    }
+
+    public function approveId($investor_id){
+        $investor = Investor::where('id', $investor_id)->first();
+        
+        if(!empty($investor->means_of_identification)){
+            $investor->update([
+                'approved_identification' =>  $investor->means_of_identification,
+                'approved_identification_by' =>  auth()->user()->id,
+            ]);
+        }
+
+        $data = [
+            'email' => $investor->user->email,
+            'type' => 'id-approval-by-admin',
+            'name' => $investor->user->name,
+        ];
+        
+        $email = (new FunctionsController)->sendEmails($data);
+       
+        return redirect(route('investors.edit', ['investor' => $investor->id, 'hid' => 'profile']))->with('message', 'Approval successful');
+
     }
 
     public function investorPackagesDelete($id, Request $request){

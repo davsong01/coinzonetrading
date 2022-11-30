@@ -29,7 +29,9 @@ class SettingController extends Controller
         $settings->update([
             'official_email' => $request->official_email,
             'wallet_types' => $request->wallet_types,
-            'currency_sign' => $request->currency_sign
+            'currency_sign' => $request->currency_sign,
+            'allow_wallet_buy' => $request->allow_wallet_buy
+            
         ]);
        
         return back()->with('message', 'Operation successful');

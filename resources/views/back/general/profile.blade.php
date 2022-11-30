@@ -16,7 +16,6 @@
 
       <div class="row">
         <div class="col-xl-4 col-lg-5">
-
           <!-- Profile Image -->
           <div class="box bg-yellow bg-deathstar-dark">
             <div class="box-body box-profile">
@@ -46,8 +45,33 @@
             </div>
             <!-- /.box-body -->
           </div>
+		  {{-- Means of Identification --}}
+		  <div class="box bg-yellow bg-deathstar-dark">
+            <div class="box-body box-profile">
+            <img style="width:100%" class="profile-user-img img-fluid mx-auto d-block"  src="
+			{{ asset(!empty(auth()->user()->investor->means_of_identification) ? auth()->user()->investor->means_of_identification : 'back-end/images/user2-160x160.jpg') }}
+			" alt="User Image">
+             
+              <div class="form-group row"> <br><br>
+                <form action="{{ route('replaceid') }}" method="post" enctype="multipart/form-data" style="margin:auto">
+                    @csrf
+                    <label class="col-sm-12 col-form-label" style="text-align: center">{{ !empty(auth()->user()->investor->means_of_identification) ? 'Replace means of identification' : 'Upload means of identification' }}</label>
+                    <div class="col-sm-12">
+                    <input class="form-control" accept=".jpeg,.png,.jpg" type="file" name="means_of_identification">
+                    </div> <br>
+                    <div class="form-group row" style="text-align: center">
+					  <div class="col-sm-12">
+						<button type="submit" class="btn btn-yellow">{{ !empty(auth()->user()->investor->means_of_identification) ? 'Replace' : 'Upload' }}</button>
+					  </div>
+					</div>
+                </form>
+                </div>  
+            </div>
+            <!-- /.box-body -->
+          </div>
           <!-- /.box -->
         </div>
+		
         <!-- /.col -->
 
         <div class="col-xl-8 col-lg-7">

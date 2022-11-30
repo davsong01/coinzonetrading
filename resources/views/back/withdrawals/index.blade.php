@@ -41,8 +41,19 @@
                       <tr>
                         <td>{{ $count++ }}</td>
                         <td>{{ $settings->currency_sign. number_format($withdrawal->amount, 2) }}</td>
-                        <td>{{ $withdrawal->reference_id }}</td>
-                        
+                        <td>
+                          <small>
+                            <strong style="font-weight: bold;">Reference:</strong> {{ $withdrawal->reference_id }} 
+                            @if($withdrawal->withdrawal_method)
+                            <br> 
+                            <strong style="font-weight: bold;">Method:</strong> {{ $withdrawal->withdrawal_method }} 
+                            @endif
+                            @if($withdrawal->withdrawal_address)
+                            <br> 
+                            <strong style="font-weight: bold;">Address: </strong>{{ $withdrawal->withdrawal_address }}
+                            @endif
+                          </small>
+                        </td>
                         <td>{{ $withdrawal->requestedBy->name }} <br>
                           <small>{{ $withdrawal->requestedBy->email }} <a target="_blank" style="color:blue" href="{{ route('investors.edit', ['investor' => $withdrawal->requestedBy->investor->id, 'hid' => 'wallet' ] ) }}"><i class="fa fa-external-link"></i></a> </small> <br>
                           <small>{{ $withdrawal->created_at }}</small>

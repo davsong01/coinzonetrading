@@ -9,7 +9,7 @@
         <li class="breadcrumb-item active">{{ $investor->user->name }}'s Packges</li>
       </ol>
     </section>
-
+    
     <!-- Main content -->
     <section class="content">
       <div class="row">

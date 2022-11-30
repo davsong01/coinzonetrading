@@ -9,7 +9,6 @@
         <li class="breadcrumb-item active">{{ __('Packages') }}</li>
       </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -25,6 +24,7 @@
                     <thead>
                       <tr>
                         <th>{{ __('Name') }}</th>
+                        <th>{{ __('Package Method') }}</th>
                         <th>{{ __('Amount') }}</th>
                         <th>{{ __('Max Amount') }}</th>
                         <th>{{ __('Daily ROI %') }}</th>
@@ -38,6 +38,8 @@
                       @foreach ($packages as $package)
                         <tr>
                           <td>{{ $package->name }}</td>
+                          <td>{{ $package->payment_method ?? 'Crypto'}}</td>
+
                           <td>{{ $setting->currency_sign . number_format($package->amount) }}</td>
                           <td>{{ $setting->currency_sign . number_format($package->max_amount) }}</td>
                           <td>{{ $package->daily_roi }}%</td>

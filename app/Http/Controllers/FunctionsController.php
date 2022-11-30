@@ -51,7 +51,6 @@ class FunctionsController extends Controller
 
     public function sendEmails($data)
     {
-       
         try {
             Mail::to($data['email'])->send(new NotificationMail($data));
             $message = 1;
@@ -90,7 +89,7 @@ class FunctionsController extends Controller
             return $packages;
         }
         return collect([]);
-
+        
     }
     public function generateTransactionReference(){
         return date('Y') . '-' . date('m') . '-' . rand(1111111, 9999999);
@@ -204,6 +203,7 @@ class FunctionsController extends Controller
         }
 
         // Must fill details
+        // dd(is_null($user->investor()->whereNotNull($this->investorMustFillBeForeWithdrawal())->first()));
         if(is_null($user->investor()->whereNotNull($this->investorMustFillBeForeWithdrawal())->first())){
             $data['eligibility'] = false;
             $data['reasons'][] = 'You have not filled one of the following details: '. ucfirst(str_replace('_', ' ', implode(',', $this->investorMustFillBeForeWithdrawal())));
@@ -234,7 +234,7 @@ class FunctionsController extends Controller
 
     public function investorMustFillBeForeWithdrawal()
     {
-        return ['phone', 'wallet_type', 'wallet_addrress', 'profile_picture'];
+        return ['phone', 'wallet_type', 'wallet_addrress', 'profile_picture','id'];
     }
 
     public function updateTransaction($reference, $middleware = 'no')

@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile');
     Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');
     Route::POST('replaceavatar', [App\Http\Controllers\DashboardController::class, 'storeAvatar'])->name('replaceavatar');
+    Route::POST('replaceid', [App\Http\Controllers\DashboardController::class, 'storeId'])->name('replaceid');
 });
 
 // Admin
@@ -54,8 +55,8 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
     Route::post('settings-four', [App\Http\Controllers\SettingController::class, 'settings4'])->name('setting4.store');
     Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
-
-   
+    Route::post('approve-id/{investor_id}', [App\Http\Controllers\InvestorController::class, 'approveId'])->name('approveid');
+    
     Route::get('resolve-wallet-backlog', [App\Http\Controllers\CronController::class, 'runCronBacklog'])->name('wallet.resolve');
 
     Route::middleware(['isAdmin:admin'])->group(function(){
@@ -81,9 +82,12 @@ Route::middleware(['auth', 'verified','pendingTransactions'])->group(function ()
     Route::get( '/payment/callback/{reference}/{middleware?}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
     Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');
     Route::get('/payment-renew/{reference}', [App\Http\Controllers\DashboardController::class, 'renewPackage'])->name('package.renew');
+    Route::get('withdrawal-history', [App\Http\Controllers\WithdrawalController::class, 'history'])->name('withdrawal.history');
+    Route::get('investor-trade', [App\Http\Controllers\DashboardController::class, 'trade'])->name('trade');
+    Route::get('market-data', [App\Http\Controllers\DashboardController::class, 'marketData'])->name('market.data');
     
     Route::resource('withdrawal', WithdrawalController::class, [
-        'only' => ['index','store']
+        'only' => ['index','store','history']
     ]);
 });
 

@@ -50,6 +50,40 @@ Status: <span style="color:{{ $data['status'] == 'accepted' ? 'green' : 'red'}}"
 Kindly login to your account on: <a href="{{ url('/').'/withdrawal' }}">{{ env('APP_NAME') }}</a> to view your withdrawal history.
 
 @endif
+@if($data['type'] == 'withdrawal-status-change-to-investor')
+Dear {{ $data['name'] }},
+
+Your means of identification document has been verified and approved.
+
+You can now proceed with your operation on {{ config('app.name') }}.
+
+Thank you.
+
+@endif
+
+@if($data['type'] == 'id-approval-by-admin')
+Dear {{ $data['name'] }},
+
+Your means of identification document has been verified and approved.
+
+You can now proceed with your operation on {{ config('app.name') }}.
+
+Thank you.
+@endif
+
+@if($data['type'] == 'upload-means-of-identification')
+Dear {{ $data['name'] }},
+
+An investor has just uploaded a means of identification on {{ config('app.name') }}, please find detials below:
+
+Name:  {{ $data['investor_name'] }}
+
+Email:  {{ $data['investor_email'] }}
+
+kindly login to approve.
+
+Thank you
+@endif
 
 {{ config('app.name') }}
 @endcomponent

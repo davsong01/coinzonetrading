@@ -58,6 +58,13 @@
 						<label class="form-label">Currency Sign, e.g. $</label>
 							<input class="form-control" name="currency_sign" type="text" value="{{ $settings->currency_sign ?? old('currency_sign') }}" required>
 						</div>
+						<div class="form-group row">
+							<label class="form-label">Allow wallet buy</label>
+							<select name="allow_wallet_buy" id="allow_wallet_buy" class="form-control" required>
+								<option value="active" {{ 'active' == $settings->allow_wallet_buy ? 'selected' : '' }}>Active</option>
+								<option value="inactive" {{ 'inactive' == $settings->allow_wallet_buy ? 'selected' : '' }}>Inactive</option>
+							</select>
+						</div>
 					</div>
 					<div class="form-group row">
 						<button type="submit" class="btn btn-yellow settings1" style="margin: auto;">Update App Settings</button>

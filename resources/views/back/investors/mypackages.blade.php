@@ -9,8 +9,8 @@
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
                             class="fa fa-dashboard"></i>Dashboard</a></li>
             </ol>
+        @include('back.investors.verification_streak')
         </section>
-
         <!-- Main content -->
         @if($mypackages->count() > 0)
         <section class="content">
@@ -31,6 +31,7 @@
                                   <thead>
                                       <tr class="bg-pale-dark">
                                           <th>Package</th>
+                                          <th>Payment Method</th>
                                           <th>Status</th>
                                           <th>Amount</th>
                                           <th>ROI</th>
@@ -43,18 +44,17 @@
                                             {{ $package->package->name  }} <br>
                                             @if(!empty($package->end_date) && !empty($package->start_date))
                                             <div style="font-size:11px">
-                                                <span style="color:#dd3765"> <b>Start date: </span><br>  <span>{{date("M dS, Y", strtotime($package->start_date)). ','. date("h:ia", strtotime($package->start_date))}} </b></span> <br>
-
-                                              <b style="color:#dd3765">End date : </b><br>
+                                                <span style="color:#dd3765"> <b>Start date: </span><span>{{date("M dS, Y", strtotime($package->start_date)). ','. date("h:ia", strtotime($package->start_date))}} </b></span> <br>
+                                              <b style="color:#dd3765">End date : </b>
                                               <span>{{date("M dS, Y", strtotime($package->end_date)). ','. date("h:ia", strtotime($package->start_date))}}</span>
                                                 <br>
                                               @endif   
 
-                                              <b style="color:#dd3765;font-size:11px">Ref:</b>  <span style="font-size:11px">{{ $package->reference }}</span>
+                                              <b style="color:#dd3765;font-size:11px">Ref:</b>  <span style="font-size:11px">{{ $package->reference }}</span> <br>
+                                              <b style="color:#dd3765;font-size:11px">Trans Id:</b>  <span style="font-size:11px">{{ $package->rid }}</span>
                                             </div>
-                                            
-
                                           </td>
+                                          <td>{{ $package->payment_method }}</td>
                                           <td>
                                               @if(!empty($package->end_date) && $package->end_date >= \Carbon\Carbon::today())
                                               <button class="btn btn-info" style="background:#dd3765;border:none" readonly>Active</button>
@@ -119,7 +119,6 @@
 
                                 </div>
                             </p>
-
                             <div class="col-md-12" style="display: flex">
                                 <a data-toggle="modal" data-target="#modal-payment{{ $package->id }}" class="btn btn-info"
                                     style="width:100%; background:#dd3765;border:none">Purchase</a>
@@ -156,6 +155,15 @@
                                                 <div class="help-block"></div>
                                             </div>
                                         </div>
+                                        @if(\App\Models\Setting::value('allow_wallet_buy') == 'active')
+                                        <div class="form-group row" id="select-payment-method">
+                                            <label class="form-label">Select Payment method</label>
+                                            <select name="payment_method" id="payment_method" class="form-control" required>
+                                                <option value="Wallet" {{ old('payment_method') == 'Wallet' ? 'selected' : '' }}>Wallet</option>
+                                                <option value="Crypto" {{ old('payment_method') == 'Crypto' ? 'selected' : '' }}>Crypto</option>
+                                            </select>
+                                        </div>
+                                        @endif
                                         <div class="text-xs-right">
                                             <input type="hidden" name="package" value="{{ $package->id }}">
                                             <button type="submit" class="btn btn-info">Purchase Package</button>

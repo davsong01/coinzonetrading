@@ -75,6 +75,47 @@
                                                             </form>
                                                         </div>
                                                     </div>
+                                                    
+                                                    @if(!empty($investor->means_of_identification) && $investor->means_of_identification != $investor->approved_identification) 
+                                                    <div class="box bg-yellow bg-deathstar-dark">
+                                                        <div class="box-body box-profile">
+                                                        <img style="width:100%" class="profile-user-img img-fluid mx-auto d-block"  src="
+                                                        {{ asset(!empty($investor->means_of_identification) ? $investor->means_of_identification : 'back-end/images/user2-160x160.jpg') }}
+                                                        " alt="Means of identification">
+                                                        <div class="form-group row"> <br><br>
+                                                            <form action="{{ route('approveid', $investor->id) }}" method="post" enctype="multipart/form-data" style="margin:auto">
+                                                                @csrf
+                                                                <label class="col-sm-12 col-form-label" style="text-align: center">Uploaded Means of Identification</label>
+                                                                <div class="col-sm-12">
+                                                                <input class="form-control" accept=".jpeg,.png,.jpg" type="file" name="means_of_identification">
+                                                                </div> <br>
+                                                                <div class="form-group row" style="text-align: center">
+                                                                <div class="col-sm-12">
+                                                                    <button type="submit" class="btn btn-yellow">Approve</button>
+                                                                </div>
+                                                                </div>
+                                                            </form>
+                                                            </div>  
+                                                        </div>
+                                                        <!-- /.box-body -->
+                                                    </div>
+                                                    @endif
+                                                    @if(!empty($investor->approved_identification)) 
+                                                    <div class="box bg-yellow bg-deathstar-dark">
+                                                        <div class="box-body box-profile">
+                                                        <img style="width:100%" class="profile-user-img img-fluid mx-auto d-block"  src="
+                                                        {{ asset(!empty($investor->approved_identification) ? $investor->approved_identification : 'back-end/images/user2-160x160.jpg') }}
+                                                        " alt="Means of identification">
+                                                        <div class="form-group row"> <br><br>
+                                                            <form action="{{ route('approveid', $investor->id) }}" method="post" enctype="multipart/form-data" style="margin:auto">
+                                                                @csrf
+                                                                <label class="col-sm-12 col-form-label" style="text-align: center">Approved Means of identification <br> <small>Approved by: {{ App\Models\User::where('id', $investor->approved_identification_by)->value('name') }}</small></label>
+                                                            </form>
+                                                            </div>  
+                                                        </div>
+                                                        <!-- /.box-body -->
+                                                    </div>
+                                                    @endif
                                                     <!-- /.box-body -->
                                                 </div>
                                                 <!-- /.box -->

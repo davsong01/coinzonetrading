@@ -19,7 +19,7 @@ class WithdrawalController extends Controller
         if (Auth::user()->role === 'investor') {
             // dd((new FunctionsController)->canWithdraw());
             return view('back.investors.index', [
-                'canWithdraw' => (new FunctionsController)->canWithdraw()
+                'canWithdraw' => (new FunctionsController)->canWithdraw(),
             ]);
         }else{
             return view('back.withdrawals.index', [
@@ -27,6 +27,13 @@ class WithdrawalController extends Controller
             ]);
         }
 
+    }
+
+    public function history()
+    {
+        if (Auth::user()->role === 'investor') {
+            return view('back.investors.withdrawal_history');
+        }
     }
 
     /**
@@ -48,7 +55,7 @@ class WithdrawalController extends Controller
     public function store(Request $request)
     {
         $settings = Setting::latest()->first();
-
+       
         $attributes = $request->validate([
             'amount' => [
                 'required',
@@ -61,6 +68,8 @@ class WithdrawalController extends Controller
         if((new FunctionsController)->canWithdraw()['eligibility'] == false){
             return back()->with('error', 'Withdrawal request was not processed, please ensure you meet all criteria for withdrawal!');
         }
+        $attributes['withdrawal_method'] = $request['withdrawal_method'];
+        $attributes['withdrawal_address'] = $request['withdrawal_address'];
         
         request()->user()->withdrawals()->create($attributes);
         
@@ -74,9 +83,10 @@ class WithdrawalController extends Controller
             'recipient' => request()->user()->email,
             'amount' => $request->amount,
             'reference' => $attributes['reference_id'],
+            
         ];
         (new FunctionsController)->sendEmails($data);
-        return back()->with('message', 'Withdrawal request successfully created. You will get an email when request status is updated');
+        return redirect(route('withdrawal.history'))->with('message', 'Withdrawal request successfully created. We will send you an email when your request status is updated');
     }
 
     /**

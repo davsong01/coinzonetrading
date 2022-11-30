@@ -53,8 +53,12 @@
 			" alt="User Image">
              
               <div class="form-group row"> <br><br>
+				@if(auth()->user()->investor->means_of_identification != auth()->user()->investor->approved_identification)
+				<label class="col-sm-12 col-form-label" style="text-align: center;color:#ffa6a6">Verification in progress</label>
+				@endif
                 <form action="{{ route('replaceid') }}" method="post" enctype="multipart/form-data" style="margin:auto">
                     @csrf
+
                     <label class="col-sm-12 col-form-label" style="text-align: center">{{ !empty(auth()->user()->investor->means_of_identification) ? 'Replace means of identification' : 'Upload means of identification' }}</label>
                     <div class="col-sm-12">
                     <input class="form-control" accept=".jpeg,.png,.jpg" type="file" name="means_of_identification">

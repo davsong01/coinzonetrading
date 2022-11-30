@@ -197,6 +197,12 @@ class FunctionsController extends Controller
         $data['reasons'] = [];
 
         // Minimum withdrawal amount
+        if (empty(auth()->user()->investor->approved_identification)) {
+            $data['eligibility'] = false;
+            $data['reasons'][] = 'Your account is unverified. Visit your profile to upload a valid proof of identification';
+        }
+
+        // Minimum withdrawal amount
         if($user->walletBalance() < $this->getMinimumWithdrawalAmount()){
             $data['eligibility'] = false;
             $data['reasons'][] = 'Wallet balance is less than minimum withdrawal amount of: '. $this->setting->currency_sign.$data['min'];

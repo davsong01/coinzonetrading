@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wallet;
 use App\Models\Package;
+use App\Models\Setting;
 use App\Models\Investor;
 use Illuminate\Http\Request;
 use App\Models\InvestorPackage;

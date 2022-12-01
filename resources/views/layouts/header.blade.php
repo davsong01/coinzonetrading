@@ -47,6 +47,9 @@
                <a href="{{ url('/#packages') }}">Packages</a>
             </li>
             <li>
+               <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
+            </li>
+            <li>
                <a href="{{ route('faq') }}">Faqs</a>
             </li>
             <li>

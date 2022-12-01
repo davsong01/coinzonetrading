@@ -1,3 +1,8 @@
+@section('css')
+{{-- <style> --}}
+	<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.css')}}">
+{{-- </style> --}}
+@endsection
 <x-app-layout>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -179,41 +184,57 @@
 			<!-- /.box-header -->
 			<div class="box-body">
 			  <div class="row">
-				<div class="col-12">
+				<div class="col-md-12" style="margin-top: -14px;">
                 <form action="{{ route('setting4.store') }}" method="post" style="margin:auto" enctype="multipart/form-data">
                     @csrf
 					<div class="form-container">
-						<div class="form-group row">
-							<label class="form-label" data-toggle="tooltip" data-placement="top" title="Investor must have up to this amount in wallet before they can create request to withdraw">Minimum Withdrawal Amount</label>
-							<input class="form-control" name="minimum_withdrawal_amount" type="number" value="{{ $settings->minimum_withdrawal_amount ?? old('minimum_withdrawal_amount') }}" required>
+						<div class="form-group">
+							<div class="col-md-6 column">
+								<label class="form-label" data-toggle="tooltip" data-placement="top" title="Investor must have up to this amount in wallet before they can create request to withdraw">Minimum Withdrawal Amount</label>
+								<input class="form-control" name="minimum_withdrawal_amount" type="number" value="{{ $settings->minimum_withdrawal_amount ?? old('minimum_withdrawal_amount') }}" required>
+							</div>
 						</div>
-						<div class="form-group row">
-							<label class="form-label" data-toggle="tooltip" data-placement="top" title="Investor cannot request more than this amount for withdrawal. If left blank, investor will be able to withdraw evrything in their wallet">Maximum Withdrawal Amount</label>
-							<input class="form-control" name="maximum_withdrawal_amount" type="number" value="{{ $settings->maximum_withdrawal_amount ?? old('maximum_withdrawal_amount') }}" required>
+						<div class="form-group">
+							<div class="col-md-6 column">
+								<label class="form-label" data-toggle="tooltip" data-placement="top" title="Investor cannot request more than this amount for withdrawal. If left blank, investor will be able to withdraw evrything in their wallet">Maximum Withdrawal Amount</label>
+								<input class="form-control" name="maximum_withdrawal_amount" type="number" value="{{ $settings->maximum_withdrawal_amount ?? old('maximum_withdrawal_amount') }}" required>
+							</div>
 						</div>
-						<div class="form-group row">
-							<label class="form-label" data-toggle="tooltip" data-placement="top" title="This controls the cycle of withdrawal for investors. e.g 30 means investor can only request for withdrawal once in 30 days">Withdrawal frequency</label>
-							<input class="form-control" name="withdrawal_frequency" type="number" value="{{ $settings->withdrawal_frequency ?? old('withdrawal_frequency') }}" required>
+						<div class="form-group">
+							<div class="col-md-6 column">
+								<label class="form-label" data-toggle="tooltip" data-placement="top" title="This controls the cycle of withdrawal for investors. e.g 30 means investor can only request for withdrawal once in 30 days">Withdrawal frequency</label>
+								<input class="form-control" name="withdrawal_frequency" type="number" value="{{ $settings->withdrawal_frequency ?? old('withdrawal_frequency') }}" required>
+							</div>
 						</div>
-						<div class="form-group row">
+						<div class="form-group">
+							<div class="col-md-6 column">
 							<label class="form-label">Facebook link</label>
 							<input class="form-control" name="facebook" type="url" value="{{ $settings->facebook ?? old('facebook') }}">
+							</div>
 						</div>
-						<div class="form-group row">
-							<label class="form-label">Twitter link</label>
-							<input class="form-control" name="twitter" type="url" value="{{ $settings->twitter ?? old('twitter') }}">
+						<div class="form-group">
+							<div class="col-md-6 column">
+								<label class="form-label">Twitter link</label>
+								<input class="form-control" name="twitter" type="url" value="{{ $settings->twitter ?? old('twitter') }}">
+							</div>
 						</div>
-						<div class="form-group row">
-							<label class="form-label">Instagram link</label>
-							<input class="form-control" name="instagram" type="url" value="{{ $settings->instagram ?? old('instagram') }}">
+						<div class="form-group">
+							<div class="col-md-6 column">
+								<label class="form-label">Instagram link</label>
+								<input class="form-control" name="instagram" type="url" value="{{ $settings->instagram ?? old('instagram') }}">
+							</div>
 						</div>
-						<div class="form-group row">
-							<label class="form-label">Youtube link</label>
-							<input class="form-control" name="youtube" type="url" value="{{ $settings->youtube ?? old('youtube') }}">
+						<div class="form-group">
+							<div class="col-md-6 column">
+								<label class="form-label">Youtube link</label>
+								<input class="form-control" name="youtube" type="url" value="{{ $settings->youtube ?? old('youtube') }}">
+							</div>
 						</div>
-						<div class="form-group row">
-							<label class="form-label">Linkedin link</label>
-							<input class="form-control" name="linkedin" type="url" value="{{ $settings->linkedin ?? old('linkedin') }}">
+						<div class="form-group">
+							<div class="col-md-6 column">
+								<label class="form-label">Linkedin link</label>
+								<input class="form-control" name="linkedin" type="url" value="{{ $settings->linkedin ?? old('linkedin') }}">
+							</div>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -237,4 +258,9 @@
     </section>
     <!-- /.content -->
   </div>
+
 </x-app-layout>
+@section('scripts')
+  <script src="{{ asset('back-end/assets/vendor_plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js') }}"></script>
+	
+@endsection

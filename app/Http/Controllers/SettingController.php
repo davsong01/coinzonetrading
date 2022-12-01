@@ -84,6 +84,10 @@ class SettingController extends Controller
         return back()->with('message', 'Operation successful');
     }
     
+    public function settings5(Request $request){
+
+    }
+    
     public function index()
     {
         //

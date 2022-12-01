@@ -87,7 +87,13 @@
             margin-top: -5px !important;
         }
 
+        .column{
+            float:left;
+            margin-bottom: 12px;
+        }
+
     </style>
+    @yield('css')
 </head>
 
 <body class="hold-transition skin-yellow sidebar-mini">
@@ -96,20 +102,6 @@
 
         @include('layouts.app-sidebar')
         <main>
-            {{-- <div class="content-wrapper top">
-                <!-- Content Header (Page header) -->
-               
-                <!-- Main content -->
-                <section class="content">
-                    <div class="row">
-                        <div class="col-lg-12 col-12">
-                            <div class="box-header with-border">
-								<h4 class="box-title">Latest Package(s)</h4> 
-							</div>
-                        </div>
-                    </div>
-                </section>
-            </div> --}}
             {{ $slot }}
         </main>
         @include('layouts.app-footer')
@@ -162,8 +154,9 @@
     <script src="{{ asset('back-end/js/pages/dashboard-chart.js') }}"></script>
 
     <!-- Crypto_Admin for demo purposes -->
-    <script src="{{ asset('js/demo.js') }}"></script>
+    <script src="{{ asset('back-end/js/demo.js') }}"></script>
     {{$scripts}}
+    @yield('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     @include('layouts.toastr')

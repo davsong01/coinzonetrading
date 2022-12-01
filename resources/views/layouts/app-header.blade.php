@@ -22,10 +22,6 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          {{-- <li>
-            mhjh {{ auth()->user()->investor }}
-          </li> --}}
-         
           @if(auth()->user()->role == 'investor')
           <li class="search-box">
             <a class="nav-link" href="{{ route('mywallet.history') }}"><i class="icon-wallet"></i> {{ $settings->currency_sign }}{{ number_format(auth()->user()->walletBalance(), 2) }}</a>
@@ -43,7 +39,6 @@
             </a>
             <ul class="dropdown-menu scale-up">
               <!-- User image -->
-             
               <!-- Menu Body -->
               <li class="user-body">
                 <div class="row no-gutters">

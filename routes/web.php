@@ -19,7 +19,8 @@ use App\Http\Controllers\WithdrawalController;
 
 Route::get( '/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
-Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
+Route::get('/faq', [ App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
+Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
 Route::post( '/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
@@ -54,6 +55,8 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::post('settings-two', [App\Http\Controllers\SettingController::class, 'settings2'])->name('setting2.store');
     Route::post('settings-three', [App\Http\Controllers\SettingController::class, 'settings3'])->name('setting3.store');
     Route::post('settings-four', [App\Http\Controllers\SettingController::class, 'settings4'])->name('setting4.store');
+    Route::post('settings-five', [App\Http\Controllers\SettingController::class, 'settings5'])->name('setting5.store');
+
     Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
     Route::post('approve-id/{investor_id}', [App\Http\Controllers\InvestorController::class, 'approveId'])->name('approveid');
     

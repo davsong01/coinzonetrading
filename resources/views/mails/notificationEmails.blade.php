@@ -70,7 +70,15 @@ You can now proceed with your operation on {{ config('app.name') }}.
 
 Thank you.
 @endif
+@if($data['type'] == 'id-rejected-by-admin')
+Dear {{ $data['name'] }},
 
+Your means of identification document has been rejected.
+
+Kindly upload a new one from your profile page
+
+Thank you.
+@endif
 @if($data['type'] == 'upload-means-of-identification')
 Dear {{ $data['name'] }},
 

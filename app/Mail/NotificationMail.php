@@ -49,7 +49,14 @@ class NotificationMail extends Mailable
         if ($this->data['type'] == 'upload-means-of-identification') {
             return $this->markdown('mails.notificationEmails')
             ->subject('Investor uploaded means of identification');
-        }        
+        }
+
+        if ($this->data['type'] == 'id-rejected-by-admin') {
+            return $this->markdown('mails.notificationEmails')
+            ->subject('Your uploaded means of verification was rejected');
+        }  
+        
+        
     }
 
 }

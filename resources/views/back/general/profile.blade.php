@@ -45,27 +45,24 @@
             </div>
             <!-- /.box-body -->
           </div>
-		  {{-- Means of Identification --}}
-		  <div class="box bg-yellow bg-deathstar-dark">
+		  {{-- If empty, show upload --}}
+		@if(empty(auth()->user()->investor->means_of_identification )) 
+		   <div class="box bg-yellow bg-deathstar-dark">
             <div class="box-body box-profile">
             <img style="width:100%" class="profile-user-img img-fluid mx-auto d-block"  src="
-			{{ asset(!empty(auth()->user()->investor->means_of_identification) ? auth()->user()->investor->means_of_identification : 'back-end/images/user2-160x160.jpg') }}
+			{{ asset('back-end/images/user2-160x160.jpg') }}
 			" alt="User Image">
-             
-              <div class="form-group row"> <br><br>
-				@if(auth()->user()->investor->means_of_identification != auth()->user()->investor->approved_identification)
-				<label class="col-sm-12 col-form-label" style="text-align: center;color:#ffa6a6">Verification in progress</label>
-				@endif
+			<div class="form-group row"> <br><br>
                 <form action="{{ route('replaceid') }}" method="post" enctype="multipart/form-data" style="margin:auto">
                     @csrf
 
-                    <label class="col-sm-12 col-form-label" style="text-align: center">{{ !empty(auth()->user()->investor->means_of_identification) ? 'Replace means of identification' : 'Upload means of identification' }}</label>
+                    <label class="col-sm-12 col-form-label" style="text-align: center">Upload means of identification</label>
                     <div class="col-sm-12">
                     <input class="form-control" accept=".jpeg,.png,.jpg" type="file" name="means_of_identification">
                     </div> <br>
                     <div class="form-group row" style="text-align: center">
 					  <div class="col-sm-12">
-						<button type="submit" class="btn btn-yellow">{{ !empty(auth()->user()->investor->means_of_identification) ? 'Replace' : 'Upload' }}</button>
+						<button type="submit" class="btn btn-yellow">Upload</button>
 					  </div>
 					</div>
                 </form>
@@ -73,6 +70,35 @@
             </div>
             <!-- /.box-body -->
           </div>
+		@endif
+		@if(!empty(auth()->user()->investor->means_of_identification) && auth()->user()->investor->means_of_identification != auth()->user()->investor->approved_identification) 
+		  <div class="box bg-yellow bg-deathstar-dark">
+            <div class="box-body box-profile">
+            <img style="width:100%" class="profile-user-img img-fluid mx-auto d-block"  src="
+			{{ asset(!empty(auth()->user()->investor->means_of_identification) ? auth()->user()->investor->means_of_identification : 'back-end/images/user2-160x160.jpg') }}
+			" alt="User Image">
+             
+			<div class="form-group row"> <br><br>
+				<label class="col-sm-12 col-form-label" style="text-align: center;color:#ffa6a6">ID Verification in progress</label>
+                <form action="{{ route('replaceid') }}" method="post" enctype="multipart/form-data" style="margin:auto">
+                    @csrf
+
+                    <label class="col-sm-12 col-form-label" style="text-align: center">Replace means of identification</label>
+                    <div class="col-sm-12">
+                    <input class="form-control" accept=".jpeg,.png,.jpg" type="file" name="means_of_identification">
+                    </div> <br>
+                    <div class="form-group row" style="text-align: center">
+					  <div class="col-sm-12">
+						<button type="submit" class="btn btn-yellow">Replace</button>
+					  </div>
+					</div>
+                </form>
+                </div>  
+            </div>
+            <!-- /.box-body -->
+          </div>
+		@endif
+		 
           <!-- /.box -->
         </div>
 		

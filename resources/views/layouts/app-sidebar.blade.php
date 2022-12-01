@@ -19,6 +19,17 @@
           @endif"
           class="rounded-circle" alt="User Image">
         </div>
+        @if(auth()->user()->role == 'investor')
+        @if(empty(auth()->user()->investor->means_of_identification) || (auth()->user()->investor->means_of_identification != auth()->user()->investor->approved_identification)) 
+         <div class="info" style="padding: 7px 5px 5px 5px;">
+              <img class="verify" style="max-width: 15px;" src="{{ asset('back-end/images/warning.png') }}"  alt="verification"> <span style="font-size: 10px;"> ID Unverified</span>
+        </div>
+        @else
+        <div class="info" style="padding: 7px 5px 5px 5px;">
+              <img class="verify" style="max-width: 15px;" src="{{ asset('back-end/images/check.png') }}"  alt="verification"> <span style="font-size: 10px;"> ID Verified</span>
+        </div>
+        @endif
+        @endif
         <div class="info">
           <p>Hi, {{ auth()->user()->name }}</p>
         </div>

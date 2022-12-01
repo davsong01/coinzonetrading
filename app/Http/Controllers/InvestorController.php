@@ -105,25 +105,41 @@ class InvestorController extends Controller
         return redirect(route('investors.edit', ['investor' => $request->user_id, 'hid' => 'packages' ]))->with('message', 'Operation successful');
     }
 
-    public function approveId($investor_id){
+    public function approveId(Request $request, $investor_id){
         $investor = Investor::where('id', $investor_id)->first();
-        
-        if(!empty($investor->means_of_identification)){
-            $investor->update([
-                'approved_identification' =>  $investor->means_of_identification,
-                'approved_identification_by' =>  auth()->user()->id,
-            ]);
-        }
+       
+        if($request->status == 'approve'){
+            if (!empty($investor->means_of_identification)) {
+                $investor->update([
+                    'approved_identification' =>  $investor->means_of_identification,
+                    'approved_identification_by' =>  auth()->user()->id,
+                ]);
+            }
 
-        $data = [
-            'email' => $investor->user->email,
-            'type' => 'id-approval-by-admin',
-            'name' => $investor->user->name,
-        ];
+            $data = [
+                'email' => $investor->user->email,
+                'type' => 'id-approval-by-admin',
+                'name' => $investor->user->name,
+            ];
         
+        }else{
+            if (!empty($investor->means_of_identification)) {
+                $investor->update([
+                    'means_of_identification' => null,
+                ]);
+            }
+
+            $data = [
+                'email' => $investor->user->email,
+                'type' => 'id-rejected-by-admin',
+                'name' => $investor->user->name,
+            ];
+        
+        }
+       
         $email = (new FunctionsController)->sendEmails($data);
        
-        return redirect(route('investors.edit', ['investor' => $investor->id, 'hid' => 'profile']))->with('message', 'Approval successful');
+        return redirect(route('investors.edit', ['investor' => $investor->id, 'hid' => 'profile']))->with('message', 'Operation successful');
 
     }
 

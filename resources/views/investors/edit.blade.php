@@ -83,15 +83,24 @@
                                                         {{ asset(!empty($investor->means_of_identification) ? $investor->means_of_identification : 'back-end/images/user2-160x160.jpg') }}
                                                         " alt="Means of identification">
                                                         <div class="form-group row"> <br><br>
+                                                            <label class="col-sm-12 col-form-label" style="text-align: center">Uploaded Means of Identification</label>
+
                                                             <form action="{{ route('approveid', $investor->id) }}" method="post" enctype="multipart/form-data" style="margin:auto">
                                                                 @csrf
-                                                                <label class="col-sm-12 col-form-label" style="text-align: center">Uploaded Means of Identification</label>
-                                                                <div class="col-sm-12">
-                                                                <input class="form-control" accept=".jpeg,.png,.jpg" type="file" name="means_of_identification">
-                                                                </div> <br>
                                                                 <div class="form-group row" style="text-align: center">
+                                                                    <input type="hidden" name="status" value="approve">
                                                                 <div class="col-sm-12">
                                                                     <button type="submit" class="btn btn-yellow">Approve</button>
+                                                                </div>
+                                                                </div>
+                                                            </form>
+                                                            <form action="{{ route('approveid', $investor->id) }}" method="post" enctype="multipart/form-data" style="margin:auto">
+                                                                @csrf                                                                
+                                                                <div class="form-group row" style="text-align: center">
+                                                                    <input type="hidden" name="status" value="reject">
+
+                                                                <div class="col-sm-12">
+                                                                    <button type="submit" class="btn btn-danger" style="background-color: red;border-color: red;">Reject</button>
                                                                 </div>
                                                                 </div>
                                                             </form>

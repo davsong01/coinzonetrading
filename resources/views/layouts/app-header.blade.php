@@ -25,10 +25,10 @@
           {{-- <li>
             mhjh {{ auth()->user()->investor }}
           </li> --}}
+         
           @if(auth()->user()->role == 'investor')
           <li class="search-box">
             <a class="nav-link" href="{{ route('mywallet.history') }}"><i class="icon-wallet"></i> {{ $settings->currency_sign }}{{ number_format(auth()->user()->walletBalance(), 2) }}</a>
-            
           </li>
           @endif
           <li class="dropdown user user-menu">

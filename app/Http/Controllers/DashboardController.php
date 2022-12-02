@@ -59,6 +59,7 @@ class DashboardController extends Controller
                 'zip_code' => $request->zip_code ?? $investor->zip_code,
                 'address' => $request->address ?? $investor->address,
                 'state' => $request->state ?? $investor->state,
+                'wallet_withdrawal_limit'=>$request->wallet_withdrawal_limit,
             ]);
            
             $this->validate($request, [

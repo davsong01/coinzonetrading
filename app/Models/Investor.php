@@ -12,7 +12,7 @@ class Investor extends Model
 
     use HasFactory;
 
-    protected $fillable = ['phone', 'profile_picture', 'wallet_type', 'wallet_addrress', 'profile_picture', 'means_of_identification','approved_identification', 'approved_identification_by','user_id', 'created_by', 'country','zip_code','state','address'];
+    protected $fillable = ['phone', 'profile_picture', 'wallet_type', 'wallet_addrress', 'profile_picture', 'means_of_identification','approved_identification', 'approved_identification_by','user_id', 'created_by', 'country','zip_code','state','address','wallet_withdrawal_limit'];
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');

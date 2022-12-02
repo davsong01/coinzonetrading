@@ -264,6 +264,14 @@
                                                                                 required>
                                                                         </div>
                                                                     </div>
+                                                                    @if(auth()->user()->admin->level == 'admin')
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Wallet withdrawal limit ({{ $settings->currency_sign }})</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input class="form-control" type="number" name="wallet_withdrawal_limit" value="{{ $investor->wallet_withdrawal_limit }}" step=".01">
+                                                                        </div>
+                                                                    </div>
+                                                                    @endif
                                                                     <div class="form-group row">
                                                                         <label class="col-sm-12 col-form-label"></label>
                                                                         <div class="col-sm-10">

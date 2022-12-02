@@ -156,10 +156,11 @@
     <!-- Crypto_Admin for demo purposes -->
     <script src="{{ asset('back-end/js/demo.js') }}"></script>
     {{$scripts}}
-    @yield('scripts')
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     @include('layouts.toastr')
+    @yield('scripts')
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()

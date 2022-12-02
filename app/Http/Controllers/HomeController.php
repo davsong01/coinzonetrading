@@ -31,7 +31,8 @@ class HomeController extends Controller
     }
 
     public function privacyPolicy(){
-        return view('privacy_policy');
+        $settings = $this->settings;
+        return view('privacy_policy',compact('settings'));
     }
 
     public function rules()

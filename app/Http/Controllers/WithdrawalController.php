@@ -17,7 +17,6 @@ class WithdrawalController extends Controller
     public function index()
     {
         if (Auth::user()->role === 'investor') {
-            // dd((new FunctionsController)->canWithdraw());
             return view('back.investors.index', [
                 'canWithdraw' => (new FunctionsController)->canWithdraw(),
             ]);
@@ -55,15 +54,20 @@ class WithdrawalController extends Controller
     public function store(Request $request)
     {
         $settings = Setting::latest()->first();
+        $max = (new FunctionsController)->canWithdraw()['max'];
        
         $attributes = $request->validate([
             'amount' => [
                 'required',
                 `min:{$settings->minimum_withdrawal_amount}`,
-                `max:{$settings->minimum_withdrawal_amount}`,
+                `max:{$max}`
             ],
         ]);
-
+      
+        if($request->amount > $max){
+            return back()->with('error', 'Withdrawal request was not processed, Invalid amount entered, please try again with correct values!');
+        }
+        
         $attributes['reference_id'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference();
         if((new FunctionsController)->canWithdraw()['eligibility'] == false){
             return back()->with('error', 'Withdrawal request was not processed, please ensure you meet all criteria for withdrawal!');

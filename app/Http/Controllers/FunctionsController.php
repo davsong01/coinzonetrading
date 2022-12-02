@@ -187,8 +187,7 @@ class FunctionsController extends Controller
     }
 
     public function canWithdraw(?float $amount = null, ?User $user = null){
-        // $settings = Setting::latest()->first();
-        // $amount ??= $settings->minimum_withdrawal_amount;
+       
         $user ??= auth()->user();
 
         $data['eligibility'] = true;
@@ -235,7 +234,15 @@ class FunctionsController extends Controller
 
     public function getMaximumWithdrawalAmount($user)
     {
-       return $user->walletBalance() < $this->setting->maximum_withdrawal_amount  ? $user->walletBalance() : $this->setting->maximum_withdrawal_amount;
+        // check 
+        $max = $user->walletBalance() < $this->setting->maximum_withdrawal_amount  ? $user->walletBalance() : $this->setting->maximum_withdrawal_amount;
+
+        if(isset($user->investor->wallet_withdrawal_limit) && !empty($user->investor->wallet_withdrawal_limit)){
+            $max = $user->investor->wallet_withdrawal_limit;
+        }
+        
+        return $max;
+  
     }
 
     public function investorMustFillBeForeWithdrawal()

@@ -85,7 +85,11 @@ class SettingController extends Controller
     }
     
     public function settings5(Request $request){
+        $settings = Setting::first();
 
+        $settings->update($request->all());
+
+        return back()->with('message','Update successful');
     }
     
     public function index()

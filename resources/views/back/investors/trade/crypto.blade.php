@@ -66,6 +66,7 @@
                   <thead>
                     <tr>
                       <th>{{ __('S/N') }}</th>
+                      <th>{{ __('Trade Id') }}</th>
                       <th>{{ __('Instrument') }}</th>
                       <th>{{ __('Amount') }}</th>
                       <th>{{ __('Status') }}</th>
@@ -79,7 +80,7 @@
                     @foreach ($historys as $history)
                     <tr>
                       <td>{{ $count ++ }}</td>
-                      <td>{{ $history->trade_id ?? 'NOT SET' }}</td>
+                      <td>{{ $history->trade_id }}</td>
                       <td>{{ $history->instrument }}
                       <small> <br>
                           <strong style="color: #dd3765;">Created on: </strong>{{ $history->created_at }} <br>

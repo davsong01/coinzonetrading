@@ -79,7 +79,7 @@
         </li>
         <li class="{{ request()->routeIs('admin.trade.history') ? 'active' : '' }}">
           <a href="{{route('admin.trade.history')}}">
-            <i class="icon-wallet"></i> <span>Trades</span>
+            <i class="cc BTC"></i> <span>Trades</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>

@@ -97,13 +97,14 @@ Thank you
 Dear Admin,
 
 An investor has just made a trade order, please find details below:
-Name: {{ $data['Trade Id'] }} : {{ $data['trade_id']  }}<br>
+
+Name: Trade Id : {{ $data['trade_id']  }}<br>
 Name: {{ $data['name'] }} <br>
 Amount: ${{ $data['amount'] }} <br>
 Instrument: {{ $data['instrument'] }} <br>
 Status: {{ $data['status'] }}
 
-Click <a href="{{ route('trade.process') }}"><strong>HERE</strong></a> to login and approve order.
+Click <a href="{{ route('admin.trade.history') }}"><strong>HERE</strong></a> to login and approve order.
 
 @endif
 {{ config('app.name') }}

@@ -16,6 +16,52 @@ use App\Http\Controllers\WithdrawalController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/testrequest', function(){
+    $authentication = "kadoshkonnect@gmail.com:Kadosh6385462222";
+    $headers = [
+        "Authorization:" . $authentication,
+        "Content-Type" => "application/json",
+    ];
+    
+    // $authentication = env('AIRTIME_USERNAME') . ':' . env('AIRTIME_PASSWORD');
+    $postData = [
+        "billersCode" => "1212121212",
+        "serviceID" => "dstv",
+    ];
+
+    $url = 'https://sandbox.vtpass.com/api/merchant-verify';
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => ($postData),
+        // CURLOPT_HTTPHEADER => array($headers),
+        CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+        CURLOPT_USERPWD => $authentication,
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    dd($response, $postData);
+    
+    // $url = 'https://sandbox.vtpass.com/api/merchant-verify';
+    // $ch = curl_init($url);
+    // curl_setopt($ch, CURLOPT_HEADER, 1);
+    // curl_setopt($ch, CURLOPT_USERPWD, 'kadoshkonnect@gmail.com:Kadosh6385462222');
+    // curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    // curl_setopt($ch, CURLOPT_POST, 1);
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    // $response = curl_exec($ch);
+    // curl_close($ch);
+});
 
 Route::get( '/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get( '/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
@@ -50,7 +96,6 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::get('investors/{investor}/edit/{hid?}', [App\Http\Controllers\InvestorController::class, 'edit'])->name('investors.edit');
     Route::post('investor_packages_add', [App\Http\Controllers\InvestorController::class, 'investorPackagesAdd'])->name('investorpackages.add');
 
-
     Route::get('alltransactions', [App\Http\Controllers\DashboardController::class, 'adminTransactions'])->name('alltransactions');
     Route::get('settings', [App\Http\Controllers\SettingController::class, 'settings'])->name('settings');
     Route::post('settings-one', [App\Http\Controllers\SettingController::class, 'settings1'])->name('setting1.store');
@@ -69,11 +114,9 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
     Route::get('admin-approve-trade-request/{id}', [App\Http\Controllers\TradeController::class, 'adminApproveTradeProcess'])->name('admin.approve.request');
     Route::get('admin-close-trade-request/{id}', [App\Http\Controllers\TradeController::class, 'adminCloseTradeProcess'])->name('admin.close.request');
     Route::post('admin-complete-request/{id}', [App\Http\Controllers\TradeController::class, 'adminCompleteTradeProcess'])->name('admin.complete.request');
-
     
     Route::middleware(['isAdmin:admin'])->group(function(){
         Route::resource('staff', App\Http\Controllers\StaffController::class);
-
         Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
         Route::post('investor_packages_delete/{id}', [App\Http\Controllers\InvestorController::class, 'investorPackagesDelete'])->name('investorpackages.delete');
         Route::post('alltransactionsdelete/{transaction}', [App\Http\Controllers\DashboardController::class, 'deleteAdminTransactions'])->name('alltransactions.delete');
@@ -83,7 +126,6 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
             'only' => ['update']
         ]);
     });
-
 });
 
 // Investor

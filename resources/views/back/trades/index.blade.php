@@ -48,6 +48,9 @@
                         <td>{{ $settings->currency_sign. number_format($history->amount, 2) }}</td>
                         <td>{{ $history->instrument}}</td>
                         <td>{{ $history->status}} 
+                          @if($history->status == 'Complete') <br>
+                          <small style="color:green">Profit: ${{ number_format($history->profit, 2) }}</small>
+                          @endif
                           @if($history->status == 'Initiated') <br>
                           <small class="sm">On:  {{date("F dS, Y", strtotime($history->created_at))}}, {{date("h:ia", strtotime($history->created_at))}}</small>
                           @endif

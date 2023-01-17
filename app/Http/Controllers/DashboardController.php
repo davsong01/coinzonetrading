@@ -283,7 +283,7 @@ class DashboardController extends Controller
             'amount' => $request->amount,
             'instrument' => $instrument->name,
             'status' => 'Initiated',
-            'trade_id' => app('App\Http\Controllerrs')->generateTradeReferenc(),
+            'trade_id' => app('App\Http\Controllers\FunctionsController')->generateTradeReference(),
         ]);
 
 
@@ -310,7 +310,7 @@ class DashboardController extends Controller
     public function tradeHistory(){
         $active = 'history';
         $historys = Trade::where('investor_id', auth()->user()->investor->id)->orderBy('created_at', 'DESC')->get();
-       
+      
         return view('back.investors.trade.crypto', compact('active','historys'));
     }
 }

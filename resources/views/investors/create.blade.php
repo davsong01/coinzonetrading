@@ -15,7 +15,6 @@
 
       <!-- Main content -->
       <section class="content">
-
         <!-- Basic Forms -->
         <div class="box">
           <!-- /.box-header -->
@@ -29,7 +28,6 @@
                     <div class="controls">
                       <input type="email" name="email" class="form-control" required value="{{ old('email') }}">
                     </div>
-                    
                   </div>
                   <div class="form-group">
                     <h5>{{ __('Name') }}</h5>

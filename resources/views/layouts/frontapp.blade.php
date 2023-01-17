@@ -89,4 +89,5 @@
     @include('layouts.toastr')
 	{{-- footer end --}}
 </body>
+
 </html>

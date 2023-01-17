@@ -31,6 +31,7 @@ class CreateSettingsTable extends Migration
             $table->unsignedFloat('minimum_withdrawal_amount')->nullable();
             $table->unsignedFloat('maximum_withdrawal_amount')->nullable();
             $table->unsignedBigInteger('withdrawal_frequency')->nullable();
+            $table->text('coin_price_list_widget')->nullable();
 
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();

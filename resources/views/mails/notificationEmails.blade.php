@@ -93,5 +93,18 @@ kindly login to approve.
 Thank you
 @endif
 
+@if($data['type'] == 'admin-trade-notify')
+Dear Admin,
+
+An investor has just made a trade order, please find details below:
+Name: {{ $data['Trade Id'] }} : {{ $data['trade_id']  }}<br>
+Name: {{ $data['name'] }} <br>
+Amount: ${{ $data['amount'] }} <br>
+Instrument: {{ $data['instrument'] }} <br>
+Status: {{ $data['status'] }}
+
+Click <a href="{{ route('trade.process') }}"><strong>HERE</strong></a> to login and approve order.
+
+@endif
 {{ config('app.name') }}
 @endcomponent

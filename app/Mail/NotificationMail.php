@@ -54,8 +54,12 @@ class NotificationMail extends Mailable
         if ($this->data['type'] == 'id-rejected-by-admin') {
             return $this->markdown('mails.notificationEmails')
             ->subject('Your uploaded means of verification was rejected');
+        }
+
+        if ($this->data['type'] == 'admin-trade-notify') {
+            return $this->markdown('mails.notificationEmails')
+            ->subject('New Trade Notification');
         }  
-        
         
     }
 

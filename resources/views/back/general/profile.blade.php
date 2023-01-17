@@ -194,7 +194,7 @@
 					  
                     ?>
                     <form action="{{ route('profile.store') }}" method="post" style="margin:auto">
-                   @csrf
+                   	@csrf
 					<div class="form-group row">
 					  <label class="col-sm-2 col-form-label">Wallet Type</label>
 					  <div class="col-sm-10">

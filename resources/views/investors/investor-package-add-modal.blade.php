@@ -7,7 +7,6 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
             <div class="modal-body">
                 <form action="{{ route('investorpackages.add') }}" onsubmit="return confirm('This action cannot be undone!');" method="post">
                     @csrf
@@ -38,7 +37,7 @@
                         <input style="margin: 0;" class="form-control" name="amount" type="numbeer" step="0.01" value="{{ old('amount')}}" required>
                     </div>
                 
-                    <input type="hidden" name="investor_id" value={{ $investor->user->id }}>
+                    <input type="hidden" name="investor_id" value="{{ $investor->user->id }}">
             </div>
             <div class="modal-footer modal-footer-uniform">
                 <button type="button" class="btn btn-bold btn-pure btn-secondary" data-dismiss="modal">Close</button>

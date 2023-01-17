@@ -211,8 +211,30 @@
                                                                                 class="btn btn-yellow">Submit</button>
                                                                         </div>
                                                                     </div>
-
                                                                 </form>
+                                                                @if(auth()->user()->admin->level == 'admin')
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-12 col-form-label"></label>
+                                                                            <div class="col-sm-12">
+                                                                                <a id="password-btn" onclick="changePassword()"
+                                                                                    class="btn btn-primary"><i class="fa fa-exclamation-triangle"></i> Change Password</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="change-password" class="col-md-8" style="display:none">
+                                                                        <form class="form-inline" action="{{ route('admin.password', $investor->user->id) }}" method="post" style="margin:auto">
+                                                                            @csrf
+                                                                            <div class="form-group mx-sm-6 mb-2">
+                                                                                <label for="inputPassword2" class="sr-only">New Password</label>
+                                                                                <input type="text" class="form-control" id="inputPassword2" name="password" placeholder="New Password" required>
+                                                                            </div>
+                                                                            <button type="submit" class="form-control btn btn-success mb-2">Confirm Password Change</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
                                                             </div>
                                                             <!-- /.col -->
                                                         </div>
@@ -450,4 +472,12 @@
     </section>
     <!-- /.content -->
     </div>
+    @section('scripts')
+    <script>
+        function changePassword(){
+            $('#change-password').toggle();
+        }
+    </script>
+        
+    @endsection
 </x-app-layout>

@@ -55,9 +55,8 @@ class FunctionsController extends Controller
             Mail::to($data['email'])->send(new NotificationMail($data));
             $message = 1;
         } catch (\Exception $th) {
-            //throw $th;
             $message = 0;
-            // dd($th->getMessage());
+            dd($th->getMessage());
             \Log::error($th->getMessage());
         }
        
@@ -93,6 +92,11 @@ class FunctionsController extends Controller
     }
     public function generateTransactionReference(){
         return date('Y') . '-' . date('m') . '-' . rand(1111111, 9999999);
+    }
+
+    public function generateTradeReference()
+    {
+        return 'TRD-'.date('Y') . '-' . date('m') . '-' . rand(1111111, 9999999);
     }
 
     public function createCharge($data){

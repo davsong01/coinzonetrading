@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Trade;
 use App\Models\Wallet;
 use App\Models\Package;
 use App\Models\Setting;
 use App\Models\Investor;
+use App\Models\Instruments;
 use Illuminate\Http\Request;
 use App\Models\InvestorPackage;
 use Illuminate\Support\Facades\Auth;
@@ -181,67 +184,17 @@ class DashboardController extends Controller
         ]);
     }
 
-    // public function retryTransaction($reference){
-    //     //Check if transaction has not expired
-
-    //     $transaction = InvestorPackage::whereInvestorId(auth()->user()->id)->whereReference($reference)->first();
+    public function changePassword(Request $request, $id){
+        $this->validate($request, ['password'=>'required']);
+        $user = User::find($id);
         
-    //     $check = InvestorPackage::where('package_id',$transaction->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
-        
-    //     if (isset($check) && $check->count() > 0) {
-    //         return back()->with('error', 'You already have this package and it is active');
-    //     }
-    //     $package = Package::find($transaction->package_id);
+        if ($request->has('password')) {
+            $password = Hash::make($request->password);
+            $user->update(['password'=>$password]);
+        } 
 
-    //     if(isset($transaction)){
-    //         if($transaction->expires_at > now()){
-    //             // Transaction has expired
-    //             // Delete transaction and create afresh
-    //             $transaction->delete();
-    //             $request()->package = $package;
-              
-    //             app('App\Http\Controllers\HomeController')->makePayment($request);
-    //         }else{
-    //             // transaction can still be done
-    //             if($transaction->status == 'pending'){
-    //                 $transaction->delete();
-    //             }
-    //             return back()->with('error', 'Transaction window for this package has expired!');
-    //         }
-    //     }else{
-    //         return back()->with('error', 'Transaction not found');
-    //     }
-
-    //     return back()->with('error', 'Something went wrong');
-
-    // }
-
-    // public function renewPackage($reference)
-    // {
-    //     //Check if transaction has not expired
-    //     $transaction = InvestorPackage::whereInvestorId(auth()->user()->id)->whereReference($reference)->first();
-    //     if(!$transaction){
-    //         return back()->with('error', 'Cannot find this transaction anymore');
-    //     }
-    //     $check = InvestorPackage::where('package_id', $transaction->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
-    //     if (isset($check) && $check->count() > 0) {
-    //         return back()->with('error', 'You already have this package and it is active');
-    //     }
-    //     $package = Package::find($transaction->package_id);
-    //     $transaction->delete();
-
-    //     $charge = app('App\Http\Controllers\FunctionsController')->createCharge([
-    //         'name' => $package->name, 'description' => '', 'amount' => $package->amount, 'package_id' => $package->id
-    //     ]);
-
-    //     if (!is_null($charge)) {
-    //         \DB::table('investors_packages')->insert($charge);
-    //         return redirect()->away($charge['url']);
-    //     } else {
-    //         return back()->with('error', 'There was an error, please refresh and try again');
-    //     }
-
-    // }
+        return back()->with('message', 'Password Changed successfully');
+    }
 
     public function index()
     {
@@ -271,12 +224,93 @@ class DashboardController extends Controller
             'wallets' => $wallets,
         ]);
     }
-
+    
     public function trade(){
-        return back();
+        $active = 'overview';
+        $instruments = $this->sendGetRequest('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&sparkline=false');
+        return view('back.investors.trade.overview', compact('instruments','active'));
+    }
+
+    public function crypto()
+    {
+        $active = 'crypto';
+        $instruments = Instruments::all();
+       
+        if(empty($instruments)){
+            $instruments = $this->sendGetRequest('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&sparkline=false');
+        }
+
+        $instruments = $instruments->map(function ($query) {
+            $query['real_id'] = $query->i_id ?? $query->id;
+            return $query;
+        });
+       
+        return view('back.investors.trade.crypto', compact('instruments', 'active'));
+    }
+
+    public function pullTradeInstruments(){
+        $instruments = $this->sendGetRequest('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&sparkline=false');
+       
+        foreach($instruments as $instrument){
+            Instruments::updateOrCreate(['i_id'=>$instrument->id], ['symbol' => $instrument->symbol, 'name'=>$instrument->name]);
+        }
+
+        return response()->json(['All instruments pulled']);
     }
 
     public function marketData(){
         return view('back.investors.market_data');
+    }
+
+    public function selectInstrument(Request $request){
+        $instrument = $request->instrument ?? null;
+       
+        $active = 'crypto';
+        return view('back.investors.trade.crypto', compact('instrument', 'active'));
+    }
+
+    public function investorTrade(Request $request){
+        $instrument = Instruments::where('i_id',$request->instrument)->first();
+        
+        if(empty($instrument)){
+            $instrument = $this->sendGetRequest('https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false');
+
+        }
+     
+        // Save in table
+        $trade = Trade::create([
+            'investor_id' => auth()->user()->investor->id,
+            'amount' => $request->amount,
+            'instrument' => $instrument->name,
+            'status' => 'Initiated',
+            'trade_id' => app('App\Http\Controllerrs')->generateTradeReferenc(),
+        ]);
+
+
+        // Send email to admin to make the trade
+        $settings = Setting::latest()->first();
+
+        $data = [
+            'type' => 'admin-trade-notify',
+            'name' => auth()->user()->name,
+            'email' =>  $settings->official_email,
+            'amount' => $request->amount,
+            'instrument' => $instrument->name,
+            'status' => 'Initiated',
+            'trade_id' =>  $trade->trade_id,
+        ];
+       
+        (new FunctionsController)->sendEmails($data);
+
+        \Session::flash('message','Order successful');
+        return redirect(route('trade.history'))->with('message', 'Order successful');
+
+    }
+
+    public function tradeHistory(){
+        $active = 'history';
+        $historys = Trade::where('investor_id', auth()->user()->investor->id)->orderBy('created_at', 'DESC')->get();
+       
+        return view('back.investors.trade.crypto', compact('active','historys'));
     }
 }

@@ -49,6 +49,8 @@
 <script src="{{ asset('front-end/assets/vendor_components/OwlCarousel2/dist/owl.carousel.js')}}"></script>
 <script src="{{ asset('front-end/assets/vendor_components/bootstrap-select/dist/js/bootstrap-select.js')}}"></script>
 <script src="{{ asset('front-end/assets/vendor_components/Web-Ticker-master/jquery.webticker.min.js')}}"></script>
+
+
 <script>
     //ticker
     if ($('#webticker-1').length) {

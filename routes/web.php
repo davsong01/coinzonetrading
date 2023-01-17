@@ -33,14 +33,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');
     Route::POST('replaceavatar', [App\Http\Controllers\DashboardController::class, 'storeAvatar'])->name('replaceavatar');
     Route::POST('replaceid', [App\Http\Controllers\DashboardController::class, 'storeId'])->name('replaceid');
+   
 });
 
+Route::get('/pull-trade-instruments', [App\Http\Controllers\DashboardController::class, 'pullTradeInstruments'])->name('instruments.pull');
 // Admin
 Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
+    Route::patch('packages/{package}/restore', [PackageController::class, 'restore'])->name('packages.restore');
     Route::get('/clear-cache', [App\Http\Controllers\SettingController::class, 'clearCache'])->name('cache.clear');
 
     Route::delete('packages/{package}/delete', [PackageController::class, 'delete'])->name('packages.delete');
-    Route::patch('packages/{package}/restore', [PackageController::class, 'restore'])->name('packages.restore');
     Route::get('packages/trashed', [PackageController::class, 'trashed'])->name('packages.trashed');
     Route::resource('packages', PackageController::class);
 
@@ -59,15 +61,23 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
 
     Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
     Route::post('approve-id/{investor_id}', [App\Http\Controllers\InvestorController::class, 'approveId'])->name('approveid');
-    
-    Route::get('resolve-wallet-backlog', [App\Http\Controllers\CronController::class, 'runCronBacklog'])->name('wallet.resolve');
 
+    Route::get('resolve-wallet-backlog', [App\Http\Controllers\CronController::class, 'runCronBacklog'])->name('wallet.resolve');
+    
+    Route::get('admin-trade-history', [App\Http\Controllers\TradeController::class, 'adminTradeHistory'])->name('admin.trade.history');
+
+    Route::get('admin-approve-trade-request/{id}', [App\Http\Controllers\TradeController::class, 'adminApproveTradeProcess'])->name('admin.approve.request');
+    Route::get('admin-close-trade-request/{id}', [App\Http\Controllers\TradeController::class, 'adminCloseTradeProcess'])->name('admin.close.request');
+    Route::post('admin-complete-request/{id}', [App\Http\Controllers\TradeController::class, 'adminCompleteTradeProcess'])->name('admin.complete.request');
+
+    
     Route::middleware(['isAdmin:admin'])->group(function(){
         Route::resource('staff', App\Http\Controllers\StaffController::class);
 
         Route::post('investor_packages', [App\Http\Controllers\InvestorController::class, 'investorPackagesUpdate'])->name('investorpackages.edit');
         Route::post('investor_packages_delete/{id}', [App\Http\Controllers\InvestorController::class, 'investorPackagesDelete'])->name('investorpackages.delete');
         Route::post('alltransactionsdelete/{transaction}', [App\Http\Controllers\DashboardController::class, 'deleteAdminTransactions'])->name('alltransactions.delete');
+        Route::post('change-investor-password/{id}', [App\Http\Controllers\DashboardController::class, 'changePassword'])->name('admin.password');
 
         Route::resource('withdrawal', WithdrawalController::class, [
             'only' => ['update']
@@ -88,6 +98,13 @@ Route::middleware(['auth', 'verified','pendingTransactions'])->group(function ()
     Route::get('withdrawal-history', [App\Http\Controllers\WithdrawalController::class, 'history'])->name('withdrawal.history');
     Route::get('investor-trade', [App\Http\Controllers\DashboardController::class, 'trade'])->name('trade');
     Route::get('market-data', [App\Http\Controllers\DashboardController::class, 'marketData'])->name('market.data');
+    Route::get('select-instrument', [App\Http\Controllers\DashboardController::class, 'selectInstrument'])->name('select.instrument');
+    Route::get('trade-overview', [App\Http\Controllers\DashboardController::class, 'trade'])->name('trade.overview');
+    Route::get('trade-crypto', [App\Http\Controllers\DashboardController::class, 'crypto'])->name('trade.crypto');
+    Route::get('trade-history', [App\Http\Controllers\DashboardController::class, 'tradeHistory'])->name('trade.history');
+    Route::post('investor-trade', [App\Http\Controllers\DashboardController::class, 'investorTrade'])->name('investor.trade');
+    Route::get('/close-trade/{trade}', [App\Http\Controllers\TradeController::class, 'closeTrade'])->name('trade.close');
+
     
     Route::resource('withdrawal', WithdrawalController::class, [
         'only' => ['index','store','history']

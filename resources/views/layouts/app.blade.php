@@ -14,13 +14,14 @@
     <title>{{ env('APP_NAME') }}</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> --}}
     <!-- Bootstrap 4.0-->
     <link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/bootstrap/dist/css/bootstrap.css') }}">
 
     <!--amcharts -->
     <link href="https://www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css" />
-
+	<link rel="stylesheet" href="{{ asset('back-end/assets/vendor_components/select2/dist/css/select2.min.css') }}">
+    
     <!-- Bootstrap-extend -->
     <link rel="stylesheet" href="{{ asset('back-end/css/bootstrap-extend.css') }}">
 
@@ -37,8 +38,7 @@
         href="{{ asset('back-end/assets/vendor_components/simple-line-icons-master/css/simple-line-icons.css')}}">
     <link rel="stylesheet"
         href="{{ asset('back-end/assets/vendor_components/cryptocoins-master/webfont/cryptocoins.css')}}">
-    <link rel="stylesheet"
-        href="{{ asset('back-end/https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i')}}">
+    {{-- <link rel="stylesheet" href="{{ asset('back-end/https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i')}}"> --}}
 
     <link rel="stylesheet" href="{{ asset('back-end/css/master_style.css') }}">
     <link rel="stylesheet" href="{{ asset('back-end/css/skins/_all-skins.css')}}">
@@ -110,6 +110,7 @@
     <!-- jQuery 3 -->
     <script src="{{ asset('back-end/assets/vendor_components/jquery/dist/jquery.js') }}"></script>
 
+
     <!-- popper -->
     <script src="{{ asset('back-end/assets/vendor_components/popper/dist/popper.min.js') }}"></script>
 
@@ -121,6 +122,8 @@
 
     <!-- FastClick -->
     <script src="{{ asset('back-end/assets/vendor_components/fastclick/lib/fastclick.js') }}"></script>
+
+    <script src="{{ asset('back-end/assets/vendor_components/select2/dist/js/select2.full.js')}}"></script>
 
     <!--amcharts charts -->
     <script src="http://www.amcharts.com/lib/3/amcharts.js" type="text/javascript"></script>
@@ -137,10 +140,8 @@
     <script src="{{ asset('back-end/assets/vendor_components/Web-Ticker-master/jquery.webticker.min.js') }}"></script>
 
     <!-- EChartJS JavaScript -->
-    <script src="{{ asset('back-end/assets/vendor_components/echarts-master/dist/echarts-en.min.js') }}"></script>
-    <script
-        src="{{ asset('back-end/assets/vendor_components/echarts-liquidfill-master/dist/echarts-liquidfill.min.js') }}">
-    </script>
+    {{-- <script src="{{ asset('back-end/assets/vendor_components/echarts-master/dist/echarts-en.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('back-end/assets/vendor_components/echarts-liquidfill-master/dist/echarts-liquidfill.min.js') }}"></script> --}}
 
     <!-- This is data table -->
     <script src="{{ asset('back-end/assets/vendor_plugins/DataTables-1.10.15/media/js/jquery.dataTables.min.js') }}">
@@ -150,8 +151,8 @@
     <script src="{{ asset('back-end/js/template.js') }}"></script>
 
     <!-- Crypto_Admin dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('back-end/js/pages/dashboard.js') }}"></script>
-    <script src="{{ asset('back-end/js/pages/dashboard-chart.js') }}"></script>
+    {{-- <script src="{{ asset('back-end/js/pages/dashboard.js') }}"></script>
+    <script src="{{ asset('back-end/js/pages/dashboard-chart.js') }}"></script> --}}
 
     <!-- Crypto_Admin for demo purposes -->
     <script src="{{ asset('back-end/js/demo.js') }}"></script>
@@ -165,7 +166,6 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
-
     </script>
 
 </body>

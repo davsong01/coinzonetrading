@@ -32,8 +32,8 @@ class SettingController extends Controller
             'official_email' => $request->official_email,
             'wallet_types' => $request->wallet_types,
             'currency_sign' => $request->currency_sign,
-            'allow_wallet_buy' => $request->allow_wallet_buy
-            
+            'allow_wallet_buy' => $request->allow_wallet_buy,
+            'coin_price_list_widget' =>$request->coin_price_list_widget
         ]);
        
         return back()->with('message', 'Operation successful');

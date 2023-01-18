@@ -68,6 +68,16 @@
 													<option value="inactive" {{ 'inactive' == $settings->allow_wallet_buy ? 'selected' : '' }}>Inactive</option>
 												</select>
 											</div>
+											<div class="form-group row">
+												<label class="form-label">Allow wallet buy</label>
+												<textarea class="form-control" name="coin_price_list_widget" id="" cols="30" rows="10" value="{!! old('coin_price_list_widget') ?? $settings->coin_price_list_widget !!}">{!! $settings->coin_price_list_widget !!}</textarea>
+												<select name="allow_wallet_buy" id="allow_wallet_buy" class="form-control" required>
+													<option value="active" {{ 'active' == $settings->allow_wallet_buy ? 'selected' : '' }}>Active</option>
+													<option value="inactive" {{ 'inactive' == $settings->allow_wallet_buy ? 'selected' : '' }}>Inactive</option>
+												</select>
+											</div>
+
+											 
 										</div>
 										<div class="form-group row">
 											<button type="submit" class="btn btn-yellow settings1" style="margin: auto;">Update App Settings</button>

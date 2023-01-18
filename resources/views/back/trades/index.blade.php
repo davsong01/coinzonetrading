@@ -41,16 +41,27 @@
                       @foreach ($histories as $history)
                       <tr>
                         <td>{{ $count++ }}</td>
-                        <td>{{ $history->investor->user->name }} <br> <small>{{ $history->investor->user->email }} <br>
-                         <span style="color:blue">Wallet Balance : ${{  number_format($history->investor->user->walletBalance(), 2) }}</span>
+                        <td>{{ $history->investor->user->name ?? null }} <br> <small>{{ $history->investor->user->email ?? null }} <br>
+                          @if($history->status == 'Initiated' || $history->status == 'In Progress')
+                          <span style="color:blue">Wallet Balance : ${{  number_format($history->investor->user->walletBalance(), 2) }}</span>
+                          @endif
                         </small> </td>
-                        <td>{{ $history->trade_id }}</td>
-                        <td>{{ $settings->currency_sign. number_format($history->amount, 2) }}</td>
+                        <td>{{ $history->trade_id }}
+                          @if($history->status == 'Complete')
+                          <p>
+                          <small>Type: </small><small style="color:{{ $history->type=='loss' ? 'red':'green' }}">{{ $history->type }}</small><br>
+                          <small>Percent: </small><small style="color:{{ $history->type=='loss' ? 'red':'green' }}">{{ $history->percent }}%</small><br>
+                          </p>
+                          @endif
+                        </td>
+                        <td>{{ $settings->currency_sign. number_format($history->amount, 2) }}
+                          @if($history->status == 'Complete') <br>
+                          <small style="color:{{ $history->type=='loss' ? 'red':'green' }}">${{ $history->bonus['bonus'] .' '. $history->bonus['type']}}</small>
+                          @endif
+                        </td>
                         <td>{{ $history->instrument}}</td>
                         <td>{{ $history->status}} 
-                          @if($history->status == 'Complete') <br>
-                          <small style="color:green">Profit: ${{ number_format($history->profit, 2) }}</small>
-                          @endif
+                          
                           @if($history->status == 'Initiated') <br>
                           <small class="sm">On:  {{date("F dS, Y", strtotime($history->created_at))}}, {{date("h:ia", strtotime($history->created_at))}}</small>
                           @endif
@@ -79,7 +90,10 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
-                                        <strong>Trade ID : {{ $history->trade_id }}</strong>
+                                        <p>
+                                          <strong class="bold">Trade ID :</strong> {{ $history->trade_id }}<br>
+                                          <strong class="bold">Trade Amount :</strong> ${{ number_format($history->amount, 2) }}
+                                        </p>
                                     </div>
                                     <div class="modal-body">
                                         <div class="row no-gutters">
@@ -87,12 +101,22 @@
                                           <div class="box-body">
                                             <div class="row">
                                               <div class="col-md-12">
-                                                <form novalidate method="POST" action="{{ route('admin.complete.request', $history->id) }}"  onsubmit="return confirm('You are about to complete this request, action cannot be undone');">
+                                                <form method="POST" action="{{ route('admin.complete.request', $history->id) }}"  onsubmit="return confirm('You are about to complete this request, action cannot be undone');">
                                                   @csrf
                                                   <div class="form-group">
-                                                    <h5 class="" style="margin-left: 9px;">Profit</h5>
+                                                    <h5 class="" style="margin-left: 9px;">Select Type</h5>
                                                     <div class="controls">
-                                                      <input type="number" name="profit" class="form-control" step=".01" required value="{{ old('profit') }}" max="{{ $history->amount }}">
+                                                      <select name="type" id="" class="form-control" required>
+                                                        <option value="" selected>Select Type</option>
+                                                        <option value="profit" {{ old('type') == 'profit' ? 'selected' : '' }}>Profit</option>
+                                                        <option value="loss" {{  old('type') == 'loss' ? 'selected' : ''}}>Loss</option>
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <h5 class="" style="margin-left: 9px;">Percentage Profit/Loss</h5>
+                                                    <div class="controls">
+                                                      <input type="number" name="percent" class="form-control" step=".01" required value="{{ old('profit') }}">
                                                     </div>
                                                   </div>
                                                   <div class="text-xs-right">

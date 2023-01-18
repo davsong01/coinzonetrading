@@ -68,7 +68,7 @@
                       <th>{{ __('S/N') }}</th>
                       <th>{{ __('Trade Id') }}</th>
                       <th>{{ __('Instrument') }}</th>
-                      <th>{{ __('Amount') }}</th>
+                      {{-- <th>{{ __('Amount') }}</th> --}}
                       <th>{{ __('Status') }}</th>
                       <th>{{ __('Actions') }}</th>
                     </tr>
@@ -80,13 +80,22 @@
                     @foreach ($historys as $history)
                     <tr>
                       <td>{{ $count ++ }}</td>
-                      <td>{{ $history->trade_id }}</td>
+                      <td>{{ $history->trade_id }}
+                        <p>
+                          <small style="font-weight: bold;">Trade Analysis</small><br>
+                          <small>Amount Invested: ${{ number_format($history->amount,2) }} <br></small>
+                          <small>Status: <span style="color:{{ $history->status=='Complete' ? 'green':'blue' }}">{{ $history->status }}</span></small>
+                          @if($history->status == 'Complete') <br>
+                          <small>Result: </small><small style="color:{{ $history->type=='loss' ? 'red':'green' }}">${{ $history->bonus['bonus'] .' '. $history->bonus['type']}}</small>
+                          @endif
+                        </p>
+                      </td>
                       <td>{{ $history->instrument }}
                       <small> <br>
                           <strong style="color: #dd3765;">Created on: </strong>{{ $history->created_at }} <br>
                       </small>
                       </td>
-                      <td>${{ $history->amount }}</td>
+                      {{-- <td>${{ $history->amount }}</td> --}}
                       <td>{{ $history->status }}</td>
                       <td>@if($history->status == 'Initiated') <a onclick="return confirm('You are about to close an initiated transaction');"  class="btn btn-danger" href="{{ route('trade.close',$history->id) }}">Close Trade</a> @endif</td>
                     </tr>

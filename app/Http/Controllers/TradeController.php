@@ -16,9 +16,16 @@ class TradeController extends Controller
      */
 
      public function adminTradeHistory(){
-         $histories = Trade::orderByRaw(DB::raw("FIELD(status, 'Initiated', 'In Progress', 'Closed') ASC"))->get();
-         
-         return view('back.trades.index', compact('histories'));
+        $histories = Trade::orderByRaw(DB::raw("FIELD(status, 'Initiated', 'In Progress', 'Complete','Closed') ASC"))->get();
+      
+        $histories = $histories->map(function($query){
+            if($query->status == 'Complete'){
+               $query->bonus = app('App\Http\Controllers\FunctionsController')->getTradeBonusType($query);
+            }
+            return $query;
+        });
+       
+        return view('back.trades.index', compact('histories'));
      }
     public function adminApproveTradeProcess($id)
     {
@@ -48,14 +55,28 @@ class TradeController extends Controller
 
     public function adminCompleteTradeProcess(Request $request, $id)
     {
+        $data = $this->validate($request,[
+            'type' => 'required',
+            'percent' => 'required'
+        ]);
+
         $trade = Trade::find($id);
+        $percentAmount = $request->percent*$trade->amount/100;
+        if($request->type == 'profit'){
+            $bonus = $percentAmount + $trade->amount;
+        }else{
+            $bonus = $trade->amount - $percentAmount;
+        }
+       
+        app('App\Http\Controllers\FunctionsController')->logWallet('credit',$bonus, $trade->investor->user->id, $trade->trade_id);
         $trade->update([
             'admin_id' => auth()->user()->admin->id,
             'status' => 'Complete',
             'approved_date' => now(),
-            'profit' => $request->profit,
+            'type' => $request->type,
+            'percent' => $request->percent,
         ]);
-        
+
         return back()->with('message','Operation successful');
     }
 

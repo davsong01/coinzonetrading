@@ -310,7 +310,13 @@ class DashboardController extends Controller
     public function tradeHistory(){
         $active = 'history';
         $historys = Trade::where('investor_id', auth()->user()->investor->id)->orderBy('created_at', 'DESC')->get();
-      
+        $historys  =  $historys ->map(function ($query) {
+            if ($query->status == 'Complete') {
+                $query->bonus = app('App\Http\Controllers\FunctionsController')->getTradeBonusType($query);
+            }
+            return $query;
+        });
+
         return view('back.investors.trade.crypto', compact('active','historys'));
     }
 }

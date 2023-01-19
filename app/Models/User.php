@@ -73,8 +73,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * The user current wallet balance
      */
     public function walletBalance(){
-        $max = Wallet::where(['user_id' => $this->id, 'type' => 'credit'])->sum('amount');
-        $min = Wallet::where(['user_id' => $this->id, 'type' => 'debit'])->sum('amount');
+        $max = Wallet::where(['user_id' => $this->id, 'type' => 'credit','status'=>'Completed'])->sum('amount');
+        $min = Wallet::where(['user_id' => $this->id, 'type' => 'debit', 'status' => 'Completed'])->sum('amount');
         
         return $max - $min;
     }

@@ -15,13 +15,16 @@ class CronController extends Controller
             $query->whereBetween('last_cron_date', [Carbon::yesterday(), Carbon::today()])
                ->orWhereNULL('last_cron_date');
         })->take($count)->get();
-        
+       
+        $others = [
+            'status'=>'Completed',
+            'description' => 'ROI'
+        ];
         $credited = 0;
         foreach($activeInvestors as $investor){
             try {
                 $amount = $investor->daily_roi;
-
-                $updateWallet = app('App\Http\Controllers\FunctionsController')->logWallet('credit', $amount, $investor->investor_id, $investor->reference);
+                $updateWallet = app('App\Http\Controllers\FunctionsController')->logWallet('credit', $amount, $investor->investor_id, $investor->reference, $others);
 
                 if (!is_null($updateWallet)) {
                     $investor->update(['last_cron_date' => now()]);
@@ -63,13 +66,18 @@ class CronController extends Controller
                     'diff' => $diff,
                     'last_cron' => $lc,
                 ];
-
+                
+                $others = [
+                    'status' => 'Completed',
+                    'description' => 'ROI'
+                ];
                 // run for loop with difference and add 1 day to last cron and update
                 for ($i=0; $i < $diff; $i++) {
                    
                     try {
-                        $updateWallet = app('App\Http\Controllers\FunctionsController')->logWallet('credit', $bl->daily_roi, $bl->investor_id, $bl->reference);
 
+                        $updateWallet = app('App\Http\Controllers\FunctionsController')->logWallet('credit', $bl->daily_roi, $bl->investor_id, $bl->reference,$others);
+                        
                         if (!is_null($updateWallet)) {
                             $bl->update(['last_cron_date' => $lc->addDays(1)]);
                             $finalCredited += 1;

@@ -217,9 +217,14 @@ class DashboardController extends Controller
         return back()->with('message', 'Delete succesful');
     }
 
-    public function mywalletHistory(){
-        $wallets = Wallet::whereUserId(auth()->user()->id)->orderBy('created_at', 'DESC')->get();
-
+    public function mywalletHistory($user_id =null){
+        if(is_null($user_id)){
+            $wallets = Wallet::whereUserId(auth()->user()->id)->orderBy('created_at', 'DESC')->get();
+        }else{
+            $wallets = Wallet::whereUserId($user_id)->orderBy('created_at', 'DESC')->get();
+            
+        }
+        
         return view('back.investors.mywallethistory', [
             'wallets' => $wallets,
         ]);

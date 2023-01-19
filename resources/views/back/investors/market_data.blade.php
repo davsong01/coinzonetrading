@@ -10,7 +10,6 @@
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
       </ol>
         @include('back.investors.verification_streak')
-
     </section>
    
     <!-- Main content -->
@@ -20,17 +19,10 @@
         <div class="col-lg-12 col-12">
           <div class="box">
             <div class="box-header with-border">
-              <h4 class="box-title">Bitcoin Exchange ETH/BTC</h4>
-                <ul class="box-controls pull-right">
-                <li><a class="box-btn-close" href="#"></a></li>
-                <li><a class="box-btn-slide" href="#"></a></li>	
-                <li><a class="box-btn-fullscreen" href="#"></a></li>
-              </ul>
+              <h4 class="box-title">Current Market Data</h4>
             </div>
             <div class="box-body">
-              <div class="chart">
-                <div id="chartdiv1" style="height: 500px;"></div>
-              </div>
+              {!! $settings->coin_price_list_widget !!}
             </div>
             <!-- /.box-body -->
             </div>

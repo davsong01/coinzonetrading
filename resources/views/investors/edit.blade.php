@@ -439,11 +439,22 @@
                                                   <tr>
                                                     <td>{{ $count ++ }}</td>
                                                     <td>{{ $wallet->reference }}
-                                                    <small> <br>
-                                                        <strong style="color: #dd3765;">Created on: </strong>{{ $wallet->created_at }}
-                                                        @if(isset($wallet->transaction->last_cron_date)) <br>
-                                                        <strong style="color: #dd3765;">Last Cron</strong> {{ $wallet->transaction->last_cron_date ?? null }} 
+                                                    
+                                                    <small> 
+                                                        @if(!is_null($wallet->description))
+                                                        <br>
+                                                        <strong style="color: blue;">Description: </strong>{{ strtoUpper($wallet->description) }}<br>
                                                         @endif
+                                                        <strong style="color: blue;">Created on: </strong>{{ $wallet->created_at }}
+                                                        @if(!is_null($wallet->status))
+                                                        <br><strong style="color: blue;">Status: </strong><span style="color: {{ $wallet->status == 'pending' ? 'red':'green' }}">{{ strtoUpper($wallet->status) }}</span> <span>@if($wallet->status == 'pending' && $wallet->description == 'Wallet Top Up') <a href="{{ url('/').'/wallet-topup-verify/'.$wallet->reference.'/'.'no/'.'yes'}}"> <i class='btn btn-info fa fa-refresh' data-toggle="tooltip" data-placement="bottom" title="Check status" ></i></a> @endif</span>
+                                                        @endif
+                                                    </small>
+                                                    @if(isset($wallet->transaction->last_cron_date)) <br>
+                                                    <small>
+                                                    <strong style="color: #dd3765;">Last Cron</strong> {{ $wallet->transaction->last_cron_date ?? null }} 
+                                                    </small>
+                                                    @endif
                                                     </small>
                                                     </td>
                                                     <td>{{ $settings->currency_sign . number_format($wallet->amount, 2) }}</td>

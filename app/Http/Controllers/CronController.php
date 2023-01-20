@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Wallet;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\InvestorPackage;
 
 class CronController extends Controller
@@ -97,5 +98,17 @@ class CronController extends Controller
             'Investors credited' => count($credited)
         ];
         // dd($backlog, $picked, $finalCredited);
+    }
+    
+    public function deleteExpiredWalletTransactions()
+    {
+        $expired = Wallet::whereStatus('pending')->whereNotNull('expires_at')->where('expires_at',  '<',  Carbon::now())->get();
+
+        if ($expired->count() > 0) {
+            foreach ($expired as $ex) {
+                $ex->delete();
+            }
+        }
+        return;
     }
 }

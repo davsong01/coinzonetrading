@@ -95,7 +95,8 @@ Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'priv
 Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
 Route::post( '/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
-Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController::class, 'creditWalletCron']);
+Route::get( '/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController::class, 'creditWalletCron']);
+Route::get('/delete-expired-wallet-transactions', [App\Http\Controllers\CronController::class, 'deleteExpiredWalletTransactions']);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/package/select', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');

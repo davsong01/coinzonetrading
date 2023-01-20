@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class WalletController extends Controller
 {
@@ -125,6 +126,7 @@ class WalletController extends Controller
 
     public function updateWalletTopUp($reference,$middleware='no',$admin="no")
     {
+        // Delete pending transactions that have expired
         //Check payment status and deliver value accordingly
         $transaction = Wallet::whereReference($reference)->whereStatus('pending')->whereDescription('Wallet Top Up')->first();
         // dd($transaction,$reference, $middleware);
@@ -168,4 +170,5 @@ class WalletController extends Controller
             return;
         }
     }
+
 }

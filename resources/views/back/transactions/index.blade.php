@@ -71,7 +71,6 @@
                                     <b>Network: </b>{{ $transaction->network }} <br>
                                     <b>Status: </b>{{ $transaction->raw_status }} <br>
                                     <b>Detected at: </b>{{ $transaction->detected_at }}
-                               
                               </p>
                             @endif
                             

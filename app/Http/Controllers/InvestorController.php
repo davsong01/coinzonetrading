@@ -199,11 +199,32 @@ class InvestorController extends Controller
      */
     public function edit(Investor $investor, $hid = null)
     {
-        // dd();
+        // $investor = $investor->loadMissing(['user']);
+       
+        // $investor->map(function ( $investor) {
+        //     if (isset( $investor->response) && !empty( $investor->response)) {
+        //         $response = json_decode( $investor->response);
+
+        //         $payments = $response->payments[0] ?? null;
+        //          $investor->payment_id = $payments->payment_id ?? null;
+        //          $investor->network = $payments->network ?? null;
+        //          $investor->raw_status = $payments->status ?? null;
+        //          $investor->detected_at =
+        //             date("M jS, Y", strtotime($payments->detected_at)) ?? null;
+        //     }
+
+        //     return $investor;
+        // });
+
+        // dd($investor);
+
         return view('investors.edit', [
             'investor' => $investor->loadMissing(['user']),
             'hid' => $hid
         ]);
+
+        
+
        
     }
 

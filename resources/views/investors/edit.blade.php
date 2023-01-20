@@ -425,6 +425,7 @@
                                                     <th>{{ __('S/N') }}</th>
                                                     <th>{{ __('Reference ID') }}</th>
                                                     <th>{{ __('Amount') }}</th>
+                                                    <th>{{ __('Status') }}</th>
                                                     <th>{{ __('Type') }}</th>
 
                                                   </tr>
@@ -446,9 +447,7 @@
                                                         <strong style="color: blue;">Description: </strong>{{ strtoUpper($wallet->description) }}
                                                         @endif
                                                         <br> <strong style="color: blue;">Created on: </strong>{{ $wallet->created_at }}
-                                                        @if(!is_null($wallet->status))
-                                                        <br><strong style="color: blue;">Status: </strong><span style="color: {{ $wallet->status == 'pending' ? 'red':'green' }}">{{ strtoUpper($wallet->status) }}</span> <span>@if($wallet->status == 'pending' && $wallet->description == 'Wallet Top Up') <a href="{{ url('/').'/wallet-topup-verify/'.$wallet->reference.'/'.'no/'.'yes'}}"> <i class='btn btn-info fa fa-refresh' data-toggle="tooltip" data-placement="bottom" title="Check status" ></i></a> @endif</span>
-                                                        @endif
+                                                        
                                                     </small>
                                                     @if(isset($wallet->transaction->last_cron_date)) <br>
                                                     <small>
@@ -458,6 +457,34 @@
                                                     </small>
                                                     </td>
                                                     <td>{{ $settings->currency_sign . number_format($wallet->amount, 2) }}</td>
+                                                    <td>
+                                                    @if(!is_null($wallet->status))
+                                                    <br><strong style="color: blue;">Status: </strong><span style="color: {{ $wallet->status == 'pending' ? 'red':'green' }}">{{ strtoUpper($wallet->status) }}</span> <span>@if($wallet->status == 'pending' && $wallet->description == 'Wallet Top Up') <a href="{{ url('/').'/wallet-topup-verify/'.$wallet->reference.'/'.'no/'.'yes'}}"> <i class='btn btn-info fa fa-refresh' data-toggle="tooltip" data-placement="bottom" title="Check status" ></i></a> @endif</span>
+                                                    @endif
+                                                    @if(isset($wallet->response) && !empty($wallet->response))
+                                                    <br>
+                                                    {{-- <p style="color:black;border: 1px black solid;height: 120px;width: 320px;border-radius: 5px;padding:5px;margin-top:5px">
+                                                        RAW RESPONSE: <br> --}}
+                                                        <?php 
+                                                        
+                                                            if (isset( $investor->response) && !empty( $investor->response)) {
+                                                                $response = json_decode( $investor->response);
+
+                                                                $payments = $response->payments[0] ?? null;
+                                                                $wallet->payment_id = $payments->payment_id ?? null;
+                                                                $wallet->network = $payments->network ?? null;
+                                                                $wallet->raw_status = $payments->status ?? null;
+                                                                $wallet->detected_at =
+                                                                    date("M jS, Y", strtotime($payments->detected_at)) ?? null;
+                                                            }
+                                                        ?>
+                                                        {{-- <b>Payment_id: </b>{{ $wallet->payment_id }} <br>
+                                                        <b>Network: </b>{{ $wallet->network }} <br>
+                                                        <b>Status: </b>{{ $wallet->raw_status }} <br>
+                                                        <b>Detected at: </b>{{ $wallet->detected_at }} --}}
+                                                        {{-- </p> --}}
+                                                    @endif
+                                                    </td>
                                                     <td style="color:{{ $wallet->type == 'credit' ? 'green' : 'red'}}">{{ ucfirst($wallet->type) }}</td>
                                                   </tr>
                                                   @endforeach

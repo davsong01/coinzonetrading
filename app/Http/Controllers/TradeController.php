@@ -68,7 +68,13 @@ class TradeController extends Controller
             $bonus = $trade->amount - $percentAmount;
         }
        
-        app('App\Http\Controllers\FunctionsController')->logWallet('credit',$bonus, $trade->investor->user->id, $trade->trade_id);
+        $others = [
+            'status' => 'Completed',
+            'description'=>'Trade'
+        ]; 
+
+        app('App\Http\Controllers\FunctionsController')->logWallet('credit',$bonus, $trade->investor->user->id, $trade->trade_id, $others);
+        
         $trade->update([
             'admin_id' => auth()->user()->admin->id,
             'status' => 'Complete',

@@ -362,7 +362,7 @@ class FunctionsController extends Controller
     public function getTradeBonusType($trade){
         $percentAmount = $trade->percent * $trade->amount / 100;
         if ($trade->type == 'profit') {
-            $bonus = $percentAmount + $trade->amount;
+            $bonus = $percentAmount;
             $type = 'Gained';
         } else {
             $bonus = $percentAmount;

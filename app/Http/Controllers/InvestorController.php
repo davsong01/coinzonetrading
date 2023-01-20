@@ -45,7 +45,6 @@ class InvestorController extends Controller
     }
 
     public function investorPackagesAdd(Request $request){
-        
         $data = $this->validate($request, [
             'investor_id' => 'required|numeric',
             'package_id' => 'required|numeric',
@@ -72,17 +71,18 @@ class InvestorController extends Controller
                 $status = 'active';
             }
         }
-        $data['reference'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference() . '-' . auth()->user()->id;
+        $reference = app('App\Http\Controllers\FunctionsController')->generateTransactionReference(). '-' . auth()->user()->id;
+        $data['reference'] = $reference;
         $data['created_by'] = auth()->user()->id;
         $data['expires_at'] = now(); 
         $data['code'] = $request->order_number;
         $data['status'] = $status;
         $data['url'] = 'none';
         $data['currency'] = $this->settings->currency;
-        $data['rid'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference() . '-' . auth()->user()->id;;
+        $data['rid'] = $reference . '_ADMIN_ADD';
         $data['daily_roi'] = $this->getRoi($package, $request->amount);
         unset($data['order_number']);
-        
+       
         InvestorPackage::create($data);
 
         return back()->with('message', 'Package Added successfully');

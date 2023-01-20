@@ -155,12 +155,15 @@ class WalletController extends Controller
         }
        
         if(isset($admin) && $admin == 'yes'){
-            return redirect(route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'wallet']))->with($message_type, $message);
+            // return redirect(route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'wallet']))->with($message_type, $message);
+            return redirect(route('investors.edit', ['investor' => $transaction->user->investor->id, 'hid' => 'wallet']));
         }else{
-            return back()->with($message_type, $message);
+            return back();
+            // return back()->with($message_type, $message);
         }
         if ($middleware == 'yes') {
-            return redirect(route('mywallet.history', $transaction->user_id))->with($message_type,$message);
+            return redirect(route('mywallet.history', $transaction->user_id));
+            // return redirect(route('mywallet.history', $transaction->user_id))->with($message_type,$message);
         } else {
             return;
         }

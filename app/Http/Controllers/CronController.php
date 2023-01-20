@@ -88,8 +88,6 @@ class CronController extends Controller
                     }
                 }
             }
-
-
         }
 
         return [

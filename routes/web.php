@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WalletController;
 use App\Http\Controllers\PackageController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvestorController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WithdrawalController;
 
 /*
@@ -18,49 +19,73 @@ use App\Http\Controllers\WithdrawalController;
 */
 Route::get('/testrequest', function(){
     $authentication = "kadoshkonnect@gmail.com:Kadosh6385462222";
-    $headers = [
-        "Authorization:" . $authentication,
-        "Content-Type" => "application/json",
-    ];
+    // $headers = [
+    //     "Authorization:" . $authentication,
+    //     "Content-Type" => "application/json",
+    // ];
     
-    // $authentication = env('AIRTIME_USERNAME') . ':' . env('AIRTIME_PASSWORD');
-    $postData = [
-        "billersCode" => "1212121212",
-        "serviceID" => "dstv",
-    ];
+    // // $authentication = env('AIRTIME_USERNAME') . ':' . env('AIRTIME_PASSWORD');
+    // $postData = [
+    //     "billersCode" => "1212121212",
+    //     "serviceID" => "dstv",
+    // ];
 
-    $url = 'https://sandbox.vtpass.com/api/merchant-verify';
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => ($postData),
-        // CURLOPT_HTTPHEADER => array($headers),
-        CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-        CURLOPT_USERPWD => $authentication,
-    ));
-
-    $response = curl_exec($curl);
-    curl_close($curl);
-
-    dd($response, $postData);
-    
     // $url = 'https://sandbox.vtpass.com/api/merchant-verify';
-    // $ch = curl_init($url);
-    // curl_setopt($ch, CURLOPT_HEADER, 1);
-    // curl_setopt($ch, CURLOPT_USERPWD, 'kadoshkonnect@gmail.com:Kadosh6385462222');
-    // curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-    // curl_setopt($ch, CURLOPT_POST, 1);
-    // curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    // $response = curl_exec($ch);
-    // curl_close($ch);
+    // $curl = curl_init();
+
+    // curl_setopt_array($curl, array(
+    //     CURLOPT_URL => $url,
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'POST',
+    //     CURLOPT_POSTFIELDS => ($postData),
+    //     // CURLOPT_HTTPHEADER => array($headers),
+    //     CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+    //     CURLOPT_USERPWD => $authentication,
+    // ));
+
+    // $response = curl_exec($curl);
+    // curl_close($curl);
+
+    // dd($response, $postData);
+
+
+    $phone="08066532759";
+    $network="MTN";
+    $amount=105;
+    $date = new DateTime("now", new DateTimeZone('Africa/Lagos') );
+    $request_id = $date->format('YmdHisi').'OGBO'.rand(1000000, 9999999);
+   
+    $host = 'https://sandbox.vtpass.com/api/pay';
+    $data = array(
+        'serviceID'=> $network, //integer e.g airtel
+        'phone'=> $phone, // e.g phoneno
+        'amount'=> $amount, // e.g dstv1, dstv2,prepaid,(optional for somes services)
+        'request_id' => $request_id // unique for every transaction from your platform
+    );
+   
+    //Confirm the GET values are not empty before sending to VTPass
+
+    //cURL begins
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $host,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_USERPWD => $authentication,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => $data,
+    ));
+    $response=curl_exec($curl);
+    echo $response;
+    curl_close($curl);
 });
 
 Route::get( '/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -70,7 +95,8 @@ Route::get('/privacy-policy', [App\Http\Controllers\HomeController::class, 'priv
 Route::get( '/rules', [App\Http\Controllers\HomeController::class, 'rules'])->name('rules');
 
 Route::post( '/sendcontact', [App\Http\Controllers\HomeController::class, 'sendContact'])->name('contact.send');
-Route::get('/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController::class, 'creditWalletCron']);
+Route::get( '/credit-wallet-cron/{count?}', [App\Http\Controllers\CronController::class, 'creditWalletCron']);
+Route::get('/delete-expired-wallet-transactions', [App\Http\Controllers\CronController::class, 'deleteExpiredWalletTransactions']);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/package/select', [App\Http\Controllers\HomeController::class, 'makePayment'])->name('package.select');
@@ -79,7 +105,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::POST('profile', [App\Http\Controllers\DashboardController::class, 'storeProfile'])->name('profile.store');
     Route::POST('replaceavatar', [App\Http\Controllers\DashboardController::class, 'storeAvatar'])->name('replaceavatar');
     Route::POST('replaceid', [App\Http\Controllers\DashboardController::class, 'storeId'])->name('replaceid');
-   
 });
 
 Route::get('/pull-trade-instruments', [App\Http\Controllers\DashboardController::class, 'pullTradeInstruments'])->name('instruments.pull');
@@ -131,10 +156,11 @@ Route::middleware(['auth','isAdmin:admin,staff'])->group(function(){
 // Investor
 Route::middleware(['auth', 'verified','pendingTransactions'])->group(function () {
     Route::get('my-packages', [App\Http\Controllers\DashboardController::class, 'myPackages'])->name('investor.packages');
-    Route::get('my-wallethistory', [App\Http\Controllers\DashboardController::class, 'myWalletHistory'])->name('mywallet.history');
+    Route::get('/my-wallethistory/{user_id?}', [App\Http\Controllers\DashboardController::class, 'myWalletHistory'])->name('mywallet.history');
 
     Route::get('mytransactions', [App\Http\Controllers\DashboardController::class, 'investorTransactions'])->name('mytransactions')->middleware('hasPackage');
-    Route::get( '/payment/callback/{reference}/{middleware?}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
+    Route::get('/payment/callback/{reference}/{middleware?}', [App\Http\Controllers\FunctionsController::class, 'updateTransaction'])->name('payment.process');
+    
     Route::get('/payment-retry/{reference}', [App\Http\Controllers\DashboardController::class, 'retryTransaction'])->name('payment.retry');
     Route::get('/payment-renew/{reference}', [App\Http\Controllers\DashboardController::class, 'renewPackage'])->name('package.renew');
     Route::get('withdrawal-history', [App\Http\Controllers\WithdrawalController::class, 'history'])->name('withdrawal.history');
@@ -146,11 +172,16 @@ Route::middleware(['auth', 'verified','pendingTransactions'])->group(function ()
     Route::get('trade-history', [App\Http\Controllers\DashboardController::class, 'tradeHistory'])->name('trade.history');
     Route::post('investor-trade', [App\Http\Controllers\DashboardController::class, 'investorTrade'])->name('investor.trade');
     Route::get('/close-trade/{trade}', [App\Http\Controllers\TradeController::class, 'closeTrade'])->name('trade.close');
+    Route::get('/top-wallet', [WalletController::class, 'topUpWallet'])->name('wallet.topup');
+    Route::post('/top-wallet', [App\Http\Controllers\WalletController::class, 'processTopUpWallet'])->name('wallet.topup.process');
 
-    
     Route::resource('withdrawal', WithdrawalController::class, [
         'only' => ['index','store','history']
     ]);
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/wallet-topup-verify/{reference}/{middleware?}/{admin?}', [App\Http\Controllers\WalletController::class, 'updateWalletTopUp'])->name('wallet.topup.verify');
 });
 
 require __DIR__.'/auth.php';

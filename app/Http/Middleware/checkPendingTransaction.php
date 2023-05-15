@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\InvestorPackage;
 use Closure;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
+use App\Models\InvestorPackage;
+use Illuminate\Support\Facades\Route;
 
 class checkPendingTransaction
 {
@@ -18,7 +20,7 @@ class checkPendingTransaction
     public function handle(Request $request, Closure $next)
     {
 
-       $pendingtransactions =  InvestorPackage::where('investor_id', auth()->user()->id)->where('status', 'pending')->where('expires_at', '>', now())->get();
+       $pendingtransactions = InvestorPackage::where('investor_id', auth()->user()->id)->where('status', 'pending')->where('expires_at', '>', now())->get();
         
        if(isset($pendingtransactions) && $pendingtransactions->count() > 0){
             // Attempt to update pending transactions
@@ -27,6 +29,25 @@ class checkPendingTransaction
             }
        }
 
-    return $next($request);
+        $pendingWallet = Wallet::where('user_id', auth()->user()->id)->where('status', 'pending')->where('description', 'Wallet Top Up')->get();
+       
+        
+        if(Route::is('mywallet.history')){
+            $param = 'yes';
+        }else{
+            $param = 'no';
+        }
+        
+        if (isset($pendingWallet) && $pendingWallet->count() > 0) {
+            // Attempt to update pending transactions
+            // $request = new \Illuminate\Http\Request();
+            // $request->replace(['admin' => 'no']);
+           
+            foreach ($pendingWallet as $transaction) {
+                app('App\Http\Controllers\WalletController')->updateWalletTopUp($transaction->reference, $param);
+            }
+        }
+
+        return $next($request);
     }
 }

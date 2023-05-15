@@ -45,7 +45,6 @@ class InvestorController extends Controller
     }
 
     public function investorPackagesAdd(Request $request){
-        
         $data = $this->validate($request, [
             'investor_id' => 'required|numeric',
             'package_id' => 'required|numeric',
@@ -72,17 +71,18 @@ class InvestorController extends Controller
                 $status = 'active';
             }
         }
-        $data['reference'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference() . '-' . auth()->user()->id;
+        $reference = app('App\Http\Controllers\FunctionsController')->generateTransactionReference(). '-' . auth()->user()->id;
+        $data['reference'] = $reference;
         $data['created_by'] = auth()->user()->id;
         $data['expires_at'] = now(); 
         $data['code'] = $request->order_number;
         $data['status'] = $status;
         $data['url'] = 'none';
         $data['currency'] = $this->settings->currency;
-        $data['rid'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference() . '-' . auth()->user()->id;;
+        $data['rid'] = $reference . '_ADMIN_ADD';
         $data['daily_roi'] = $this->getRoi($package, $request->amount);
         unset($data['order_number']);
-        
+       
         InvestorPackage::create($data);
 
         return back()->with('message', 'Package Added successfully');
@@ -199,11 +199,32 @@ class InvestorController extends Controller
      */
     public function edit(Investor $investor, $hid = null)
     {
-        // dd();
+        // $investor = $investor->loadMissing(['user']);
+       
+        // $investor->map(function ( $investor) {
+        //     if (isset( $investor->response) && !empty( $investor->response)) {
+        //         $response = json_decode( $investor->response);
+
+        //         $payments = $response->payments[0] ?? null;
+        //          $investor->payment_id = $payments->payment_id ?? null;
+        //          $investor->network = $payments->network ?? null;
+        //          $investor->raw_status = $payments->status ?? null;
+        //          $investor->detected_at =
+        //             date("M jS, Y", strtotime($payments->detected_at)) ?? null;
+        //     }
+
+        //     return $investor;
+        // });
+
+        // dd($investor);
+
         return view('investors.edit', [
             'investor' => $investor->loadMissing(['user']),
             'hid' => $hid
         ]);
+
+        
+
        
     }
 

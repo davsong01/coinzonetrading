@@ -141,6 +141,19 @@
             </span>
           </a>
         </li>
+        <li class="treeview {{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
+          <a href="#">
+            <i class="icon-equalizer"></i>
+            <span>Trades</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ request()->routeIs('trade') ? 'active' : '' }}"><a href="{{ route('trade') }}">Trade</a></li>
+            <li class="{{ request()->routeIs('market.data') ? 'active' : '' }}"><a href="{{ route('market.data') }}">Market Data</a></li>
+          </ul>
+        </li>
         <li class="{{ request()->routeIs('mytransactions') ? 'active' : '' }}">
           <a href="{{route('mytransactions')}}">
             <i class="icon-wallet"></i> <span>My Transactions</span>
@@ -149,14 +162,21 @@
             </span>
           </a>
         </li>
-        <li class="{{ request()->routeIs('mywallet.history') ? 'active' : '' }}">
-          <a href="{{route('mywallet.history')}}">
-            <i class="cc BCN-alt"></i> <span>Wallet history</span>
+        
+        <li class="treeview {{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
+          <a href="#">
+            <i class="cc BCN-alt"></i>
+            <span>Wallet</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
+          <ul class="treeview-menu">
+            <li class="{{ request()->routeIs('wallet.topup') ? 'active' : '' }}"><a href="{{ route('wallet.topup') }}">Top Up Wallet</a></li>
+            <li class="{{ request()->routeIs('mywallet.history') ? 'active' : '' }}"><a href="{{ route('mywallet.history') }}">Wallet History</a></li>
+          </ul>
         </li>
+        
         <li class="treeview {{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
           <a href="#">
             <i class="icon-layers"></i>
@@ -170,29 +190,7 @@
             <li class="{{ request()->routeIs('withdrawal.history') ? 'active' : '' }}"><a href="{{ route('withdrawal.history') }}">Withdraw History</a></li>
           </ul>
         </li>
-         <li class="treeview {{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
-          <a href="#">
-            <i class="icon-equalizer"></i>
-            <span>Trades</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="{{ request()->routeIs('trade') ? 'active' : '' }}"><a href="{{ route('trade') }}">Trade</a></li>
-            <li class="{{ request()->routeIs('market.data') ? 'active' : '' }}"><a href="{{ route('market.data') }}">Market Data</a></li>
-          </ul>
-        </li>
        
-        {{-- <li class="{{ request()->routeIs('withdrawal.index') ? 'active' : '' }}">
-          <a href="{{route('withdrawal.index')}}">
-            <i class="icon-layers"></i> <span>Withdrawal history</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-        </li> --}}
-        
         <li class="{{ request()->routeIs('profile') ? 'active' : '' }}">
           <a href="{{route('profile')}}">
             <i class="icon-people"></i> <span>My Profile</span>

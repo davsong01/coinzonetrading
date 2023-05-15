@@ -81,16 +81,11 @@ class HomeController extends Controller
     {
         $package = Package::find($request->package);
         $settings = Setting::latest()->first();
-
+        
         if($request->amount < $package->amount || $request->amount > $package->max_amount){
             return back()->with('error', 'Amount entered not within range');
         }
 
-        // dd($request->all());
-        // $check = InvestorPackage::where('package_id', $package->id)->where('investor_id', auth()->user()->id)->where('status', 'active')->where('end_date', '>', now());
-        // if (isset($check) && $check->count() > 0) {
-        //     return back()->with('error', 'You already have this package and it is active');
-        // }
         if($request->payment_method == 'Wallet'){
             \DB::table('investors_packages')->whereStatus('pending')->where('expires_at', '>', now())->delete();
 
@@ -98,8 +93,13 @@ class HomeController extends Controller
                 return back()->with('error', 'You do not have up to '.$request->amount. ' in your wallet, kindly use a different payment method');
             }
             $validity = $package->validity_period;
+            
+            $others = [
+                'status' => 'Completed',
+                'description' => 'Package Purchase',
+            ];
 
-            app('App\Http\Controllers\FunctionsController')->logWallet('debit', $request->amount, auth()->user()->id, app('App\Http\Controllers\FunctionsController')->generateTransactionReference());
+            app('App\Http\Controllers\FunctionsController')->logWallet('debit', $request->amount, auth()->user()->id, app('App\Http\Controllers\FunctionsController')->generateTransactionReference(), $others);
             
             $charge = [
                 'reference' => app('App\Http\Controllers\FunctionsController')->generateTransactionReference(),
@@ -135,7 +135,5 @@ class HomeController extends Controller
                 return back()->with('error', 'There was an error, please refresh and try again');
             }
         }
-    }
-
-    
+    }    
 }

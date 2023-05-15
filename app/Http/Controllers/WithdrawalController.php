@@ -22,7 +22,7 @@ class WithdrawalController extends Controller
             ]);
         }else{
             return view('back.withdrawals.index', [
-                'withdrawals' => Withdrawal::with('requestedBy', 'approvedBy')->orderBy('created_at', 'DESC')->get(),
+                'withdrawals' => Withdrawal::with('requestedBy', 'approvedBy')->whereHas('requestedBy')->orderBy('created_at', 'DESC')->get(),
             ]);
         }
 
@@ -68,7 +68,8 @@ class WithdrawalController extends Controller
             return back()->with('error', 'Withdrawal request was not processed, Invalid amount entered, please try again with correct values!');
         }
         
-        $attributes['reference_id'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference();
+        $attributes['reference_id'] = app('App\Http\Controllers\FunctionsController')->generateTransactionReference().'_WITHDRAW';
+
         if((new FunctionsController)->canWithdraw()['eligibility'] == false){
             return back()->with('error', 'Withdrawal request was not processed, please ensure you meet all criteria for withdrawal!');
         }
@@ -87,7 +88,6 @@ class WithdrawalController extends Controller
             'recipient' => request()->user()->email,
             'amount' => $request->amount,
             'reference' => $attributes['reference_id'],
-            
         ];
         (new FunctionsController)->sendEmails($data);
         return redirect(route('withdrawal.history'))->with('message', 'Withdrawal request successfully created. We will send you an email when your request status is updated');
@@ -142,7 +142,11 @@ class WithdrawalController extends Controller
 
         // Todo : Only log into wallet when status == accepted, but send email regardless of status
         if($withdrawal->status == 'accepted'){
-            app('App\Http\Controllers\FunctionsController')->logWallet('debit', $withdrawal->amount, $withdrawal->user_id, $withdrawal->reference_id);
+            $others = [
+                'status'=>'Completed',
+                'description'=>'Wallet Withdrawal'
+            ];
+            app('App\Http\Controllers\FunctionsController')->logWallet('debit', $withdrawal->amount, $withdrawal->user_id, $withdrawal->reference_id,$others);
         }
         // End modify
         return back()->with('message', 'Withdrawal successfully updated.');

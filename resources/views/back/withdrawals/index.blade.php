@@ -54,18 +54,20 @@
                             @endif
                           </small>
                         </td>
-                        <td>{{ $withdrawal->requestedBy->name }} <br>
-                          <small>{{ $withdrawal->requestedBy->email }} <a target="_blank" style="color:blue" href="{{ route('investors.edit', ['investor' => $withdrawal->requestedBy->investor->id, 'hid' => 'wallet' ] ) }}"><i class="fa fa-external-link"></i></a> </small> <br>
+                        <td>{{ $withdrawal->requestedBy->name ?? 'NOT SET' }} <br>
+                          <small>{{ $withdrawal->requestedBy->email  ?? 'NOT SET' }} <a target="_blank" style="color:blue" href="{{ route('investors.edit', ['investor' => $withdrawal->requestedBy->investor->id, 'hid' => 'wallet' ] ) }}"><i class="fa fa-external-link"></i></a> </small> <br>
                           <small>{{ $withdrawal->created_at }}</small>
                         </td>
                         <td style="color:{{ $withdrawal->status == 'accepted' ? 'green' : ''}} {{ $withdrawal->status == 'pending' ? '#f38e3f' : ''}} {{ $withdrawal->status == 'rejected' ? 'red' : ''}}">{{ ucfirst($withdrawal->status) }}
-                          @if(!is_null($withdrawal->approvedBy))
-                           @if(auth()->user()->admin->level == 'admin' && $withdrawal->approvedBy->id != 1)
+                          @if(!is_null($withdrawal->approvedBy  ?? 'NOT SET'))
+                           @if(auth()->user()->admin->level == 'admin')
+                           @if(isset($withdrawal->approvedBy->id) && $withdrawal->approvedBy->id != 1)
                            <br>
                               @if($withdrawal->status == 'accepted' || $withdrawal->status == 'rejected')
                                 <small  style="color:blue"><b>By: </b><span class="approved_by">{{ $withdrawal->approvedBy->name }}</></span> </small> <br>
                                 <small style="color:blue"> <b>On: </b> {{ $withdrawal->approved_date }}</small>
                                 @endif
+                              @endif
                               @endif
                               @endif
                         </td>
